@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="60dp"
-            android:layout_weight=".7"
+            android:layout_weight=".4"
             android:orientation="horizontal"
 
             android:weightSum="2">
@@ -97,72 +97,105 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="3dp"
-            android:layout_weight=".7"
-            android:orientation="horizontal"
-            android:weightSum="6">
+            android:layout_weight="1.8"
+            android:orientation="vertical"
+            >
 
-            <EditText
-                android:id="@+id/ed_amount"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:backgroundTint="#fff"
-                android:fontFamily="@font/oswald_light"
-                android:hint="Enter ammount"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="5"
-                android:maxLines="1"
-                android:textSize="16sp" />
+                android:layout_marginLeft="22dp">
+                <TextView
+                    android:id="@+id/amount_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amount :"
+                    android:textSize="15dp"
+                    />
+                <EditText
+                    android:id="@+id/ed_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/amount_tv"
+                    android:backgroundTint="#fff"
+                    android:hint="Enter ammount"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:textSize="15dp"
+                    android:maxLines="1"
 
-            <Spinner
-                android:id="@+id/spinner_currency"
-                style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                android:layout_width="0dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:entries="@array/array_currency"
-
-                />
-
-            <Spinner
-                android:id="@+id/spinner_country"
-                style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                android:layout_width="0dp"
+                android:layout_marginLeft="22dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price :"
+                    android:textSize="15dp"
+                    />
+                <EditText
+                    android:id="@+id/ed_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/amount_tv"
+                    android:backgroundTint="#fff"
+                    android:hint="Enter Price"
+                    android:imeOptions="actionNext"
+                    android:textSize="15dp"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:maxLines="1"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:entries="@array/array_country"
-                android:textSize="6dp" />
+                android:layout_marginLeft="22dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total :"
+                    android:textSize="15dp"
+                    />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".7">
-
-            <Spinner
-                android:id="@+id/spinner_offer"
-                style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:entries="@array/array_offer" />
+                <EditText
+                    android:id="@+id/ed_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/amount_tv"
+                    android:backgroundTint="#fff"
+                    android:editable="false"
+                    android:hint="Total"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:maxLines="1"
+                    android:textSize="15dp" />
+            </LinearLayout>
 
             <Button
-                android:id="@+id/btn_search"
-                android:layout_width="0dp"
+                android:id="@+id/btn_trade"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Search" />
+                android:text="Trade"
+                android:layout_marginLeft="15dp"
+                android:layout_alignParentBottom="true"
+                />
+
         </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/main_des_tv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="4dp"
-            android:layout_weight=".5"
+            android:layout_weight=".4"
             android:fontFamily="@font/mplusregular"
             android:text="Buy bitcoins online in Pakistan"
             android:textColor="#fff"
@@ -172,8 +205,9 @@
             android:layout_width="wrap_content"
             android:id="@+id/buyer_table"
             android:layout_height="0dp"
-            android:layout_weight="5.5"
-            android:visibility="gone">
+            android:layout_weight="3.4"
+            android:layout_margin="8dp"
+            android:visibility="visible">
 
 
             <LinearLayout
@@ -235,7 +269,6 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_marginTop="-10dp"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#fff" />
@@ -251,7 +284,10 @@
             android:id="@+id/seller_table"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="5.5">
+            android:layout_weight="3.4"
+            android:layout_margin="8dp"
+            android:visibility="gone"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -311,7 +347,6 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_marginTop="-10dp"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#fff" />
