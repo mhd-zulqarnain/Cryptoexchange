@@ -3,75 +3,326 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.auth.options.HomeFragment"
     android:background="#544f4f"
+    tools:context=".auth.auth.options.HomeFragment"
 
     >
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:weightSum="2">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        android:weightSum="6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="60dp"
+            android:layout_weight=".7"
+            android:orientation="horizontal"
+
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/upper_border_buy"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="#fff" />
+
+                <Button
+                    android:id="@+id/buy_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00ffffff"
+                    android:text="Buy"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/_border_buy"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#fff" />
+
+            </RelativeLayout>
+
 
             <View
-                android:id="@+id/upper_border_buy"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:background="#fff" />
-            <Button
 
-                android:layout_width="match_parent"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#00ffffff"
-                android:text="Buy"
-                android:textColor="#96AAB7"
-                android:textSize="18sp" />
-
-            <View
-                android:id="@+id/_border_buy"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
                 android:background="#fff" />
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
+                <View
+                    android:id="@+id/upper_border_sell"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="#fff"
+                    android:visibility="gone" />
 
-        <View
+                <Button
+                    android:id="@+id/sell_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00ffffff"
+                    android:text="Sell"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
 
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:background="#fff" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#fff" />
+            </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="3dp"
+            android:layout_weight=".7"
+            android:orientation="horizontal"
+            android:weightSum="6">
+
+            <EditText
+                android:id="@+id/ed_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:backgroundTint="#fff"
+                android:fontFamily="@font/oswald_light"
+                android:hint="Enter ammount"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="5"
+                android:maxLines="1"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinner_currency"
+                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:entries="@array/array_currency"
+
+                />
+
+            <Spinner
+                android:id="@+id/spinner_country"
+                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:entries="@array/array_country"
+                android:textSize="6dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".7">
+
+            <Spinner
+                android:id="@+id/spinner_offer"
+                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:entries="@array/array_offer" />
 
             <Button
-                android:id="@+id/sign_in_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#00ffffff"
-                android:text="Sell"
-                android:textColor="#96AAB7"
-                android:textSize="18sp" />
+                android:id="@+id/btn_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Search" />
+        </LinearLayout>
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/main_des_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_weight=".5"
+            android:fontFamily="@font/mplusregular"
+            android:text="Buy bitcoins online in Pakistan"
+            android:textColor="#fff"
+            android:textSize="22dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/buyer_table"
+            android:layout_height="0dp"
+            android:layout_weight="5.5"
+            android:visibility="gone">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#fff" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Seller"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Payment Method"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Price/Btc"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Limit"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Buton"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_marginTop="-10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#fff" />
+
+               <android.support.v7.widget.RecyclerView
+                   android:id="@+id/table_recycler"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/seller_table"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="5.5">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#fff" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Buyer"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Payment Method"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Price/Btc"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Limit"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Buton"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_marginTop="-10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#fff" />
+
+               <android.support.v7.widget.RecyclerView
+                   android:id="@+id/table_seller_recycler"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
 
 
 </FrameLayout>

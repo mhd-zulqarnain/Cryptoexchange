@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="7"
+    android:orientation="horizontal"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/tv_seller"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Seller"
+        android:textColor="#fff"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/tv_method"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Payment Method"
+        android:textColor="#fff"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Price"
+        android:textColor="#fff"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/tv_limit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Limit"
+        android:textColor="#fff"
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Buy"
+        android:textColor="#fff"
+        android:textSize="8dp" />
+
+</LinearLayout>
