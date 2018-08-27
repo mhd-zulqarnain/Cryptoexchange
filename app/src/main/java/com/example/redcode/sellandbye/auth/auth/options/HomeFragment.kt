@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 
@@ -30,10 +33,12 @@ class HomeFragment : Fragment() {
     var buyer_view: Boolean? = true
     var buyer_table: LinearLayout? = null
     var seller_table: LinearLayout? = null
+    var ed_price: EditText? = null
+    var ed_amount: EditText? = null
+    var ed_total: EditText? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         main_view = inflater.inflate(R.layout.fragment_home, container, false)
         initView(main_view)
         initTable(main_view)
@@ -80,6 +85,9 @@ class HomeFragment : Fragment() {
         main_des_tv = view!!.findViewById(R.id.main_des_tv)
         buyer_table = view!!.findViewById(R.id.buyer_table)
         seller_table = view!!.findViewById(R.id.seller_table)
+        ed_price = view!!.findViewById(R.id.ed_price)
+        ed_total = view!!.findViewById(R.id.ed_total)
+        ed_amount = view!!.findViewById(R.id.ed_amount)
 
         main_des_tv!!.setText("Buy bitcoins online in Pakistan")
 
@@ -89,8 +97,8 @@ class HomeFragment : Fragment() {
             buyer_view = true
 
             initTable(main_view)
-            seller_table!!.setVerticalGravity(View.GONE)
-            buyer_table!!.setVerticalGravity(View.VISIBLE)
+            seller_table!!.visibility = View.GONE
+            buyer_table!!.visibility = View.VISIBLE
 
         }
         sell_btn!!.setOnClickListener {
@@ -98,10 +106,31 @@ class HomeFragment : Fragment() {
             upper_border_sell!!.visibility = View.VISIBLE
             buyer_view = false
             initTable(main_view)
-            seller_table!!.setVerticalGravity(View.VISIBLE)
-            buyer_table!!.setVerticalGravity(View.GONE)
+            seller_table!!.visibility = View.VISIBLE
+            buyer_table!!.visibility = View.GONE
         }
 
+        ed_price!!.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "") {
+
+                    if (!ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
+                        var amout = ed_amount!!.text.toString().toInt()
+                        var price = ed_price!!.text.toString().toInt()
+                        var total = amout * price
+                        ed_total!!.setText(total.toString())
+                    }
+                }
+                if (ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != ""){
+                    ed_total!!.setText("")
+                }
+            }
+        })
 
     }
 
