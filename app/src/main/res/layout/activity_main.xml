@@ -37,6 +37,7 @@
             android:src="@drawable/ic_close_black_24dp" />
 
         <TextView
+            android:id="@+id/tv_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/menuItem"
@@ -45,10 +46,11 @@
              />
 
         <TextView
+            android:id="@+id/tv_trade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="23dp"
-            android:text="Project"
+            android:text="Trade"
             style="@style/menuItem"
             />
 

@@ -6,15 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 
 import com.example.redcode.sellandbye.R
 import com.example.redcode.sellandbye.auth.auth.auth.SignInActivity
-import com.example.redcode.sellandbye.auth.auth.options.HomeFragment
+import com.example.redcode.sellandbye.auth.auth.ui.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -36,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         initView()
-
         add_option.bringToFront()
         menu_layout.bringToFront()
     }
@@ -61,14 +58,32 @@ class MainActivity : AppCompatActivity() {
         }
 
         close_btn!!.setOnClickListener {
-            val animate = TranslateAnimation(0f,-menuList!!.width.toFloat(),  0f, 0f)
-            animate.duration = 500
-            animate.fillAfter = true
-            menuList!!.startAnimation(animate)
-            menuList!!.visibility = View.GONE
-            btnToogle!!.visibility = View.VISIBLE
-            close_btn!!.visibility = View.GONE
+
+            hideView()
+
         }
+
+        tv_trade.setOnClickListener {
+            supportFragmentManager.beginTransaction().add(R.id.fragment_container, TradeFragment()).commit()
+            hideView()
+
+        }
+        tv_home.setOnClickListener {
+            supportFragmentManager.beginTransaction().add(R.id.fragment_container, HomeFragment()).commit()
+            hideView()
+
+        }
+
+    }
+
+    private fun hideView() {
+        val animate = TranslateAnimation(0f,-menuList!!.width.toFloat(),  0f, 0f)
+        animate.duration = 500
+        animate.fillAfter = true
+        menuList!!.startAnimation(animate)
+        menuList!!.visibility = View.GONE
+        btnToogle!!.visibility = View.VISIBLE
+        close_btn!!.visibility = View.GONE
     }
 
     private fun logout() {

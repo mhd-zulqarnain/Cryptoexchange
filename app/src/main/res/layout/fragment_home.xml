@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#544f4f"
-    tools:context=".auth.auth.options.HomeFragment"
+    tools:context=".auth.auth.ui.HomeFragment"
 
     >
 
@@ -175,6 +175,14 @@
                     android:maxLength="5"
                     android:maxLines="1"
                     android:textSize="15dp" />
+
+                <Spinner
+                    android:id="@+id/curreny_type_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/array_currency"
+
+                    ></Spinner>
             </LinearLayout>
 
             <Button

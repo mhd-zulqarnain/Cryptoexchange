@@ -1,6 +1,7 @@
-package com.example.redcode.sellandbye.auth.auth.options
+package com.example.redcode.sellandbye.auth.auth.ui
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,15 +11,16 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 
 import com.example.redcode.sellandbye.R
 import com.example.redcode.sellandbye.auth.auth.adapter.TableBuyerAdapater
 import com.example.redcode.sellandbye.auth.auth.adapter.TableSellerAdapater
 import com.example.redcode.sellandbye.auth.auth.models.Payments
+import android.widget.Toast
+import android.content.DialogInterface
+
+
 
 
 class HomeFragment : Fragment() {
@@ -36,7 +38,9 @@ class HomeFragment : Fragment() {
     var ed_price: EditText? = null
     var ed_amount: EditText? = null
     var ed_total: EditText? = null
-
+    var btn_trade: Button? = null
+    var curreny_type_spinner: Spinner? = null
+    var selectedCurrency :String = "PKR"
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         main_view = inflater.inflate(R.layout.fragment_home, container, false)
@@ -88,6 +92,8 @@ class HomeFragment : Fragment() {
         ed_price = view!!.findViewById(R.id.ed_price)
         ed_total = view!!.findViewById(R.id.ed_total)
         ed_amount = view!!.findViewById(R.id.ed_amount)
+        curreny_type_spinner = view!!.findViewById(R.id.curreny_type_spinner)
+        btn_trade = view!!.findViewById(R.id.btn_trade)
 
         main_des_tv!!.setText("Buy bitcoins online in Pakistan")
 
@@ -132,6 +138,29 @@ class HomeFragment : Fragment() {
             }
         })
 
+        curreny_type_spinner!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                var  item = parent!!.getItemAtPosition(pos);
+                selectedCurrency= item.toString()
+            }
+        })
+
+        btn_trade!!.setOnClickListener{
+
+            var  alertDialog:AlertDialog? = null
+           // var view:View = LayoutInflater.from(context).inflate(R.layout.)
+             alertDialog = AlertDialog.Builder(context)
+                    .setTitle("Add new Coin")
+                    .setMessage("New coin will added for trading")
+                    .setPositiveButton("Yes") { dialogInterface, i ->
+                       alertDialog!!.dismiss()
+                    }
+                    .setNegativeButton("No") { dialogInterface, i ->
+                        Toast.makeText(context, "Nothing Happened", Toast.LENGTH_LONG).show()
+                    }
+                    .show()
+        }
     }
 
 }
