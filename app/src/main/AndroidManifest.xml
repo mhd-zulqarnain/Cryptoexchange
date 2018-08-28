@@ -12,13 +12,14 @@
         <activity android:name=".auth.auth.auth.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auth.auth.auth.SignInActivity"></activity>
+        <activity android:name=".auth.auth.auth.SignInActivity" />
         <activity
             android:name=".auth.auth.MainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

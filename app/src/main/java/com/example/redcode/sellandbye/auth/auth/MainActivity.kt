@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
 
         btn_logout!!.setOnClickListener { logout() }
-        supportFragmentManager.beginTransaction().add(R.id.fragment_container, HomeFragment()).commit()
+            supportFragmentManager.beginTransaction().add(R.id.fragment_container, HomeFragment()).commit()
+
         btnToogle!!.setOnClickListener {
             val animate = TranslateAnimation(Animation.RELATIVE_TO_PARENT, -1.0f,
                     Animation.RELATIVE_TO_PARENT, 0.0f,
@@ -64,12 +65,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         tv_trade.setOnClickListener {
-            supportFragmentManager.beginTransaction().add(R.id.fragment_container, TradeFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, TradeFragment()).commit()
             hideView()
 
         }
         tv_home.setOnClickListener {
-            supportFragmentManager.beginTransaction().add(R.id.fragment_container, HomeFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
             hideView()
 
         }
@@ -77,7 +78,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideView() {
-        val animate = TranslateAnimation(0f,-menuList!!.width.toFloat(),  0f, 0f)
+
+        val animate = TranslateAnimation(0f, -menuList!!.width.toFloat(), 0f, 0f)
         animate.duration = 500
         animate.fillAfter = true
         menuList!!.startAnimation(animate)

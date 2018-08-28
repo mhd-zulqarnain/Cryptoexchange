@@ -148,19 +148,46 @@ class HomeFragment : Fragment() {
 
         btn_trade!!.setOnClickListener{
 
-            var  alertDialog:AlertDialog? = null
-           // var view:View = LayoutInflater.from(context).inflate(R.layout.)
-             alertDialog = AlertDialog.Builder(context)
-                    .setTitle("Add new Coin")
-                    .setMessage("New coin will added for trading")
-                    .setPositiveButton("Yes") { dialogInterface, i ->
-                       alertDialog!!.dismiss()
-                    }
-                    .setNegativeButton("No") { dialogInterface, i ->
-                        Toast.makeText(context, "Nothing Happened", Toast.LENGTH_LONG).show()
-                    }
-                    .show()
+            showTradeDialog()
         }
+    }
+
+    private fun showTradeDialog() {
+        val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dilalog_view_trade, null)
+        val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
+        alertBox.setView(view)
+        alertBox.setCancelable(false)
+        val dialog = alertBox.create()
+
+
+        val btnCancel: Button = view.findViewById(R.id.btn_cancel)
+        val btnSave: Button = view.findViewById(R.id.btn_save)
+
+        val spinner_method: Spinner = view.findViewById(R.id.spinner_method)
+
+
+        var paymentMethod : String = spinner_method.selectedItem.toString()
+
+        spinner_method!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                var  item = parent!!.getItemAtPosition(pos);
+                paymentMethod= item.toString()
+            }
+        })
+
+
+        btnSave.setOnClickListener {
+            Toast.makeText(activity!!, "Do Something", Toast.LENGTH_SHORT).show()
+            var saveable = true
+
+        }
+
+        btnCancel.setOnClickListener {
+
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
 }
