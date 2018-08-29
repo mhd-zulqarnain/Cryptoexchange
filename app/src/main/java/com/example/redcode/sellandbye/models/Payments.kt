@@ -1,6 +1,4 @@
-package com.example.redcode.sellandbye.auth.auth.models
-
-import java.util.*
+package com.example.redcode.sellandbye.models
 
 data class Payments(var seller: String? = null,
                     var method: String? = null,

@@ -1,4 +1,4 @@
-package com.example.redcode.sellandbye.auth.auth.models
+package com.example.redcode.sellandbye.models
 
 data class Bank(var uid: String? = null,
                 var account_number: String? = null,

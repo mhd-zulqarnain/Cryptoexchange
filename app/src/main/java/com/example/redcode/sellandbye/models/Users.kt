@@ -1,4 +1,4 @@
-package com.example.redcode.sellandbye.auth.auth.models
+package com.example.redcode.sellandbye.models
 
 data class Users(var uid: String? = null,
                  var user_email: String? = null,

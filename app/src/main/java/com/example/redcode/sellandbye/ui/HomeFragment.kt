@@ -1,7 +1,6 @@
-package com.example.redcode.sellandbye.auth.auth.ui
+package com.example.redcode.sellandbye.ui
 
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -14,13 +13,10 @@ import android.view.ViewGroup
 import android.widget.*
 
 import com.example.redcode.sellandbye.R
-import com.example.redcode.sellandbye.auth.auth.adapter.TableBuyerAdapater
-import com.example.redcode.sellandbye.auth.auth.adapter.TableSellerAdapater
-import com.example.redcode.sellandbye.auth.auth.models.Payments
+import com.example.redcode.sellandbye.adapter.TableBuyerAdapater
+import com.example.redcode.sellandbye.adapter.TableSellerAdapater
+import com.example.redcode.sellandbye.models.Payments
 import android.widget.Toast
-import android.content.DialogInterface
-
-
 
 
 class HomeFragment : Fragment() {

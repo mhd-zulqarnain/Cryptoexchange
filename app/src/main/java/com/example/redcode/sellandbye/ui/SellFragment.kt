@@ -1,4 +1,4 @@
-package com.example.redcode.sellandbye.auth.auth.ui
+package com.example.redcode.sellandbye.ui
 
 
 import android.os.Bundle

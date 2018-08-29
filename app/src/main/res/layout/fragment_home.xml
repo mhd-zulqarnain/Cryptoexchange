@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#544f4f"
-    tools:context=".auth.auth.ui.HomeFragment"
+    tools:context=".ui.HomeFragment"
 
     >
 

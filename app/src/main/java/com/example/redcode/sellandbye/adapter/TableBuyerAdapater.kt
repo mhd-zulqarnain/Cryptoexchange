@@ -1,4 +1,4 @@
-package com.example.redcode.sellandbye.auth.auth.adapter
+package com.example.redcode.sellandbye.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.redcode.sellandbye.R
-import com.example.redcode.sellandbye.auth.auth.models.Payments
+import com.example.redcode.sellandbye.models.Payments
 
 class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Payments>) : RecyclerView.Adapter<TableBuyerAdapater.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_buyer,parent,false))
+        var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_buyer, parent, false))
         return view
     }
 

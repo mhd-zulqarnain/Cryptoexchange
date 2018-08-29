@@ -1,6 +1,5 @@
-package com.example.redcode.sellandbye.auth.auth
+package com.example.redcode.sellandbye
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,11 +9,8 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 
-import com.example.redcode.sellandbye.R
-import com.example.redcode.sellandbye.auth.auth.auth.SignInActivity
-import com.example.redcode.sellandbye.auth.auth.ui.BuyFragment
-import com.example.redcode.sellandbye.auth.auth.ui.HomeFragment
-import com.example.redcode.sellandbye.auth.auth.ui.TradeFragment
+import com.example.redcode.sellandbye.ui.HomeFragment
+import com.example.redcode.sellandbye.ui.TradeFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 

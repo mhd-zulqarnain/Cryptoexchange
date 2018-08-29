@@ -1,19 +1,15 @@
-package com.example.redcode.sellandbye.auth.auth.auth
+package com.example.redcode.sellandbye.auth
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 
 import com.example.redcode.sellandbye.R
-import com.example.redcode.sellandbye.auth.auth.MainActivity
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+import com.example.redcode.sellandbye.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SignUpActivity : AppCompatActivity() {
