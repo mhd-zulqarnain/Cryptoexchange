@@ -42,7 +42,7 @@ class TradeFragment : Fragment() {
         override fun getItem(pos: Int): Fragment {
             when (pos) {
 
-                0 -> return BuyFragment()
+                0 -> return BuyMainFragment()
                 1 -> return SellFragment()
 
             }

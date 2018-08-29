@@ -49,6 +49,6 @@
         android:layout_weight="1"
         android:text="Buy"
         android:textColor="#fff"
-        android:textSize="8dp" />
+        android:textSize="6dp" />
 
 </LinearLayout>

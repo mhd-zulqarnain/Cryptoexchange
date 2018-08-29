@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
 
         btn_logout!!.setOnClickListener { logout() }
-            supportFragmentManager.beginTransaction().add(R.id.fragment_container, HomeFragment()).commit()
+            supportFragmentManager.beginTransaction().add(R.id.fragment_container, TradeFragment()).commit()
 
         btnToogle!!.setOnClickListener {
             val animate = TranslateAnimation(Animation.RELATIVE_TO_PARENT, -1.0f,
@@ -61,13 +61,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         tv_trade.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, TradeFragment()).commit()
-            hideView()
+            //supportFragmentManager.beginTransaction().replace(R.id.fragment_container, TradeFragment()).commit()
+           // hideView()
 
         }
         tv_home.setOnClickListener {
 
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, TradeFragment()).commit()
             hideView()
         }
 

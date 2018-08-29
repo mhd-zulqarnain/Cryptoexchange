@@ -38,7 +38,7 @@ class TableSellerAdapater(var ctx: Context, var model: ArrayList<Payments>) : Re
             tv_limit = itemView.findViewById(R.id.tv_limit)
             tv_seller = itemView.findViewById(R.id.tv_seller)
             tv_method = itemView.findViewById(R.id.tv_method)
-            btn_sell = itemView.findViewById(R.id.btn_sell)
+//            btn_sell = itemView.findViewById(R.id.btn_sell)
 
             tv_limit!!.setText(payments.limit+" "+payments.currency)
             tv_method!!.setText(payments.method)
