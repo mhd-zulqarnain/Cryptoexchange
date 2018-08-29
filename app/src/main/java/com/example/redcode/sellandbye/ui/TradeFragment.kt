@@ -46,7 +46,7 @@ class TradeFragment : Fragment() {
                 1 -> return SellFragment()
 
             }
-            return BuyFragment()
+            return BuyMainFragment()
         }
 
         override fun getCount(): Int {

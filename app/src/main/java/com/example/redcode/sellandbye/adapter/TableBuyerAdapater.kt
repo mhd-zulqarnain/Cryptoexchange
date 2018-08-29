@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.example.redcode.sellandbye.R
 import com.example.redcode.sellandbye.models.Payments
 
-class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Payments>) : RecyclerView.Adapter<TableBuyerAdapater.MyViewHolder>() {
+class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Payments>,private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableBuyerAdapater.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_buyer, parent, false))
@@ -23,6 +23,9 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Payments>) : Rec
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bindView(model[position])
+        holder.btn_buy!!.setOnClickListener{
+            onItemClick(position)
+        }
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
         android:orientation="vertical"
         android:weightSum="6"
         >
@@ -29,7 +29,7 @@
                 android:id="@+id/ed_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:backgroundTint="#fff"
                 android:fontFamily="@font/oswald_light"
                 android:hint="Enter ammount"
@@ -44,9 +44,8 @@
                 style="@style/Widget.AppCompat.DropDownItem.Spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".8"
+                android:layout_weight="1.2"
                 android:entries="@array/array_currency"
-
                 />
 
             <Button
@@ -54,23 +53,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".8"
-                android:textSize="15sp"
+                android:textSize="10sp"
                 android:text="Search" />
 
         </LinearLayout>
-
-
 
         <TextView
             android:id="@+id/main_des_tv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
             android:layout_weight=".5"
             android:fontFamily="@font/mplusregular"
-            android:text="Buy bitcoins online in Pakistan"
+            android:text="Buy online bitcoins "
             android:textColor="#fff"
-            android:textSize="22dp" />
+            android:textSize="20sp" />
 
 
         <LinearLayout

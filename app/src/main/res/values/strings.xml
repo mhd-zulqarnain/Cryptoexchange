@@ -55,7 +55,16 @@
         <item>5 hours</item>
         <item>6 hours</item>
     </string-array>
-    
+
+    <string-array name="banks_array">
+        <item>Habib Bank</item>
+        <item>Allied Bank</item>
+        <item>MCB Bank</item>
+        <item>Alfalah Bank</item>
+        <item>National Bank</item>
+        <item>State Bank</item>
+    </string-array>
+
     <string name="title_activity_home">home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

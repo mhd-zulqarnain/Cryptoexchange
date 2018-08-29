@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
+            android:name=".ui.BuyActivity"
+            android:label="Buy activity"
             android:theme="@style/AppTheme">
 
         </activity>

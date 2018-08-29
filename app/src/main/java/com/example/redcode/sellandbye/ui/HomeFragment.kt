@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
 
         if (buyer_view!!) {
 
-            table_recycler = view!!.findViewById(R.id.table_recycler)
+           /* table_recycler = view!!.findViewById(R.id.table_recycler)
             var list = ArrayList<Payments>()
             list.add(Payments("ahmed", "Bank Transfer", "2000", "PKR", "1000"))
             list.add(Payments("ali", "Bank Transfer", "7000", "INR", "200"))
@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
             var layout = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
             recyclerView.layoutManager = layout
             recyclerView.adapter = adapter
-
+*/
             main_des_tv!!.setText("Buy bitcoins online in Pakistan")
         } else {
 

@@ -45,6 +45,7 @@
             android:background="@null"
             android:src="@drawable/ic_close_black_24dp" />
 
+
         <TextView
             android:id="@+id/tv_home"
             android:layout_width="match_parent"
@@ -64,9 +65,10 @@
             />
 
         <TextView
+            android:id="@+id/tv_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Service"
+            android:text="Profile"
             style="@style/menuItem"
             />
 
