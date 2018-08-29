@@ -12,7 +12,9 @@ import android.widget.TextView
 
 import com.example.redcode.sellandbye.R
 import com.example.redcode.sellandbye.auth.auth.auth.SignInActivity
+import com.example.redcode.sellandbye.auth.auth.ui.BuyFragment
 import com.example.redcode.sellandbye.auth.auth.ui.HomeFragment
+import com.example.redcode.sellandbye.auth.auth.ui.TradeFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -34,8 +36,6 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         initView()
-        add_option.bringToFront()
-        menu_layout.bringToFront()
     }
 
     private fun initView() {
@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
             animate.duration = 500
             animate.fillAfter = true
             menuList!!.startAnimation(animate)
-            menuList!!.visibility = View.VISIBLE
             btnToogle!!.visibility = View.GONE
-            close_btn!!.visibility = View.VISIBLE
+
+            viewOption(View.VISIBLE)
 
         }
 
@@ -70,9 +70,9 @@ class MainActivity : AppCompatActivity() {
 
         }
         tv_home.setOnClickListener {
+
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
             hideView()
-
         }
 
     }
@@ -83,17 +83,28 @@ class MainActivity : AppCompatActivity() {
         animate.duration = 500
         animate.fillAfter = true
         menuList!!.startAnimation(animate)
-        menuList!!.visibility = View.GONE
         btnToogle!!.visibility = View.VISIBLE
-        close_btn!!.visibility = View.GONE
+
+        viewOption(View.GONE)
     }
 
+    private fun viewOption(visiblity: Int) {
+
+        menuList!!.visibility=visiblity
+        tv_home!!.visibility=visiblity
+        tv_trade!!.visibility=visiblity
+        btn_logout!!.visibility=visiblity
+        close_btn!!.visibility=visiblity
+
+    }
+
+
     private fun logout() {
-        if (auth!!.currentUser != null) {
+       /* if (auth!!.currentUser != null) {
             auth!!.signOut()
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             finish()
-        }
+        }*/
     }
 }

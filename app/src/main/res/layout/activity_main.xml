@@ -7,6 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".auth.auth.MainActivity">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
+        >
+
+    </RelativeLayout>
+
     <ImageButton
         android:id="@+id/add_option"
         android:layout_width="35dp"
@@ -43,7 +52,7 @@
             style="@style/menuItem"
             android:layout_marginTop="60dp"
             android:text="Home"
-             />
+            />
 
         <TextView
             android:id="@+id/tv_trade"
@@ -79,10 +88,4 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_container">
-
-    </RelativeLayout>
 </RelativeLayout>
