@@ -41,11 +41,11 @@ class BuyFragment : Fragment() {
 
         var list = ArrayList<Trade>()
         list.add(Trade("233","user3322", Users("user3322"),"bankid",1200000,50000
-                        ,null,"3 hours","BTC","3","100000"))
+                        ,null,"3 hours","BTC","3","120000"))
          list.add(Trade("633","user6322", Users("user88"),"bankid",2700000,30000
-                        ,null,"5 hours","BTC","1","100000"))
+                        ,null,"5 hours","BTC","1","110000"))
          list.add(Trade("133","user3322", Users("user377"),"bankid",1600000,40000
-                        ,null,"2 hours","BTC","2","100000"))
+                        ,null,"2 hours","BTC","2","166000"))
 
 
         var recyclerView: RecyclerView = view.findViewById(R.id.table_recycler)
