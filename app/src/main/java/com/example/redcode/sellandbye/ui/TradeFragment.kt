@@ -1,6 +1,8 @@
 package com.example.redcode.sellandbye.ui
 
+import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
@@ -15,6 +17,7 @@ import com.example.redcode.sellandbye.R
 class TradeFragment : Fragment() {
 
     var view_pager: ViewPager? = null
+    var view_pager_tab: TabLayout? = null
     var adapter : MyPagerAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,21 +35,22 @@ class TradeFragment : Fragment() {
 
     private fun initView(view: View) {
         view_pager = view.findViewById(R.id.view_pager)
+        view_pager_tab = view.findViewById(R.id.view_pager_tab)
+        view_pager_tab!!.setSelectedTabIndicatorColor(Color.TRANSPARENT);
         adapter = MyPagerAdapter(childFragmentManager)
         view_pager!!.adapter = adapter
     }
-
 
     inner class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(pos: Int): Fragment {
             when (pos) {
 
-                0 -> return BuyMainFragment()
+                0 -> return BuyFragment()
                 1 -> return SellFragment()
 
             }
-            return BuyMainFragment()
+            return BuyFragment()
         }
 
         override fun getCount(): Int {

@@ -5,6 +5,7 @@
     android:id="@+id/outer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgoundTheme"
     tools:context=".MainActivity">
 
 
@@ -16,13 +17,17 @@
 
     </RelativeLayout>
 
+
     <ImageButton
         android:id="@+id/add_option"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentLeft="true"
-        android:layout_margin="22dp"
         android:background="@null"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="11dp"
+
         android:src="@drawable/ic_menu_white_24dp" />
 
     <LinearLayout

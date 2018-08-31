@@ -153,11 +153,15 @@
             android:textSize="15dp" />
     </LinearLayout>
 
+
     <Button
-        android:id="@+id/btn_save"
+        android:id="@+id/btn_trade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
         android:layout_gravity="center"
+        android:textColor="@color/backgoundTheme"
+        android:background="@drawable/layout_curve_btn_boreder_only"
         android:text="Trade" />
-
 </LinearLayout>

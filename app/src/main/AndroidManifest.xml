@@ -11,6 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".auth.SignUpActivity">
 
+
+
         </activity>
         <activity android:name=".auth.SignInActivity" />
         <activity

@@ -6,6 +6,7 @@
     android:orientation="horizontal"
     android:layout_margin="8dp">
 
+
     <TextView
         android:id="@+id/tv_seller"
         android:layout_width="0dp"
@@ -48,7 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Buy"
-        android:textColor="#fff"
-        android:textSize="6dp" />
+        android:textColor="@color/backgoundTheme"
+        android:background="@drawable/layout_curve_btn_boreder_only"
+        android:textSize="10dp" />
 
 </LinearLayout>

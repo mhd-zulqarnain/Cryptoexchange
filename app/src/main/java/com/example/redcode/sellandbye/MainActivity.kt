@@ -11,7 +11,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.redcode.sellandbye.auth.SignInActivity
 
-import com.example.redcode.sellandbye.ui.HomeFragment
 import com.example.redcode.sellandbye.ui.ProfileFragment
 import com.example.redcode.sellandbye.ui.TradeFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -110,11 +109,13 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun logout() {
-        if (auth!!.currentUser != null) {
+        startActivity(Intent(baseContext, SignInActivity::class.java))
+        finish()
+        /*if (auth!!.currentUser != null) {
             auth!!.signOut()
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             finish()
-        }
+        }*/
     }
 }

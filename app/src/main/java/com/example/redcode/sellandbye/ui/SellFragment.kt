@@ -13,6 +13,10 @@ import android.widget.*
 import com.example.redcode.sellandbye.R
 import com.example.redcode.sellandbye.adapter.TableSellerAdapater
 import com.example.redcode.sellandbye.models.Payments
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+
+
 
 
 class SellFragment : Fragment() {
@@ -29,9 +33,9 @@ class SellFragment : Fragment() {
 
         btn_trade = view.findViewById(R.id.btn_trade)
         var list = ArrayList<Payments>()
-        list.add(Payments("saqib", "Bank Transfer", "1000", "IKR", "1030"))
-        list.add(Payments("aslam", "Bank Transfer", "7000", "PNR", "300"))
-        list.add(Payments("red", "Bank Transfer", "200", "USD", "3000"))
+        list.add(Payments("saqib", "Bank Transfer", "1000", "IKR", 1030))
+        list.add(Payments("aslam", "Bank Transfer", "7000", "PNR", 300))
+        list.add(Payments("red", "Bank Transfer", "200", "USD", 3000))
         var recyclerView: RecyclerView = view!!.findViewById(R.id.table_seller_recycler)
         var adapter = TableSellerAdapater(activity!!, list)
         var layout = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
@@ -41,6 +45,25 @@ class SellFragment : Fragment() {
         btn_trade!!.setOnClickListener{
             showTradeDialog()
         }
+
+
+        val coin_type_spinner = view.findViewById(R.id.curreny_type_spinner) as Spinner
+        // Creating ArrayAdapter using the string array and default spinner layout
+        var spinnerAdapter = ArrayAdapter.createFromResource(activity!!,
+                R.array.array_coin, android.R.layout.simple_spinner_item)
+        // Specify layout to be used when list of choices appears
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Applying the adapter to our spinner
+        coin_type_spinner.adapter = spinnerAdapter
+        coin_type_spinner!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                var  item = parent!!.getItemAtPosition(pos);
+               Toast.makeText(activity!!,"item "+item,Toast.LENGTH_SHORT).show()
+            }
+        })
+
+
 
     }
 
@@ -57,8 +80,6 @@ class SellFragment : Fragment() {
         val btnSave: Button = view.findViewById(R.id.btn_save)
 
         val spinner_method: Spinner = view.findViewById(R.id.spinner_method)
-
-
         var paymentMethod: String = spinner_method.selectedItem.toString()
 
         spinner_method!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {

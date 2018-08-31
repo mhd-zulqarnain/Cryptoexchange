@@ -37,13 +37,14 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Payments>,privat
         var btn_buy:Button? = null
 
         fun bindView(payments: Payments) {
+
             tv_price = itemView.findViewById(R.id.tv_price)
             tv_limit = itemView.findViewById(R.id.tv_limit)
             tv_seller = itemView.findViewById(R.id.tv_seller)
             tv_method = itemView.findViewById(R.id.tv_method)
             btn_buy = itemView.findViewById(R.id.btn_buy)
 
-            tv_limit!!.setText(payments.limit+" "+payments.currency)
+            tv_limit!!.setText(payments.limit.toString()+" "+payments.currency)
             tv_method!!.setText(payments.method)
             tv_seller!!.setText(payments.seller)
             tv_price!!.setText(payments.price+" \n "+payments.currency)
