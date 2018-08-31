@@ -19,52 +19,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac95f868-6e6b-4f12-8b37-3a24027e5fc1" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_toptoche_searchablespinner_searchablespinnerlibrary_1_3_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/layout_curve_btn_boreder_only.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/layout_curve_btn_text.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/layout_curve_edit_text.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tab_color_selector.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dilalog_email_verify.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Trade.kt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/utils/Constants.kt" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/jarAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/jarAnalysis.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/redcode/sellandbye/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/redcode/sellandbye/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/MainActivity.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/MainActivity.kt" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableBuyerAdapater.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableBuyerAdapater.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableSellerAdapater.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableSellerAdapater.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/auth/SignUpActivity.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/auth/SignUpActivity.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Payments.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Payments.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyMainFragment.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyFragment.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/HomeFragment.kt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/SellFragment.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/SellFragment.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/TradeFragment.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/TradeFragment.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_buy.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_buy.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dilalog_view_trade.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dilalog_view_trade.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_buy_main.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_buy.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_sell.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_sell.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_trade.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_trade.xml" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyFragment.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyFragment.kt" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_buy.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_buy.xml" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/single_table_row_buyer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/single_table_row_buyer.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/single_table_row_seller.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/single_table_row_seller.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -97,24 +67,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TableBuyerAdapater.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableBuyerAdapater.kt">
+      <file leaf-file-name="Payments.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Payments.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="38" column="42" lean-forward="false" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
-              <folding />
+            <state relative-caret-position="204">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding>
+                <element signature="e#47#92#0" expanded="true" />
+                <element signature="e#355#897#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Payments.kt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Payments.kt">
+      <file leaf-file-name="Trade.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Trade.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-              <folding>
-                <element signature="e#47#92#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="258">
+              <caret line="31" column="63" lean-forward="false" selection-start-line="31" selection-start-column="63" selection-end-line="31" selection-end-column="63" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,11 +93,56 @@
       <file leaf-file-name="BuyFragment.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="38" column="66" lean-forward="false" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
+            <state relative-caret-position="238">
+              <caret line="29" column="53" lean-forward="false" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_buy.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_buy.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="222" column="40" lean-forward="false" selection-start-line="222" selection-start-column="40" selection-end-line="222" selection-end-column="40" />
               <folding>
-                <element signature="e#44#529#0" expanded="true" />
+                <element signature="e#1287#2379#0" expanded="false" />
+                <element signature="e#1472#1753#0" expanded="false" />
+                <element signature="e#1770#2351#0" expanded="false" />
+                <element signature="e#2392#3431#0" expanded="false" />
+                <element signature="e#3444#5250#0" expanded="false" />
+                <element signature="e#5287#5728#0" expanded="false" />
+                <element signature="e#5738#6010#0" expanded="false" />
+                <element signature="e#6021#7154#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TableBuyerAdapater.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableBuyerAdapater.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding>
+                <element signature="e#48#419#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="single_table_row_buyer.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/single_table_row_buyer.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="18" column="34" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -136,9 +152,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin File" />
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="Kotlin File" />
       </list>
     </option>
   </component>
@@ -2282,19 +2298,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/home.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/auth/auth/ui/SellFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/auth/auth/ui/HomeFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/auth/auth/ui/TradeFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/app_bar_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_home_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/HomeActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/auth/auth/ui/BuyFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_buy.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dilalog_terms_trade.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/auth/auth/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/auth/auth1/MainActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_new.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_new_bank.xml" />
@@ -2326,13 +2337,18 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_sell.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_buy.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/single_table_row_buyer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableSellerAdapater.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableBuyerAdapater.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/HomeFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/SellFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Payments.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyMainFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/utils/Constants.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/trade.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Trade.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_buy.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/single_table_row_buyer.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableBuyerAdapater.kt" />
       </list>
     </option>
   </component>
@@ -2382,7 +2398,7 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="sellandbye" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="adapter" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bitsell1" type="1abcf292:AndroidViewProjectNode" />
@@ -2633,7 +2649,7 @@
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58006537" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2777778" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39869282" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2641,13 +2657,12 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="92" y="92" width="840" height="544" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35306123" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30510205" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="343" y="78" width="390" height="612" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28163266" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2489796" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Android WiFi ADB" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2657,6 +2672,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="92" y="92" width="840" height="544" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2719,23 +2735,11 @@
           <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="35" />
+      <option name="time" value="36" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_home.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_home_drawer.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/home.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -2753,13 +2757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Users.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -3038,23 +3035,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_buy.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          <folding>
-            <element signature="e#1287#2379#0" expanded="false" />
-            <element signature="e#1472#1753#0" expanded="false" />
-            <element signature="e#1770#2351#0" expanded="false" />
-            <element signature="e#2392#3431#0" expanded="false" />
-            <element signature="e#6298#8216#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3115,17 +3095,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/single_table_row_buyer.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="39" column="23" lean-forward="false" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/MainActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="53">
@@ -3161,16 +3130,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="38" column="66" lean-forward="false" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
-          <folding>
-            <element signature="e#44#529#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3182,20 +3141,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableBuyerAdapater.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Users.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="38" column="42" lean-forward="false" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+        <state relative-caret-position="85">
+          <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/utils/Constants.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="56" lean-forward="false" selection-start-line="5" selection-start-column="56" selection-end-line="5" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Payments.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="204">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
             <element signature="e#47#92#0" expanded="true" />
+            <element signature="e#355#897#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/models/Trade.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="31" column="63" lean-forward="false" selection-start-line="31" selection-start-column="63" selection-end-line="31" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_buy.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="222" column="40" lean-forward="false" selection-start-line="222" selection-start-column="40" selection-end-line="222" selection-end-column="40" />
+          <folding>
+            <element signature="e#1287#2379#0" expanded="false" />
+            <element signature="e#1472#1753#0" expanded="false" />
+            <element signature="e#1770#2351#0" expanded="false" />
+            <element signature="e#2392#3431#0" expanded="false" />
+            <element signature="e#3444#5250#0" expanded="false" />
+            <element signature="e#5287#5728#0" expanded="false" />
+            <element signature="e#5738#6010#0" expanded="false" />
+            <element signature="e#6021#7154#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/single_table_row_buyer.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="18" column="34" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/ui/BuyFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="29" column="53" lean-forward="false" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/redcode/sellandbye/adapter/TableBuyerAdapater.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="e#48#419#0" expanded="true" />
           </folding>
         </state>
       </provider>
