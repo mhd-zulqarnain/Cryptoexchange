@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
@@ -6,16 +6,40 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#000</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/backgoundTheme</item>
 
     </style>
 
     <style name="menuItem">
-        <!-- Customize your theme here. -->
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:textSize">25dp</item>
         <item name="android:layout_marginLeft">23dp</item>
         <item name="android:gravity">left</item>
-
-
     </style>
+
+    <style name="editTextStyle">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:layout_marginLeft">23dp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:background">@drawable/layout_curve_edit_text</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="buyActivityText">
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/oswald_regular</item>
+    </style>
+
+    <style name="editLableStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/whitColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="colorAccent">@color/whitColor</item>
+        <item name="colorControlNormal">@color/whitColor</item>
+        <item name="colorControlActivated">@color/whitColor</item>
+    </style>
+
 </resources>

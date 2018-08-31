@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/sign_up_underline"
-                android:onClick="signIn"/>
+                android:onClick="signUp"/>
         </LinearLayout>
 
 

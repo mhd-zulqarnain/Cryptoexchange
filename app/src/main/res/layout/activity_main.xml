@@ -5,15 +5,29 @@
     android:id="@+id/outer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.auth.MainActivity">
+    android:background="@color/backgoundTheme"
+    tools:context=".MainActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
+        >
+
+    </RelativeLayout>
+
 
     <ImageButton
         android:id="@+id/add_option"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentLeft="true"
-        android:layout_margin="22dp"
         android:background="@null"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="11dp"
+
         android:src="@drawable/ic_menu_white_24dp" />
 
     <LinearLayout
@@ -36,26 +50,30 @@
             android:background="@null"
             android:src="@drawable/ic_close_black_24dp" />
 
+
         <TextView
+            android:id="@+id/tv_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/menuItem"
             android:layout_marginTop="60dp"
             android:text="Home"
-             />
+            />
 
         <TextView
+            android:id="@+id/tv_trade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="23dp"
-            android:text="Project"
+            android:text="Trade"
             style="@style/menuItem"
             />
 
         <TextView
+            android:id="@+id/tv_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Service"
+            android:text="Profile"
             style="@style/menuItem"
             />
 
@@ -77,10 +95,4 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_container">
-
-    </RelativeLayout>
 </RelativeLayout>

@@ -43,11 +43,11 @@
         android:textSize="10dp" />
 
     <Button
-        android:id="@+id/btn_sell"
+        android:id="@+id/btn_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="sell"
+        android:text="Sell"
         android:textColor="#fff"
         android:textSize="8dp" />
 

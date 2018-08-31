@@ -1,4 +1,4 @@
-package com.example.redcode.sellandbye.auth.auth.adapter
+package com.example.redcode.sellandbye.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.redcode.sellandbye.R
-import com.example.redcode.sellandbye.auth.auth.models.Payments
+import com.example.redcode.sellandbye.models.Payments
 
 class TableSellerAdapater(var ctx: Context, var model: ArrayList<Payments>) : RecyclerView.Adapter<TableSellerAdapater.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_seller,parent,false))
+        var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_seller, parent, false))
         return view
     }
 
@@ -38,9 +38,9 @@ class TableSellerAdapater(var ctx: Context, var model: ArrayList<Payments>) : Re
             tv_limit = itemView.findViewById(R.id.tv_limit)
             tv_seller = itemView.findViewById(R.id.tv_seller)
             tv_method = itemView.findViewById(R.id.tv_method)
-            btn_sell = itemView.findViewById(R.id.btn_sell)
+//            btn_sell = itemView.findViewById(R.id.btn_sell)
 
-            tv_limit!!.setText(payments.limit+" "+payments.currency)
+            tv_limit!!.setText(payments.limit.toString()+" "+payments.currency)
             tv_method!!.setText(payments.method)
             tv_seller!!.setText(payments.seller)
             tv_price!!.setText(payments.price+" \n "+payments.currency)

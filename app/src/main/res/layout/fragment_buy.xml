@@ -3,95 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#544f4f"
-    tools:context=".auth.auth.options.HomeFragment"
+    android:background="@color/backgoundBtn"
 
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
+        android:weightSum="6.5"
+        >
 
-        android:weightSum="6">
-
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="60dp"
-            android:layout_weight=".4"
-            android:orientation="horizontal"
-
-            android:weightSum="2">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <View
-                    android:id="@+id/upper_border_buy"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentTop="true"
-                    android:background="#fff" />
-
-                <Button
-                    android:id="@+id/buy_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#00ffffff"
-                    android:text="Buy"
-                    android:textColor="#fff"
-                    android:textSize="18sp" />
-
-                <View
-                    android:id="@+id/_border_buy"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#fff" />
-
-            </RelativeLayout>
-
-
-            <View
-
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#fff" />
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <View
-                    android:id="@+id/upper_border_sell"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentTop="true"
-                    android:background="#fff"
-                    android:visibility="gone" />
-
-                <Button
-                    android:id="@+id/sell_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#00ffffff"
-                    android:text="Sell"
-                    android:textColor="#fff"
-                    android:textSize="18sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#fff" />
-            </RelativeLayout>
-        </LinearLayout>
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight=".5"
+            android:fontFamily="@font/mplusregular"
+            android:text="Place your purchasing rates"
+            android:textColor="#fff"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -175,40 +110,46 @@
                     android:maxLength="5"
                     android:maxLines="1"
                     android:textSize="15dp" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/curreny_type_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+
+                <Button
+                    android:id="@+id/btn_trade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/backgoundTheme"
+                    android:background="@drawable/layout_curve_btn_boreder_only"
+                    android:text="Trade"
+                    />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_trade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Trade"
-                android:layout_marginLeft="15dp"
-                android:layout_alignParentBottom="true"
-                />
+
 
         </LinearLayout>
-
-
 
         <TextView
             android:id="@+id/main_des_tv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="4dp"
-            android:layout_weight=".4"
+            android:layout_marginTop="4dp"
+            android:layout_weight=".5"
             android:fontFamily="@font/mplusregular"
-            android:text="Buy bitcoins online in Pakistan"
+            android:text="Buy online bitcoins "
             android:textColor="#fff"
-            android:textSize="22dp" />
+            android:textSize="20sp" />
+
 
         <LinearLayout
+            android:id="@+id/seller_table"
             android:layout_width="wrap_content"
-            android:id="@+id/buyer_table"
             android:layout_height="0dp"
-            android:layout_weight="3.4"
-            android:layout_margin="8dp"
-            android:visibility="visible">
-
+            android:layout_weight="5.5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -262,7 +203,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Buton"
                         android:textColor="#fff"
                         android:textSize="12dp" />
 
@@ -271,90 +211,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="-10dp"
                     android:background="#fff" />
 
-               <android.support.v7.widget.RecyclerView
-                   android:id="@+id/table_recycler"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/seller_table"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="3.4"
-            android:layout_margin="8dp"
-            android:visibility="gone"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <View
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/table_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#fff" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Buyer"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Payment Method"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Price/Btc"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Limit"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Buton"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#fff" />
-
-               <android.support.v7.widget.RecyclerView
-                   android:id="@+id/table_seller_recycler"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -363,3 +226,4 @@
 </FrameLayout>
 
     <!--android:drawableStart="@drawable/ic_search_gray"-->
+
