@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1098457612828:android:c19d123eb510b693",
         "android_client_info": {
-          "package_name": "com.example.redcode.sellandbye"
+          "package_name": "com.company.redcode.royalcryptoexchange"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1098457612828-ehguqghi3e1hqlbn6s8vr0kjoug79ga6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.redcode.sellandbye",
+            "package_name": "com.company.redcode.royalcryptoexchange",
             "certificate_hash": "a1321e23dbf3ced39d26d2c556764dee06b6c25d"
           }
         },
