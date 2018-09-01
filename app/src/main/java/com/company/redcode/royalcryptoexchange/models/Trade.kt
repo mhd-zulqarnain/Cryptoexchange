@@ -2,13 +2,13 @@ package com.company.redcode.royalcryptoexchange.models
 
 import java.util.*
 
-class Trade(var  tid: String? = null,
+class Trade(
+        var  tid: String? = null,
             var uid: String? = null,
             var user: Users? = null,
             var bid: String? = null,
             var u_limit: Int? = null,
             var d_limit: Int? = null,
-            var banks: ArrayList<Bank>? = null,
             var dead_line: String? = null,
             var currency_type: String? = null,
             var amount: String? = null,

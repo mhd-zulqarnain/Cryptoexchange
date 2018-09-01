@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,11 @@ import com.company.redcode.royalcryptoexchange.adapter.TableSellerAdapater
 import com.company.redcode.royalcryptoexchange.models.Payments
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-
-
+import com.company.redcode.royalcryptoexchange.models.Users
+import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class SellFragment : Fragment() {
@@ -43,7 +47,8 @@ class SellFragment : Fragment() {
         recyclerView.adapter = adapter
 
         btn_trade!!.setOnClickListener{
-            showTradeDialog()
+           // showTradeDialog()
+            postReq()
         }
 
 
@@ -65,6 +70,24 @@ class SellFragment : Fragment() {
 
 
 
+    }
+
+    private fun postReq() {
+        ApiClint.getInstance()?.getService()?.getUser()?.enqueue(object : Callback<ArrayList<Users>> {
+            override fun onResponse(call: Call<ArrayList<Users>>?, response: Response<ArrayList<Users>>?) {
+
+                response?.body()?.forEach{user->
+                    println(" ")
+                    println("User data "+user.email)
+                    println("User data "+user.password)
+                    println(" ")
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
+                println("error  "+ t.toString())
+             }
+        })
     }
 
 
