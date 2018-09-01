@@ -16,7 +16,8 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun addTrade(@Body trade: Trade): Call<ApiResponse>
 
-
-
+    @GET("get_trade.php")
+    @Headers("Content-Type:application/json")
+    fun getTrade(): Call<ArrayList<Trade>>
 
 }

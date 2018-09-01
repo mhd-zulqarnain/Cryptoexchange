@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,7 +75,7 @@ class SellFragment : Fragment() {
 
     private fun postReq() {
 
-       var mtrade=  Trade("233","user3322", Users("user3322"),"bankid",1200000,50000
+       var mtrade=  Trade(null,"322", Users("user3322"),"bankid",1200000,50000
                 ,"3 hours","BTC","3","120000")
         ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object :Callback<ApiResponse>{
 

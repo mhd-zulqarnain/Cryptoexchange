@@ -48,7 +48,7 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>,private v
             btn_buy = itemView.findViewById(R.id.btn_buy)
 
             tv_limit!!.setText(trade.d_limit.toString()+"-"+trade.u_limit.toString())
-            tv_seller!!.setText(trade.user!!.uid)
+            tv_seller!!.setText("user"+trade.uid)
 
             tv_amount!!.setText(trade.amount+trade.currency_type)
             tv_price!!.setText(trade.price)
