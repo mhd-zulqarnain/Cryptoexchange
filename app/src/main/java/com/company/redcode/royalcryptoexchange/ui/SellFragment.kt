@@ -16,6 +16,7 @@ import com.company.redcode.royalcryptoexchange.adapter.TableSellerAdapater
 import com.company.redcode.royalcryptoexchange.models.Payments
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.models.Users
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import retrofit2.Call
@@ -48,9 +49,9 @@ class SellFragment : Fragment() {
 
         btn_trade!!.setOnClickListener{
            // showTradeDialog()
+            //getReq()
             postReq()
         }
-
 
         val coin_type_spinner = view.findViewById(R.id.curreny_type_spinner) as Spinner
         // Creating ArrayAdapter using the string array and default spinner layout
@@ -73,6 +74,14 @@ class SellFragment : Fragment() {
     }
 
     private fun postReq() {
+       var mtrade=  Trade("233","user3322", Users("user3322"),"bankid",1200000,50000
+                ,"3 hours","BTC","3","120000")
+      /*  ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object :Callback<Response>{
+
+        })*/
+    }
+
+    private fun getReq() {
         ApiClint.getInstance()?.getService()?.getUser()?.enqueue(object : Callback<ArrayList<Users>> {
             override fun onResponse(call: Call<ArrayList<Users>>?, response: Response<ArrayList<Users>>?) {
 
@@ -86,6 +95,7 @@ class SellFragment : Fragment() {
 
             override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                 println("error  "+ t.toString())
+
              }
         })
     }
