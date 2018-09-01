@@ -16,6 +16,7 @@ import com.company.redcode.royalcryptoexchange.adapter.TableSellerAdapater
 import com.company.redcode.royalcryptoexchange.models.Payments
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.company.redcode.royalcryptoexchange.models.ApiResponse
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.models.Users
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
@@ -74,17 +75,29 @@ class SellFragment : Fragment() {
     }
 
     private fun postReq() {
+
        var mtrade=  Trade("233","user3322", Users("user3322"),"bankid",1200000,50000
                 ,"3 hours","BTC","3","120000")
-      /*  ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object :Callback<Response>{
+        ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object :Callback<ApiResponse>{
 
-        })*/
+            override fun onResponse(call: Call<ApiResponse>?, response: Response<ApiResponse>?) {
+                println("error  "+ response.toString())
+                Toast.makeText(activity!! , "success ",Toast.LENGTH_LONG).show()
+
+
+            }
+            override fun onFailure(call: Call<ApiResponse>?, t: Throwable?) {
+                Toast.makeText(activity!! , "failed ",Toast.LENGTH_LONG).show()
+                println("error  "+ t.toString())
+
+            }
+
+        })
     }
 
     private fun getReq() {
         ApiClint.getInstance()?.getService()?.getUser()?.enqueue(object : Callback<ArrayList<Users>> {
             override fun onResponse(call: Call<ArrayList<Users>>?, response: Response<ArrayList<Users>>?) {
-
                 response?.body()?.forEach{user->
                     println(" ")
                     println("User data "+user.email)

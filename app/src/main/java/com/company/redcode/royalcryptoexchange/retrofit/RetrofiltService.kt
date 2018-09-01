@@ -1,5 +1,6 @@
 package com.company.redcode.royalcryptoexchange.retrofit
 
+import com.company.redcode.royalcryptoexchange.models.ApiResponse
 import com.company.redcode.royalcryptoexchange.models.Users
 import retrofit2.Call
 import retrofit2.http.*
@@ -13,7 +14,7 @@ interface RetrofiltService {
 
     @POST("trade_post.php")
     @Headers("Content-Type:application/json")
-    fun addTrade(@Body trade: Trade): Call<Response>
+    fun addTrade(@Body trade: Trade): Call<ApiResponse>
 
 
 
