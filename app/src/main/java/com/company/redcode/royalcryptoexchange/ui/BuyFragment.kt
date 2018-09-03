@@ -2,6 +2,7 @@ package com.company.redcode.royalcryptoexchange.ui
 
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -22,9 +23,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import com.company.redcode.royalcryptoexchange.models.ApiResponse
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DecimalFormat
 
 
 class BuyFragment : Fragment() {
@@ -51,6 +55,7 @@ class BuyFragment : Fragment() {
     @SuppressLint("NewApi")
     private fun initView(view: View) {
 
+
         seller_coin_filter = view.findViewById(R.id.seller_coin_filter)
         seller_filter_group = view.findViewById(R.id.seller_filter_group)
         seller_price_filter = view.findViewById(R.id.seller_price_filter)
@@ -59,6 +64,7 @@ class BuyFragment : Fragment() {
         ed_price = view.findViewById(R.id.ed_price)
         btn_trade = view.findViewById(R.id.btn_trade)
         ed_total = view.findViewById(R.id.ed_total)
+        val coin_type_spinner = view.findViewById(R.id.curreny_type_spinner) as Spinner
 
         val builder = AlertDialog.Builder(activity!!)
         builder.setView(R.layout.layout_dialog_progress)
@@ -68,23 +74,26 @@ class BuyFragment : Fragment() {
 
 
         val recyclerView: RecyclerView = view.findViewById(R.id.table_recycler)
+        Collections.sort(tradelist, Trade.Order.ByLimit.ascending());
 
-       adapter = TableBuyerAdapater(activity!!, tradelist) { position ->
+        adapter = TableBuyerAdapater(activity!!, tradelist) { position ->
+
+            var obj = Gson().toJson(tradelist[position])
             val intent = Intent(activity!!, BuyActivity::class.java)
+            intent.putExtra("tradeObject", obj)
             startActivity(intent)
         }
+
         val layout = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         recyclerView.layoutManager = layout
         recyclerView.adapter = adapter
 
 
-        val coin_type_spinner = view.findViewById(R.id.curreny_type_spinner) as Spinner
-
         val spinnerAdapter = ArrayAdapter.createFromResource(activity!!,
                 R.array.array_coin, android.R.layout.simple_spinner_item)
+
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         coin_type_spinner.adapter = spinnerAdapter
-
         coin_type_spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
@@ -128,7 +137,9 @@ class BuyFragment : Fragment() {
                         val amout = ed_amount!!.text.toString().toInt()
                         val price = ed_price!!.text.toString().toInt()
                         val total = amout * price
-                        ed_total!!.setText(total.toString())
+                        val df = DecimalFormat("#,###,##0.00")
+                        var formated = df.format(total)
+                        ed_total!!.setText(formated.toString())
                     }
                 }
                 if (ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
@@ -168,7 +179,7 @@ class BuyFragment : Fragment() {
         val btnSave: Button = view.findViewById(R.id.btn_save)
 
         ed_currency.setText(coin.toUpperCase())
-        val spinner_time: Spinner = view.findViewById(R.id.spinner_method)
+        val spinner_time: Spinner = view.findViewById(R.id.spinner_time)
         var time: String = spinner_time.selectedItem.toString()
 
         spinner_time!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
@@ -203,12 +214,32 @@ class BuyFragment : Fragment() {
             } else
                 saveAble = true
 
+            if (u_limit!!.text.trim().length < 4) {
+                u_limit!!.error = "It should be in four figures"
+                u_limit!!.requestFocus()
+                saveAble = false
+            } else
+                saveAble = true
+
+            if (l_limit!!.text.trim().length < 4) {
+                l_limit!!.error = "It should be in four figures"
+                l_limit!!.requestFocus()
+                saveAble = false
+            } else
+                saveAble = true
+            if (saveAble) {
+                if (l_limit.text.toString().toLong() > u_limit.text.toString().toLong()) {
+                    Apputils.showMsg(context as Activity, "Upper limit should  be greater")
+                    saveAble = false
+                } else
+                    saveAble = true
+            }
             if (saveAble) {
 
                 progressBar!!.show()
 
-                var mtrade=  Trade(null,"322", Users("user3322"),"bankid",u_limit.text.toString().toLong(),l_limit.text.toString().toLong()
-                        ,time,coin,ed_amount!!.text.toString(),ed_price!!.text.toString(),ed_terms!!.text.toString(),"buy")
+                var mtrade = Trade(null, "322", Users("user3322"), "bankid", u_limit.text.toString().toLong(), l_limit.text.toString().toLong()
+                        , time, coin, ed_amount!!.text.toString(), ed_price!!.text.toString(), ed_terms!!.text.toString(), "buy")
 
                 ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object : Callback<ApiResponse> {
 
@@ -236,28 +267,26 @@ class BuyFragment : Fragment() {
 
         btnCancel.setOnClickListener {
 
-
             dialog.dismiss()
         }
         dialog.show()
     }
 
-
-    private fun  getAllTrade(){
+    private fun getAllTrade() {
         tradelist.clear()
 
         progressBar!!.show()
         ApiClint.getInstance()?.getService()?.getTrade()?.enqueue(object : Callback<ArrayList<Trade>> {
             override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
-                response?.body()?.forEach{trade->
-                   tradelist.add(trade)
+                response?.body()?.forEach { trade ->
+                    tradelist.add(trade)
                 }
                 progressBar!!.dismiss()
                 adapter!!.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<ArrayList<Trade>>?, t: Throwable?) {
-                println("error tpye  "+ t.toString())
+                println("error tpye  " + t.toString())
                 progressBar!!.dismiss()
                 Toast.makeText(activity!!, "Network error ", Toast.LENGTH_LONG).show()
 

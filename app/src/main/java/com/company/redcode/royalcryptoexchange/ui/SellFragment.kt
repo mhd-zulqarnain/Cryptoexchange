@@ -65,7 +65,7 @@ class SellFragment : Fragment() {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
                 var  item = parent!!.getItemAtPosition(pos);
-               Toast.makeText(activity!!,"item "+item,Toast.LENGTH_SHORT).show()
+               //Toast.makeText(activity!!,"item "+item,Toast.LENGTH_SHORT).show()
             }
         })
 
