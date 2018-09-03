@@ -1,18 +1,17 @@
 package com.company.redcode.royalcryptoexchange.ui
 
 
-import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.*
-
+import android.widget.Button
+import android.widget.TextView
 import com.company.redcode.royalcryptoexchange.R
+import com.company.redcode.royalcryptoexchange.TradeConfirmActivity
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
@@ -30,7 +29,6 @@ class BuyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_buy)
         var obj = intent.getStringExtra(JSON_TRARE);
         trade = Gson().fromJson(obj, Trade::class.java)
-
 
         initView()
     }
@@ -57,13 +55,17 @@ class BuyActivity : AppCompatActivity() {
 
                         if (pkr_ed!!.text.toString().toLong() > trade.u_limit.toString().toLong()) {
                             Apputils.showMsg(this@BuyActivity, "Limit crossed")
+                            btn_trade.isEnabled = false
                         } else if (pkr_ed!!.text.toString().toLong() < trade.d_limit.toString().toLong()) {
 
                             Apputils.showMsg(this@BuyActivity, "Should exceed lower Limit ")
+                            btn_trade.isEnabled = false
+
+                        } else {
+                            btc_ed!!.setText(price.toString())
+                            btn_trade.isEnabled = true
 
                         }
-
-                        btc_ed!!.setText(price.toString())
 
                     }
                 }
@@ -73,6 +75,23 @@ class BuyActivity : AppCompatActivity() {
 
         tv_terms.setOnClickListener {
             showTradeDialog()
+        }
+        btn_trade.setOnClickListener {
+
+            if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim()
+                    != "" &&!btc_ed!!.text.toString().trim().isEmpty() && btc_ed!!.text.toString().trim()!= ""
+                            ) {
+                var intent = Intent(this, TradeConfirmActivity::class.java)
+                var obj = Gson().toJson(trade)
+                intent.putExtra("tradeObj", obj)
+                intent.putExtra("coinUsed", btc_ed.text.toString())
+                startActivity(intent)
+                finish()
+            }
+            else{
+                Apputils.showMsg(this@BuyActivity , "Fill Valid data")
+            }
+
 
         }
     }

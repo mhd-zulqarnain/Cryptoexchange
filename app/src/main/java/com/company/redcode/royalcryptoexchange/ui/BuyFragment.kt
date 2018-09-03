@@ -9,19 +9,17 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.TableBuyerAdapater
+import com.company.redcode.royalcryptoexchange.models.ApiResponse
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.models.Users
-import java.util.*
-import android.text.Editable
-import android.text.TextWatcher
-import com.company.redcode.royalcryptoexchange.models.ApiResponse
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.google.gson.Gson
@@ -29,6 +27,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.DecimalFormat
+import java.util.*
 
 
 class BuyFragment : Fragment() {
@@ -186,7 +185,8 @@ class BuyFragment : Fragment() {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
                 var item = parent!!.getItemAtPosition(pos);
-                time = item.toString()
+                var str = item.toString().substring(0, 1)
+                time = (str.toInt() * 60 * 60 * 1000).toString()
             }
         })
 
@@ -227,6 +227,7 @@ class BuyFragment : Fragment() {
                 saveAble = false
             } else
                 saveAble = true
+
             if (saveAble) {
                 if (l_limit.text.toString().toLong() > u_limit.text.toString().toLong()) {
                     Apputils.showMsg(context as Activity, "Upper limit should  be greater")

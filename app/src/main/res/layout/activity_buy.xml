@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="18dp"
     android:orientation="vertical"
+    android:layout_gravity="center"
    >
 
     <TextView
@@ -99,19 +100,7 @@
                 android:text="Method : Bank Transfer"
                 style="@style/buyActivityText"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Bank Name : Hbl Bank"
-                style="@style/buyActivityText"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="IBN : 12312412333"
-                style="@style/buyActivityText"/>
         </LinearLayout>
 
     </LinearLayout>
