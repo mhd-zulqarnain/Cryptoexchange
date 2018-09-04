@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.company.redcode.royalcryptoexchange.R
-import com.company.redcode.royalcryptoexchange.models.Payments
 import com.company.redcode.royalcryptoexchange.models.Trade
+import com.company.redcode.royalcryptoexchange.utils.Apputils
 
 class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>,private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableBuyerAdapater.MyViewHolder>() {
 
@@ -47,11 +47,12 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>,private v
             tv_amount = itemView.findViewById(R.id.tv_amount)
             btn_buy = itemView.findViewById(R.id.btn_buy)
 
-            tv_limit!!.setText(trade.d_limit.toString()+"-"+trade.u_limit.toString())
+            tv_limit!!.setText(Apputils.formatCurrency(trade.d_limit.toString())+"-"+
+                    Apputils.formatCurrency(trade.u_limit.toString()))
             tv_seller!!.setText("user"+trade.uid)
 
             tv_amount!!.setText(trade.amount+trade.currency_type)
-            tv_price!!.setText(trade.price)
+            tv_price!!.setText(Apputils.formatCurrency(trade.price!!))
         }
 
 

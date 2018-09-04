@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.CompoundButton
 import android.widget.TextView
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.TradeConfirmActivity
@@ -23,7 +24,7 @@ class BuyActivity : AppCompatActivity() {
 
     val JSON_TRARE: String = "tradeObject"
     var trade: Trade = Trade()
-
+    var isTermAccept:Boolean =false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy)
@@ -35,7 +36,7 @@ class BuyActivity : AppCompatActivity() {
 
     private fun initView() {
 
-        seller_limit.setText(trade.d_limit.toString() + "-" + trade.u_limit.toString())
+        seller_limit.setText(Apputils.formatCurrency(trade.d_limit.toString()) + "-" + Apputils.formatCurrency(trade.u_limit.toString()))
         seller_name.setText("User" + trade.uid.toString())
 
         pkr_ed!!.addTextChangedListener(object : TextWatcher {
@@ -49,9 +50,7 @@ class BuyActivity : AppCompatActivity() {
 
                     if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "" && pkr_ed!!.text.trim().length > 3) {
 
-                        val amout = pkr_ed!!.text.toString().toInt()
 
-                        val price = amout * Constants.BTC_PKR_RATE
 
                         if (pkr_ed!!.text.toString().toLong() > trade.u_limit.toString().toLong()) {
                             Apputils.showMsg(this@BuyActivity, "Limit crossed")
@@ -62,6 +61,8 @@ class BuyActivity : AppCompatActivity() {
                             btn_trade.isEnabled = false
 
                         } else {
+                            val amout = pkr_ed!!.text.toString().toInt()
+                            val price = amout * Constants.BTC_PKR_RATE
                             btc_ed!!.setText(price.toString())
                             btn_trade.isEnabled = true
 
@@ -73,29 +74,36 @@ class BuyActivity : AppCompatActivity() {
             }
         })
 
+        chk_terms.setOnCheckedChangeListener(object :CompoundButton.OnCheckedChangeListener{
+            override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+                isTermAccept= p1;
+
+            }
+
+        })
         tv_terms.setOnClickListener {
             showTradeDialog()
         }
-        btn_trade.setOnClickListener {
 
-            if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim()
+        btn_trade.setOnClickListener {
+            if(!isTermAccept){
+                Apputils.showMsg(this@BuyActivity , "Accept the terms ")
+            }else if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim()
                     != "" &&!btc_ed!!.text.toString().trim().isEmpty() && btc_ed!!.text.toString().trim()!= ""
                             ) {
                 var intent = Intent(this, TradeConfirmActivity::class.java)
                 var obj = Gson().toJson(trade)
                 intent.putExtra("tradeObj", obj)
                 intent.putExtra("coinUsed", btc_ed.text.toString())
+                intent.putExtra("priceCharged", pkr_ed.text.toString())
                 startActivity(intent)
                 finish()
             }
             else{
                 Apputils.showMsg(this@BuyActivity , "Fill Valid data")
             }
-
-
         }
     }
-
 
     private fun showTradeDialog() {
         val view: View = LayoutInflater.from(this@BuyActivity).inflate(R.layout.dilalog_terms_trade, null)

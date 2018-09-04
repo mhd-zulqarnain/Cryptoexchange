@@ -57,7 +57,7 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:background="@drawable/layout_curve_btn_boreder_only"
-            android:text="Buy"
+            android:text="Sell"
             android:textColor="@color/backgoundTheme"
             android:textSize="10sp" />
     </LinearLayout>

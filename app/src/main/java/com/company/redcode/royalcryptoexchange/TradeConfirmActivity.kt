@@ -12,6 +12,7 @@ class TradeConfirmActivity : AppCompatActivity() {
 
     var trade = Trade()
     var coinUsed: String? = null
+    var price: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +21,7 @@ class TradeConfirmActivity : AppCompatActivity() {
         var obj = intent.getStringExtra("tradeObj")
         trade = Gson().fromJson(obj, Trade::class.java)
         coinUsed = intent.getStringExtra("coinUsed")
+        price = intent.getStringExtra("priceCharged")
         initView()
 
 
@@ -31,6 +33,10 @@ class TradeConfirmActivity : AppCompatActivity() {
         var time = deadline-System.currentTimeMillis()
 
         println("time now " + time)
+
+        seller_name.setText("user"+trade.uid)
+        btc_amount.setText(coinUsed)
+        price_tv.setText(price)
         val countDown = object : CountDownTimer(time, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {

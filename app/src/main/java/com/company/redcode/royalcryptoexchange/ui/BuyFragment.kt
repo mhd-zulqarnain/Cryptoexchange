@@ -26,7 +26,6 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.DecimalFormat
 import java.util.*
 
 
@@ -44,6 +43,17 @@ class BuyFragment : Fragment() {
     var coin: String = "BTC"
     var tradelist = ArrayList<Trade>()
     var adapter: TableBuyerAdapater? = null
+
+    /*Dialog item */
+    var btnCancel: Button? = null
+    var ed_currency: TextView? = null
+    var u_limit: EditText? = null
+    var ed_terms: EditText? = null
+    var l_limit: EditText? = null
+    var btnSave: Button? = null
+    var spinner_time: Spinner? = null
+    var time: String? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_buy, container, false)
@@ -73,7 +83,7 @@ class BuyFragment : Fragment() {
 
 
         val recyclerView: RecyclerView = view.findViewById(R.id.table_recycler)
-        Collections.sort(tradelist, Trade.Order.ByLimit.ascending());
+        Collections.sort(tradelist, Trade.Order.ByPrice.descending());
 
         adapter = TableBuyerAdapater(activity!!, tradelist) { position ->
 
@@ -98,6 +108,7 @@ class BuyFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
                 val item = parent!!.getItemAtPosition(pos);
                 coin = item.toString()
+                getAllTrade()
             }
         })
 
@@ -108,7 +119,7 @@ class BuyFragment : Fragment() {
                         adapter?.notifyDataSetChanged()
                     }
                     if (seller_price_filter!!.isChecked) {
-                        Collections.sort(tradelist, Trade.Order.ByPrice.ascending());
+                        Collections.sort(tradelist, Trade.Order.ByPrice.descending());
                         adapter?.notifyDataSetChanged()
                     }
                     if (seller_coin_filter!!.isChecked) {
@@ -136,9 +147,8 @@ class BuyFragment : Fragment() {
                         val amout = ed_amount!!.text.toString().toInt()
                         val price = ed_price!!.text.toString().toInt()
                         val total = amout * price
-                        val df = DecimalFormat("#,###,##0.00")
-                        var formated = df.format(total)
-                        ed_total!!.setText(formated.toString())
+
+                        ed_total!!.setText(total.toString())
                     }
                 }
                 if (ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
@@ -162,24 +172,31 @@ class BuyFragment : Fragment() {
             return
         }
 
+        if (ed_total!!.text.toString().toFloat() < 5000) {
+            ed_total!!.error = "Minimum total should be 5000"
+            ed_total!!.requestFocus()
+            return
+
+        }
+
+
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dilalog_view_trade, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
         alertBox.setView(view)
         alertBox.setCancelable(false)
         val dialog = alertBox.create()
 
-        var saveAble = true
+        btnCancel = view.findViewById(R.id.btn_cancel)
+        ed_currency = view.findViewById(R.id.ed_currency)
+        u_limit = view.findViewById(R.id.u_limit)
+        ed_terms = view.findViewById(R.id.ed_terms)
+        l_limit = view.findViewById(R.id.l_limit)
+        btnSave = view.findViewById(R.id.btn_save)
 
-        val btnCancel: Button = view.findViewById(R.id.btn_cancel)
-        val ed_currency: TextView = view.findViewById(R.id.ed_currency)
-        val u_limit: EditText = view.findViewById(R.id.u_limit)
-        val ed_terms: EditText = view.findViewById(R.id.ed_terms)
-        val l_limit: EditText = view.findViewById(R.id.l_limit)
-        val btnSave: Button = view.findViewById(R.id.btn_save)
+        ed_currency!!.setText(coin.toUpperCase())
+        spinner_time = view.findViewById(R.id.spinner_time)
 
-        ed_currency.setText(coin.toUpperCase())
-        val spinner_time: Spinner = view.findViewById(R.id.spinner_time)
-        var time: String = spinner_time.selectedItem.toString()
+        time = spinner_time!!.selectedItem.toString()
 
         spinner_time!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
@@ -189,95 +206,105 @@ class BuyFragment : Fragment() {
                 time = (str.toInt() * 60 * 60 * 1000).toString()
             }
         })
+        btnCancel!!.setOnClickListener {
 
-        btnSave.setOnClickListener {
-            if (u_limit!!.text.toString() == "") {
-                u_limit!!.error = "Enter the Limit"
-                u_limit!!.requestFocus()
-                saveAble = false
-
-            } else
-                saveAble = true
-            if (l_limit!!.text.toString() == "") {
-                l_limit!!.error = "Enter the Limit"
-                l_limit!!.requestFocus()
-                saveAble = false
-
-            } else
-                saveAble = true
-
-            if (ed_terms!!.text.toString() == "") {
-                ed_terms!!.error = "Enter your terms"
-                ed_terms!!.requestFocus()
-                saveAble = false
-
-            } else
-                saveAble = true
-
-            if (u_limit!!.text.trim().length < 4) {
-                u_limit!!.error = "It should be in four figures"
-                u_limit!!.requestFocus()
-                saveAble = false
-            } else
-                saveAble = true
-
-            if (l_limit!!.text.trim().length < 4) {
-                l_limit!!.error = "It should be in four figures"
-                l_limit!!.requestFocus()
-                saveAble = false
-            } else
-                saveAble = true
-
-            if (saveAble) {
-                if (l_limit.text.toString().toLong() > u_limit.text.toString().toLong()) {
-                    Apputils.showMsg(context as Activity, "Upper limit should  be greater")
-                    saveAble = false
-                } else
-                    saveAble = true
-            }
-            if (saveAble) {
-
-                progressBar!!.show()
-
-                var mtrade = Trade(null, "322", Users("user3322"), "bankid", u_limit.text.toString().toLong(), l_limit.text.toString().toLong()
-                        , time, coin, ed_amount!!.text.toString(), ed_price!!.text.toString(), ed_terms!!.text.toString(), "buy")
-
-                ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object : Callback<ApiResponse> {
-
-                    override fun onResponse(call: Call<ApiResponse>?, response: Response<ApiResponse>?) {
-                        println("error  " + response.toString())
-                        Toast.makeText(activity!!, "Deal added successfully ", Toast.LENGTH_LONG).show()
-                        progressBar!!.dismiss()
-                        dialog.dismiss()
-                        getAllTrade()
-
-                    }
-
-                    override fun onFailure(call: Call<ApiResponse>?, t: Throwable?) {
-                        Toast.makeText(activity!!, "failed ", Toast.LENGTH_LONG).show()
-                        println("error  " + t.toString())
-                        progressBar!!.dismiss()
-                        dialog.dismiss()
-
-                    }
-
-                })
-
-            }
+            dialog!!.dismiss()
         }
+        btnSave?.setOnClickListener {
+            proceed(dialog)
 
-        btnCancel.setOnClickListener {
-
-            dialog.dismiss()
         }
         dialog.show()
+    }
+
+    private fun proceed(dialog: android.support.v7.app.AlertDialog) {
+
+        if (u_limit!!.text.toString() == "") {
+            u_limit!!.error = "Enter the Limit"
+            u_limit!!.requestFocus()
+            return
+
+        }
+        if (l_limit!!.text.toString() == "") {
+            l_limit!!.error = "Enter the Limit"
+            l_limit!!.requestFocus()
+            return
+        }
+
+        if (ed_terms!!.text.toString() == "") {
+            ed_terms!!.error = "Enter your terms"
+            ed_terms!!.requestFocus()
+            return
+
+        }
+
+        if (u_limit!!.text.trim().length < 4) {
+            u_limit!!.error = "It should be in four figures"
+            u_limit!!.requestFocus()
+            return
+
+        }
+
+        if (l_limit!!.text.trim().length < 4) {
+            l_limit!!.error = "It should be in four figures"
+            l_limit!!.requestFocus()
+            return
+
+        }
+
+        if (ed_total!!.text.toString().toLong() < l_limit!!.text.toString().toLong()) {
+            l_limit!!.error = "Limt exceed the total"
+            l_limit!!.requestFocus()
+            return
+        }
+        if (ed_total!!.text.toString().toLong() < u_limit!!.text.toString().toLong()) {
+            u_limit!!.error = "Limt exceed the total"
+            u_limit!!.requestFocus()
+            return
+        }
+
+        if (l_limit!!.text.toString().toLong() > u_limit!!.text.toString().toLong()) {
+            Apputils.showMsg(context as Activity, "Upper limit should  be greater")
+            return
+
+        }
+
+
+
+        progressBar!!.show()
+
+        var mtrade = Trade(null, "322", Users("user3322"), "bankid", u_limit?.text.toString().toLong(), l_limit?.text.toString().toLong()
+                , time, coin, ed_amount!!.text.toString(), ed_price!!.text.toString(), ed_terms!!.text.toString(), "buy")
+
+        ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object : Callback<ApiResponse> {
+
+            override fun onResponse(call: Call<ApiResponse>?, response: Response<ApiResponse>?) {
+                println("error  " + response.toString())
+                Toast.makeText(activity!!, "Deal added successfully ", Toast.LENGTH_LONG).show()
+                progressBar!!.dismiss()
+                dialog.dismiss()
+                getAllTrade()
+
+            }
+
+            override fun onFailure(call: Call<ApiResponse>?, t: Throwable?) {
+                Toast.makeText(activity!!, "failed ", Toast.LENGTH_LONG).show()
+                println("error  " + t.toString())
+                progressBar!!.dismiss()
+                dialog.dismiss()
+
+            }
+
+        })
+
+
     }
 
     private fun getAllTrade() {
         tradelist.clear()
 
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.getTrade()?.enqueue(object : Callback<ArrayList<Trade>> {
+        ApiClint.getInstance()?.getService()?.getTradeByType(coin, "buy")?.enqueue(object : Callback<ArrayList<Trade>> {
             override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
                 response?.body()?.forEach { trade ->
                     tradelist.add(trade)

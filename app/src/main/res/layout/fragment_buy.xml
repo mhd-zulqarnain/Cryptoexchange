@@ -133,14 +133,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.8"
                     android:backgroundTint="#fff"
-                    android:editable="false"
+                    android:enabled="false"
                     android:hint="Total"
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLines="1"
                     android:textSize="15dp" />
-
-
 
 
                 <Button
@@ -163,9 +161,9 @@
             android:layout_marginTop="4dp"
             android:layout_weight=".5"
             android:fontFamily="@font/mplusregular"
-            android:text="Buy online bitcoins "
+            android:text="Buy online  E-Currency "
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="20sp" />55
 
         <TextView
             android:layout_width="wrap_content"
@@ -188,7 +186,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:checked="true"
+
                 android:text="Limit" />
 
             <RadioButton
@@ -196,6 +194,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:checked="true"
                 android:text="Price" />
 
             <RadioButton

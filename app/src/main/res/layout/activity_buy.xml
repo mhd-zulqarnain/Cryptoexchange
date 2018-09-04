@@ -106,6 +106,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/chk_terms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Accept buyer terms and conditions" />
@@ -140,12 +141,27 @@
             android:gravity="center"
             android:hint="BTC"
             android:inputType="number"
-            android:editable="false"
+            android:enabled="false"
             android:textColorHint="#DDAAAAAA"
             android:textColor="#DDAAAAAA"
             android:textSize="15dp" />
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/ed_terms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_margin="8dp"
+        android:imeOptions="actionDone"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textColorHint="#DDAAAAAA"
+        android:hint="Comments  "
+        android:background="@drawable/terms_back_ground"
+        android:lines="3"
+        />
 
     <Button
         android:id="@+id/btn_trade"
