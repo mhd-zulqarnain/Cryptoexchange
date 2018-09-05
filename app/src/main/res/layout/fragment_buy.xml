@@ -15,7 +15,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="vertical"
-        android:weightSum="8">
+        android:weightSum="8.5">
 
         <TextView
             android:layout_width="match_parent"
@@ -31,11 +31,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.5"
-            android:weightSum="4"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:orientation="vertical">
+            android:layout_weight="3.5"
+            android:orientation="vertical"
+            android:weightSum="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,17 +43,17 @@
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select E-Currency"
-                        android:layout_marginRight="10dp"
-                    />
+                    android:layout_marginRight="10dp"
+                    android:text="Select E-Currency" />
+
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/curreny_type_spinner"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>
@@ -62,55 +62,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:weightSum="4"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/amount_tv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Amount :"
+                    android:layout_weight="1.5"
                     android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/ed_amount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/amount_tv"
                     android:backgroundTint="#fff"
-                    android:hint="Enter ammount"
+                    android:layout_weight="2"
+                    android:hint="Enter amount"
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="8"
                     android:maxLines="1"
-                    android:textSize="15dp"
+                    android:textSize="12dp"
 
                     />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Price :"
-                    android:textSize="15dp" />
-
-                <EditText
-                    android:id="@+id/ed_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/amount_tv"
-                    android:backgroundTint="#fff"
-                    android:hint="Enter Price"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:maxLength="9"
-                    android:maxLines="1"
-                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -123,18 +101,77 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
+                    android:layout_weight="1.5"
+                    android:text="Price:"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/ed_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/amount_tv"
+                    android:layout_weight="1.5"
+                    android:backgroundTint="#fff"
+                    android:hint="Enter Price"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:maxLines="1"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center|left"
+              >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fees :"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="4dp"
+                    android:enabled="false"
+                    android:text="Charged fees"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textSize="15dp" />
+
+
+           </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+               >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Total :"
                     android:textSize="12dp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/ed_total"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.8"
                     android:backgroundTint="#fff"
                     android:enabled="false"
                     android:hint="Total"
+                    android:layout_marginLeft="4dp"
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLines="1"
@@ -143,10 +180,9 @@
 
                 <Button
                     android:id="@+id/btn_trade"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_weight=".7"
                     android:background="@drawable/layout_curve_btn_boreder_only"
                     android:text="Trade"
                     android:textColor="@color/backgoundTheme" />
@@ -163,7 +199,7 @@
             android:fontFamily="@font/mplusregular"
             android:text="Buy online  E-Currency "
             android:textColor="#fff"
-            android:textSize="20sp" />55
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -283,7 +319,7 @@
             android:id="@+id/table_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3" />
+            android:layout_weight="2.5" />
     </LinearLayout>
 </ScrollView>
 

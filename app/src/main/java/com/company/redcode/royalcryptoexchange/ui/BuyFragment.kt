@@ -22,6 +22,7 @@ import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.models.Users
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,9 +37,11 @@ class BuyFragment : Fragment() {
     var seller_price_filter: RadioButton? = null
     var ed_amount: EditText? = null
     var ed_price: EditText? = null
-    var ed_total: EditText? = null
+    var ed_total: TextView? = null
     var btn_trade: Button? = null
+    var tv_fee: TextView? = null
     var seller_coin_filter: RadioButton? = null
+
     var progressBar: AlertDialog? = null
     var coin: String = "BTC"
     var tradelist = ArrayList<Trade>()
@@ -73,6 +76,8 @@ class BuyFragment : Fragment() {
         ed_price = view.findViewById(R.id.ed_price)
         btn_trade = view.findViewById(R.id.btn_trade)
         ed_total = view.findViewById(R.id.ed_total)
+        tv_fee = view.findViewById(R.id.tv_fee)
+
         val coin_type_spinner = view.findViewById(R.id.curreny_type_spinner) as Spinner
 
         val builder = AlertDialog.Builder(activity!!)
@@ -133,26 +138,25 @@ class BuyFragment : Fragment() {
             showTradeDialog()
 
         }
-
         ed_price!!.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun afterTextChanged(p0: Editable?) {
             }
 
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "") {
+                if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "" &&
+                        !ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
 
-                    if (!ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
-                        val amout = ed_amount!!.text.toString().toInt()
-                        val price = ed_price!!.text.toString().toInt()
-                        val total = amout * price
+                    var amount = ed_amount!!.text.toString().toDouble()
+                    var price = ed_price!!.text.toString().toDouble()
+                    //var total = amount * price
+                    //var fees = price * 4 / 100 /*fee charged per transaction */
+                    var remCoin: Double = getCoinAfterFee(amount, price = price)
 
-                        ed_total!!.setText(total.toString())
-                    }
-                }
-                if (ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
-                    ed_total!!.setText("")
+                    tv_fee!!.setText((amount - remCoin).toString() + coin)
+                    ed_total!!.setText(remCoin.toString())
+
                 }
             }
         })
@@ -172,11 +176,16 @@ class BuyFragment : Fragment() {
             return
         }
 
-        if (ed_total!!.text.toString().toFloat() < 5000) {
-            ed_total!!.error = "Minimum total should be 5000"
-            ed_total!!.requestFocus()
-            return
+        if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "" &&
+                !ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
 
+            var amount = ed_amount!!.text.toString().toDouble()
+            var price = ed_price!!.text.toString().toDouble()
+            var total = amount * price
+            if (total < Constants.TRADE_LIMIT_AMOUNT){
+                Apputils.showMsg(context as Activity , "Minimum 5000 transaction allowed ")
+                return
+            }
         }
 
 
@@ -212,7 +221,7 @@ class BuyFragment : Fragment() {
         }
         btnSave?.setOnClickListener {
             proceed(dialog)
-
+            clearfileds()
         }
         dialog.show()
     }
@@ -252,18 +261,18 @@ class BuyFragment : Fragment() {
 
         }
 
-        if (ed_total!!.text.toString().toLong() < l_limit!!.text.toString().toLong()) {
+       /* if (ed_total!!.text.toString().toDouble() < l_limit!!.text.toString().toDouble()) {
             l_limit!!.error = "Limt exceed the total"
             l_limit!!.requestFocus()
             return
         }
-        if (ed_total!!.text.toString().toLong() < u_limit!!.text.toString().toLong()) {
+        if (ed_total!!.text.toString().toDouble() < u_limit!!.text.toString().toDouble()) {
             u_limit!!.error = "Limt exceed the total"
             u_limit!!.requestFocus()
             return
-        }
+        }*/
 
-        if (l_limit!!.text.toString().toLong() > u_limit!!.text.toString().toLong()) {
+        if (l_limit!!.text.toString().toDouble() > u_limit!!.text.toString().toDouble()) {
             Apputils.showMsg(context as Activity, "Upper limit should  be greater")
             return
 
@@ -320,6 +329,30 @@ class BuyFragment : Fragment() {
 
             }
         })
+    }
+
+    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
+
+        var feeAmount = 4
+        var totalPrice: Double = coinNum * price
+        var fees: Double = totalPrice * feeAmount / 100
+        var actualPrice: Double = totalPrice - fees
+
+        var coinRem: Double = actualPrice / price
+
+        return coinRem
+    }
+
+    fun clearfileds() {
+        ed_amount!!.setText("")
+        ed_price!!.setText("")
+        ed_total!!.setText("")
+        tv_fee!!.setText("Fee charged")
+    }
+
+    override fun onDetach() {
+        clearfileds()
+        super.onDetach()
     }
 }
 

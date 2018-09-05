@@ -22,11 +22,11 @@ import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.models.Users
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.DecimalFormat
 import java.util.*
 
 
@@ -38,7 +38,8 @@ class SellFragment : Fragment() {
     var seller_price_filter: RadioButton? = null
     var ed_amount: EditText? = null
     var ed_price: EditText? = null
-    var ed_total: EditText? = null
+    var ed_total: TextView? = null
+    var tv_fee: TextView? = null
     var seller_coin_filter: RadioButton? = null
     var progressBar: AlertDialog? = null
     var coin: String = "BTC"
@@ -75,6 +76,7 @@ class SellFragment : Fragment() {
         ed_price = view.findViewById(R.id.ed_price)
         btn_trade = view.findViewById(R.id.btn_trade)
         ed_total = view.findViewById(R.id.ed_total)
+        tv_fee = view.findViewById(R.id.tv_fee)
         val coin_type_spinner = view.findViewById(R.id.curreny_type_spinner) as Spinner
 
         val builder = AlertDialog.Builder(activity!!)
@@ -142,19 +144,18 @@ class SellFragment : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "") {
+                if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "" &&
+                        !ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
 
-                    if (!ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
-                        val amout = ed_amount!!.text.toString().toInt()
-                        val price = ed_price!!.text.toString().toInt()
-                        val total = amout * price
-                        val df = DecimalFormat("#,###,##0.00")
-                        var formated = df.format(total)
-                        ed_total!!.setText(formated.toString())
-                    }
-                }
-                if (ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
-                    ed_total!!.setText("")
+                    var amount = ed_amount!!.text.toString().toDouble()
+                    var price = ed_price!!.text.toString().toDouble()
+                    //var total = amount * price
+                    //var fees = price * 4 / 100 /*fee charged per transaction */
+                    var remCoin: Double = getCoinAfterFee(amount, price = price)
+
+                    tv_fee!!.setText((amount - remCoin).toString() + coin)
+                    ed_total!!.setText(remCoin.toString())
+
                 }
             }
         })
@@ -171,6 +172,18 @@ class SellFragment : Fragment() {
             ed_price!!.error = "Enter the price of one coin"
             ed_price!!.requestFocus()
             return
+        }
+
+        if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "" &&
+                !ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
+
+            var amount = ed_amount!!.text.toString().toDouble()
+            var price = ed_price!!.text.toString().toDouble()
+            var total = amount * price
+            if (total < Constants.TRADE_LIMIT_AMOUNT){
+                Apputils.showMsg(context as Activity , "Minimum 5000 transaction allowed ")
+                return
+            }
         }
 
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dilalog_view_trade, null)
@@ -305,5 +318,22 @@ class SellFragment : Fragment() {
         })
     }
 
+    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
 
+        var feeAmount = 4
+        var totalPrice: Double = coinNum * price
+        var fees: Double = totalPrice * feeAmount / 100
+        var actualPrice: Double = totalPrice - fees
+
+        var coinRem: Double = actualPrice / price
+
+        return coinRem
+    }
+
+    fun clearfileds() {
+        ed_amount!!.setText("")
+        ed_price!!.setText("")
+        ed_total!!.setText("")
+        tv_fee!!.setText("Fee charged")
+    }
 }
