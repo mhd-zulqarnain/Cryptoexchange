@@ -83,13 +83,6 @@
 
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Blog"
-            style="@style/menuItem"
-            />
-
-        <TextView
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

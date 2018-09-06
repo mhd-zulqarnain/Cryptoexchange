@@ -50,24 +50,28 @@ class SellFragment : Fragment() {
     var btnCancel: Button   ? = null
     var ed_currency: TextView? = null
     var u_limit: EditText? = null
-    var ed_terms: EditText? = null
     var l_limit: EditText? = null
     var btnSave: Button? = null
     var spinner_time: Spinner? = null
     var time: String? = null
+    var total:Double? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         var view = inflater.inflate(R.layout.fragment_sell, container, false)
-        initView(view)
+
         return view
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView(view)
+        getAllTrade()
+    }
+
 
     @SuppressLint("NewApi")
     private fun initView(view: View) {
-
-
         seller_coin_filter = view.findViewById(R.id.seller_coin_filter)
         seller_filter_group = view.findViewById(R.id.seller_filter_group)
         seller_price_filter = view.findViewById(R.id.seller_price_filter)
@@ -149,7 +153,7 @@ class SellFragment : Fragment() {
 
                     var amount = ed_amount!!.text.toString().toDouble()
                     var price = ed_price!!.text.toString().toDouble()
-                    //var total = amount * price
+                     total = amount * price
                     //var fees = price * 4 / 100 /*fee charged per transaction */
                     var remCoin: Double = getCoinAfterFee(amount, price = price)
 
@@ -195,9 +199,13 @@ class SellFragment : Fragment() {
         btnCancel    = view.findViewById(R.id.btn_cancel)
         ed_currency= view.findViewById(R.id.ed_currency)
         u_limit     = view.findViewById(R.id.u_limit)
-        ed_terms     = view.findViewById(R.id.ed_terms)
         l_limit      = view.findViewById(R.id.l_limit)
         btnSave         = view.findViewById(R.id.btn_save)
+
+        var dialog_coin_tv :TextView= view.findViewById(R.id.dialog_coin_tv)
+        var dialog_pkr_tv :TextView= view.findViewById(R.id.dialog_pkr_tv)
+        dialog_coin_tv.setText(tv_fee!!.text.toString())
+        dialog_pkr_tv.setText(Apputils.formatCurrency(total.toString())+"PKR")
 
         ed_currency!!.setText(coin.toUpperCase())
         spinner_time = view.findViewById(R.id.spinner_time)
@@ -237,12 +245,6 @@ class SellFragment : Fragment() {
             return
         }
 
-        if (ed_terms!!.text.toString() == "") {
-            ed_terms!!.error = "Enter your terms"
-            ed_terms!!.requestFocus()
-            return
-
-        }
 
         if (u_limit!!.text.trim().length < 4) {
             u_limit!!.error = "It should be in four figures"
@@ -265,12 +267,10 @@ class SellFragment : Fragment() {
 
         }
 
-
-
         progressBar!!.show()
 
         var mtrade = Trade(null, "322", Users("user3322"), "bankid", u_limit?.text.toString().toLong(), l_limit?.text.toString().toLong()
-                , time, coin, ed_amount!!.text.toString(), ed_price!!.text.toString(), ed_terms!!.text.toString(), "sell")
+                , time, coin, ed_amount!!.text.toString(), ed_price!!.text.toString(), "", "sell")
 
         ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object : Callback<ApiResponse> {
 
@@ -292,7 +292,6 @@ class SellFragment : Fragment() {
             }
 
         })
-
 
     }
 
