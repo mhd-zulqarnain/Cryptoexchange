@@ -10,33 +10,50 @@ import android.widget.TextView
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.company.redcode.royalcryptoexchange.utils.OnLoadMoreListener
 
-class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>,private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableBuyerAdapater.MyViewHolder>() {
 
+class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableBuyerAdapater.MyViewHolder>() {
+    var num = 1
+    var data = model
+    var onLoadMoreListener: OnLoadMoreListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_buyer, parent, false))
         return view
     }
 
+
     override fun getItemCount(): Int {
-        return model.size
+        return if (num * 10 > data.size) {
+            data.size
+        } else {
+            num * 10
+        }
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bindView(model[position])
-        holder.btn_buy!!.setOnClickListener{
+        holder.btn_buy!!.setOnClickListener {
             onItemClick(position)
         }
     }
 
+    fun setOnAddMoreListener(onLoadMoreListener: OnLoadMoreListener) {
+        this.onLoadMoreListener = onLoadMoreListener
+
+    }
+
+    /* init {
+         nLayoutManager =
+     }*/
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var tv_price:TextView? = null
-        var tv_limit:TextView? = null
+        var tv_price: TextView? = null
+        var tv_limit: TextView? = null
 
-        var tv_amount:TextView? = null
-        var tv_seller:TextView? = null
-        var btn_buy:Button? = null
+        var tv_amount: TextView? = null
+        var tv_seller: TextView? = null
+        var btn_buy: Button? = null
 
         fun bindView(trade: Trade) {
 
@@ -47,11 +64,11 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>,private v
             tv_amount = itemView.findViewById(R.id.tv_amount)
             btn_buy = itemView.findViewById(R.id.btn_buy)
 
-            tv_limit!!.setText(Apputils.formatCurrency(trade.d_limit.toString())+"-"+
+            tv_limit!!.setText(Apputils.formatCurrency(trade.d_limit.toString()) + "-" +
                     Apputils.formatCurrency(trade.u_limit.toString()))
-            tv_seller!!.setText("user"+trade.uid)
+            tv_seller!!.setText("user" + trade.uid)
 
-            tv_amount!!.setText(trade.amount+trade.currency_type)
+            tv_amount!!.setText(trade.amount + trade.currency_type)
             tv_price!!.setText(Apputils.formatCurrency(trade.price!!))
         }
 

@@ -17,18 +17,18 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".auth.SignInActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.BuyActivity"
+            android:name=".ui.BuyingDetailActivity"
             android:label="Buy activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
@@ -36,25 +36,38 @@
         <activity
             android:name=".ui.ProfileActivity"
             android:focusable="true"
-            android:theme="@style/AppTheme"
             android:focusableInTouchMode="true"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
+
+        </activity>
+        <activity
+            android:name=".DrawerActivity"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="com.example.admin.camerawork.CameraActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".BuyActivity"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/BuyTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DrawerActivity"
-            android:label="@string/title_activity_drawer"
-            android:theme="@style/AppTheme">
 
-        </activity>
-        <activity android:name="com.example.admin.camerawork.CameraActivity"
-            android:theme="@style/AppTheme">
-
-        </activity>
+        <activity android:name=".SellActivity"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/BuyTheme"/>
     </application>
 
 </manifest>

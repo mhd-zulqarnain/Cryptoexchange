@@ -4,7 +4,6 @@
     android:id="@+id/scrollLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgoundBtn"
     android:fillViewport="true"
     android:orientation="vertical">
 
@@ -53,6 +52,7 @@
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/curreny_type_spinner"
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content" />
 
 

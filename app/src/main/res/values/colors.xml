@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="backgoundTheme">#1C2535</color>
+    <color name="backgoundBuy">#295055</color>
+    <color name="BuyActivityText">#fff</color>
     <color name="backgoundBtn">#F6A50A</color>
     <color name="backgoundBackup">#C6CACE</color>
     <color name="whitColor">#F1F2F4</color>

@@ -98,7 +98,7 @@ class BuyFragment : Fragment() {
         adapter = TableBuyerAdapater(activity!!, tradelist) { position ->
 
             var obj = Gson().toJson(tradelist[position])
-            val intent = Intent(activity!!, BuyActivity::class.java)
+            val intent = Intent(activity!!, BuyingDetailActivity::class.java)
             intent.putExtra("tradeObject", obj)
             startActivity(intent)
         }
