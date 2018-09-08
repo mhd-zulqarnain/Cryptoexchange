@@ -51,6 +51,11 @@
         <item>Chine</item>
     </string-array>
 
+    <string-array name="search_options">
+        <item>Coin</item>
+        <item>user</item>
+    </string-array>
+
     <string-array name="method_payment">
         <item>Easypaisa</item>
         <item>Bank Transfer</item>

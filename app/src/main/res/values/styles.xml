@@ -10,6 +10,27 @@
 
     </style>
 
+    <style name="BuyTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#000</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/backgoundBuy</item>
+
+        <item name="android:editTextColor">@color/BuyActivityText</item>
+        <item name="android:textColorPrimary">@color/BuyActivityText</item>
+        <item name="android:textColorSecondary">@color/BuyActivityText</item>
+        <item name="android:textColorTertiary">@color/BuyActivityText</item>
+        <item name="android:textColorPrimaryInverse">@color/BuyActivityText</item>
+        <item name="android:textColorSecondaryInverse">@color/BuyActivityText</item>
+        <item name="android:textColorTertiaryInverse">@color/BuyActivityText</item>
+    </style>
+
+    <style name="searchableStyle" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textColor">#000</item>
+        <item name="android:textColorHint">#5000</item>
+    </style>
+
     <style name="menuItem">
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:textSize">25sp</item>

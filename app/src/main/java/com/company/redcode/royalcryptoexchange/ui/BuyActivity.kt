@@ -17,7 +17,7 @@ import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_buy.*
+import kotlinx.android.synthetic.main.activity_buying_details.*
 
 
 class BuyActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class BuyActivity : AppCompatActivity() {
     var isTermAccept:Boolean =false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_buy)
+        setContentView(R.layout.activity_buying_details)
         var obj = intent.getStringExtra(JSON_TRARE);
         trade = Gson().fromJson(obj, Trade::class.java)
 
