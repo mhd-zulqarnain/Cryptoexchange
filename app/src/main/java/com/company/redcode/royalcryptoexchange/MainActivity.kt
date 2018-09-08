@@ -9,11 +9,11 @@ import android.view.animation.TranslateAnimation
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.auth.SignInActivity
 
 import com.company.redcode.royalcryptoexchange.ui.ProfileFragment
 import com.company.redcode.royalcryptoexchange.ui.TradeFragment
+import com.company.redcode.royalcryptoexchange.ui.WolletFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private var tv_profile: TextView? = null
     private var menuList: LinearLayout? = null
     private var auth: FirebaseAuth? = null
+    private var wallet :TextView? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         menuList = findViewById(R.id.menu_layout)
         btn_logout = findViewById(R.id.btn_logout)
         tv_profile = findViewById(R.id.tv_profile)
+        wallet = findViewById(R.id.tv_wallet)
         auth = FirebaseAuth.getInstance()
 
         initView()
@@ -84,6 +86,12 @@ class MainActivity : AppCompatActivity() {
             hideView()
         }
 
+        tv_wallet!!.setOnClickListener {
+
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WolletFragment()).commit()
+            hideView()
+        }
+
     }
 
     private fun hideView() {
@@ -105,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         btn_logout!!.visibility=visiblity
         close_btn!!.visibility=visiblity
         tv_profile!!.visibility=visiblity
-
+        wallet!!.visibility=visiblity
     }
 
 

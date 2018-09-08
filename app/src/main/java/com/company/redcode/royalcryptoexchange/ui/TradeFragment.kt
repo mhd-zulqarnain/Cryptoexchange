@@ -28,7 +28,6 @@ class TradeFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         var view: View = inflater.inflate(R.layout.fragment_trade, container, false)
 
-
         initView(view)
         return view
     }

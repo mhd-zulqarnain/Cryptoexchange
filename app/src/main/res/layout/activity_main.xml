@@ -92,6 +92,14 @@
             style="@style/menuItem"
 
             />
+        <TextView
+            android:id="@+id/tv_wallet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wallet"
+            style="@style/menuItem"
+
+            />
 
     </LinearLayout>
 

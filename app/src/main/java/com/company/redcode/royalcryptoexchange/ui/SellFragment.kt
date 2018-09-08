@@ -1,6 +1,5 @@
 package com.company.redcode.royalcryptoexchange.ui
 
-
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -15,9 +14,6 @@ import com.company.redcode.royalcryptoexchange.adapter.TableSellerAdapater
 import com.company.redcode.royalcryptoexchange.models.Payments
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-
-
-
 
 class SellFragment : Fragment() {
     var btn_trade: Button? = null
