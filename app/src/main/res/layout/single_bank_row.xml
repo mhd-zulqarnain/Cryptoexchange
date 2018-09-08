@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Bank Name"
-           android:textColor="#000"
             android:textSize="10dp" />
 
         <TextView
@@ -28,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="1234123"
-            android:textColor="#000"
             android:textSize="10dp" />
 
         <Button
@@ -37,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Delete"
-            android:textColor="#000"
             android:textSize="10dp"
             android:background="@drawable/terms_back_ground"
             />

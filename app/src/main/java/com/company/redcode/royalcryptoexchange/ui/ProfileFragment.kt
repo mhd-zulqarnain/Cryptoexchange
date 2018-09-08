@@ -101,6 +101,7 @@ class ProfileFragment : Fragment() {
         val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
         alertBox.setView(view)
         val dialog = alertBox.create()
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         val btnClose: ImageView = view.findViewById(R.id.btn_close)
         bank_recycler_view = view!!.findViewById(R.id.bank_recycler_view)
