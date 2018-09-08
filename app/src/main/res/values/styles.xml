@@ -44,6 +44,10 @@
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/oswald_regular</item>
     </style>
+    <style name="bankDialogText">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/oswald_regular</item>
+    </style>
 
     <style name="editLableStyle" parent="TextAppearance.AppCompat">
         <item name="android:textColorHint">@color/whitColor</item>

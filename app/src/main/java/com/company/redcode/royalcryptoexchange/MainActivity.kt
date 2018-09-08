@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         btn_logout!!.setOnClickListener {
             logout()
         }
-         var  fragentTrasaction =supportFragmentManager.beginTransaction()
+        var fragentTrasaction = supportFragmentManager.beginTransaction()
         fragentTrasaction!!.add(R.id.fragment_container, TradeFragment()).commit()
         fragentTrasaction!!.addToBackStack(null)
 
@@ -70,14 +70,12 @@ class MainActivity : AppCompatActivity() {
 
         tv_trade.setOnClickListener {
             //supportFragmentManager.beginTransaction().replace(R.id.fragment_container, TradeFragment()).commit()
-           // hideView()
+            // hideView()
 
         }
         tv_home.setOnClickListener {
-            var  fragentTrasaction =supportFragmentManager.beginTransaction()
 
-            fragentTrasaction!!.replace(R.id.fragment_container, TradeFragment()).commit()
-            fragentTrasaction!!.addToBackStack(null)
+            supportFragmentManager.beginTransaction()!!.replace(R.id.fragment_container, TradeFragment()).commit()
             hideView()
         }
 
@@ -102,13 +100,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun viewOption(visiblity: Int) {
 
-        menuList!!.visibility=visiblity
-        tv_home!!.visibility=visiblity
-        tv_trade!!.visibility=visiblity
-        btn_logout!!.visibility=visiblity
-        close_btn!!.visibility=visiblity
-        tv_profile!!.visibility=visiblity
-        tv_my_transaction!!.visibility=visiblity
+        menuList!!.visibility = visiblity
+        tv_home!!.visibility = visiblity
+        tv_trade!!.visibility = visiblity
+        btn_logout!!.visibility = visiblity
+        close_btn!!.visibility = visiblity
+        tv_profile!!.visibility = visiblity
+        tv_my_transaction!!.visibility = visiblity
 
     }
 

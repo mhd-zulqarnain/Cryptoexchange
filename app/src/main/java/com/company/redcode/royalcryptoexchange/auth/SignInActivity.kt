@@ -7,9 +7,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-
-import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.MainActivity
+import com.company.redcode.royalcryptoexchange.R
 import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : AppCompatActivity() {
@@ -62,7 +61,7 @@ class SignInActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
+/*
     override fun onStart() {
         if (auth!!.currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
@@ -70,7 +69,7 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
         super.onStart()
-    }
+    }*/
 
 
 

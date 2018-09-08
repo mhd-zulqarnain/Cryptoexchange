@@ -350,10 +350,10 @@ class BuyFragment : Fragment() {
     }
 
     fun clearfileds() {
-        ed_amount!!.setText("")
-        ed_price!!.setText("")
-        ed_total!!.setText("")
-        tv_fee!!.setText("Fee charged")
+        ed_amount?.setText("")
+        ed_price?.setText("")
+        ed_total?.setText("")
+        tv_fee?.setText("Fee charged")
     }
 
     override fun onDetach() {

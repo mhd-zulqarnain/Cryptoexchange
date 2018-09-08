@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.TextView
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Bank
-import com.company.redcode.royalcryptoexchange.models.Payments
 
 class UserBankAdapater(var ctx: Context, var model: ArrayList<Bank>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<UserBankAdapater.MyViewHolder>() {
 
@@ -24,9 +23,9 @@ class UserBankAdapater(var ctx: Context, var model: ArrayList<Bank>, private val
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bindView(model[position])
-        holder.btn_edit!!.setOnClickListener{
+       /* holder.btn_edit!!.setOnClickListener{
             onItemClick(position)
-        }
+        }*/
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -43,9 +42,7 @@ class UserBankAdapater(var ctx: Context, var model: ArrayList<Bank>, private val
 
             btn_edit = itemView.findViewById(R.id.btn_edit)
 
-
         }
-
 
     }
 }
