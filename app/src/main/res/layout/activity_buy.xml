@@ -31,45 +31,17 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        android:background="@drawable/layout_curve_btn_boreder_only"
-        android:weightSum="4">
+        android:layout_marginBottom="5dp"
+        android:text="Buy E-Currency"
+        android:textSize="30sp"
+        />
 
-        <SearchView
-            android:id="@+id/search_data"
-            style="@style/searchableStyle"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:queryBackground="@android:color/transparent"
-
-            />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/terms_back_ground"
-            android:textColor="@color/backgoundTheme"
-            android:text="Search"
-            android:textSize="14sp" />
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:entries="@array/search_options"
-            android:padding="3dp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -220,7 +192,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/table_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="150dp" />
     </LinearLayout>
 </LinearLayout>
 

@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
@@ -13,7 +14,8 @@ import android.widget.*
 import com.company.redcode.royalcryptoexchange.adapter.TableBuyerAdapater
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
-import com.company.redcode.royalcryptoexchange.ui.BuyActivity
+import com.company.redcode.royalcryptoexchange.ui.BuyingDetailActivity
+import com.company.redcode.royalcryptoexchange.utils.OnLoadMoreListener
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,11 +29,6 @@ class BuyActivity : AppCompatActivity() {
     var seller_filter_group: RadioGroup? = null
     var seller_limit_filter: RadioButton? = null
     var seller_price_filter: RadioButton? = null
-//    var ed_amount: EditText? = null
-//    var ed_price: EditText? = null
-//    var ed_total: TextView? = null
-//    var btn_trade: Button? = null
-    //var tv_fee: TextView? = null
     var seller_coin_filter: RadioButton? = null
 
     var progressBar: AlertDialog? = null
@@ -49,14 +46,18 @@ class BuyActivity : AppCompatActivity() {
     var spinner_time: Spinner? = null
     var time: String? = null
 
+    /*scroll recycler */
+    var visibleThreshold:Int ? =5
+    var lastVisibleItem:Int ? = null
+    var totalItemCount:Int ? = null
+    var  onLoadMoreListener: OnLoadMoreListener? =null;
+    var loading: Boolean? = false
 
     var toolbar :Toolbar ? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy)
         toolbar = findViewById(R.id.toolbar_top)
-//        search_data.clearFocus()
-
         initView()
     }
 
@@ -68,11 +69,7 @@ class BuyActivity : AppCompatActivity() {
         seller_filter_group =findViewById(R.id.seller_filter_group)
         seller_price_filter = findViewById(R.id.seller_price_filter)
         seller_limit_filter = findViewById(R.id.seller_limit_filter)
-        /*ed_amount = findViewById(R.id.ed_amount)
-        ed_price =findViewById(R.id.ed_price)
-        btn_trade = findViewById(R.id.btn_trade)
-        ed_total = findViewById(R.id.ed_total)
-        tv_fee = findViewById(R.id.tv_fee)*/
+
 
         val coin_type_spinner =findViewById(R.id.curreny_type_spinner) as Spinner
 
@@ -81,24 +78,44 @@ class BuyActivity : AppCompatActivity() {
         builder.setCancelable(false)
         progressBar = builder.create()
 
-
-
         val recyclerView: RecyclerView = findViewById(R.id.table_recycler)
         Collections.sort(tradelist, Trade.Order.ByPrice.descending());
 
         adapter = TableBuyerAdapater(this@BuyActivity, tradelist) { position ->
-
             var obj = Gson().toJson(tradelist[position])
-            val intent = Intent(this@BuyActivity, BuyActivity::class.java)
+            val intent = Intent(this@BuyActivity, BuyingDetailActivity::class.java)
             intent.putExtra("tradeObject", obj)
             startActivity(intent)
         }
 
-        val layout = LinearLayoutManager(this@BuyActivity, LinearLayout.VERTICAL, false)
-        recyclerView.layoutManager = layout
+        val layoutManager = LinearLayoutManager(this@BuyActivity, LinearLayout.VERTICAL, false)
+        recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+        recyclerView.itemAnimator = DefaultItemAnimator()
 
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
 
+//                 = layoutManager?.childCount
+
+                totalItemCount  = layoutManager?.itemCount
+
+                lastVisibleItem  = layoutManager?.findFirstVisibleItemPosition()
+
+                if (loading!! && ((lastVisibleItem!! + visibleThreshold!!) >= totalItemCount!!) && dy > 0) {
+                    loading = false
+                  //  loadDataFromArrayList()
+                }
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                   // isScrolling = true
+                }
+            }
+        })
         val spinnerAdapter = ArrayAdapter.createFromResource(this@BuyActivity,
                 R.array.array_coin, android.R.layout.simple_spinner_item)
 
@@ -129,10 +146,7 @@ class BuyActivity : AppCompatActivity() {
                     }
                 })
 
-
-
     }
-
 
 
     private fun getAllTrade() {
