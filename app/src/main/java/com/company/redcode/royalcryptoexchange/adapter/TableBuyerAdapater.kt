@@ -13,6 +13,8 @@ import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.OnLoadMoreListener
 
 
+
+
 class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableBuyerAdapater.MyViewHolder>() {
     var num = 1
     var data = model
@@ -24,10 +26,10 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private 
 
 
     override fun getItemCount(): Int {
-        return if (num * 10 > data.size) {
+        return if (num * 5 > data.size) {
             data.size
         } else {
-            num * 10
+            num * 5
         }
     }
 
@@ -74,4 +76,6 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private 
 
 
     }
+
+
 }

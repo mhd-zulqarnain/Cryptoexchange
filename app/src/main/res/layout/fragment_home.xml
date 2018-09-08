@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundThere"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_margin="40dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_buy"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button"
+            android:text="Buy"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btn_sell"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button"
+            android:text="Sell"
+            android:textColor="#Fff"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/Trade"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/button"
+            android:text="Advertisement"
+            android:textColor="#Ffff"
+            android:textSize="20dp" />
+    </LinearLayout>
+</LinearLayout>

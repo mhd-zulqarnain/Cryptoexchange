@@ -2,8 +2,10 @@ package com.company.redcode.royalcryptoexchange
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -15,12 +17,15 @@ import com.company.redcode.royalcryptoexchange.adapter.TableBuyerAdapater
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.ui.BuyingDetailActivity
-import com.company.redcode.royalcryptoexchange.utils.OnLoadMoreListener
+import com.company.redcode.royalcryptoexchange.utils.AppExecutors
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_buy.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+
+
 
 class BuyActivity : AppCompatActivity() {
 
@@ -47,10 +52,12 @@ class BuyActivity : AppCompatActivity() {
     var time: String? = null
 
     /*scroll recycler */
-    var visibleThreshold:Int ? =5
-    var lastVisibleItem:Int ? = null
-    var totalItemCount:Int ? = null
-    var  onLoadMoreListener: OnLoadMoreListener? =null;
+    var isScrolling: Boolean? = false
+    private var currentItems: Int? = 0
+    private var totalItems: Int? = 0
+    private var scrollOutItems: Int? = 0
+    private var back_btn:ImageView? = null
+
     var loading: Boolean? = false
 
     var toolbar :Toolbar ? = null
@@ -58,6 +65,7 @@ class BuyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy)
         toolbar = findViewById(R.id.toolbar_top)
+
         initView()
     }
 
@@ -97,25 +105,26 @@ class BuyActivity : AppCompatActivity() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-//                 = layoutManager?.childCount
+                currentItems = layoutManager?.childCount
 
-                totalItemCount  = layoutManager?.itemCount
+                totalItems = layoutManager?.itemCount
 
-                lastVisibleItem  = layoutManager?.findFirstVisibleItemPosition()
+                scrollOutItems = layoutManager?.findFirstVisibleItemPosition()
 
-                if (loading!! && ((lastVisibleItem!! + visibleThreshold!!) >= totalItemCount!!) && dy > 0) {
-                    loading = false
-                  //  loadDataFromArrayList()
+                if (isScrolling!! && ((currentItems!! + scrollOutItems!!) >= totalItems!!) && dy > 0) {
+                    isScrolling = false
+                    loadDataFromArrayList()
                 }
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                   // isScrolling = true
+                    isScrolling = true
                 }
             }
         })
+
         val spinnerAdapter = ArrayAdapter.createFromResource(this@BuyActivity,
                 R.array.array_coin, android.R.layout.simple_spinner_item)
 
@@ -145,6 +154,10 @@ class BuyActivity : AppCompatActivity() {
                         adapter?.notifyDataSetChanged()
                     }
                 })
+
+        btn_back.setOnClickListener {
+            finish()
+        }
 
     }
 
@@ -183,6 +196,25 @@ class BuyActivity : AppCompatActivity() {
         return coinRem
     }
 
+    private fun loadDataFromArrayList() {
+        //progressLoadData?.visibility = View.VISIBLE
+        val progressdialog = ProgressDialog(this@BuyActivity)
+        progressdialog.setMessage("Please Wait....")
+        progressdialog.show()
 
+        AppExecutors.instance.diskIO().execute {
+            runOnUiThread {
+                Handler().postDelayed(
+                        {
+                            if ((adapter!!.num) * 5 < tradelist!!.size) {
+                                adapter!!.num = adapter!!.num + 1
+                            }
+                            progressdialog.dismiss()
+                        },
+                        1200L
+                )
+            }
+        }
+    }
 
 }

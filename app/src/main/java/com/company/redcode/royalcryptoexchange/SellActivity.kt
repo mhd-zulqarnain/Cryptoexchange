@@ -16,6 +16,7 @@ import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.ui.BuyingDetailActivity
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_buy.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,6 +59,10 @@ class SellActivity : AppCompatActivity() {
     @SuppressLint("NewApi")
     private fun initView() {
 
+
+        btn_back.setOnClickListener {
+            finish()
+        }
 
         seller_coin_filter = findViewById(R.id.seller_coin_filter)
         seller_filter_group =findViewById(R.id.seller_filter_group)
