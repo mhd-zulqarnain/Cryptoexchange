@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="18dp"
     android:orientation="vertical"
+    android:layout_gravity="center"
    >
 
     <TextView
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/oswald_regular"
-        android:text="Buy a new Coin "
+        android:text="Buying trade details "
         android:layout_margin="8dp"
         android:layout_marginTop="12dp"
         android:textSize="35dp" />
@@ -56,6 +57,7 @@
             style="@style/buyActivityText"/>
 
         <TextView
+            android:id="@+id/seller_limit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -98,24 +100,13 @@
                 android:text="Method : Bank Transfer"
                 style="@style/buyActivityText"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Bank Name : Hbl Bank"
-                style="@style/buyActivityText"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="IBN : 12312412333"
-                style="@style/buyActivityText"/>
         </LinearLayout>
 
     </LinearLayout>
 
     <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/chk_terms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Accept buyer terms and conditions" />
@@ -127,6 +118,7 @@
         android:weightSum="4">
 
         <EditText
+                android:id="@+id/pkr_ed"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="8dp"
@@ -135,11 +127,12 @@
             android:gravity="center"
             android:hint="PKR"
             android:inputType="number"
-            android:textColor="#000"
+            android:textColor="#DDAAAAAA"
             android:textColorHint="#DDAAAAAA"
             android:textSize="20dp" />
 
         <EditText
+            android:id="@+id/btc_ed"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="8dp"
@@ -148,11 +141,27 @@
             android:gravity="center"
             android:hint="BTC"
             android:inputType="number"
-            android:textColor="#000"
+            android:enabled="false"
             android:textColorHint="#DDAAAAAA"
+            android:textColor="#DDAAAAAA"
             android:textSize="15dp" />
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/ed_terms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_margin="8dp"
+        android:imeOptions="actionDone"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textColorHint="#DDAAAAAA"
+        android:hint="Comments  "
+        android:background="@drawable/terms_back_ground"
+        android:lines="3"
+        />
 
     <Button
         android:id="@+id/btn_trade"

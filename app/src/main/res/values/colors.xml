@@ -3,8 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="backgoundTheme">#0F61BB</color>
-    <color name="backgoundBtn">#3983FA</color>
-    <color name="whitColor">#FFF</color>
+    <color name="backgoundTheme">#1C2535</color>
+    <color name="backgoundBtn">#F6A50A</color>
+    <color name="backgoundBackup">#C6CACE</color>
+    <color name="whitColor">#F1F2F4</color>
     <color name="mainActivityColor">#0F61BB</color>
 </resources>

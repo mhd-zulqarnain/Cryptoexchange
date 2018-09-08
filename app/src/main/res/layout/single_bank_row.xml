@@ -10,15 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_margin="5dp"
         android:weightSum="4">
+
         <TextView
             android:id="@+id/tv_account_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Bank Name"
-            android:textColor="#fff"
-            android:textSize="12dp" />
+           android:textColor="#000"
+            android:textSize="10dp" />
 
         <TextView
             android:id="@+id/tv_account_number"
@@ -26,17 +28,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="1234123"
-            android:textColor="#fff"
-            android:textSize="12dp" />
+            android:textColor="#000"
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/btn_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Edit"
-            android:textColor="#fff"
-            android:textSize="10dp" />
+            android:text="Delete"
+            android:textColor="#000"
+            android:textSize="10dp"
+            android:background="@drawable/terms_back_ground"
+            />
 
     </LinearLayout>
 

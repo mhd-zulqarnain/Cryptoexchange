@@ -1,59 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="#3e3e3e"
-    android:layout_marginTop="54dp"
-    tools:context=".MainActivity">
-
-    <LinearLayout
+    android:fillViewport="true"
+>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#224255">
+    <LinearLayout
+        android:id="@+id/scroll_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="22dp"
-
         >
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="First Name"
-            android:textSize="20dp"
-            android:textColor="#fff" />
-
-        <EditText
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#ffe926"
-            android:hint="Enter name"
-            android:textColorHint="#DDAAAAAA"
-            android:textColor="#ffff"/>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="Last Name"
-            android:textColorHint="#DDAAAAAA"
-            android:textColor="#fff"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ffe926"
-            android:hint="Enter Last name"
-            android:textColorHint="#DDAAAAAA"
-            android:textColor="#ffff"/>
-
-
+            android:text="Profile "
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First Name:"
+                style="@style/signUpEditTextStyle"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/ed_fname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First name"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                style="@style/signUpEditTextStyle"
+                android:singleLine="true"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Name: "
+
+                style="@style/signUpEditTextStyle"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/ed_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last name"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                style="@style/signUpEditTextStyle"
+                android:singleLine="true"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: "
+                style="@style/signUpEditTextStyle"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/ed_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email "
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                style="@style/signUpEditTextStyle"
+                android:singleLine="true"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile Number: "
+                style="@style/signUpEditTextStyle"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/ed_mbl_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mobile Number "
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                style="@style/signUpEditTextStyle"
+                android:singleLine="true"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password: "
+                style="@style/signUpEditTextStyle"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/ed_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email "
+                android:inputType="textPassword"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                style="@style/signUpEditTextStyle"
+                android:singleLine="true"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CNIC: "
+                style="@style/signUpEditTextStyle"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/ed_cnic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="CNIC "
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                style="@style/signUpEditTextStyle"
+                android:singleLine="true"
+                android:layout_gravity="bottom"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btn_add_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
             android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:background="@drawable/terms_back_ground"
             android:weightSum="3"
             >
             <TextView
@@ -61,107 +189,93 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:text="Add New Account"
-                android:textColor="#fff"
+                android:text="Payment Method"
+                android:layout_marginLeft="3dp"
+                android:textColor="#224255"
                 />
 
             <ImageButton
-                android:id="@+id/btn_add_bank"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:padding="30dp"
                 android:background="@null"
                 android:layout_marginLeft="3dp"
                 android:src="@drawable/ic_add_black_24dp"
                 />
 
         </LinearLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
+<!--        <Button
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:textSize="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Bank Details"
-            android:textColor="#fff"/>
+            android:layout_marginTop="15dp"
+            android:textColor="#fff"
+            android:text="Update"
+            android:layout_gravity="center"
+            android:background="#242438"/>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp"
+            android:gravity="center">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#fff" />
+            <ImageView
+                android:id="@+id/attach_img_1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="3dp"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:orientation="horizontal">
+                android:src="@drawable/ic_no_img_24dp"
+                />
+            <ImageView
+                android:id="@+id/attach_img_2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/ic_no_img_24dp"
+                />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Bank Name"
-                    android:textColor="#fff"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text=""
-                    />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Account"
-                    android:textColor="#fff"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                   />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="#fff"
-                    android:textSize="12dp" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#fff" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/bank_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/attach_img_3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/ic_no_img_24dp"
+                />
         </LinearLayout>
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#fff" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Add Documents"
+                android:textColor="#fff"
+                />
+            <ImageButton
+                android:id="@+id/btn_add_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@null"
+                android:layout_marginLeft="3dp"
+                android:padding="30dp"
+                android:src="@drawable/ic_add_black_24dp"
+                />
 
+        </LinearLayout>
+        <Button
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="Update"
 
-
-
-
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:background="#242438"/>
     </LinearLayout>
-
-
-
-</LinearLayout>
+    </RelativeLayout>
+    </ScrollView>

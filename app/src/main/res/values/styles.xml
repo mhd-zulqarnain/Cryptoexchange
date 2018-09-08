@@ -12,14 +12,25 @@
 
     <style name="menuItem">
         <item name="android:layout_marginTop">12dp</item>
-        <item name="android:textSize">25dp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:layout_marginLeft">23dp</item>
         <item name="android:gravity">left</item>
     </style>
 
+
+    <!--Sign up edittext style-->
+
+    <style name="signUpEditTextStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <!--end-->
+
     <style name="editTextStyle">
         <item name="android:layout_marginTop">12dp</item>
-        <item name="android:textSize">25dp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:layout_marginLeft">23dp</item>
         <item name="android:gravity">left</item>
         <item name="android:background">@drawable/layout_curve_edit_text</item>
@@ -30,7 +41,11 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="buyActivityText">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/oswald_regular</item>
+    </style>
+    <style name="bankDialogText">
+        <item name="android:textSize">15sp</item>
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/oswald_regular</item>
     </style>
 

@@ -5,7 +5,6 @@
     android:id="@+id/outer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgoundTheme"
     tools:context=".MainActivity">
 
 
@@ -27,7 +26,6 @@
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
         android:layout_marginTop="11dp"
-
         android:src="@drawable/ic_menu_white_24dp" />
 
     <LinearLayout
@@ -59,7 +57,13 @@
             android:layout_marginTop="60dp"
             android:text="Home"
             />
-
+        <TextView
+            android:id="@+id/tv_my_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transactions"
+            style="@style/menuItem"
+            />
         <TextView
             android:id="@+id/tv_trade"
             android:layout_width="match_parent"
@@ -77,12 +81,6 @@
             style="@style/menuItem"
             />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Blog"
-            style="@style/menuItem"
-            />
 
         <TextView
             android:id="@+id/btn_logout"
