@@ -40,15 +40,10 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".DrawerActivity"
             android:theme="@style/BuyTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.example.admin.camerawork.CameraActivity"
@@ -59,7 +54,7 @@
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
             android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.SellActivity"
             android:focusable="true"
@@ -67,13 +62,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/BuyTheme"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".AdvertisementActivity"
-
+        <activity
+            android:name=".AdvertisementActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
-            android:theme="@style/BuyTheme">
+            android:theme="@style/BuyTheme"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -30,7 +30,7 @@
                 android:textSize="15dp" />
 
             <Spinner
-                android:id="@+id/spinner_type"
+                android:id="@+id/spinner_order_type"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -82,6 +82,7 @@
                 android:textSize="15dp" />
 
             <Spinner
+                android:id="@+id/spinner_coin_type"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -116,6 +117,7 @@
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/ed_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -139,6 +141,7 @@
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/ed_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -160,13 +163,15 @@
                 android:layout_weight="1"
                 android:text="Fees "
                 android:textSize="15dp" />
-
-            <EditText
+            <TextView
+                android:id="@+id/tv_fees"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:imeOptions="actionNext"
                 android:inputType="number"
+                style="@style/adsActivityStyle"
+                android:text="Fees"
                 android:textSize="15dp" />
         </LinearLayout>
         <LinearLayout
@@ -184,15 +189,17 @@
 
                 android:textSize="15dp" />
 
-            <EditText
+            <TextView
+                android:id="@+id/tv_total"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:imeOptions="actionNext"
-                style="@style/adsActivityStyle"
-
                 android:inputType="number"
+                style="@style/adsActivityStyle"
+                android:text="Total"
                 android:textSize="15dp" />
+
         </LinearLayout>
 
         <View
@@ -243,6 +250,7 @@
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/u_limit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
