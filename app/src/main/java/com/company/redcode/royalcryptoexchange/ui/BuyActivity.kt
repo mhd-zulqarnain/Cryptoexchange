@@ -65,13 +65,11 @@ class BuyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy)
         toolbar = findViewById(R.id.toolbar_top)
-
         initView()
     }
 
     @SuppressLint("NewApi")
     private fun initView() {
-
 
         seller_coin_filter = findViewById(R.id.seller_coin_filter)
         seller_filter_group =findViewById(R.id.seller_filter_group)
