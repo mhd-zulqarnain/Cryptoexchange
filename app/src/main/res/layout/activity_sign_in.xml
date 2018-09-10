@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical"
     >
 
@@ -15,23 +15,20 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-
+<ImageView
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:src="@mipmap/ic_launcher_logo"
+    />
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:text="Authorization"
-        android:textSize="25dp" />
-
-    <TextView
-        android:id="@+id/tv_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Create an account if you do not have one"
-        android:textSize="15dp" />
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:fontFamily="@font/oswald_regular"
+        android:text="Sign in to Royal Cryto Currency"
+        android:textSize="18sp" />
 
 
     <LinearLayout
@@ -72,9 +69,7 @@
                 style="@style/signUpEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:hint="@string/prompt_password"
-
                 android:imeOptions="actionDone"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -82,42 +77,41 @@
 
         </android.support.design.widget.TextInputLayout>
 
-
-        <Button
-            android:id="@+id/sign_up_button"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/btn_sign_up"
-            android:onClick="signUp"
-            android:text="@string/action_sign_in"
-            android:textColor="@color/backgoundTheme"
-            android:textSize="12sp"
-            android:layout_margin="10dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="3">
-
-            <TextView
+            android:weightSum="2.1">
+            <Button
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="2"
-                android:text="Registor a new account !!" />
-
-            <TextView
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_yellow_border"
+                android:onClick="signIn"
                 android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="@string/action_sign_in"
+                android:textColor="#Fff"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_yellow_border"
                 android:onClick="signUp"
-                android:text="@string/sign_up_underline" />
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="@string/action_sign_up"
+                android:textColor="#Fff"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
         </LinearLayout>
+
 
 
     </LinearLayout>

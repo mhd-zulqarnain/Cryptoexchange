@@ -15,10 +15,10 @@
         <item
             android:id="@+id/nav_wallet"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Waller" />
+            android:title="Wallet" />
         <item
-            android:id="@+id/nav_transcation"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Transcation" />
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="Dashboard" />
     </group>
 </menu>

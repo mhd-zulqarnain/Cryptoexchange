@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/button"
+            android:background="@drawable/button_yellow_border"
             android:text="Buy"
             android:textColor="#fff"
             android:textSize="20dp" />
@@ -27,16 +27,16 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/button"
+            android:background="@drawable/button_yellow_border"
             android:text="Sell"
             android:textColor="#Fff"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/Trade"
+            android:id="@+id/btn_ads"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@drawable/button"
+            android:background="@drawable/button_yellow_border"
             android:text="Advertisement"
             android:textColor="#Ffff"
             android:textSize="20dp" />

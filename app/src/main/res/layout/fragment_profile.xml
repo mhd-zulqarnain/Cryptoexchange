@@ -181,7 +181,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:background="@drawable/terms_back_ground"
+            android:background="@drawable/white_curve_btn"
             android:weightSum="3"
             >
             <TextView
