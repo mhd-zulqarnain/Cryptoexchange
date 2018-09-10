@@ -52,21 +52,21 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
     fun displayScreen(id: Int){
-        val fragment= when(id){
+        val fragment:Fragment= when(id){
             R.id.nav_home ->{
                 HomeFragment()
             }
             R.id.nav_profile ->{
                 ProfileFragment()
             }
-            R.id.nav_wallet ->{
+           /* R.id.nav_wallet ->{
 
             }
             R.id.nav_transcation->{
 
-            }
+            }*/
             else -> {
-
+                HomeFragment()
             }
         }
         supportFragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment as Fragment).commit();
