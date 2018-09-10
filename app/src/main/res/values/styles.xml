@@ -38,6 +38,15 @@
         <item name="android:gravity">left</item>
     </style>
 
+    <style name="drawerToolbarTheme" parent="Theme.AppCompat.NoActionBar">
+
+        <item name="android:textColorPrimary">@color/whitColor</item>
+
+        <item name="actionMenuTextColor">@color/whitColor</item>
+
+        <item name="android:textColorSecondary">@color/whitColor</item>
+
+    </style>
 
     <!--Sign up edittext style-->
 
@@ -45,6 +54,14 @@
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">left</item>
         <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="adsActivityStyle">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/oswald_regular</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+
     </style>
 
     <!--end-->
@@ -65,6 +82,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/oswald_regular</item>
     </style>
+
     <style name="bankDialogText">
         <item name="android:textSize">15sp</item>
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/oswald_regular</item>

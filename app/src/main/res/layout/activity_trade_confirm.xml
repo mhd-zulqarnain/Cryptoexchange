@@ -175,7 +175,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:textColor="@color/backgoundTheme"
-        android:background="@drawable/layout_curve_btn_boreder_only"
+        android:background="@drawable/white_curve_btn"
         android:text="Pay later" />
 
 </LinearLayout>

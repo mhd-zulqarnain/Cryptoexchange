@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="adsActivityStyle">
+        <item name="android:fontFamily">oswald_regular</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+</resources>

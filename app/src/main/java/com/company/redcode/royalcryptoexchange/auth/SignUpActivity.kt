@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.company.redcode.royalcryptoexchange.DrawerActivity
 import com.company.redcode.royalcryptoexchange.MainActivity
 import com.company.redcode.royalcryptoexchange.R
 import com.google.firebase.auth.FirebaseAuth
@@ -79,7 +80,10 @@ class SignUpActivity : AppCompatActivity() {
         btnVerify.setOnClickListener{
 
             Toast.makeText(baseContext, "Account created successfully", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+
+            val intent = Intent(this, DrawerActivity::class.java)
+            startActivity(intent)
+            finish()
          /*   sign_up_progress!!.visibility = View.GONE*/
             dialog.dismiss()
             finish()
