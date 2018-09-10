@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="backgoundTheme">#1C2535</color>
-    <color name="backgoundBuy">#295055</color>
+    <color name="backgoundBuy">#224255</color>
     <color name="BuyActivityText">#fff</color>
     <color name="backgoundBtn">#F6A50A</color>
     <color name="backgoundBackup">#C6CACE</color>
@@ -12,7 +12,7 @@
     <color name="mainActivityColor">#0F61BB</color>
 
     <color name="ActionBAr">#356a81</color>
-    <color name="backgroundThere">#295055</color>
+    <color name="backgroundThere">#224255</color>
 
 
     <color name="iconColor">#88703f</color>
