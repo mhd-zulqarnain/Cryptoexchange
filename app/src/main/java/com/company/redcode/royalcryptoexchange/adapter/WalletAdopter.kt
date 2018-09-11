@@ -56,15 +56,19 @@ class WalletAdopter (var datalist: ArrayList<Wallet>):
         var wollet_address: EditText =view.findViewById(R.id.Ed_wallet_address)
         var wollet_desc: EditText =view.findViewById(R.id.wallet_descrbtion)
         var button_ok: Button = view.findViewById(R.id.wallet_ok)
-
+        var button_cancel:Button = view.findViewById(R.id.wallet_cancel)
         button_ok.setOnClickListener {
             var saveable =true
-            if(wollet_address.length()==0)
+            if(wollet_address.length()!=0)
                 dialog.cancel()
             else
                 (Toast.makeText(ctx, "Fill Send Method",Toast.LENGTH_SHORT).show())
         }
+        button_cancel.setOnClickListener{
+            dialog.dismiss()
+        }
         dialog.show()
+
         }
 
     }
