@@ -8,7 +8,10 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.ui.ProfileFragment
+import com.company.redcode.royalcryptoexchange.ui.SupportFragment
+import com.company.redcode.royalcryptoexchange.ui.WalletFragment
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
 
@@ -60,10 +63,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 ProfileFragment()
             }
             R.id.nav_wallet ->{
-
+               WalletFragment()
             }
-            R.id.nav_transcation->{
-
+            R.id.nav_support->{
+                SupportFragment()
             }
             else -> {
 

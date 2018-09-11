@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">@color/ActionBAr</color>
+    <color name="colorPrimaryDark">@color/ActionBAr</color>
     <color name="colorAccent">#FF4081</color>
     <color name="backgoundTheme">#1C2535</color>
     <color name="backgoundBuy">#295055</color>
@@ -10,7 +10,6 @@
     <color name="backgoundBackup">#C6CACE</color>
     <color name="whitColor">#F1F2F4</color>
     <color name="mainActivityColor">#0F61BB</color>
-
     <color name="ActionBAr">#356a81</color>
     <color name="backgroundThere">#295055</color>
 </resources>

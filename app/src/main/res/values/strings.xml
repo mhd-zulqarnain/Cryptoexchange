@@ -79,6 +79,12 @@
         <item>State Bank</item>
     </string-array>
 
+    <string-array name="array_support_title">
+        <item>Attempted Froad</item>
+        <item>Low Prize Tranction</item>
+        <item>Not Valid User</item>
+        <item>xxxxxx</item>
+    </string-array>
 
     <string name="title_activity_home">home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
