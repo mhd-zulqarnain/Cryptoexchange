@@ -10,9 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.company.redcode.royalcryptoexchange.auth.SignInActivity
-import com.company.redcode.royalcryptoexchange.ui.DashboardFragment
-import com.company.redcode.royalcryptoexchange.ui.HomeFragment
-import com.company.redcode.royalcryptoexchange.ui.ProfileFragment
+import com.company.redcode.royalcryptoexchange.ui.*
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
 
@@ -64,8 +62,12 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_profile -> {
                 ProfileFragment()
             }
-            R.id.nav_dashboard -> {
-                DashboardFragment()
+            R.id.nav_support -> {
+                SupportFragment()
+            }
+            R.id.nav_wallet -> {
+                WalletFragment()
+
             }
             else -> {
                 HomeFragment()

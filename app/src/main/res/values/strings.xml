@@ -50,6 +50,10 @@
         <item>advcash</item>
         <item>Chine</item>
     </string-array>
+    <string-array name="array_support_title">
+        <item>Claim a Fraud</item>
+        <item>Let payment</item>
+    </string-array>
 
     <string-array name="search_options">
         <item>Coin</item>
