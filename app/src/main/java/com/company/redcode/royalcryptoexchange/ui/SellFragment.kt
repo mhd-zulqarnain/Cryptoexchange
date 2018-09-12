@@ -41,7 +41,7 @@ class SellFragment : Fragment() {
     var ed_total: TextView? = null
     var tv_fee: TextView? = null
     var seller_coin_filter: RadioButton? = null
-    var progressBar: AlertDialog? = null
+        var progressBar: AlertDialog? = null
     var coin: String = "BTC"
     var tradelist = java.util.ArrayList<Trade>()
     var adapter: TableSellerAdapater? = null

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="6">
+        android:weightSum="7">
 
         <TextView
             android:id="@+id/tv_User"
@@ -19,17 +19,17 @@
             android:gravity="center"
             android:text="Seller"
             android:textColor="#fff"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_amount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:text="Amount"
             android:gravity="center"
             android:textColor="#fff"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
 
         <TextView
@@ -40,7 +40,7 @@
             android:text="Price"
             android:textColor="#fff"
             android:gravity="center"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_limit"
@@ -50,17 +50,17 @@
             android:text="Limit"
             android:textColor="#fff"
             android:gravity="center"
-            android:textSize="8sp" />
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btn_buy"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Sell"
             android:background="@drawable/white_curve_btn"
             android:textColor="@color/backgoundTheme"
-            android:textSize="10sp" />
+            android:textSize="8sp" />
     </LinearLayout>
 
 </LinearLayout>
