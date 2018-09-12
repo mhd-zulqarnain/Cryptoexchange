@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="12dp"
         android:orientation="vertical">
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -15,6 +17,7 @@
             android:fontFamily="@font/oswald_regular"
             android:text="Add Advertisement"
             android:textSize="28sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,22 +25,20 @@
             android:weightSum="3">
 
             <TextView
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Order type"
-                style="@style/adsActivityStyle"
                 android:textSize="15dp" />
 
             <Spinner
                 android:id="@+id/spinner_order_type"
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                style="@style/adsActivityStyle"
-                android:entries="@array/order_type">
-
-            </Spinner>
+                android:entries="@array/order_type"></Spinner>
         </LinearLayout>
 
         <LinearLayout
@@ -47,18 +48,18 @@
             android:weightSum="3">
 
             <TextView
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                style="@style/adsActivityStyle"
 
                 android:text="Payment Method "
                 android:textSize="15dp" />
 
             <Spinner
                 android:id="@+id/spinner_payment_method"
-                android:layout_width="0dp"
                 style="@style/adsActivityStyle"
+                android:layout_width="0dp"
 
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -66,6 +67,7 @@
 
             </Spinner>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,20 +75,20 @@
             android:weightSum="3">
 
             <TextView
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Currency"
-                style="@style/adsActivityStyle"
 
                 android:textSize="15dp" />
 
             <Spinner
                 android:id="@+id/spinner_coin_type"
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                style="@style/adsActivityStyle"
 
                 android:entries="@array/array_coin">
 
@@ -97,11 +99,11 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:alpha="0.5"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:background="#fff"/>
+            android:background="#fff" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,6 +127,7 @@
                 android:inputType="numberDecimal"
                 android:textSize="15dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,25 +135,26 @@
             android:weightSum="3">
 
             <TextView
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Price "
-                style="@style/adsActivityStyle"
 
                 android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/ed_price"
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                style="@style/adsActivityStyle"
 
                 android:textSize="15dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -163,17 +167,19 @@
                 android:layout_weight="1"
                 android:text="Fees "
                 android:textSize="15dp" />
+
             <TextView
                 android:id="@+id/tv_fees"
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                style="@style/adsActivityStyle"
                 android:text="Fees"
                 android:textSize="15dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -181,22 +187,22 @@
             android:weightSum="3">
 
             <TextView
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Total "
-                style="@style/adsActivityStyle"
 
                 android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/tv_total"
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                style="@style/adsActivityStyle"
                 android:text="Total"
                 android:textSize="15dp" />
 
@@ -206,11 +212,12 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:alpha="0.5"
-            android:background="#fff"/>
+            android:background="#fff" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -218,23 +225,24 @@
             android:weightSum="3">
 
             <TextView
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                style="@style/adsActivityStyle"
                 android:text="Lower Limit "
                 android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/l_limit"
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                style="@style/adsActivityStyle"
                 android:textSize="15dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -242,21 +250,21 @@
             android:weightSum="3">
 
             <TextView
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                style="@style/adsActivityStyle"
                 android:text="Upper Limit "
                 android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/u_limit"
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:imeOptions="actionDone"
                 android:inputType="number"
-                style="@style/adsActivityStyle"
                 android:textSize="15dp" />
         </LinearLayout>
 
