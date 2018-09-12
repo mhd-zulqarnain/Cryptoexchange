@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.company.redcode.royalcryptoexchange.R.id.*
 import com.company.redcode.royalcryptoexchange.auth.SignInActivity
 import com.company.redcode.royalcryptoexchange.ui.DashboardFragment
 import com.company.redcode.royalcryptoexchange.ui.HomeFragment
@@ -67,6 +68,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_dashboard -> {
                 DashboardFragment()
             }
+
             else -> {
                 HomeFragment()
             }

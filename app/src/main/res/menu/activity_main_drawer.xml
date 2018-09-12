@@ -20,5 +20,9 @@
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_dashboard_black_24dp"
             android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_support"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="Dashboard" />
     </group>
 </menu>

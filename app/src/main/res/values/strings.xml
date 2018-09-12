@@ -44,6 +44,10 @@
         <item>Oman</item>
         <item>Chine</item>
     </string-array>
+    <string-array name="array_support_title">
+        <item>Arif</item>
+        <item>Fraud</item>
+    </string-array>
     <string-array name="array_offer">
         <item>All online offer</item>
         <item>Easypaisa</item>
