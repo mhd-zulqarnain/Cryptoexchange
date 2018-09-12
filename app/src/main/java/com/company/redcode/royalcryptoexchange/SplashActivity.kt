@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
                 .withFullScreen()
                 .withTargetActivity(SignInActivity::class.java)
                 .withSplashTimeOut(3000)
-                .withLogo(R.mipmap.ic_launcher_logo)
+                .withLogo(R.drawable.splash_image)
 
         val view = config.create()
         setContentView(view)

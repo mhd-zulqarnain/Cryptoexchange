@@ -53,6 +53,10 @@ class AdvertisementActivity : AppCompatActivity() {
                 }
             }
         })
+
+        btn_cancel.setOnClickListener{
+            finish()
+        }
     }
 
 
