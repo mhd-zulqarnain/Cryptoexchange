@@ -139,9 +139,7 @@ class BuyFragment : Fragment() {
                 })
 
         btn_trade!!.setOnClickListener {
-
             showTradeDialog()
-
         }
         ed_price!!.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {

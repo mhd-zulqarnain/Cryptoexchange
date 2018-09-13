@@ -61,8 +61,8 @@ class AdvertisementActivity : AppCompatActivity() {
 
                         val amount = ed_amount!!.text.toString().toDouble()
                         val remCoin: Double = getCoinAfterFee(amount)
-
-                        tv_fees!!.setText((amount * 4 / 100).toString())
+                        var fees = amount * 4 / 100
+                        tv_fees!!.setText(fees.toString())
                         tv_total!!.setText(remCoin.toString())
                     } catch (e: NumberFormatException) {
                         println("error")
@@ -70,12 +70,9 @@ class AdvertisementActivity : AppCompatActivity() {
 
                 }
             }
-
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
         btn_post.setOnClickListener{
             validation()
@@ -89,14 +86,25 @@ class AdvertisementActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun validation() {
 
-        if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "" &&
+        /*if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "" &&
                 !ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
 
             var amount = ed_amount!!.text.toString().toDouble()
             var price = ed_price!!.text.toString().toDouble()
-            var total = amount * price
+//            var total = amount * price
 
+        }*/
+        if (ed_amount!!.text.toString() == "") {
+            ed_amount!!.error = "Enter the amount i.e the number of coin"
+            ed_amount!!.requestFocus()
+            return
         }
+        if (ed_price!!.text.toString() == "") {
+            ed_price!!.error = "Enter the price of one coin"
+            ed_price!!.requestFocus()
+            return
+        }
+
         if (u_limit!!.text.toString() == "") {
             u_limit!!.error = "Enter the Limit"
             u_limit!!.requestFocus()
@@ -126,7 +134,6 @@ class AdvertisementActivity : AppCompatActivity() {
         if (l_limit!!.text.toString().toDouble() > u_limit!!.text.toString().toDouble()) {
             Apputils.showMsg(this@AdvertisementActivity, "Upper limit should  be greater")
             return
-
         }
 
         postNewTrade()
@@ -151,7 +158,8 @@ class AdvertisementActivity : AppCompatActivity() {
         progressBar = builder.create()
 
         progressBar!!.show()
-        var mtrade = Trade(null, "322", Users("user3322"), "bankid", u_limit?.text.toString().toLong(), l_limit?.text.toString().toLong()
+
+        val mtrade = Trade(null, "322", Users("user3322"), "bankid", u_limit?.text.toString().toLong(), l_limit?.text.toString().toLong()
                 , null, coin, ed_amount!!.text.toString(), ed_price!!.text.toString(), "", type = orderType)
 
         println(Gson().toJson(mtrade))
@@ -171,8 +179,7 @@ class AdvertisementActivity : AppCompatActivity() {
                     startActivity(Intent(this@AdvertisementActivity, SellActivity::class.java))
                     finish()
                 }
-
-                finish()
+//                finish()
 //                dialog.dismiss()
 //                getAllTrade()
 
