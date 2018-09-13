@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="12dp"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -23,7 +27,7 @@
 
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="First name" />
 
@@ -31,7 +35,7 @@
             android:id="@+id/ed_first_name"
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_person_outline_black_24dp"
             android:hint="First name"
             android:imeOptions="actionNext"
@@ -43,7 +47,7 @@
 
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Last name" />
 
@@ -51,7 +55,7 @@
             android:id="@+id/ed_last_name"
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_person_outline_black_24dp"
             android:hint="Last name"
             android:imeOptions="actionNext"
@@ -61,7 +65,7 @@
         <TextView
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Email" />
 
@@ -69,7 +73,7 @@
             android:id="@+id/ed_email"
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_email_black_24dp"
             android:hint="Email"
             android:imeOptions="actionNext"
@@ -82,7 +86,7 @@
 
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Mobile" />
 
@@ -91,7 +95,7 @@
             android:id="@+id/ed_mobile_number"
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_local_phone_black_24dp"
             android:hint="Mobile number"
             android:imeOptions="actionNext"
@@ -104,7 +108,7 @@
 
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Password" />
 
@@ -112,7 +116,7 @@
             android:id="@+id/ed_pasword"
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
@@ -123,7 +127,7 @@
 
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Cnic" />
 
@@ -131,7 +135,7 @@
             android:id="@+id/ed_cnic"
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:hint="CNIC"
             android:imeOptions="actionNext"
             android:inputType="number"
@@ -149,7 +153,7 @@
             android:id="@+id/ed_dob"
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_date_black"
             android:hint="mm/dd/yy"
 

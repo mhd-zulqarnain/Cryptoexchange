@@ -175,7 +175,7 @@ class SignUpActivity : AppCompatActivity() {
         var month = cal.get(Calendar.MONTH);
 
         val listener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            ed_dob.setText(monthOfYear.toString() + "/" + dayOfMonth.toString() + "/" + year)
+            ed_dob.setText(monthOfYear.toString() + "-" + dayOfMonth.toString() + "-" + year)
         }
         val dpDialog = DatePickerDialog(this@SignUpActivity, listener, year, month, day)
         dpDialog.show()
