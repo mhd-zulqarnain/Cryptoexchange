@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Amount: "
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42dp"
+            android:hint="Enter Amount Here"
+            android:padding="12dp"
+            android:textColorHint="#f43a3a"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/tv_wallet_address"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Wallet Address: "
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/Ed_wallet_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:hint="Wallet Address"
+            android:padding="12dp"
+            android:textColorHint="#f43a3a"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:padding="5dp">
+        <TextView
+            android:id="@+id/wallert_descbtion"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Wallet Descbtion: "
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/wallet_descrbtion"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="20dp"
+            android:hint="Describtion"
+            android:textColorHint="#f43a3a"
+            android:textSize="12dp"
+            android:background="#ffff"
+            android:layout_weight="1"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:textColor="#000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="12dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
+            android:id="@+id/wallet_ok"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="OK!"
+            android:textSize="16dp"
+            android:layout_margin="5dp"/>
+        <Button
+            android:id="@+id/wallet_cancel"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="Cancel!"
+            android:textSize="16dp"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
