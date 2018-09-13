@@ -20,5 +20,5 @@ class SplashActivity : AppCompatActivity() {
         val view = config.create()
         setContentView(view)
     }
-    
+
 }

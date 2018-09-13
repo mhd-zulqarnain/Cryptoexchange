@@ -1,163 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    >
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_margin="12dp"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign up"
             android:layout_marginBottom="10dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/editLableStyle"
-            >
+            android:text="Sign up"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-
-            <EditText
-                android:id="@+id/ed_first_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="First name"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
-               />
-
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/editLableStyle"
-            >
-
-
-            <EditText
-                android:id="@+id/ed_last_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Last name"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
-               />
-
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/editLableStyle"
-            >
-
-
-            <EditText
-                android:id="@+id/ed_email"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
-               />
-
-        </android.support.design.widget.TextInputLayout>
-
-       <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/editLableStyle"
-            >
-
-
-            <EditText
-                android:id="@+id/ed_mobile_number"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Mobile number"
-                android:inputType="number"
-                android:maxLength="13"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
-               />
-
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/editLableStyle"
-            >
-
-
-            <EditText
-                android:id="@+id/ed_pasword"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
-               />
-
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/editLableStyle"
-            >
-
-
-            <EditText
-                android:id="@+id/ed_cnic"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="CNIC"
-                android:inputType="number"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
-               />
-
-        </android.support.design.widget.TextInputLayout>
 
         <TextView
+
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="First name" />
+
+        <EditText
+            android:id="@+id/ed_first_name"
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_person_outline_black_24dp"
+            android:hint="First name"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+
+        <TextView
+
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="Last name" />
+
+        <EditText
+            android:id="@+id/ed_last_name"
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_person_outline_black_24dp"
+            android:hint="Last name"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <TextView
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="Email" />
+
+        <EditText
+            android:id="@+id/ed_email"
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_email_black_24dp"
+            android:hint="Email"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+
+        <TextView
+
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="Mobile" />
+
+
+        <EditText
+            android:id="@+id/ed_mobile_number"
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_local_phone_black_24dp"
+            android:hint="Mobile number"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="13"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <TextView
+
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="Password" />
+
+        <EditText
+            android:id="@+id/ed_pasword"
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <TextView
+
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="Cnic" />
+
+        <EditText
+            android:id="@+id/ed_cnic"
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="CNIC"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+
+        <TextView
+            style="@style/signUpEditTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/signUpEditTextStyle"
-            android:text="Date of birth:"
-            />
+            android:text="Date of birth:" />
+
         <TextView
-                android:id="@+id/ed_dob"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="mm/dd/yy"
-                android:inputType="datetime"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
-                android:drawableRight="@drawable/ic_date_black"
-               />
+            android:id="@+id/ed_dob"
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_date_black"
+            android:hint="mm/dd/yy"
+
+            android:inputType="datetime"
+            android:maxLines="1"
+            android:singleLine="true" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -168,13 +167,13 @@
         <Button
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/button_yellow_border"
             android:onClick="signUp"
-            android:layout_gravity="center"
             android:text="@string/action_sign_up"
             android:textColor="#Fff"
-            android:layout_marginTop="12dp"
             android:textSize="20dp" />
 
         <LinearLayout
@@ -189,17 +188,15 @@
                 android:layout_height="24dp"
                 android:layout_weight="2"
                 android:text="Already have an account?"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:onClick="signIn"
                 android:layout_weight="1"
+                android:onClick="signIn"
                 android:text="@string/sign_in_underline"
-                android:textSize="13sp"
-                />
+                android:textSize="13sp" />
 
         </LinearLayout>
 
