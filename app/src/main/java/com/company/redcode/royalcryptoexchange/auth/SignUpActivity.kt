@@ -11,23 +11,23 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.company.redcode.royalcryptoexchange.DrawerActivity
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Response
-import com.company.redcode.royalcryptoexchange.models.SignUpResponse
 import com.company.redcode.royalcryptoexchange.models.Users
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.company.redcode.royalcryptoexchange.utils.Constants
+import com.company.redcode.royalcryptoexchange.utils.ServiceError
+import com.company.redcode.royalcryptoexchange.utils.ServiceListener
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
 import java.text.DateFormat
 import java.util.*
-
-
 
 
 class SignUpActivity : AppCompatActivity() {
@@ -53,8 +53,10 @@ class SignUpActivity : AppCompatActivity() {
                     editable.append('-');
                 }
             }
+
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 /*if (ed_cnic.text.toString().length == 5 || ed_cnic.text.toString().length == 13) {
                     //ed_cnic.text = ed_cnic.text.append('-');
@@ -116,69 +118,52 @@ class SignUpActivity : AppCompatActivity() {
             ed_last_name!!.requestFocus()
             return
         }
-        showVerifyDialog()
-
-//        var dateCreate = Cal
 
         val date = Date()
         var dateCreated = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(date)
 
 
-        Toast.makeText(baseContext, "Verify your account", Toast.LENGTH_SHORT).show()
-
-        var user = Users(firstName = ed_first_name.text.toString(), lastName = ed_last_name.text.toString(), email = ed_email.text.toString(),mobile = ed_mobile_number.text.toString(),isEmailActive =  "0", createdDate = dateCreated, loginDate = dateCreated,
+        var user = Users(firstName = ed_first_name.text.toString(), lastName = ed_last_name.text.toString(), email = ed_email.text.toString(), mobile = ed_mobile_number.text.toString(), isEmailActive = "0", createdDate = dateCreated, loginDate = dateCreated,
                 logoutDate = dateCreated, IsActive = "0", dateOfBirth = ed_dob.text.toString(), terms = "null", documentVerification = "0",
                 userId = "null", cnic = ed_cnic.text.toString(), IsPhoneNumActive = "0", Password = ed_pasword!!.text.toString())
         println(user)
 
-        ApiClint.getInstance()?.getService()?.signUpUser(user.firstName!!, user.lastName!!,email = user.email!!,
-                mobile = user.mobile!!, password = ed_pasword.text.toString(),cnic = user.cnic!!,dob = user.dateOfBirth!!)
-                ?.enqueue(object : Callback<SignUpResponse> {
-                    override fun onFailure(call: Call<SignUpResponse>?, t: Throwable?) {
+        ApiClint.getInstance()?.getService()?.signUpUser(user.firstName!!, user.lastName!!, email = user.email!!,
+                mobile = user.mobile!!, password = ed_pasword.text.toString(), cnic = user.cnic!!, dob = user.dateOfBirth!!)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         Apputils.showMsg(this@SignUpActivity, "failed")
                         println("response " + t)
                     }
 
-                    override fun onResponse(call: Call<SignUpResponse>?, response: retrofit2.Response<SignUpResponse>?) {
-                        Apputils.showMsg(this@SignUpActivity, "successfully added")
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         println("response " + response!!.body())
+
+                        if (response != null) {
+                            var apiResponse = response.body()
+                            if (apiResponse!!.status == Constants.STATUS_INACTIVE || apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                                var status = response.body()!!.message
+                                val mStatus = status!!.split(" ")
+                                //println(mStatus[0])
+                                showVerifyDialog(code = mStatus[1], userId = mStatus[0])
+
+                                Toast.makeText(baseContext, "Please verify your email", Toast.LENGTH_SHORT).show()
+
+//
+                            } else {
+                                Toast.makeText(baseContext, "Email already verifed please login", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                                // startActivity(intent)
+                                //finish()
+                            }
+                        }
+
                     }
-
                 })
-
-
     }
 
-    fun postNewUser() {
-        ApiClint.getInstance()?.getService()?.postNewUser("myname", ",asdsad", "Myimage .png  * ) )& ^% $%@~!@ n", "9")?.enqueue(object : Callback<Response> {
-            override fun onFailure(call: Call<Response>?, t: Throwable?) {
-                Apputils.showMsg(this@SignUpActivity, "failed")
-                println("response " + t)
-            }
+    fun showVerifyDialog(code: String, userId: String) {
 
-            override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
-                Apputils.showMsg(this@SignUpActivity, "successfully added")
-                println("response " + response!!.body())
-            }
-        })
-        /*   override fun onFailure(call: Call<String>?, t: Throwable?) {
-               Apputils.showMsg(this@SignInActivity , "failed")
-               println("response "+t)
-
-
-           }
-
-           override fun onResponse(call: Call<String>?, response: Response<String>?) {
-               Apputils.showMsg(this@SignInActivity , "successfully added")
-               println("response "+response!!.body())
-
-
-           }
-       })*/
-
-    }
-
-    fun showVerifyDialog() {
         val view: View = LayoutInflater.from(this@SignUpActivity).inflate(R.layout.dilalog_email_verify, null)
         val alert = AlertDialog.Builder(this@SignUpActivity)
         alert.setView(view)
@@ -186,18 +171,50 @@ class SignUpActivity : AppCompatActivity() {
         var dialog = alert.create()
         dialog.show()
         val btnVerify: Button = view.findViewById(R.id.btn_verify)
+        val ed_code: EditText = view.findViewById(R.id.ed_code)
+
         btnVerify.setOnClickListener {
+            if (ed_code.text.toString() != "") {
+                if (ed_code.text.toString() == code) {
+                    verifyEmail(code, userId, object : ServiceListener<String> {
+                        override fun success(obj: String) {
+                            Toast.makeText(baseContext, "Account Verified successfully", Toast.LENGTH_SHORT).show()
+                            dialog.dismiss()
+                            val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
 
-            Toast.makeText(baseContext, "Account created successfully", Toast.LENGTH_SHORT).show()
+                        override fun fail(error: ServiceError) {
+                            Toast.makeText(baseContext, "Unable to verify ", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                } else {
+                    ed_code!!.requestFocus()
+                    ed_code!!.error = Html.fromHtml("<font color='black'>Wrong code</font>")
 
-            val intent = Intent(this, DrawerActivity::class.java)
+                }
+
+            }
+            /*val intent = Intent(this, DrawerActivity::class.java)
             startActivity(intent)
             finish()
+            */
             /*   sign_up_progress!!.visibility = View.GONE*/
-            dialog.dismiss()
-            finish()
+            //  dialog.dismiss()
+            //finish()
         }
 
+    }
+
+    fun verifyEmail(code: String, userId: String, serviceListener: ServiceListener<String>) {
+        ApiClint.getInstance()?.getService()?.verifyEmail(userId, code)?.enqueue(object : Callback<Response> {
+            override fun onFailure(call: Call<Response>?, t: Throwable?) {}
+
+            override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                serviceListener.success("success")
+            }
+        })
     }
 
     fun signIn(v: View) {
@@ -214,7 +231,7 @@ class SignUpActivity : AppCompatActivity() {
         var month = cal.get(Calendar.MONTH);
 
         val listener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            ed_dob.setText(dayOfMonth.toString()+"-"+ monthOfYear.toString() + "-"  + year)
+            ed_dob.setText(dayOfMonth.toString() + "-" + monthOfYear.toString() + "-" + year)
 
         }
         val dpDialog = DatePickerDialog(this@SignUpActivity, listener, year, month, day)
@@ -222,11 +239,11 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-       /* if (auth!!.currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }*/
+        /* if (auth!!.currentUser != null) {
+             val intent = Intent(this, MainActivity::class.java)
+             startActivity(intent)
+             finish()
+         }*/
         super.onStart()
     }
 }

@@ -57,33 +57,6 @@ class SignInActivity : AppCompatActivity() {
     }
 
 
-    fun postNewUser(){
-        ApiClint.getInstance()?.getService()?.postNewUser("myname",",asdsad","Myimage .png  * ) )& ^% $%@~!@ n","9")?.enqueue(object :Callback<Response>{
-            override fun onFailure(call: Call<Response>?, t: Throwable?) {
-                Apputils.showMsg(this@SignInActivity , "failed")
-                println("response "+t)
-            }
-            override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
-                Apputils.showMsg(this@SignInActivity , "successfully added")
-                println("response "+response!!.body())
-            }
-        })
-         /*   override fun onFailure(call: Call<String>?, t: Throwable?) {
-                Apputils.showMsg(this@SignInActivity , "failed")
-                println("response "+t)
-
-
-            }
-
-            override fun onResponse(call: Call<String>?, response: Response<String>?) {
-                Apputils.showMsg(this@SignInActivity , "successfully added")
-                println("response "+response!!.body())
-
-
-            }
-        })*/
-
-    }
 /*
     override fun onStart() {
         if (auth!!.currentUser != null) {

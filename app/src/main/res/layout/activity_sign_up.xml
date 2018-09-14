@@ -97,15 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/ccp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            app:ccp_countryAutoDetectionPref="SIM_NETWORK_LOCALE"
-            app:ccp_countryPreference="pk"
-            app:ccp_hintExampleNumber="true"
-            />
+
         <EditText
             android:id="@+id/ed_mobile_number"
             style="@style/signUpEditTextStyle"
@@ -115,7 +107,7 @@
             android:hint="Mobile number"
             android:imeOptions="actionNext"
             android:inputType="number"
-            android:maxLength="13"
+            android:maxLength="11"
             android:maxLines="1"
             android:singleLine="true" />
     </LinearLayout>

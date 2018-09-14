@@ -3,16 +3,16 @@ package com.company.redcode.royalcryptoexchange.models
 
 class Response() {
 
-    var Add_SupportTicketResult: String? =""
+    var status: String? =""
     var message: String? = ""
 
-    constructor( message: String) : this() {
-//        this.status = status
-        this.Add_SupportTicketResult = message
+    constructor( status: String, message: String) : this() {
+        this.status = status
+        this.message = message
     }
 
     override fun toString(): String {
-        return "Response(message=$Add_SupportTicketResult)"
+        return "Response(message=$message status=$status)"
     }
 
 }

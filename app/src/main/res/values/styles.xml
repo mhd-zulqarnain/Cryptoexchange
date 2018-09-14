@@ -63,6 +63,12 @@
 
     </style>
 
+    <style name="numberPicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/backgoundTheme</item>
+        <item name="colorPrimaryDark">@color/backgoundTheme</item>
+        <item name="colorAccent">@color/backgoundTheme</item>
+    </style>
+
     <!--end-->
 
     <style name="editTextStyle">
