@@ -1,9 +1,6 @@
 package com.company.redcode.royalcryptoexchange.retrofit
 
-import com.company.redcode.royalcryptoexchange.models.ApiResponse
-import com.company.redcode.royalcryptoexchange.models.Response
-import com.company.redcode.royalcryptoexchange.models.Trade
-import com.company.redcode.royalcryptoexchange.models.Users
+import com.company.redcode.royalcryptoexchange.models.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -32,5 +29,9 @@ interface RetrofiltService {
     @POST("Service1.svc/Add_SupportTicket/{title}/{desc}/{image}/{fucid}")
     @Headers("Content-Type:application/json")
     fun postNewUser( @Path("title") title: String,@Path("desc") desc: String,@Path("image") image: String,@Path("fucid") fucid: String): Call<Response>
+
+    @POST("Service1.svc/Add_UserAccount/{fname}/{lastName}/{email}/{mobile}/{password}/{cnic}/{dob}")
+    @Headers("Content-Type:application/json")
+    fun signUpUser( @Path("fname") fname: String,@Path("lastName") lastName: String,@Path("email") email: String,@Path("mobile") mobile: String,@Path("password") password: String,@Path("cnic") cnic: String,@Path("dob") dob: String): Call<SignUpResponse>
 
 }

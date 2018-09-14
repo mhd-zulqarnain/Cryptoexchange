@@ -1,6 +1,7 @@
 package com.company.redcode.royalcryptoexchange.utils
 
 import android.app.Activity
+import android.text.TextUtils
 import android.widget.Toast
 import java.text.DecimalFormat
 
@@ -12,6 +13,14 @@ class Apputils{
         fun formatCurrency(amount: String): String {
             val formatter = DecimalFormat("###,###,##")
             return formatter.format(java.lang.Double.parseDouble(amount))
+        }
+
+        fun isValidEmail(target: CharSequence): Boolean {
+            return if (TextUtils.isEmpty(target)) {
+                false
+            } else {
+                android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches()
+            }
         }
 
 

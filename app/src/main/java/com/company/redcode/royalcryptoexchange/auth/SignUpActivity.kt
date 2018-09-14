@@ -5,15 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.Html
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.DrawerActivity
-import com.company.redcode.royalcryptoexchange.MainActivity
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Response
+import com.company.redcode.royalcryptoexchange.models.SignUpResponse
 import com.company.redcode.royalcryptoexchange.models.Users
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Apputils
@@ -25,6 +28,8 @@ import java.text.DateFormat
 import java.util.*
 
 
+
+
 class SignUpActivity : AppCompatActivity() {
 
     private var sign_up_progress: ProgressBar? = null
@@ -33,50 +38,84 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         // sign_up_progress = findViewById(R.id.sign_up_progress)
-        auth = FirebaseAuth.getInstance()
+//        auth = FirebaseAuth.getInstance()
         ed_dob.setOnClickListener {
             DateDialog()
         }
+
+        ed_cnic.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+//                val length = editable?.length
+//                if (prevL < length!! && (length == 5 || length == 13)) {
+//                    editable?.append("-")
+//                }
+                if (editable!!.length == 5 || editable.length == 14) {
+                    editable.append('-');
+                }
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                /*if (ed_cnic.text.toString().length == 5 || ed_cnic.text.toString().length == 13) {
+                    //ed_cnic.text = ed_cnic.text.append('-');
+                }*/
+            }
+        })
     }
 
     fun signUp(v: View) {
 
-           if (ed_pasword!!.text.toString().trim { it <= ' ' }.length < 8) {
-               ed_pasword!!.error = "password is short must be greater then 8 digits"
-               ed_pasword!!.requestFocus()
-               return
-           }
-           if (ed_email!!.text.toString() == "") {
-               ed_email!!.error = ""
-               ed_email!!.requestFocus()
-               return
-           }
-           if (ed_first_name!!.text.toString() == "") {
-               ed_first_name!!.error = "Enter user first name"
-               ed_first_name!!.requestFocus()
-               return
-           }
-           if (ed_last_name!!.text.toString() == "") {
-               ed_last_name!!.error = "Enter user last name"
-               ed_last_name!!.requestFocus()
-               return
-           }
-           if (ed_mobile_number!!.text.toString() == "") {
-               ed_mobile_number!!.error = "This field could not be empty"
-               ed_mobile_number!!.requestFocus()
-               return
-           }
+        if (ed_first_name!!.text.toString() == "") {
+            ed_first_name!!.error = Html.fromHtml("<font color='black'>Enter user first name</font>")
+            ed_first_name!!.requestFocus()
+            return
+        }
+        if (ed_last_name!!.text.toString() == "") {
+            ed_last_name!!.error = Html.fromHtml("<font color='black'>Enter user last name</font>")
+            ed_last_name!!.requestFocus()
+            return
+        }
+        if (!Apputils.isValidEmail(ed_email!!.text.toString()) || ed_email!!.text.toString() == "") {
+            ed_email!!.error = Html.fromHtml("<font color='black'>Invalid email</font>")
+            ed_email!!.requestFocus()
+            return
+        }
 
-           if (ed_cnic!!.text.toString() == "") {
-               ed_cnic!!.error = "This field could not be empty"
-               ed_cnic!!.requestFocus()
-               return
-           }
-           if (ed_dob!!.text.toString() == "") {
-               Toast.makeText(baseContext, "Missing date of birth ", Toast.LENGTH_SHORT).show()
 
-               return
-           }
+        if (ed_mobile_number!!.text.toString() == "") {
+            ed_mobile_number!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+            ed_mobile_number!!.requestFocus()
+            return
+        }
+
+        if (ed_pasword!!.text.toString() == "") {
+            ed_pasword!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+            ed_pasword!!.requestFocus()
+            return
+        }
+
+        if (ed_pasword!!.text.toString().trim { it <= ' ' }.length < 8) {
+            ed_pasword!!.error = Html.fromHtml("<font color='black'>password is short must be greater then 8 digits</font>")
+            ed_pasword!!.requestFocus()
+            return
+        }
+
+        if (ed_cnic!!.text.toString() == "") {
+            ed_cnic!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+            ed_cnic!!.requestFocus()
+            return
+        }
+        if (ed_dob!!.text.toString() == "") {
+            Toast.makeText(baseContext, "Missing date of birth ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (ed_first_name!!.text.toString() == ed_last_name.text.toString()) {
+            ed_first_name!!.error = Html.fromHtml("<font color='black'>Could not be same</font>")
+            ed_last_name!!.error = Html.fromHtml("<font color='black'>Could not be same</font>")
+            ed_first_name!!.requestFocus()
+            ed_last_name!!.requestFocus()
+            return
+        }
         showVerifyDialog()
 
 //        var dateCreate = Cal
@@ -87,26 +126,26 @@ class SignUpActivity : AppCompatActivity() {
 
         Toast.makeText(baseContext, "Verify your account", Toast.LENGTH_SHORT).show()
 
-        var user = Users(ed_first_name.text.toString(), ed_last_name.text.toString(), "0", createdDate = dateCreated, loginDate = dateCreated,
-                logoutDate = dateCreated,IsActive = "0",dateOfBirth = ed_dob.text.toString() , terms = "null",documentVerification = "0",
-                userId = "null",cnic = ed_cnic.text.toString(), IsPhoneNumActive = "0",Password =ed_pasword!!.text.toString() )
+        var user = Users(firstName = ed_first_name.text.toString(), lastName = ed_last_name.text.toString(), email = ed_email.text.toString(),mobile = ed_mobile_number.text.toString(),isEmailActive =  "0", createdDate = dateCreated, loginDate = dateCreated,
+                logoutDate = dateCreated, IsActive = "0", dateOfBirth = ed_dob.text.toString(), terms = "null", documentVerification = "0",
+                userId = "null", cnic = ed_cnic.text.toString(), IsPhoneNumActive = "0", Password = ed_pasword!!.text.toString())
         println(user)
 
-        /// sign_up_progress!!.visibility = View.VISIBLE
-        /*auth!!.createUserWithEmailAndPassword(user_email!!.text.toString(), ed_password!!.text.toString()).addOnCompleteListener(this) { task ->
-            if (!task.isSuccessful) {
-                Toast.makeText(baseContext, "Failed", Toast.LENGTH_SHORT).show()
-                sign_up_progress!!.visibility = View.GONE
+        ApiClint.getInstance()?.getService()?.signUpUser(user.firstName!!, user.lastName!!,email = user.email!!,
+                mobile = user.mobile!!, password = ed_pasword.text.toString(),cnic = user.cnic!!,dob = user.dateOfBirth!!)
+                ?.enqueue(object : Callback<SignUpResponse> {
+                    override fun onFailure(call: Call<SignUpResponse>?, t: Throwable?) {
+                        Apputils.showMsg(this@SignUpActivity, "failed")
+                        println("response " + t)
+                    }
 
-            } else {
-                Toast.makeText(baseContext, "Account created successfully", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(baseContext, MainActivity::class.java))
-                sign_up_progress!!.visibility = View.GONE
-                finish()
+                    override fun onResponse(call: Call<SignUpResponse>?, response: retrofit2.Response<SignUpResponse>?) {
+                        Apputils.showMsg(this@SignUpActivity, "successfully added")
+                        println("response " + response!!.body())
+                    }
 
-            }
-        }
-*/
+                })
+
 
     }
 
@@ -175,18 +214,19 @@ class SignUpActivity : AppCompatActivity() {
         var month = cal.get(Calendar.MONTH);
 
         val listener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            ed_dob.setText(monthOfYear.toString() + "-" + dayOfMonth.toString() + "-" + year)
+            ed_dob.setText(dayOfMonth.toString()+"-"+ monthOfYear.toString() + "-"  + year)
+
         }
         val dpDialog = DatePickerDialog(this@SignUpActivity, listener, year, month, day)
         dpDialog.show()
     }
 
     override fun onStart() {
-        if (auth!!.currentUser != null) {
+       /* if (auth!!.currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }
+        }*/
         super.onStart()
     }
 }

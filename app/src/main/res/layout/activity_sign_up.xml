@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@drawable/signin"
     >
 
     <LinearLayout
@@ -69,17 +70,18 @@
             android:layout_marginTop="5dp"
             android:text="Email" />
 
-        <EditText
-            android:id="@+id/ed_email"
-            style="@style/signUpEditTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_email_black_24dp"
-            android:hint="Email"
-            android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:singleLine="true" />
+            <EditText
+                android:id="@+id/ed_email"
+                style="@style/signUpEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_email_black_24dp"
+                android:hint="Email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true" />
+
 
 
         <TextView
@@ -91,6 +93,19 @@
             android:text="Mobile" />
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:ccp_countryAutoDetectionPref="SIM_NETWORK_LOCALE"
+            app:ccp_countryPreference="pk"
+            app:ccp_hintExampleNumber="true"
+            />
         <EditText
             android:id="@+id/ed_mobile_number"
             style="@style/signUpEditTextStyle"
@@ -103,6 +118,7 @@
             android:maxLength="13"
             android:maxLines="1"
             android:singleLine="true" />
+    </LinearLayout>
 
         <TextView
 
@@ -137,9 +153,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="CNIC"
-            android:imeOptions="actionNext"
-            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:digits="0123456789 -."
             android:maxLines="1"
+            android:maxLength="16"
             android:singleLine="true" />
 
 
@@ -184,7 +201,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:id="@+id/textView3"

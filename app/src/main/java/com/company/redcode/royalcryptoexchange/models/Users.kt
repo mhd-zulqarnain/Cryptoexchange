@@ -1,8 +1,10 @@
 package com.company.redcode.royalcryptoexchange.models
 
 data class Users(var firstName: String? = null,
+                 var lastName: String? = null,
                  var email: String? = null,
-                 var IsEmailActive: String? = null,
+                 var mobile: String? = null,
+                 var isEmailActive: String? = null,
                  var createdDate: String? = null,
                  var loginDate: String? = null,
                  var logoutDate: String? = null,
