@@ -49,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
 //                if (prevL < length!! && (length == 5 || length == 13)) {
 //                    editable?.append("-")
 //                }
-                if (editable!!.length == 5 || editable.length == 14) {
+                if (editable!!.length == 5 || editable.length == 13) {
                     editable.append('-');
                 }
             }
