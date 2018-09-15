@@ -52,14 +52,14 @@ class SignInActivity : AppCompatActivity() {
 
     fun signIn(v: View) {
 
-        if (ed_password!!.text.toString().trim { it <= ' ' }.length < 8) {
-            ed_password!!.error = "password is short must be greater then 8 digits"
-            ed_password!!.requestFocus()
+        if (ed_password.text.toString().trim { it <= ' ' }.length < 8) {
+            ed_password.error = "password is short must be greater then 8 digits"
+            ed_password.requestFocus()
             return
         }
         if (ed_email.text.toString() == "") {
-            ed_email!!.error = "This field could not be empty"
-            ed_email!!.requestFocus()
+            ed_email.error = "This field could not be empty"
+            ed_email.requestFocus()
             return
         }
         if (!Apputils.isValidEmail(ed_email!!.text.toString()) || ed_email!!.text.toString() == "") {
