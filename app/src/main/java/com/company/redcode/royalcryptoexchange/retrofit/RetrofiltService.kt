@@ -33,4 +33,8 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun verifyEmail( @Path("userId") userId: String,@Path("code") code: String): Call<Response>
 
+    @POST("Service1.svc/Login/{userEmail}/{password}")
+    @Headers("Content-Type:application/json")
+    fun signIn( @Path("userEmail") userEmail: String,@Path("password") password: String): Call<Response>
+
 }

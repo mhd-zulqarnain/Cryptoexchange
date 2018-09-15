@@ -10,5 +10,7 @@ class Constants{
         const val STATUS_ACTIVE = "Active"
         const val STATUS_INACTIVE = "InActive"
         const val STATUS_SUCCESS = "success"
+        const val STATUS_ERROR = "error"
+
     }
 }

@@ -146,15 +146,13 @@ class SignUpActivity : AppCompatActivity() {
                                 val mStatus = status!!.split(" ")
                                 //println(mStatus[0])
                                 showVerifyDialog(code = mStatus[1], userId = mStatus[0])
-
                                 Toast.makeText(baseContext, "Please verify your email", Toast.LENGTH_SHORT).show()
 
-//
                             } else {
                                 Toast.makeText(baseContext, "Email already verifed please login", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                                // startActivity(intent)
-                                //finish()
+                                 startActivity(intent)
+                                finish()
                             }
                         }
 
