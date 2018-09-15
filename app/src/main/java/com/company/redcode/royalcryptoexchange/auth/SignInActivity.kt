@@ -24,15 +24,30 @@ import retrofit2.Call
 import retrofit2.Callback
 
 
+
 class SignInActivity : AppCompatActivity() {
 
     private var login_progress: ProgressBar? = null
+    private var USER_KEY:String ="user id"
+    private var progressDialog :AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
         // login_progress = findViewById(R.id.login_progress)
+        val builder = AlertDialog.Builder(this@SignInActivity)
+        builder.setCancelable(false) // if you want user to wait for some process to finish,
+        builder.setView(R.layout.progress_bar)
+        progressDialog = builder.create()
+        initView()
+    }
+
+    private fun initView() {
+        tv_forget_password.setOnClickListener {
+            showforgetPasswordDialog()
+
+        }
     }
 
     fun signIn(v: View) {
@@ -76,6 +91,7 @@ class SignInActivity : AppCompatActivity() {
                             } else if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
                                 Toast.makeText(baseContext, "Login successfully ", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@SignInActivity, DrawerActivity::class.java)
+                                intent.putExtra(USER_KEY,"161")
                                 startActivity(intent)
                                 finish()
 
@@ -124,7 +140,6 @@ class SignInActivity : AppCompatActivity() {
     fun verifyEmail(code: String, userId: String, serviceListener: ServiceListener<String>) {
         ApiClint.getInstance()?.getService()?.verifyEmail(userId, code)?.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>?, t: Throwable?) {}
-
             override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                 serviceListener.success("success")
             }
@@ -136,5 +151,61 @@ class SignInActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+    fun showforgetPasswordDialog() {
 
+        val view: View = LayoutInflater.from(this@SignInActivity).inflate(R.layout.dialog_forget_password, null)
+        val alert = AlertDialog.Builder(this@SignInActivity)
+        alert.setView(view)
+        alert.setCancelable(true)
+        var dialog = alert.create()
+        dialog.show()
+        val btnSend: Button = view.findViewById(R.id.btn_recover)
+        val ed_dialog_email: EditText = view.findViewById(R.id.ed_email)
+
+        btnSend.setOnClickListener {
+            progressDialog!!.show()
+            recoverPassword(ed_dialog_email,object :ServiceListener<String>{
+                override fun success(obj: String) {
+
+                    if (obj==Constants.STATUS_FAILED){
+                        Toast.makeText(baseContext, "Email not exist", Toast.LENGTH_SHORT).show()
+                        progressDialog!!.dismiss()
+
+                    }
+                    else if (obj==Constants.STATUS_SUCCESS){
+                        Toast.makeText(baseContext, "Password has been send to your email", Toast.LENGTH_SHORT).show()
+                        progressDialog!!.dismiss()
+                        dialog.dismiss()
+                    }
+                }
+                override fun fail(error: ServiceError) {
+                }
+            })
+        }
+
+
+    }
+
+    private fun recoverPassword(ed_dialog_email: EditText,serviceListener: ServiceListener<String>) {
+        if (!Apputils.isValidEmail(ed_dialog_email!!.text.toString()) || ed_dialog_email!!.text.toString() == "") {
+            ed_dialog_email!!.error = Html.fromHtml("<font color='black'>Invalid email</font>")
+            ed_dialog_email!!.requestFocus()
+            return
+        }
+
+        ApiClint.getInstance()?.getService()?.sendCode(ed_dialog_email!!.text.toString())?.enqueue(object : Callback<Response> {
+            override fun onFailure(call: Call<Response>?, t: Throwable?) {}
+            override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+
+                if(response!!.body()!=null){
+                    var apiResponse:Response = response!!.body()!!
+
+                    serviceListener.success(apiResponse.status!!)
+
+                }
+            }
+        })
+
+
+    }
 }

@@ -30,7 +30,9 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan" >
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"

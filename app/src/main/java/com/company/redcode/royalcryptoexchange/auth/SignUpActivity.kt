@@ -123,13 +123,15 @@ class SignUpActivity : AppCompatActivity() {
         var dateCreated = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(date)
 
 
-        var user = Users(firstName = ed_first_name.text.toString(), lastName = ed_last_name.text.toString(), email = ed_email.text.toString(), mobile = ed_mobile_number.text.toString(), isEmailActive = "0", createdDate = dateCreated, loginDate = dateCreated,
-                logoutDate = dateCreated, IsActive = "0", dateOfBirth = ed_dob.text.toString(), terms = "null", documentVerification = "0",
-                userId = "null", cnic = ed_cnic.text.toString(), IsPhoneNumActive = "0", Password = ed_pasword!!.text.toString())
-        println(user)
+        var user = Users(CNIC = ed_cnic.text.toString(), CreatedDate = "null",
+                DateOfBirth = ed_dob.text.toString(), DocumentVerification = "Un-Verified",
+                Email = ed_email.text.toString(),
+                FirstName = ed_first_name.text.toString(), IsActive = "false",
+                IsPhoneNumActive = "false", LastName = ed_last_name.text.toString(), LoginDate = "null", LogoutDate = "null", Password = ed_pasword.text.toString(),
+                PhoneNum = ed_mobile_number.text.toString(), Terms = "null", UAC_Id = "null", UserId ="null")
 
-        ApiClint.getInstance()?.getService()?.signUpUser(user.firstName!!, user.lastName!!, email = user.email!!,
-                mobile = user.mobile!!, password = ed_pasword.text.toString(), cnic = user.cnic!!, dob = user.dateOfBirth!!)
+        ApiClint.getInstance()?.getService()?.signUpUser(user.FirstName!!, user.LastName!!, email = user.Email!!,
+                mobile = user.PhoneNum!!, password = ed_pasword.text.toString(), cnic = user.CNIC!!, dob = user.DateOfBirth!!)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         Apputils.showMsg(this@SignUpActivity, "failed")
