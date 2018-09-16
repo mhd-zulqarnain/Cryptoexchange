@@ -32,17 +32,23 @@ import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
 
-    private var sign_up_progress: ProgressBar? = null
-    private var auth: FirebaseAuth? = null
+    private var progressDialog: AlertDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-        // sign_up_progress = findViewById(R.id.sign_up_progress)
-//        auth = FirebaseAuth.getInstance()
+        initView()
+    }
+
+    private fun initView() {
+        val builder = AlertDialog.Builder(this@SignUpActivity)
+        builder.setCancelable(false) // if you want user to wait for some process to finish,
+        builder.setView(R.layout.progress_bar)
+        progressDialog = builder.create()
+
         ed_dob.setOnClickListener {
             DateDialog()
         }
-
         ed_cnic.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
 //                val length = editable?.length
@@ -128,7 +134,8 @@ class SignUpActivity : AppCompatActivity() {
                 Email = ed_email.text.toString(),
                 FirstName = ed_first_name.text.toString(), IsActive = "false",
                 IsPhoneNumActive = "false", LastName = ed_last_name.text.toString(), LoginDate = "null", LogoutDate = "null", Password = ed_pasword.text.toString(),
-                PhoneNum = ed_mobile_number.text.toString(), Terms = "null", UAC_Id = "null", UserId ="null")
+                PhoneNum = ed_mobile_number.text.toString(), Terms = "null", UAC_Id = "null", UserId = "null")
+        progressDialog?.show()
 
         ApiClint.getInstance()?.getService()?.signUpUser(user.FirstName!!, user.LastName!!, email = user.Email!!,
                 mobile = user.PhoneNum!!, password = ed_pasword.text.toString(), cnic = user.CNIC!!, dob = user.DateOfBirth!!)
@@ -136,24 +143,26 @@ class SignUpActivity : AppCompatActivity() {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         Apputils.showMsg(this@SignUpActivity, "failed")
                         println("response " + t)
+                        progressDialog?.dismiss()
                     }
 
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         println("response " + response!!.body())
+                        progressDialog?.dismiss()
 
                         if (response != null) {
                             var apiResponse = response.body()
                             if (apiResponse!!.status == Constants.STATUS_INACTIVE || apiResponse!!.status == Constants.STATUS_SUCCESS) {
                                 var status = response.body()!!.message
                                 val mStatus = status!!.split(" ")
-                                //println(mStatus[0])
+
                                 showVerifyDialog(code = mStatus[1], userId = mStatus[0])
                                 Toast.makeText(baseContext, "Please verify your email", Toast.LENGTH_SHORT).show()
 
                             } else {
                                 Toast.makeText(baseContext, "Email already verifed please login", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                                 startActivity(intent)
+                                startActivity(intent)
                                 finish()
                             }
                         }

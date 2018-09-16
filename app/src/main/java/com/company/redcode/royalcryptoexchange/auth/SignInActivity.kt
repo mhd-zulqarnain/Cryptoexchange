@@ -53,12 +53,12 @@ class SignInActivity : AppCompatActivity() {
     fun signIn(v: View) {
 
         if (ed_password.text.toString().trim { it <= ' ' }.length < 8) {
-            ed_password.error = "password is short must be greater then 8 digits"
+            ed_password.error =Html.fromHtml("<font color='black'>password is short must be greater then 8 digits</font>")
             ed_password.requestFocus()
             return
         }
         if (ed_email.text.toString() == "") {
-            ed_email.error = "This field could not be empty"
+            ed_email.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
             ed_email.requestFocus()
             return
         }
@@ -187,6 +187,8 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun recoverPassword(ed_dialog_email: EditText,serviceListener: ServiceListener<String>) {
+        progressDialog?.dismiss()
+
         if (!Apputils.isValidEmail(ed_dialog_email!!.text.toString()) || ed_dialog_email!!.text.toString() == "") {
             ed_dialog_email!!.error = Html.fromHtml("<font color='black'>Invalid email</font>")
             ed_dialog_email!!.requestFocus()
