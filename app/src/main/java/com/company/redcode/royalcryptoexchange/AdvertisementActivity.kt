@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import com.company.redcode.royalcryptoexchange.auth.SignInActivity
 import com.company.redcode.royalcryptoexchange.models.ApiResponse
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.models.Users
@@ -19,14 +20,17 @@ import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.ui.BuyActivity
 import com.company.redcode.royalcryptoexchange.ui.SellActivity
 import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_advertisement.*
+import kotlinx.android.synthetic.main.dialogue_wallet_send.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AdvertisementActivity : AppCompatActivity() {
-
+    var remCoin: Double? = null;
+    var fees: Double? = null;
     var coin: String = "BTC"
     var orderType: String = "Buy"
     var progressBar: AlertDialog? = null
@@ -60,8 +64,8 @@ class AdvertisementActivity : AppCompatActivity() {
                     try {
 
                         val amount = ed_amount!!.text.toString().toDouble()
-                        val remCoin: Double = getCoinAfterFee(amount)
-                        var fees = amount * 4 / 100
+                        remCoin = getCoinAfterFee(amount)
+                        fees = amount * 4 / 100
                         tv_fees!!.setText(fees.toString())
                         tv_total!!.setText(remCoin.toString())
                     } catch (e: NumberFormatException) {
@@ -159,40 +163,34 @@ class AdvertisementActivity : AppCompatActivity() {
 
         progressBar!!.show()
 
-        val mtrade = Trade(null, "322", Users("user3322"), "bankid", u_limit?.text.toString().toLong(), l_limit?.text.toString().toLong()
-                , null, coin, ed_amount!!.text.toString(), ed_price!!.text.toString(), "", type = orderType)
-
+        val mtrade = Trade(null,7,orderType,1,ed_amount.text.toString(),ed_price.text.toString(),fees.toString(),u_limit.text.toString().toLong(),l_limit.text.toString().toLong(),null,coin,null)
         println(Gson().toJson(mtrade))
-        ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object : Callback<ApiResponse> {
-
-            override fun onResponse(call: Call<ApiResponse>?, response: Response<ApiResponse>?) {
-                println("error  " + response.toString())
-                Toast.makeText(this@AdvertisementActivity!!, "Deal added successfully ", Toast.LENGTH_LONG).show()
-                progressBar!!.dismiss()
-                if(orderType.equals("Buy"))
-                {
-                    startActivity(Intent(this@AdvertisementActivity, BuyActivity::class.java))
-                    finish()
-                }
-                if(orderType.equals("Sell")){
-
-                    startActivity(Intent(this@AdvertisementActivity, SellActivity::class.java))
-                    finish()
-                }
-//                finish()
-//                dialog.dismiss()
-//                getAllTrade()
+        ApiClint.getInstance()?.getService()?.addTrade(fuac_id = mtrade.FUAC_Id.toString(),
+                ordertype = mtrade.OrderType.toString(),fup_id = mtrade.FUP_Id.toString(),
+                amount = mtrade.Amount.toString(),price = mtrade.Price.toString(),fees = mtrade.Fees.toString(),
+                ulimit = mtrade.UpperLimit.toString(),llimit = mtrade.LowerLimit.toString(),
+                ctype = mtrade.CurrencyType.toString())?.enqueue(object: Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+        // Apputils.showMsg(this@AdvertisementActivity,"")
 
             }
 
-            override fun onFailure(call: Call<ApiResponse>?, t: Throwable?) {
-                Toast.makeText(this@AdvertisementActivity!!, "failed ", Toast.LENGTH_LONG).show()
-                println("error  " + t.toString())
-                progressBar!!.dismiss()
-//                dialog.dismiss()
+            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+                if (response != null) {
+                    var apiResponse = response.body()
+                    if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                        var status = response.body()!!.message
 
+
+                        Toast.makeText(baseContext, "Trade Added Successfully", Toast.LENGTH_SHORT).show()
+                        finish();
+                    } else {
+                        Toast.makeText(baseContext, "Error!! ", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+                //Apputils.showMsg(this@AdvertisementActivity,"success");
             }
-
         })
 
     }

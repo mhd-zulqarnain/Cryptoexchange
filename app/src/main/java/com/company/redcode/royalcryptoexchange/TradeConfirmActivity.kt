@@ -28,13 +28,13 @@ class TradeConfirmActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        var deadline = System.currentTimeMillis() + trade.dead_line!!.toLong()
+        var deadline = System.currentTimeMillis() + 6;
         println("current deadline "+deadline)
         var time = deadline-System.currentTimeMillis()
 
         println("time now " + time)
 
-        seller_name.setText("user"+trade.uid)
+        seller_name.setText("user"+trade.FUAC_Id)
         btc_amount.setText(coinUsed)
         price_tv.setText(price)
         val countDown = object : CountDownTimer(time, 1000) {
