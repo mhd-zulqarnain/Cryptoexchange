@@ -12,9 +12,9 @@ class Trade(
         var Fees: String? = null,
         var UpperLimit: Long? = null,
         var LowerLimit: Long? = null,
-        var DeadLine: Date? = null,
+        var DeadLine: String? = null,
         var CurrencyType: String? = null,
-        var Status: Int? = null
+        var Status: String? = null
 ){
 
     enum class Order : Comparator<Trade>{

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 import com.company.redcode.royalcryptoexchange.models.Trade
+import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_trade_confirm.*
 
@@ -28,16 +29,16 @@ class TradeConfirmActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        var deadline = System.currentTimeMillis() + 6;
+        var deadline = Apputils.getTimeStamp(trade.DeadLine.toString())?.toLong();
         println("current deadline "+deadline)
-        var time = deadline-System.currentTimeMillis()
+        var time = deadline?.minus(System.currentTimeMillis())
 
         println("time now " + time)
 
         seller_name.setText("user"+trade.FUAC_Id)
         btc_amount.setText(coinUsed)
         price_tv.setText(price)
-        val countDown = object : CountDownTimer(time, 1000) {
+        val countDown = object : CountDownTimer(time!!, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
 

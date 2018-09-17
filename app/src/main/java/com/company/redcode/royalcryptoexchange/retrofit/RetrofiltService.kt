@@ -28,11 +28,18 @@ interface RetrofiltService {
 
     @POST("Add_UserTrades/{fuac_id}/{ordertype}/{fup_id}/{amount}/{price}/{fees}/{ulimit}/{llimit}/{ctype}")
     @Headers("Content-Type:application/json")
-    fun addTrade( @Path("fuac_id") fuac_id: String,@Path("ordertype") ordertype: String,@Path("fup_id") fup_id: String,@Path("amount") amount: String,@Path("price") price: String,@Path("fees") fees: String,@Path("ulimit") ulimit: String,@Path("llimit") llimit: String,@Path("ctype") ctype: String): Call<Response>
+    fun addTrade( @Path("fuac_id") fuac_id: String,@Path("ordertype") ordertype: String,@Path("fup_id") fup_id: String,
+                  @Path("amount") amount: String,@Path("price") price: String,@Path("fees") fees: String,
+                  @Path("ulimit") ulimit: String,@Path("llimit") llimit: String,@Path("ctype") ctype: String): Call<Response>
 
     @GET("Select_UserAccount/{userid}")
     @Headers("Content-Type:application/json")
     fun getUserById(@Path("userid") userid:String): Call<Users>
+
+    /*get trade by coin type and ordertype*/
+    @GET("Select_UserTrades/{orderType}/{coinType}")
+    @Headers("Content-Type:application/json")
+    fun getTrade(@Path("orderType") orderType:String,@Path("coinType") coinType:String): Call<ArrayList<Trade>>
 
 
 }

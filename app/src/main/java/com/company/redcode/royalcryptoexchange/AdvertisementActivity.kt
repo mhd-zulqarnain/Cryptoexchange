@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
+import android.text.Html
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
@@ -62,7 +63,6 @@ class AdvertisementActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
                 if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "") {
                     try {
-
                         val amount = ed_amount!!.text.toString().toDouble()
                         remCoin = getCoinAfterFee(amount)
                         fees = amount * 4 / 100
@@ -99,38 +99,38 @@ class AdvertisementActivity : AppCompatActivity() {
 
         }*/
         if (ed_amount!!.text.toString() == "") {
-            ed_amount!!.error = "Enter the amount i.e the number of coin"
+            ed_amount!!.error = Html.fromHtml("<font color='black'>Enter the amount i.e the number of coin</font>")
             ed_amount!!.requestFocus()
             return
         }
         if (ed_price!!.text.toString() == "") {
-            ed_price!!.error = "Enter the price of one coin"
+            ed_price!!.error = Html.fromHtml("<font color='black'>Enter the price of one coin</font>")
             ed_price!!.requestFocus()
             return
         }
 
         if (u_limit!!.text.toString() == "") {
-            u_limit!!.error = "Enter the Limit"
+            u_limit!!.error =  Html.fromHtml("<font color='black'>Enter the Limit</font>")
             u_limit!!.requestFocus()
             return
 
         }
         if (l_limit!!.text.toString() == "") {
-            l_limit!!.error = "Enter the Limit"
+            l_limit!!.error = Html.fromHtml("<font color='black'>Enter the Limit</font>")
             l_limit!!.requestFocus()
             return
         }
 
 
         if (u_limit!!.text.trim().length < 4) {
-            u_limit!!.error = "It should be in four figures"
+            u_limit!!.error = Html.fromHtml("<font color='black'>It should be in four figures</font>")
             u_limit!!.requestFocus()
             return
 
         }
 
         if (l_limit!!.text.trim().length < 4) {
-            l_limit!!.error = "It should be in four figures"
+            l_limit!!.error = Html.fromHtml("<font color='black'>It should be in four figures</font>")
             l_limit!!.requestFocus()
             return
 
@@ -171,8 +171,7 @@ class AdvertisementActivity : AppCompatActivity() {
                 ulimit = mtrade.UpperLimit.toString(),llimit = mtrade.LowerLimit.toString(),
                 ctype = mtrade.CurrencyType.toString())?.enqueue(object: Callback<com.company.redcode.royalcryptoexchange.models.Response>{
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
-        // Apputils.showMsg(this@AdvertisementActivity,"")
-
+                println("error")
             }
 
             override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
@@ -180,8 +179,6 @@ class AdvertisementActivity : AppCompatActivity() {
                     var apiResponse = response.body()
                     if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
                         var status = response.body()!!.message
-
-
                         Toast.makeText(baseContext, "Trade Added Successfully", Toast.LENGTH_SHORT).show()
                         finish();
                     } else {

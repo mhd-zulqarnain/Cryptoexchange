@@ -23,21 +23,30 @@ import kotlinx.android.synthetic.main.activity_buying_details.*
 class BuyingDetailActivity : AppCompatActivity() {
 
     val JSON_TRARE: String = "tradeObject"
+    val ORDER_TYPE: String = "orderType"
     var trade: Trade = Trade()
-    var isTermAccept:Boolean =false
+    var orderType: String? = null
+    var isTermAccept: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buying_details)
         var obj = intent.getStringExtra(JSON_TRARE);
+        orderType = intent.getStringExtra(ORDER_TYPE);
         trade = Gson().fromJson(obj, Trade::class.java)
-
         initView()
     }
 
     private fun initView() {
 
-        seller_limit.setText(Apputils.formatCurrency(trade.d_limit.toString()) + "-" + Apputils.formatCurrency(trade.u_limit.toString()))
-        seller_name.setText("User" + trade.uid.toString())
+//        seller_limit.setText(Apputils.formatCurrency(trade.d_limit.toString()) + "-" + Apputils.formatCurrency(trade.u_limit.toString()))
+//        seller_name.setText("User" + trade.uid.toString())
+        if (orderType == "buy")
+            tv_title_trade.setText("Buying trade details")
+        else (orderType == "sell")
+        tv_title_trade.setText("Selling trade details")
+        tv_name.setText("U-" + trade.FUAC_Id)
+        tv_coin_amount.setText(trade.Amount + trade.CurrencyType)
+        tv_limit.setText(trade.UpperLimit.toString() + "-" + trade.LowerLimit.toString())
 
         pkr_ed!!.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
@@ -47,36 +56,27 @@ class BuyingDetailActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "") {
+                    if ( pkr_ed!!.text.trim().length > 3) {
+                        //btc_ed.setText()
+                        var price = trade.UpperLimit.toString().toLong()
+                        if(pkr_ed!!.text.toString().toLong() > price){
 
-                    if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "" && pkr_ed!!.text.trim().length > 3) {
+                            //Apputils.showMsg(this@BuyingDetailActivity, " Limit ")
+                            ecuurency_ed.setText((trade.Price!!.toDouble()/pkr_ed.text.toString().toDouble()).toString())
 
-
-
-                        if (pkr_ed!!.text.toString().toLong() > trade.u_limit.toString().toLong()) {
-                            Apputils.showMsg(this@BuyingDetailActivity, "Limit crossed")
-                            btn_trade.isEnabled = false
-                        } else if (pkr_ed!!.text.toString().toLong() < trade.d_limit.toString().toLong()) {
-
-                            Apputils.showMsg(this@BuyingDetailActivity, "Should exceed lower Limit ")
-                            btn_trade.isEnabled = false
-
-                        } else {
-                            val amout = pkr_ed!!.text.toString().toInt()
-                            val price = amout * Constants.BTC_PKR_RATE
-                            btc_ed!!.setText(price.toString())
-                            btn_trade.isEnabled = true
+                        }
+                        else{
 
                         }
 
                     }
                 }
-
             }
         })
 
-        chk_terms.setOnCheckedChangeListener(object :CompoundButton.OnCheckedChangeListener{
+        chk_terms.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
             override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
-                isTermAccept= p1;
+                isTermAccept = p1;
 
             }
 
@@ -86,23 +86,40 @@ class BuyingDetailActivity : AppCompatActivity() {
         }
 
         btn_trade.setOnClickListener {
-            if(!isTermAccept){
-                Apputils.showMsg(this@BuyingDetailActivity , "Accept the terms ")
-            }else if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim()
-                    != "" &&!btc_ed!!.text.toString().trim().isEmpty() && btc_ed!!.text.toString().trim()!= ""
-                            ) {
-                var intent = Intent(this, TradeConfirmActivity::class.java)
-                var obj = Gson().toJson(trade)
-                intent.putExtra("tradeObj", obj)
-                intent.putExtra("coinUsed", btc_ed.text.toString())
-                intent.putExtra("priceCharged", pkr_ed.text.toString())
-                startActivity(intent)
-                finish()
-            }
-            else{
-                Apputils.showMsg(this@BuyingDetailActivity , "Fill Valid data")
+            validation()
+        }
+    }
+
+    private fun validation() {
+
+        if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "") {
+
+            if (pkr_ed!!.text.trim().length > 3) {
+
+                if (pkr_ed!!.text.toString().toLong() > trade.UpperLimit.toString().toLong()) {
+                    Apputils.showMsg(this@BuyingDetailActivity, "Limit crossed")
+                    return
+                } else if (pkr_ed!!.text.toString().toLong() < trade.LowerLimit.toString().toLong()) {
+
+                    Apputils.showMsg(this@BuyingDetailActivity, "Should exceed lower Limit ")
+                    return
+
+                }
+
             }
         }
+        if (isTermAccept) {
+            var intent = Intent(this, TradeConfirmActivity::class.java)
+            var obj = Gson().toJson(trade)
+            intent.putExtra("tradeObj", obj)
+            intent.putExtra("coinUsed", ecuurency_ed.text.toString())
+            intent.putExtra("priceCharged", pkr_ed.text.toString())
+            startActivity(intent)
+            finish()
+        } else {
+            Apputils.showMsg(this@BuyingDetailActivity, "Fill Valid data")
+        }
+
     }
 
     private fun showTradeDialog() {
@@ -114,7 +131,7 @@ class BuyingDetailActivity : AppCompatActivity() {
 
         val btnSave: Button = view.findViewById(R.id.btn_save)
         val terms_tv: TextView = view.findViewById(R.id.terms_tv)
-        terms_tv.setText(trade.terms.toString())
+//        terms_tv.setText(trade.terms.toString())
 
         btnSave.setOnClickListener {
             dialog.dismiss()

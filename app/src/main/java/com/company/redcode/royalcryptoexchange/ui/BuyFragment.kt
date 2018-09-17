@@ -210,7 +210,7 @@ class BuyFragment : Fragment() {
         var dialog_pkr_tv :TextView= view.findViewById(R.id.dialog_pkr_tv)
 
         dialog_coin_tv.setText(tv_fee!!.text.toString())
-        dialog_pkr_tv.setText(Apputils.formatCurrency(total.toString())+"PKR")
+        dialog_pkr_tv.setText(/*Apputils.formatCurrency(*/total.toString()+"PKR")
 
         ed_currency!!.setText(coin.toUpperCase())
         spinner_time = view.findViewById(R.id.spinner_time)

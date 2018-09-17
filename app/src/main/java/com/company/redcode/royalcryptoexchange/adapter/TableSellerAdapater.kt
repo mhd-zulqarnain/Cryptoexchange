@@ -47,13 +47,19 @@ class TableSellerAdapater(var ctx: Context, var model: ArrayList<Trade>,private 
             tv_seller = itemView.findViewById(R.id.tv_User)
             tv_amount = itemView.findViewById(R.id.tv_amount)
             btn_buy = itemView.findViewById(R.id.btn_buy)
+            tv_price = itemView.findViewById(R.id.tv_price)
+            tv_limit = itemView.findViewById(R.id.tv_limit)
 
-            tv_limit!!.setText(Apputils.formatCurrency(trade.d_limit.toString())+"-"+
-                    Apputils.formatCurrency(trade.u_limit.toString()))
-            tv_seller!!.setText("user"+trade.uid)
+            tv_seller = itemView.findViewById(R.id.tv_User)
+            tv_amount = itemView.findViewById(R.id.tv_amount)
+            btn_buy = itemView.findViewById(R.id.btn_buy)
 
-            tv_amount!!.setText(trade.amount+trade.currency_type)
-            tv_price!!.setText(Apputils.formatCurrency(trade.price!!))
+            tv_limit!!.setText(/*Apputils.formatCurrency(*/trade.UpperLimit.toString() + "-" +
+                    /*Apputils.formatCurrency(*/trade.LowerLimit.toString())
+            tv_seller!!.setText("U-" + trade.FUAC_Id)
+
+            tv_amount!!.setText(trade.Amount + trade.CurrencyType)
+            tv_price!!.setText(/*Apputils.formatCurrency(*/trade.Price!!)/*)*/
         }
 
 

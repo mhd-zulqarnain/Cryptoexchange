@@ -85,6 +85,7 @@ class SellActivity : AppCompatActivity() {
             var obj = Gson().toJson(tradelist[position])
             val intent = Intent(this@SellActivity, BuyingDetailActivity::class.java)
             intent.putExtra("tradeObject", obj)
+            intent.putExtra("orderType", "sell")
             startActivity(intent)
         }
 
@@ -129,22 +130,20 @@ class SellActivity : AppCompatActivity() {
 
     private fun getAllTrade() {
         tradelist.clear()
-
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.getTradeByType(coin, "sell")?.enqueue(object : Callback<ArrayList<Trade>> {
-            override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
-                response?.body()?.forEach { trade ->
-                    tradelist.add(trade)
-                }
-                progressBar!!.dismiss()
-                adapter!!.notifyDataSetChanged()
-            }
 
+        ApiClint.getInstance()?.getService()?.getTrade( "sell",coin)?.enqueue(object : Callback<ArrayList<Trade>> {
             override fun onFailure(call: Call<ArrayList<Trade>>?, t: Throwable?) {
-                println("error tpye  " + t.toString())
-                progressBar!!.dismiss()
-                Toast.makeText(this@SellActivity, "Network error ", Toast.LENGTH_LONG).show()
-
+                println("error "+t)
+            }
+            override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
+                if (response?.body() != null) {
+                    response?.body()?.forEach { trade ->
+                        tradelist.add(trade)
+                    }
+                    progressBar!!.dismiss()
+                    adapter!!.notifyDataSetChanged()
+                }
             }
         })
     }

@@ -24,7 +24,7 @@ import retrofit2.Callback
 
 class SignInActivity : AppCompatActivity() {
 
-    private var login_progress: ProgressBar? = null
+//    private var login_progress: ProgressBar? = null
     private var USER_KEY:String ="user id"
     private var progressDialog :AlertDialog? = null
     private var pref:SharedPref = SharedPref.getInstance()!!
