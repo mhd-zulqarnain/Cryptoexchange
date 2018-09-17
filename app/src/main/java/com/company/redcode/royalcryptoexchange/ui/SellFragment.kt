@@ -269,9 +269,7 @@ class SellFragment : Fragment() {
 
         progressBar!!.show()
 
-        var mtrade = Trade(null, "322", Users("user3322"), "bankid", u_limit?.text.toString().toLong(), l_limit?.text.toString().toLong()
-                , time, coin, ed_amount!!.text.toString(), ed_price!!.text.toString(), "", "sell")
-
+        var mtrade = Trade()
         ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object : Callback<ApiResponse> {
 
             override fun onResponse(call: Call<ApiResponse>?, response: Response<ApiResponse>?) {

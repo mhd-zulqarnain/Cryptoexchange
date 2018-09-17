@@ -3,35 +3,35 @@ package com.company.redcode.royalcryptoexchange.models
 import java.util.*
 
 class Trade(
-        var tid: String? = null,
-        var uid: String? = null,
-        var user: Users? = null,
-        var bid: String? = null,
-        var u_limit: Long? = null,
-        var d_limit: Long? = null,
-        var dead_line: String? = null,
-        var currency_type: String? = null,
-        var amount: String? = null,
-        var price: String? = null,
-        var terms: String? = null,
-        var type: String? = null
+        var UT_Id:Int? = null,
+        var FUAC_Id: Int? = null,
+        var OrderType: String? = null,
+        var FUP_Id: Int? = null,
+        var Amount: String? = null,
+        var Price: String? = null,
+        var Fees: String? = null,
+        var UpperLimit: Long? = null,
+        var LowerLimit: Long? = null,
+        var DeadLine: Date? = null,
+        var CurrencyType: String? = null,
+        var Status: Int? = null
 ){
 
     enum class Order : Comparator<Trade>{
         ByPrice{
             override fun compare(left: Trade?, right: Trade?): Int {
-                return left!!.price!!.compareTo(right!!.price!!)
+                return left!!.Price!!.compareTo(right!!.Price!!)
             }
         },
         ByLimit{
             override fun compare(left: Trade?, right: Trade?): Int {
-                return left!!.u_limit!!.compareTo(right!!.u_limit!!)
+                return left!!.UpperLimit!!.compareTo(right!!.UpperLimit!!)
             }
         },
         ByAmount{
 
             override fun compare(left: Trade?, right: Trade?): Int {
-                return left!!.amount!!.compareTo(right!!.amount!!)
+                return left!!.Amount!!.compareTo(right!!.Amount!!)
             }
         };
         fun ascending(): Comparator<Trade> {

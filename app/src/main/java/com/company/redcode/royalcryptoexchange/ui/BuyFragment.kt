@@ -286,29 +286,27 @@ class BuyFragment : Fragment() {
 
         progressBar!!.show()
 
-        var mtrade = Trade(null, "322", Users("user3322"), "bankid", u_limit?.text.toString().toLong(), l_limit?.text.toString().toLong()
-                , time, coin, ed_amount!!.text.toString(), ed_price!!.text.toString(), "", "buy")
-
-        ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object : Callback<ApiResponse> {
-
-            override fun onResponse(call: Call<ApiResponse>?, response: Response<ApiResponse>?) {
-                println("error  " + response.toString())
-                Toast.makeText(activity!!, "Deal added successfully ", Toast.LENGTH_LONG).show()
-                progressBar!!.dismiss()
-                dialog.dismiss()
-                getAllTrade()
-
-            }
-
-            override fun onFailure(call: Call<ApiResponse>?, t: Throwable?) {
-                Toast.makeText(activity!!, "failed ", Toast.LENGTH_LONG).show()
-                println("error  " + t.toString())
-                progressBar!!.dismiss()
-                dialog.dismiss()
-
-            }
-
-        })
+        var mtrade = Trade()
+//        ApiClint.getInstance()?.getService()?.addTrade(trade = mtrade)?.enqueue(object : Callback<ApiResponse> {
+//
+//            override fun onResponse(call: Call<ApiResponse>?, response: Response<ApiResponse>?) {
+//                println("error  " + response.toString())
+//                Toast.makeText(activity!!, "Deal added successfully ", Toast.LENGTH_LONG).show()
+//                progressBar!!.dismiss()
+//                dialog.dismiss()
+//                getAllTrade()
+//
+//            }
+//
+//            override fun onFailure(call: Call<ApiResponse>?, t: Throwable?) {
+//                Toast.makeText(activity!!, "failed ", Toast.LENGTH_LONG).show()
+//                println("error  " + t.toString())
+//                progressBar!!.dismiss()
+//                dialog.dismiss()
+//
+//            }
+//
+//        })
 
 
     }
@@ -317,22 +315,22 @@ class BuyFragment : Fragment() {
         tradelist.clear()
 
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.getTradeByType(coin, "buy")?.enqueue(object : Callback<ArrayList<Trade>> {
-            override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
-                response?.body()?.forEach { trade ->
-                    tradelist.add(trade)
-                }
-                progressBar!!.dismiss()
-                adapter!!.notifyDataSetChanged()
-            }
-
-            override fun onFailure(call: Call<ArrayList<Trade>>?, t: Throwable?) {
-                println("error tpye  " + t.toString())
-                progressBar!!.dismiss()
-                Toast.makeText(activity!!, "Network error ", Toast.LENGTH_LONG).show()
-
-            }
-        })
+//        ApiClint.getInstance()?.getService()?.getTradeByType(coin, "buy")?.enqueue(object : Callback<ArrayList<Trade>> {
+//            override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
+//                response?.body()?.forEach { trade ->
+//                    tradelist.add(trade)
+//                }
+//                progressBar!!.dismiss()
+//                adapter!!.notifyDataSetChanged()
+//            }
+//
+//            override fun onFailure(call: Call<ArrayList<Trade>>?, t: Throwable?) {
+//                println("error tpye  " + t.toString())
+//                progressBar!!.dismiss()
+//                Toast.makeText(activity!!, "Network error ", Toast.LENGTH_LONG).show()
+//
+//            }
+//        })
     }
 
     fun getCoinAfterFee(coinNum: Double, price: Double): Double {
