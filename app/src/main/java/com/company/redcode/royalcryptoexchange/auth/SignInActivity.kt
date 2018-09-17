@@ -15,10 +15,7 @@ import com.company.redcode.royalcryptoexchange.DrawerActivity
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Response
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
-import com.company.redcode.royalcryptoexchange.utils.Apputils
-import com.company.redcode.royalcryptoexchange.utils.Constants
-import com.company.redcode.royalcryptoexchange.utils.ServiceError
-import com.company.redcode.royalcryptoexchange.utils.ServiceListener
+import com.company.redcode.royalcryptoexchange.utils.*
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,12 +27,13 @@ class SignInActivity : AppCompatActivity() {
     private var login_progress: ProgressBar? = null
     private var USER_KEY:String ="user id"
     private var progressDialog :AlertDialog? = null
-
+    private var pref:SharedPref = SharedPref.getInstance()!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
         // login_progress = findViewById(R.id.login_progress)
+
         val builder = AlertDialog.Builder(this@SignInActivity)
         builder.setCancelable(false) // if you want user to wait for some process to finish,
         builder.setView(R.layout.progress_bar)
@@ -210,4 +208,17 @@ class SignInActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onStart() {
+        super.onStart()
+//        if()
+        var userId = pref.getProfilePref(this@SignInActivity).UAC_Id
+        if(userId!=null){
+            val intent=  Intent(this@SignInActivity,DrawerActivity::class.java)
+            intent.putExtra("user id",userId)
+            startActivity(intent)
+            finish()
+        }
+    }
+
 }

@@ -9,10 +9,14 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.auth.SignInActivity
 import com.company.redcode.royalcryptoexchange.models.Users
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.ui.*
+import com.company.redcode.royalcryptoexchange.utils.ServiceError
+import com.company.redcode.royalcryptoexchange.utils.ServiceListener
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
 import retrofit2.Call
@@ -22,6 +26,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     private var userId:String ?= null
     private var USER_KEY:String ="user id"
+    private var  mPref= SharedPref.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drawer)
@@ -32,22 +38,32 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+
+
         supportFragmentManager.beginTransaction().add(R.id.relativeLayout, HomeFragment()).commit();
         nav_view.setNavigationItemSelectedListener(this)
         userId = intent.getStringExtra(USER_KEY)
+        getuserData(userId,object:ServiceListener<Users>{
+            override fun success(obj: Users) {
+                mPref!!.setProfilePref(this@DrawerActivity, obj)
+            }
+            override fun fail(error: ServiceError) {}
+        })
 
-        getuserData(userId)
     }
 
-    private fun getuserData(userId: String?) {
+    private fun getuserData(userId: String?,serviceListener: ServiceListener<Users>) {
         ApiClint.getInstance()?.getService()?.getUserById(userId!!)!!.enqueue(object :Callback<Users>{
             override fun onFailure(call: Call<Users>?, t: Throwable?) {
-                println("error"+t)
+                Toast.makeText(this@DrawerActivity, "Shared prefrence error", Toast.LENGTH_SHORT).show()
+
             }
 
             override fun onResponse(call: Call<Users>?, response: retrofit2.Response<Users>?) {
                 print("object success ")
-                print(response!!.body())
+               if(response!!.body()!= null){
+                   serviceListener.success(response.body()!!)
+               }
             }
         })
 
@@ -70,6 +86,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         when (item.itemId) {
             R.id.action_logout -> {
+                mPref!!.clearProfilePref(this@DrawerActivity)
                 startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
                 finish()
                 return true
