@@ -41,5 +41,10 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getTrade(@Path("orderType") orderType:String,@Path("coinType") coinType:String): Call<ArrayList<Trade>>
 
+  /*get trade by coin type and ordertype*/
+    @POST("MobileFactor/{mbl}")
+    @Headers("Content-Type:application/json")
+    fun verifyMobile(@Path("mbl") mbl:String): Call<Response>
+
 
 }

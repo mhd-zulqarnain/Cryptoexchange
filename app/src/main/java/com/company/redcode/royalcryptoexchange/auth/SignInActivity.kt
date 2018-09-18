@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.DrawerActivity
 import com.company.redcode.royalcryptoexchange.R
@@ -21,13 +20,12 @@ import retrofit2.Call
 import retrofit2.Callback
 
 
-
 class SignInActivity : AppCompatActivity() {
 
-//    private var login_progress: ProgressBar? = null
-    private var USER_KEY:String ="user id"
-    private var progressDialog :AlertDialog? = null
-    private var pref:SharedPref = SharedPref.getInstance()!!
+    //    private var login_progress: ProgressBar? = null
+    private var USER_KEY: String = "user id"
+    private var progressDialog: AlertDialog? = null
+    private var pref: SharedPref = SharedPref.getInstance()!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -51,7 +49,7 @@ class SignInActivity : AppCompatActivity() {
     fun signIn(v: View) {
 
         if (ed_password.text.toString().trim { it <= ' ' }.length < 8) {
-            ed_password.error =Html.fromHtml("<font color='black'>password is short must be greater then 8 digits</font>")
+            ed_password.error = Html.fromHtml("<font color='black'>password is short must be greater then 8 digits</font>")
             ed_password.requestFocus()
             return
         }
@@ -66,7 +64,7 @@ class SignInActivity : AppCompatActivity() {
             return
         }
         progressDialog?.show()
-        ApiClint.getInstance()?.getService()?.signIn( ed_email!!.text.toString(),ed_password!!.text.toString())
+        ApiClint.getInstance()?.getService()?.signIn(ed_email!!.text.toString(), ed_password!!.text.toString())
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         Apputils.showMsg(this@SignInActivity, "failed")
@@ -89,13 +87,17 @@ class SignInActivity : AppCompatActivity() {
 
                             } else if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
 
-                                val str =  apiResponse.message!!.split(" ")
+                                val str = apiResponse.message!!.split(" ")
                                 var uid = str[0]
                                 var numberStatus = str[1]
                                 var mbl = str[2]
+
+                                if(numberStatus=="true"){
+                                    showMblVerifyDialog(mbl)
+                                }
                                 Toast.makeText(baseContext, "Login successfully ", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@SignInActivity, DrawerActivity::class.java)
-                                intent.putExtra(USER_KEY,uid)
+                                intent.putExtra(USER_KEY, uid)
                                 startActivity(intent)
                                 finish()
                                 progressDialog?.dismiss()
@@ -157,6 +159,7 @@ class SignInActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
     fun showforgetPasswordDialog() {
 
         val view: View = LayoutInflater.from(this@SignInActivity).inflate(R.layout.dialog_forget_password, null)
@@ -170,20 +173,20 @@ class SignInActivity : AppCompatActivity() {
 
         btnSend.setOnClickListener {
             progressDialog!!.show()
-            recoverPassword(ed_dialog_email,object :ServiceListener<String>{
+            recoverPassword(ed_dialog_email, object : ServiceListener<String> {
                 override fun success(obj: String) {
 
-                    if (obj==Constants.STATUS_FAILED){
+                    if (obj == Constants.STATUS_FAILED) {
                         Toast.makeText(baseContext, "Email not exist", Toast.LENGTH_SHORT).show()
                         progressDialog!!.dismiss()
 
-                    }
-                    else if (obj==Constants.STATUS_SUCCESS){
+                    } else if (obj == Constants.STATUS_SUCCESS) {
                         Toast.makeText(baseContext, "Password has been send to your email", Toast.LENGTH_SHORT).show()
                         progressDialog!!.dismiss()
                         dialog.dismiss()
                     }
                 }
+
                 override fun fail(error: ServiceError) {
                 }
             })
@@ -192,7 +195,56 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
-    private fun recoverPassword(ed_dialog_email: EditText,serviceListener: ServiceListener<String>) {
+    fun showMblVerifyDialog(mbl: String) {
+
+        val view: View = LayoutInflater.from(this@SignInActivity).inflate(R.layout.dialog_mobile_verify, null)
+        val alert = AlertDialog.Builder(this@SignInActivity)
+        alert.setView(view)
+        alert.setCancelable(true)
+        var dialog = alert.create()
+        dialog.show()
+        val btnSend: Button = view.findViewById(R.id.btnmobileverify)
+        val ed_mobilecode: EditText = view.findViewById(R.id.ed_mobilecode)
+
+        btnSend.setOnClickListener {
+            progressDialog!!.show()
+            verifyMobile(mbl, object : ServiceListener<String> {
+                override fun success(obj: String) {
+
+                    if (obj == Constants.STATUS_FAILED) {
+                        Toast.makeText(baseContext, "Email not exist", Toast.LENGTH_SHORT).show()
+                        progressDialog!!.dismiss()
+
+                    } else if (obj == Constants.STATUS_SUCCESS) {
+                        Toast.makeText(baseContext, "Password has been send to your email", Toast.LENGTH_SHORT).show()
+                        progressDialog!!.dismiss()
+                        dialog.dismiss()
+                    }
+                }
+
+                override fun fail(error: ServiceError) {
+                }
+            })
+        }
+
+
+    }
+
+    fun verifyMobile(code: String, serviceListener: ServiceListener<String>) {
+        ApiClint.getInstance()?.getService()?.verifyMobile(code)?.enqueue(object : Callback<Response> {
+            override fun onFailure(call: Call<Response>?, t: Throwable?) {}
+            override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                if (response!!.body()!! != null) {
+                    var apiResponse: Response = response.body()!!
+
+                    if (apiResponse.status == Constants.STATUS_SUCCESS)
+                        serviceListener.success(response.body()!!.message!!)
+                }
+            }
+        })
+    }
+
+    private fun recoverPassword(ed_dialog_email: EditText, serviceListener: ServiceListener<String>) {
         progressDialog?.dismiss()
 
         if (!Apputils.isValidEmail(ed_dialog_email!!.text.toString()) || ed_dialog_email!!.text.toString() == "") {
@@ -205,8 +257,8 @@ class SignInActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Response>?, t: Throwable?) {}
             override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
 
-                if(response!!.body()!=null){
-                    var apiResponse:Response = response!!.body()!!
+                if (response!!.body() != null) {
+                    var apiResponse: Response = response!!.body()!!
 
                     serviceListener.success(apiResponse.status!!)
 
@@ -221,9 +273,9 @@ class SignInActivity : AppCompatActivity() {
         super.onStart()
 //        if()
         var userId = pref.getProfilePref(this@SignInActivity).UAC_Id
-        if(userId!=null){
-            val intent=  Intent(this@SignInActivity,DrawerActivity::class.java)
-            intent.putExtra("user id",userId)
+        if (userId != null) {
+            val intent = Intent(this@SignInActivity, DrawerActivity::class.java)
+            intent.putExtra("user id", userId)
             startActivity(intent)
             finish()
         }
