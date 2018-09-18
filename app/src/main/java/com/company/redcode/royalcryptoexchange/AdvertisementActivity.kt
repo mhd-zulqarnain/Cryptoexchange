@@ -33,7 +33,7 @@ class AdvertisementActivity : AppCompatActivity() {
     var remCoin: Double? = null;
     var fees: Double? = null;
     var coin: String = "BTC"
-    var orderType: String = "Buy"
+    var order_type: String = "Buy"
     var progressBar: AlertDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +55,7 @@ class AdvertisementActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
                 var item = parent!!.getItemAtPosition(pos);
-                orderType = item as String
+                order_type = item as String
             }
         })
 
@@ -163,10 +163,10 @@ class AdvertisementActivity : AppCompatActivity() {
 
         progressBar!!.show()
 
-        val mtrade = Trade(null,7,orderType,1,ed_amount.text.toString(),ed_price.text.toString(),fees.toString(),u_limit.text.toString().toLong(),l_limit.text.toString().toLong(),null,coin,null)
+        val mtrade = Trade(null,7,order_type,1,ed_amount.text.toString(),ed_price.text.toString(),fees.toString(),u_limit.text.toString().toLong(),l_limit.text.toString().toLong(),null,coin,null)
         println(Gson().toJson(mtrade))
         ApiClint.getInstance()?.getService()?.addTrade(fuac_id = mtrade.FUAC_Id.toString(),
-                ordertype = mtrade.OrderType.toString(),fup_id = mtrade.FUP_Id.toString(),
+                ordertype = mtrade.order_type.toString(),fup_id = mtrade.FUP_Id.toString(),
                 amount = mtrade.Amount.toString(),price = mtrade.Price.toString(),fees = mtrade.Fees.toString(),
                 ulimit = mtrade.UpperLimit.toString(),llimit = mtrade.LowerLimit.toString(),
                 ctype = mtrade.CurrencyType.toString())?.enqueue(object: Callback<com.company.redcode.royalcryptoexchange.models.Response>{

@@ -5,7 +5,7 @@ import java.util.*
 class Trade(
         var UT_Id:Int? = null,
         var FUAC_Id: Int? = null,
-        var OrderType: String? = null,
+        var order_type: String? = null,
         var FUP_Id: Int? = null,
         var Amount: String? = null,
         var Price: String? = null,
