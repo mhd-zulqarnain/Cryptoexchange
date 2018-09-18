@@ -163,11 +163,11 @@ class AdvertisementActivity : AppCompatActivity() {
 
         progressBar!!.show()
 
-        val mtrade = Trade(null,7,orderType,1,ed_amount.text.toString(),ed_price.text.toString(),fees.toString(),u_limit.text.toString().toLong(),l_limit.text.toString().toLong(),null,coin,null)
+        val mtrade = Trade(null,7,orderType,1,ed_amount.text.toString(),"0","0",ed_price.text.toString(),fees.toString(),u_limit.text.toString().toLong(),l_limit.text.toString().toLong(),coin,null,null)
         println(Gson().toJson(mtrade))
         ApiClint.getInstance()?.getService()?.addTrade(fuac_id = mtrade.FUAC_Id.toString(),
                 ordertype = mtrade.OrderType.toString(),fup_id = mtrade.FUP_Id.toString(),
-                amount = mtrade.Amount.toString(),price = mtrade.Price.toString(),fees = mtrade.Fees.toString(),
+                amount = mtrade.Amount.toString(),exeamount = mtrade.ExecutedAmount!!,exefee = mtrade.ExecutedFees!!,price = mtrade.Price.toString(),fees = mtrade.Fees.toString(),
                 ulimit = mtrade.UpperLimit.toString(),llimit = mtrade.LowerLimit.toString(),
                 ctype = mtrade.CurrencyType.toString())?.enqueue(object: Callback<com.company.redcode.royalcryptoexchange.models.Response>{
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
@@ -186,7 +186,6 @@ class AdvertisementActivity : AppCompatActivity() {
 
                     }
                 }
-                //Apputils.showMsg(this@AdvertisementActivity,"success");
             }
         })
 

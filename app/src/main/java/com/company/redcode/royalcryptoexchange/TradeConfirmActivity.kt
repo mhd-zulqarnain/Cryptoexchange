@@ -29,16 +29,16 @@ class TradeConfirmActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        var deadline = Apputils.getTimeStamp(trade.DeadLine.toString())?.toLong();
-        println("current deadline "+deadline)
-        var time = deadline?.minus(System.currentTimeMillis())
+        //var deadline = Apputils.getTimeStamp(trade.DeadLine.toString())?.toLong();
+//        println("current deadline "+deadline)
+        //var time = deadline?.minus(System.currentTimeMillis())
 
-        println("time now " + time)
+      /*  println("time now " + time)*/
 
         seller_name.setText("user"+trade.FUAC_Id)
         btc_amount.setText(coinUsed)
         price_tv.setText(price)
-        val countDown = object : CountDownTimer(time!!, 1000) {
+     /*   val countDown = object : CountDownTimer(time!!, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
 
@@ -47,7 +47,7 @@ class TradeConfirmActivity : AppCompatActivity() {
 
             override fun onFinish() {}
         }
-        countDown.start()
+        countDown.start()*/
     }
 
     private fun formatMilliSecondsToTime(milliseconds: Long): String {

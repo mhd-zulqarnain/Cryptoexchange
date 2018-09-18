@@ -26,10 +26,10 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun sendCode( @Path("userEmail") userEmail: String): Call<Response>
 
-    @POST("Add_UserTrades/{fuac_id}/{ordertype}/{fup_id}/{amount}/{price}/{fees}/{ulimit}/{llimit}/{ctype}")
+    @POST("Add_UserTrades/{fuac_id}/{ordertype}/{fup_id}/{amount}/{exeamount}/{exefee}/{price}/{fees}/{ulimit}/{llimit}/{ctype}")
     @Headers("Content-Type:application/json")
     fun addTrade( @Path("fuac_id") fuac_id: String,@Path("ordertype") ordertype: String,@Path("fup_id") fup_id: String,
-                  @Path("amount") amount: String,@Path("price") price: String,@Path("fees") fees: String,
+                  @Path("amount") amount: String , @Path("exeamount") exeamount: String , @Path("exefee") exefee: String,@Path("price") price: String,@Path("fees") fees: String,
                   @Path("ulimit") ulimit: String,@Path("llimit") llimit: String,@Path("ctype") ctype: String): Call<Response>
 
     @GET("Select_UserAccount/{userid}")

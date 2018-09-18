@@ -8,13 +8,15 @@ class Trade(
         var OrderType: String? = null,
         var FUP_Id: Int? = null,
         var Amount: String? = null,
+        var ExecutedAmount: String? = null,
+        var ExecutedFees: String? = null,
         var Price: String? = null,
         var Fees: String? = null,
         var UpperLimit: Long? = null,
         var LowerLimit: Long? = null,
-        var DeadLine: String? = null,
         var CurrencyType: String? = null,
-        var Status: String? = null
+        var Status: String? = null,
+        var Date: String? = null
 ){
 
     enum class Order : Comparator<Trade>{

@@ -65,12 +65,13 @@ class SignInActivity : AppCompatActivity() {
             ed_email!!.requestFocus()
             return
         }
-
+        progressDialog?.show()
         ApiClint.getInstance()?.getService()?.signIn( ed_email!!.text.toString(),ed_password!!.text.toString())
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         Apputils.showMsg(this@SignInActivity, "failed")
                         println("response " + t)
+                        progressDialog?.dismiss()
                     }
 
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
@@ -83,18 +84,25 @@ class SignInActivity : AppCompatActivity() {
                                 var status = response.body()!!.message
                                 val mStatus = status!!.split(" ")
                                 Toast.makeText(baseContext, "Verify your email code sent to your email", Toast.LENGTH_SHORT).show()
-
                                 showVerifyDialog(code = mStatus[1], userId = mStatus[0])
+                                progressDialog?.dismiss()
 
                             } else if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
+
+                                val str =  apiResponse.message!!.split(" ")
+                                var uid = str[0]
+                                var numberStatus = str[1]
+                                var mbl = str[2]
                                 Toast.makeText(baseContext, "Login successfully ", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@SignInActivity, DrawerActivity::class.java)
-                                intent.putExtra(USER_KEY,"161")
+                                intent.putExtra(USER_KEY,uid)
                                 startActivity(intent)
                                 finish()
+                                progressDialog?.dismiss()
 
                             } else if (apiResponse!!.status == Constants.STATUS_ERROR) {
                                 Toast.makeText(baseContext, "Wrong password or email", Toast.LENGTH_SHORT).show()
+                                progressDialog?.dismiss()
                             }
                         }
 
