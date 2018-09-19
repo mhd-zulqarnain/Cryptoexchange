@@ -46,5 +46,9 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun verifyMobile(@Path("mbl") mbl:String): Call<Response>
 
+    @GET("Select_Dashboard/{fuac_id}")
+    @Headers("Content-Type:application/json")
+    fun getdashboardorder(@Path("fuac_id") fuac_id: String): Call<ArrayList<Trade>>
+
 
 }
