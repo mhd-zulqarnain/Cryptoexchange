@@ -1,9 +1,6 @@
 package com.company.redcode.royalcryptoexchange.retrofit
 
-import com.company.redcode.royalcryptoexchange.models.ApiResponse
-import com.company.redcode.royalcryptoexchange.models.Response
-import com.company.redcode.royalcryptoexchange.models.Trade
-import com.company.redcode.royalcryptoexchange.models.Users
+import com.company.redcode.royalcryptoexchange.models.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -41,10 +38,13 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getTrade(@Path("orderType") orderType:String,@Path("coinType") coinType:String): Call<ArrayList<Trade>>
 
-  /*get trade by coin type and ordertype*/
     @POST("MobileFactor/{mbl}")
     @Headers("Content-Type:application/json")
     fun verifyMobile(@Path("mbl") mbl:String): Call<Response>
+
+    @GET("Select_UserOrder/{fuac_id}")
+    @Headers("Content-Type:application/json")
+    fun getOrderById(@Path("fuac_id") fuac_id:String): Call<ArrayList<Order>>
 
 
 }

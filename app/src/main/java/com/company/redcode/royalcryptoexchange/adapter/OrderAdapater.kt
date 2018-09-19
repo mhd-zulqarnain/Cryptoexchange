@@ -23,17 +23,18 @@ class OrderAdapater(var ctx: Context, var model: ArrayList<Order>, private val o
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bindView(model[position])
-        holder.tv_action!!.setOnClickListener{
+        holder.tv_action!!.setOnClickListener {
             onItemClick(position)
         }
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var tv_description:TextView? = null
-        var tv_price:TextView? = null
-        var tv_status:TextView? = null
-        var tv_action:Button? = null
+        var tv_description: TextView? = null
+        var tv_price: TextView? = null
+        var tv_date: TextView? = null
+        var tv_status: TextView? = null
+        var tv_action: Button? = null
 
         fun bindView(order: Order) {
 
@@ -41,6 +42,14 @@ class OrderAdapater(var ctx: Context, var model: ArrayList<Order>, private val o
             tv_price = itemView.findViewById(R.id.tv_price)
             tv_status = itemView.findViewById(R.id.tv_status)
             tv_action = itemView.findViewById(R.id.tv_action)
+            tv_date = itemView.findViewById(R.id.tv_date)
+            tv_date!!.text = order.Order_Date
+            tv_price!!.text = order.Price
+            tv_status!!.text = order.Status
+            tv_description!!.text = order.Description
+
+
+            //  tv_price!!.text = order.BitPrice
 
         }
 
