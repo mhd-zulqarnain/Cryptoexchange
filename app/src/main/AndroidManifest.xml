@@ -18,13 +18,9 @@
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
             android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
@@ -32,7 +28,10 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan">
+
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
@@ -52,7 +51,22 @@
         <activity
             android:name=".DrawerActivity"
             android:theme="@style/BuyTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
         </activity>
+
+        <activity android:name=".ui.DisputeActivity">
+
+
+        </activity>
+
+
         <activity
             android:name="com.example.admin.camerawork.CameraActivity"
             android:theme="@style/AppTheme" />
@@ -75,14 +89,8 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
-            android:theme="@style/BuyTheme"></activity>
-        <activity android:name=".SplashActivity">
-
-
-
-
-
-        </activity>
+            android:theme="@style/BuyTheme" />
+        <activity android:name=".SplashActivity"></activity>
     </application>
 
 </manifest>

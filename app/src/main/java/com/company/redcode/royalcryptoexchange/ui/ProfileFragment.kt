@@ -59,6 +59,8 @@ class ProfileFragment : Fragment() {
 
         btn_add_img = view!!.findViewById(R.id.btn_add_img)
 
+
+
         btn_add_bank!!.setOnClickListener {
             showTradeDialog()
         }
@@ -101,6 +103,8 @@ class ProfileFragment : Fragment() {
         val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
         alertBox.setView(view)
         val dialog = alertBox.create()
+
+        //-------------------------------------------------------------------------
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         val btnClose: ImageView = view.findViewById(R.id.btn_close)

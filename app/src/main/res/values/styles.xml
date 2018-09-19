@@ -55,6 +55,8 @@
   <!--      <item name="android:layout_marginTop">10dp</item>-->
     </style>
 
+
+
     <style name="adsActivityStyle">
         <item name="android:fontFamily" tools:ignore="NewApi">@font/oswald_regular</item>
         <item name="android:textSize">20sp</item>
@@ -100,5 +102,7 @@
         <item name="colorControlNormal">@color/whitColor</item>
         <item name="colorControlActivated">@color/whitColor</item>
     </style>
+
+
 
 </resources>

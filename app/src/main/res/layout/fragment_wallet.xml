@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="10dp"
+    android:background="@drawable/signupbackground"
     android:padding="10dp">
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
