@@ -86,7 +86,7 @@ class BuyActivity : AppCompatActivity() {
             var obj = Gson().toJson(tradelist[position])
             val intent = Intent(this@BuyActivity, BuyingDetailActivity::class.java)
             intent.putExtra("tradeObject", obj)
-            intent.putExtra("orderType", "buy")
+            intent.putExtra("orderType", "BUY")
             startActivity(intent)
         }
 
