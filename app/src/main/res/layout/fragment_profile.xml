@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@drawable/signupbackground"
+    android:background="@drawable/color_gradient_profile"
 >
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,7 +71,6 @@
                 android:layout_weight="0.7"
                 android:layout_height="wrap_content"
                 app:kswThumbWidth="30dp"
-                app:kswThumbRadius="@dimen/fastscroll__handle_corner"
                 app:kswThumbColor="#c2d1bd"
                 app:kswTintColor="#2c2aff2e"
                 app:kswTextOff="0"
@@ -101,7 +100,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="4"
                 android:drawableRight="@drawable/ic_person_outline_black_24dp"
-                android:hint="First name"
+                android:hint="Enter First name"
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
@@ -131,8 +131,9 @@
                 android:id="@+id/profile_lastname"
                 android:layout_width="0dp"
                 android:layout_weight="4"
+                android:background="@null"
                 android:layout_height="wrap_content"
-                android:hint="Last name"
+                android:hint="Enter Last name"
                 android:imeOptions="actionNext"
                 android:drawableRight="@drawable/ic_person_outline_black_24dp"
                 android:maxLines="1"
@@ -161,7 +162,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="4"
                 android:layout_height="wrap_content"
-                android:hint="Email "
+                android:hint="Enter Email "
+                android:background="@null"
                 android:imeOptions="actionNext"
                 android:drawableRight="@drawable/ic_email_black_24dp"
                 android:maxLines="1"
@@ -193,7 +195,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:hint="Mobile Number "
+                android:background="@null"
+                android:hint="Enter Mobile Number "
 
                 android:inputType="number"
                 android:maxLength="11"
@@ -222,8 +225,9 @@
                 android:id="@+id/profile_pass"
                 android:layout_width="0dp"
                 android:layout_weight="4"
+                android:background="@null"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="Enter Password"
                 android:inputType="textPassword"
                 android:drawableRight="@drawable/ic_vpn_key_black_24dp"
                 android:imeOptions="actionNext"
@@ -236,7 +240,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.5"
+            android:layout_weight="1.7"
             android:weightSum="6"
             android:orientation="horizontal"
             android:layout_gravity="center">
@@ -253,7 +257,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="4"
                 android:layout_height="wrap_content"
-                android:hint="CNIC "
+                android:hint="Enter CNIC "
+                android:background="@null"
                 android:inputType="number"
                 android:digits="0123456789 -."
                 android:drawableRight="@drawable/ic_perm_contact_calendar_black_24dp"
@@ -266,6 +271,13 @@
                 />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            ></LinearLayout>
+
+
         <LinearLayout
             android:id="@+id/btn_add_bank"
             android:layout_width="match_parent"
@@ -358,12 +370,16 @@
         </LinearLayout>
 
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            ></LinearLayout>
 
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:layout_height="0dp"
                 app:met_baseColor="#ffffff"
                 app:met_primaryColor="#45a12e"

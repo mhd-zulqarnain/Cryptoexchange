@@ -4,7 +4,7 @@
     android:id="@+id/scrollLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgoundBtn"
+    android:background="@drawable/color_gradient_profile"
     android:fillViewport="true"
     android:orientation="vertical">
 
@@ -185,7 +185,7 @@
                     android:layout_alignParentBottom="true"
                     android:background="@drawable/layout_curve_btn_boreder_only"
                     android:text="Trade"
-                    android:textColor="@color/backgoundTheme" />
+                    android:textColor="#fff" />
             </LinearLayout>
         </LinearLayout>
 

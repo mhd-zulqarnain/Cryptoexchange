@@ -5,7 +5,9 @@
     android:layout_margin="42dp"
     android:orientation="vertical"
     android:background="@drawable/layout_curve_edit_text"
-    android:gravity="center">
+    android:gravity="center"
+
+    >
 
     <TextView
         android:layout_width="wrap_content"
