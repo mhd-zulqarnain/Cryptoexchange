@@ -34,7 +34,7 @@ class SellActivity : AppCompatActivity() {
     var coin: String = "BTC"
     var tradelist = ArrayList<Trade>()
     var adapter: TableSellerAdapater? = null
-    var total:Double? = null
+    var total: Double? = null
 
     /*Dialog item */
     var btnCancel: Button? = null
@@ -47,7 +47,7 @@ class SellActivity : AppCompatActivity() {
     var time: String? = null
 
 
-    var toolbar : Toolbar? = null
+    var toolbar: Toolbar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sell)
@@ -64,17 +64,16 @@ class SellActivity : AppCompatActivity() {
         }
 
         seller_coin_filter = findViewById(R.id.seller_coin_filter)
-        seller_filter_group =findViewById(R.id.seller_filter_group)
+        seller_filter_group = findViewById(R.id.seller_filter_group)
         seller_price_filter = findViewById(R.id.seller_price_filter)
         seller_limit_filter = findViewById(R.id.seller_limit_filter)
 
-        val coin_type_spinner =findViewById(R.id.curreny_type_spinner) as Spinner
+        val coin_type_spinner = findViewById(R.id.curreny_type_spinner) as Spinner
 
         val builder = AlertDialog.Builder(this@SellActivity!!)
         builder.setView(R.layout.layout_dialog_progress)
         builder.setCancelable(false)
         progressBar = builder.create()
-
 
 
         val recyclerView: RecyclerView = findViewById(R.id.table_recycler)
@@ -84,6 +83,7 @@ class SellActivity : AppCompatActivity() {
 
             var obj = Gson().toJson(tradelist[position])
             val intent = Intent(this@SellActivity, BuyingDetailActivity::class.java)
+
             intent.putExtra("tradeObject", obj)
             intent.putExtra("orderType", "sell")
             startActivity(intent)
@@ -127,15 +127,15 @@ class SellActivity : AppCompatActivity() {
     }
 
 
-
     private fun getAllTrade() {
         tradelist.clear()
         progressBar!!.show()
 
-        ApiClint.getInstance()?.getService()?.getTrade( "sell",coin)?.enqueue(object : Callback<ArrayList<Trade>> {
+        ApiClint.getInstance()?.getService()?.getTrade("sell", coin)?.enqueue(object : Callback<ArrayList<Trade>> {
             override fun onFailure(call: Call<ArrayList<Trade>>?, t: Throwable?) {
-                println("error "+t)
+                println("error " + t)
             }
+
             override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
                 if (response?.body() != null) {
                     response?.body()?.forEach { trade ->
@@ -159,7 +159,6 @@ class SellActivity : AppCompatActivity() {
 
         return coinRem
     }
-
 
 
 }

@@ -26,8 +26,10 @@ class AdsDashboardAdapater(var ctx: Context, var model: ArrayList<Trade>, privat
         holder.bindView(model[position])
         holder.btn_action!!.setOnClickListener{
             onItemClick(position)
+
         }
     }
+
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -37,7 +39,6 @@ class AdsDashboardAdapater(var ctx: Context, var model: ArrayList<Trade>, privat
         var tv_executed_fee:TextView? = null
         var tv_status:TextView? = null
         var btn_action:Button? = null
-        var btn_edit:Button? = null
 
 
         fun bindView(trade: Trade) {
@@ -48,6 +49,13 @@ class AdsDashboardAdapater(var ctx: Context, var model: ArrayList<Trade>, privat
             tv_executed_fee = itemView.findViewById(R.id.tv_executed_fee)
             tv_status = itemView.findViewById(R.id.tv_status)
             btn_action = itemView.findViewById(R.id.btn_action)
+
+            tv_time!!.setText(trade.Date)
+            tv_category!!.setText(trade.OrderType)
+            tv_executed_amount!!.setText(trade.ExecutedAmount)
+            tv_executed_fee!!.setText(trade.ExecutedFees)
+            tv_status!!.setText(trade.Status)
+
 
 
         }

@@ -13,9 +13,11 @@ import android.widget.CompoundButton
 import android.widget.TextView
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.TradeConfirmActivity
+import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_buying_details.*
 
@@ -26,14 +28,28 @@ class BuyingDetailActivity : AppCompatActivity() {
     val ORDER_TYPE: String = "orderType"
     var trade: Trade = Trade()
     var orderType: String? = null
+    var order:Order = Order()
     var isTermAccept: Boolean = false
+    var sharedPref = SharedPref.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buying_details)
         var obj = intent.getStringExtra(JSON_TRARE);
         orderType = intent.getStringExtra(ORDER_TYPE);
         trade = Gson().fromJson(obj, Trade::class.java)
+
+        order.UpperLimit = trade.UpperLimit.toString()
+        order.LowerLimit = trade.LowerLimit.toString()
+        order.FUAC_Id = trade.FUAC_Id.toString()
+        order.FUT_Id = trade.UT_Id.toString()
+        order.Notify_Status = "true"
+        order.PaymentMethod = "Bank"
+        order.Status = "Open"
+
+        order.ORD_UserId = sharedPref!!.getProfilePref(this@BuyingDetailActivity).UserId
+
         initView()
+
     }
 
     private fun initView() {
@@ -109,6 +125,7 @@ class BuyingDetailActivity : AppCompatActivity() {
             }
         }
         if (isTermAccept) {
+//            order.Amount =
             var intent = Intent(this, TradeConfirmActivity::class.java)
             var obj = Gson().toJson(trade)
             intent.putExtra("tradeObj", obj)

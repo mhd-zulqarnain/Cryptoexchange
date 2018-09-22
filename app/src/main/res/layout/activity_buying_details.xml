@@ -164,7 +164,7 @@
         android:weightSum="4">
 
         <EditText
-                android:id="@+id/pkr_ed"
+         android:id="@+id/pkr_ed"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="8dp"
@@ -193,21 +193,6 @@
             android:textSize="15dp" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/ed_terms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:layout_margin="8dp"
-        android:imeOptions="actionDone"
-        android:textSize="15dp"
-        android:gravity="center"
-        android:textColor="#000"
-        android:textColorHint="#DDAAAAAA"
-        android:hint="Comments  "
-        android:background="@drawable/white_curve_btn"
-        android:lines="3"
-        />
 
     <Button
         android:id="@+id/btn_trade"
