@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,8 +47,7 @@ class SupportFragment : Fragment() {
     private fun initView(view: View) {
         btn_add = view!!.findViewById(R.id.btn_add)
         val coin_type_spinner = view.findViewById(R.id.spinner) as Spinner
-        val spinnerAdapter = ArrayAdapter.createFromResource(activity!!,
-                R.array.array_support_title, android.R.layout.simple_spinner_item)
+        val spinnerAdapter = ArrayAdapter.createFromResource(activity!!,R.array.array_support_title, android.R.layout.simple_spinner_item)
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         coin_type_spinner.adapter = spinnerAdapter
@@ -56,6 +56,7 @@ class SupportFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
                 val item = parent!!.getItemAtPosition(pos);
                 coin = item.toString()
+                Log.d("Selected Item ", " "+coin)
             }
         })
         btn_add!!.setOnClickListener {

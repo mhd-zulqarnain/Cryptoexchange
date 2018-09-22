@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/color_gradient_profile"
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_top"
@@ -168,7 +170,7 @@
                     android:gravity="center"
                     android:text="Limit"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp" />z
 
                 <TextView
                     android:layout_width="0dp"

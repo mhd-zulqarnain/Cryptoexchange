@@ -11,7 +11,7 @@
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Profile" />
+            android:title="Profile" />1
         <item
             android:id="@+id/nav_wallet"
             android:icon="@drawable/ic_menu_slideshow"
@@ -24,5 +24,11 @@
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_dashboard_black_24dp"
             android:title="Dashboard" />
+
+        <item
+            android:id="@+id/nav_dispute"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="Dispute"
+            />
     </group>
 </menu>

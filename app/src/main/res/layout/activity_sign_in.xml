@@ -5,6 +5,7 @@
     android:layout_margin="10dp"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@drawable/color_gradient_profile"
     >
 
     <ProgressBar

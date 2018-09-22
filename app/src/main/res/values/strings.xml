@@ -22,10 +22,30 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="array_support_title">
-        <item>Attempted Froad</item>
-        <item>Low Prize Tranction</item>
-        <item>Not Valid User</item>
-        <item>xxxxxx</item>
+
+        <item>I want to report fraud</item>
+        <item>I want to report a fraudulent trade</item>
+        <item>I want to report a fraudulent user</item>
+        <item>Help with a disputed trade</item>
+        <item>Problems with a Bitcoin transaction</item>
+        <item>My account is hacked</item>
+        <item>I am a new user</item>
+        <item>My account is on forced holiday</item>
+        <item>I have a problem with my advertisement(s)</item>
+        <item>I have received abusive feedback</item>
+        <item>Report a bug</item>
+        <item>I cant log in to my account</item>
+        <item>I am not receiving the login guard email</item>
+        <item>I do not have my two-factor authentication codes</item>
+        <item>I have forgotten my password</item>
+        <item>I have forgotten my username</item>
+        <item>I have forgotten my email</item>
+        <item>I have forgotten both my email and username</item>
+        <item>I am not receiving my account verification email</item>
+        <item>I am not able to verify my phone number</item>
+        <item>Other</item>
+
+
     </string-array>
 
     <string-array name="array_currency">
@@ -66,8 +86,9 @@
     <string-array name="method_payment">
         <item>Easypaisa</item>
         <item>Bank Transfer</item>
-        <item>advcash</item>
-        <item>mobicash</item>
+        <item>Jazz Cash</item>
+        <item>U Paisa</item>
+        <item>Zong Pay</item>
     </string-array>
 
     <string-array name="time_array">

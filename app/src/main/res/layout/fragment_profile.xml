@@ -5,42 +5,104 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@drawable/color_gradient_profile"
 >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#224255">
     <LinearLayout
-        android:id="@+id/scroll_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="22dp"
+        android:weightSum="36.5"
+        android:layout_margin="10dp"
         >
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Profile "
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            />
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:weightSum="7"
+            >
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_gravity="clip_vertical"
+                android:layout_height="wrap_content"
+                android:text="Profile "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                />
+
+            <TextView
+                style="@style/signUpEditTextStyle"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_gravity="center"
+                android:text="Two Factor"
+                />
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1.3"
+                >
+
+            </LinearLayout>
+
+            <com.kyleduo.switchbutton.SwitchButton
+                android:id="@+id/profile_twofactor"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                app:kswThumbWidth="30dp"
+                app:kswThumbColor="#c2d1bd"
+                app:kswTintColor="#2c2aff2e"
+                app:kswTextOff="0"
+                android:checked="true"
+                app:kswTextOn="1"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:weightSum="6"
             android:orientation="horizontal"
             android:layout_gravity="center">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1.7"
                 android:layout_height="wrap_content"
-                android:text="First Name:"
+                android:text="First Name"
                 style="@style/signUpEditTextStyle"
                 android:textColor="#fff" />
 
             <EditText
-                android:id="@+id/ed_fname"
-                android:layout_width="match_parent"
+                android:id="@+id/profile_fname"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:drawableRight="@drawable/ic_person_outline_black_24dp"
+                android:hint="Enter First name"
+                android:background="@null"
                 android:layout_height="wrap_content"
-                android:hint="First name"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 style="@style/signUpEditTextStyle"
@@ -50,24 +112,30 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:weightSum="6"
             android:orientation="horizontal"
             android:layout_gravity="center">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1.7"
                 android:layout_height="wrap_content"
-                android:text="Last Name: "
+                android:text="Last Name "
+
 
                 style="@style/signUpEditTextStyle"
                 android:textColor="#fff" />
 
             <EditText
-                android:id="@+id/ed_last_name"
-                android:layout_width="match_parent"
+                android:id="@+id/profile_lastname"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:background="@null"
                 android:layout_height="wrap_content"
-                android:hint="Last name"
-                android:inputType="number"
+                android:hint="Enter Last name"
                 android:imeOptions="actionNext"
+                android:drawableRight="@drawable/ic_person_outline_black_24dp"
                 android:maxLines="1"
                 style="@style/signUpEditTextStyle"
                 android:singleLine="true"
@@ -76,97 +144,126 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:weightSum="6"
             android:orientation="horizontal"
             android:layout_gravity="center">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1.7"
                 android:layout_height="wrap_content"
-                android:text="Email: "
+                android:text="Email "
                 style="@style/signUpEditTextStyle"
                 android:textColor="#fff" />
 
             <EditText
-                android:id="@+id/ed_email"
-                android:layout_width="match_parent"
+                android:id="@+id/profile_email"
+                android:layout_width="0dp"
+                android:layout_weight="4"
                 android:layout_height="wrap_content"
-                android:hint="Email "
+                android:hint="Enter Email "
+                android:background="@null"
+                android:imeOptions="actionNext"
+                android:drawableRight="@drawable/ic_email_black_24dp"
+                android:maxLines="1"
+                style="@style/signUpEditTextStyle"
+                android:singleLine="true"
                 android:inputType="textEmailAddress"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
                 />
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:weightSum="6"
             android:orientation="horizontal"
             android:layout_gravity="center">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mobile Number: "
-                style="@style/signUpEditTextStyle"
-                android:textColor="#fff" />
-
-            <EditText
-                android:id="@+id/ed_mbl_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Mobile Number "
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password: "
-                style="@style/signUpEditTextStyle"
-                android:textColor="#fff" />
-
-            <EditText
-                android:id="@+id/ed_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email "
-                android:inputType="textPassword"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/signUpEditTextStyle"
-                android:singleLine="true"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CNIC: "
-                style="@style/signUpEditTextStyle"
-                android:textColor="#fff" />
-
-            <EditText
-                android:id="@+id/ed_cnic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="CNIC "
+                android:layout_width="0dp"
+                android:layout_weight="1.7"
                 android:inputType="number"
+                android:layout_height="wrap_content"
+                android:text="Mobile #"
+                style="@style/signUpEditTextStyle"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/profile_mob"
+                style="@style/signUpEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@null"
+                android:hint="Enter Mobile Number "
+
+                android:inputType="number"
+                android:maxLength="11"
+                android:drawableRight="@drawable/ic_local_phone_black_24dp"
                 android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:weightSum="6"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.7"
+                android:layout_height="wrap_content"
+                android:text="Password "
+                style="@style/signUpEditTextStyle"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/profile_pass"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:background="@null"
+                android:layout_height="wrap_content"
+                android:hint="Enter Password"
+                android:inputType="textPassword"
+                android:drawableRight="@drawable/ic_vpn_key_black_24dp"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                style="@style/signUpEditTextStyle"
+                android:singleLine="true"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.7"
+            android:weightSum="6"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.7"
+                android:layout_height="wrap_content"
+                android:text="CNIC "
+                style="@style/signUpEditTextStyle"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/profile_cnic"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:hint="Enter CNIC "
+                android:background="@null"
+                android:inputType="number"
+                android:digits="0123456789 -."
+                android:drawableRight="@drawable/ic_perm_contact_calendar_black_24dp"
+                android:imeOptions="actionDone"
+                android:maxLength="13"
                 android:maxLines="1"
                 style="@style/signUpEditTextStyle"
                 android:singleLine="true"
@@ -175,107 +272,140 @@
 
         </LinearLayout>
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            ></LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/btn_add_bank"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:background="@drawable/white_curve_btn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:weightSum="3"
+            android:layout_weight="1.25"
+            android:orientation="horizontal"
+
+
             >
             <TextView
                 android:id="@+id/addaccount"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_weight="1.3"
+                android:background="@drawable/white_curve_btn"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Payment Method"
-                android:layout_marginLeft="3dp"
+                android:textSize="15sp"
+                android:text="  Payment Method  "
                 android:textColor="#224255"
                 />
 
             <ImageButton
-                android:layout_width="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
                 android:layout_height="20dp"
-                android:padding="30dp"
                 android:background="@null"
-                android:layout_marginLeft="3dp"
                 android:src="@drawable/ic_add_black_24dp"
                 />
 
         </LinearLayout>
-<!--        <Button
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textColor="#fff"
-            android:text="Update"
-            android:layout_gravity="center"
-            android:background="#242438"/>-->
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="4.5"
+            android:weightSum="4"
             android:orientation="horizontal"
-            android:layout_marginTop="3dp"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/attach_img_1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="3dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
 
                 android:src="@drawable/ic_no_img_24dp"
                 />
             <ImageView
                 android:id="@+id/attach_img_2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="3dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
                 android:src="@drawable/ic_no_img_24dp"
                 />
 
             <ImageView
                 android:id="@+id/attach_img_3"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="3dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
                 android:src="@drawable/ic_no_img_24dp"
                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="0dp"
             android:weightSum="3"
-            >
+            android:layout_weight="1.25"
+            android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Add Documents"
-                android:textColor="#fff"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:background="@drawable/white_curve_btn"
+                android:text=" Add Documents"
+                android:textColor="#224255"
                 />
             <ImageButton
                 android:id="@+id/btn_add_img"
-                android:layout_width="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
                 android:layout_height="20dp"
                 android:background="@null"
-                android:layout_marginLeft="3dp"
-                android:padding="30dp"
                 android:src="@drawable/ic_add_black_24dp"
                 />
 
         </LinearLayout>
-        <Button
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:textColor="#fff"
-            android:text="Update"
 
-            android:layout_marginTop="15dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            ></LinearLayout>
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_weight="3"
+                android:layout_height="0dp"
+                app:met_baseColor="#ffffff"
+                app:met_primaryColor="#45a12e"
+                app:met_textColor="#fff"
+
+                android:hint="Description"/>
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:textColor="#fff"
+            android:text="          Update          "
+            android:onClick="profileValidiation"
+
             android:layout_gravity="center"
-            android:background="#242438"/>
+            android:background="@drawable/layout_curve_btn_submit"/>
     </LinearLayout>
-    </RelativeLayout>
+
+
+
+
+
+
+
     </ScrollView>
+

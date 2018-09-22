@@ -53,7 +53,6 @@ class WalletAdapter (var datalist: ArrayList<Wallet>):
 
         var wollet_amount: EditText = view.findViewById(R.id.amount)
         var wollet_address: EditText =view.findViewById(R.id.Ed_wallet_address)
-        var wollet_desc: EditText =view.findViewById(R.id.wallet_descrbtion)
         var button_ok: Button = view.findViewById(R.id.wallet_ok)
         var button_cancel:Button = view.findViewById(R.id.wallet_cancel)
         button_ok.setOnClickListener {
