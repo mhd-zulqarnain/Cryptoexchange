@@ -22,6 +22,7 @@ import com.company.redcode.royalcryptoexchange.ui.BuyActivity
 import com.company.redcode.royalcryptoexchange.ui.SellActivity
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_advertisement.*
 import kotlinx.android.synthetic.main.dialogue_wallet_send.*
@@ -35,6 +36,7 @@ class AdvertisementActivity : AppCompatActivity() {
     var coin: String = "BTC"
     var orderType: String = "Buy"
     var progressBar: AlertDialog? = null
+    var sharedPref = SharedPref.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_advertisement)
@@ -163,10 +165,11 @@ class AdvertisementActivity : AppCompatActivity() {
 
         progressBar!!.show()
 
-        val mtrade = Trade(null,7,orderType,1,ed_amount.text.toString(),"0","0",ed_price.text.toString(),fees.toString(),u_limit.text.toString().toLong(),l_limit.text.toString().toLong(),coin,null,null)
+        val userId = sharedPref!!.getProfilePref(this@AdvertisementActivity).UAC_Id!!.toInt()
+        val mtrade = Trade(null,userId,orderType,1,ed_amount.text.toString(),"0","0",ed_price.text.toString(),fees.toString(),u_limit.text.toString().toLong(),l_limit.text.toString().toLong(),coin,null,null)
         println(Gson().toJson(mtrade))
         ApiClint.getInstance()?.getService()?.addTrade(fuac_id = mtrade.FUAC_Id.toString(),
-                ordertype = mtrade.OrderType.toString(),fup_id = mtrade.FUP_Id.toString(),
+                ordertype = mtrade.OrderType.toString(),fup_id ="3",
                 amount = mtrade.Amount.toString(),exeamount = mtrade.ExecutedAmount!!,exefee = mtrade.ExecutedFees!!,price = mtrade.Price.toString(),fees = mtrade.Fees.toString(),
                 ulimit = mtrade.UpperLimit.toString(),llimit = mtrade.LowerLimit.toString(),
                 ctype = mtrade.CurrencyType.toString())?.enqueue(object: Callback<com.company.redcode.royalcryptoexchange.models.Response>{
