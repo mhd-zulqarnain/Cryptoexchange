@@ -26,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 class CameraActivity : AppCompatActivity() {
     private val PICK_IMAGES = 6069
-    private val MY_PERMISSIONS_REQUEST_CAMERA = 1001
+    private val MY_PERMISSIONS_REQUEST_CAMERA = 999
     //    private CameraView cameraView;
     private lateinit var btn_take_photo: CircleImageView
     private lateinit var profile_image0: CircleImageView

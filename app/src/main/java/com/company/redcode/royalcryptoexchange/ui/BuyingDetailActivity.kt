@@ -222,7 +222,7 @@ class BuyingDetailActivity : AppCompatActivity() {
 
     private fun showTradeDialog() {
         val view: View = LayoutInflater.from(this@BuyingDetailActivity).inflate(R.layout.dilalog_terms_trade, null)
-        val alertBox = android.support.v7.app.AlertDialog.Builder(this@BuyingDetailActivity)
+        val alertBox =AlertDialog.Builder(this@BuyingDetailActivity)
         alertBox.setView(view)
         alertBox.setCancelable(false)
         val dialog = alertBox.create()
