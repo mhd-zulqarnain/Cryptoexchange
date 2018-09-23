@@ -49,4 +49,12 @@ interface RetrofiltService {
     @GET("Select_UserOrder/{fuac_id}")
     @Headers("Content-Type:application/json")
     fun getOrderById(@Path("fuac_id") fuac_id:String): Call<ArrayList<Order>>
+
+    @PUT("Update_UserAccount/{fuac_id}/{fname}/{lname}/{pass}/{terms}")
+    @Headers("Content-Type:application/json")
+    fun update_profile(@Path("fuac_id") fuac_id:String,@Path("fname")fname:String,@Path("lname")lname:String,@Path("pass")pass:String,@Path("terms")terms:String): Call<Response>
+
+    @POST("Add_UserDocument/{fuac_id}/{userdoc}")
+    @Headers("Content-Type:application/json")
+    fun add_userdoc(@Path("fuac_id") fuac_id:String,@Path("userdoc") userdoc:String): Call<Response>
 }
