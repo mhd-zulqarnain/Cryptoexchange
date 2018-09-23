@@ -22,9 +22,12 @@ import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_buying_details.*
+import kotlinx.android.synthetic.main.dilalog_view_trade.*
 import retrofit2.Call
 import retrofit2.Callback
 import java.lang.reflect.Method
+import java.math.BigDecimal
+import java.text.DecimalFormat
 
 
 class BuyingDetailActivity : AppCompatActivity() {
@@ -33,11 +36,11 @@ class BuyingDetailActivity : AppCompatActivity() {
     val ORDER_TYPE: String = "orderType"
     var trade: Trade = Trade()
     var orderType: String? = null
-    var order:Order = Order()
+    var order: Order = Order()
     var isTermAccept: Boolean = false
     var progressBar: AlertDialog? = null
     var sharedPref = SharedPref.getInstance()
-    var orderTerms:OrderTerms = OrderTerms()
+    var orderTerms: OrderTerms = OrderTerms()
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +54,10 @@ class BuyingDetailActivity : AppCompatActivity() {
 
     }
 
-    fun getTerm(){
+    fun getTerm() {
         progressBar!!.show()
 
-        ApiClint.getInstance()?.getService()?.gettermAndPayment(trade.FUAC_Id.toString()!!,"3")?.enqueue(object :Callback<OrderTerms>{
+        ApiClint.getInstance()?.getService()?.gettermAndPayment(trade.FUAC_Id.toString()!!, "3")?.enqueue(object : Callback<OrderTerms> {
             override fun onFailure(call: Call<OrderTerms>?, t: Throwable?) {
                 progressBar!!.dismiss()
             }
@@ -64,13 +67,14 @@ class BuyingDetailActivity : AppCompatActivity() {
                 if (response != null) {
                     orderTerms = response.body()!!
                     tv_payment_method.setText(orderTerms.PaymentMethod!!.BankName)
-                    if (orderTerms.PaymentMethod!!.Type=="Bank")
-                    tv_payment_method.text = tv_payment_method.text.toString()+"\nCode:"+orderTerms!!.PaymentMethod!!.BankCode
+                    if (orderTerms.PaymentMethod!!.Type == "Bank")
+                        tv_payment_method.text = tv_payment_method.text.toString() + "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
                 }
             }
         })
 
     }
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initView() {
         val builder = AlertDialog.Builder(this@BuyingDetailActivity)
@@ -88,25 +92,27 @@ class BuyingDetailActivity : AppCompatActivity() {
         tv_price.setText(trade.Price)
 
         pkr_ed!!.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
+            override fun afterTextChanged(p0: Editable?) {
+              /*  if(pkr_ed!!.text.toString().trim() != "")
+                if(ed_currency!!.text.toString().trim() != "")
+                if (pkr_ed!!.text.toString().toDouble() > trade.Amount!!.toDouble()) {
+                    Apputils.showMsg(this@BuyingDetailActivity, "Ecurrency must be less than total amount")
+
+                }*/
+            }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "") {
-                    if ( pkr_ed!!.text.trim().length > 2) {
-
-                        var price = trade.LowerLimit.toString().toLong()
-                        if(pkr_ed!!.text.toString().toLong() >= price){
-                            //Apputils.showMsg(this@BuyingDetailActivity, " Limit ")
-                            ecuurency_ed.setText((trade.Price!!.toDouble()/pkr_ed.text.toString().toDouble()).toString())
-                        }
-                        else{
-                            ecuurency_ed.setText("")
-
-                        }
-
+                    if (pkr_ed!!.text.toString().toDouble() < trade.Amount!!.toDouble()) {
+                        var eachprice = trade.Price!!.toDouble() / trade.Amount!!.toDouble()
+                        var txtuseramount = eachprice * pkr_ed!!.text.toString().toDouble()
+                        ecuurency_ed.setText(BigDecimal.valueOf(txtuseramount!!).toPlainString())
+                    }
+                    else{
+                        ecuurency_ed.setText("")
                     }
                 }
             }
@@ -130,40 +136,42 @@ class BuyingDetailActivity : AppCompatActivity() {
 
     private fun validation() {
 
+        if(pkr_ed!!.text.toString().trim() == ""){
+            Apputils.showMsg(this@BuyingDetailActivity, "Enter the amount")
+            return
+        }
+        if(ecuurency_ed!!.text.toString().trim() == ""){
+            Apputils.showMsg(this@BuyingDetailActivity, "Invalid amount")
+            return
+        }
         if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "") {
 
-            if (pkr_ed!!.text.trim().length > 2) {
-
-                if (pkr_ed!!.text.toString().toLong() > trade.UpperLimit.toString().toLong()) {
-                    Apputils.showMsg(this@BuyingDetailActivity, "Limit crossed")
-                    return
-                } else if (pkr_ed!!.text.toString().toLong() < trade.LowerLimit.toString().toLong()) {
-
-                    Apputils.showMsg(this@BuyingDetailActivity, "Should exceed lower Limit ")
-                    return
-                }
+            if (pkr_ed!!.text.toString().toDouble() > trade.Amount!!.toDouble()) {
+                Apputils.showMsg(this@BuyingDetailActivity, "Ecurrency must be less than total amount")
+                return
             }
         }
         if (isTermAccept) {
 //            order.Amount =
-           /* var intent = Intent(this, OrderDetailActivity::class.java)
-            var obj = Gson().toJson(trade)
-            val order = Gson().toJson(order)
-            intent.putExtra("tradeObj", obj)
-            intent.putExtra("order", order)
-            intent.putExtra("coinUsed", ecuurency_ed.text.toString())
-            intent.putExtra("priceCharged", pkr_ed.text.toString())
-            startActivity(intent)
-            finish()*/
+            /* var intent = Intent(this, OrderDetailActivity::class.java)
+             var obj = Gson().toJson(trade)
+             val order = Gson().toJson(order)
+             intent.putExtra("tradeObj", obj)
+             intent.putExtra("order", order)
+             intent.putExtra("coinUsed", ecuurency_ed.text.toString())
+             intent.putExtra("priceCharged", pkr_ed.text.toString())
+             startActivity(intent)
+             finish()*/
 
-            addOrder(serviceListener = object :ServiceListener<String>{
+
+            addOrder(serviceListener = object : ServiceListener<String> {
                 override fun success(obj: String) {
-                    Apputils.showMsg(this@BuyingDetailActivity,obj)
+                    Apputils.showMsg(this@BuyingDetailActivity, obj)
                     finish()
                 }
 
                 override fun fail(error: ServiceError) {
-                    Apputils.showMsg(this@BuyingDetailActivity,"Fail to add new order")
+                    Apputils.showMsg(this@BuyingDetailActivity, "Fail to add new order")
                 }
             })
         } else {
@@ -172,11 +180,11 @@ class BuyingDetailActivity : AppCompatActivity() {
 
     }
 
-    private fun addOrder(serviceListener:ServiceListener<String>) {
+    private fun addOrder(serviceListener: ServiceListener<String>) {
         order.Amount = trade.Amount
         order.Price = trade.Price
-        order.BitAmount = ecuurency_ed.text.toString()
-        order.BitPrice = pkr_ed.text.toString()
+        order.BitAmount = pkr_ed.text.toString()
+        order.BitPrice = ecuurency_ed.text.toString()
         order.UpperLimit = trade.UpperLimit.toString()
         order.LowerLimit = trade.LowerLimit.toString()
         order.FUAC_Id = sharedPref!!.getProfilePref(this@BuyingDetailActivity).UAC_Id
@@ -187,7 +195,7 @@ class BuyingDetailActivity : AppCompatActivity() {
         order.ORD_UserId = sharedPref!!.getProfilePref(this@BuyingDetailActivity).UAC_Id
         order.User_Id = trade.FUAC_Id.toString()
 
-        if(orderType=="buy")
+        if (orderType == "buy")
             order.Description = "bought"
         else
             order.Description = "sold"
@@ -195,14 +203,14 @@ class BuyingDetailActivity : AppCompatActivity() {
 
         ApiClint.getInstance()?.getService()?.addNewOrder(
                 order.User_Id!!, order.ORD_UserId!!, order.FUAC_Id!!, order.FUT_Id!!
-                ,order.Price!!,order.Amount!!,order.PaymentMethod!!,order.UpperLimit!!,order.LowerLimit!!,
-                order.BitAmount!!, order.BitPrice!!, order.Status!!,order.Description!!,order.Notify_Status!!)?.
-                enqueue(object: Callback<Response>{
+                , order.Price!!, order.Amount!!, order.PaymentMethod!!, order.UpperLimit!!, order.LowerLimit!!,
+                order.BitAmount!!, order.BitPrice!!, order.Status!!, order.Description!!, order.Notify_Status!!)?.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>?, t: Throwable?) {
-                print("error"+t)
+                print("error" + t)
                 serviceListener.fail(ServiceError("failed"))
 
             }
+
             override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                 print("success")
                 print(response!!.body())

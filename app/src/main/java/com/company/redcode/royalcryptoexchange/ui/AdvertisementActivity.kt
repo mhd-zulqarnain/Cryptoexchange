@@ -1,8 +1,7 @@
-package com.company.redcode.royalcryptoexchange
+package com.company.redcode.royalcryptoexchange.ui
 
 import android.annotation.TargetApi
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -13,22 +12,19 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import com.company.redcode.royalcryptoexchange.auth.SignInActivity
-import com.company.redcode.royalcryptoexchange.models.ApiResponse
+import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Trade
-import com.company.redcode.royalcryptoexchange.models.Users
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
-import com.company.redcode.royalcryptoexchange.ui.BuyActivity
-import com.company.redcode.royalcryptoexchange.ui.SellActivity
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_advertisement.*
-import kotlinx.android.synthetic.main.dialogue_wallet_send.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.math.BigDecimal
+import java.text.DecimalFormat
 
 class AdvertisementActivity : AppCompatActivity() {
     var remCoin: Double? = null;
@@ -66,11 +62,16 @@ class AdvertisementActivity : AppCompatActivity() {
                 if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "") {
                     try {
                         val amount = ed_amount!!.text.toString().toDouble()
+
+
+                        //Apputils.showMsg(this@BuyingDetailActivity, " Limit ")
+
                         remCoin = getCoinAfterFee(amount)
                         fees = amount * 4 / 100
-                        tv_fees!!.setText(fees.toString())
-                        tv_total!!.setText(remCoin.toString())
-                    } catch (e: NumberFormatException) {
+                        tv_fees!!.setText(BigDecimal.valueOf(fees!!).toPlainString())
+                        tv_total!!.setText(BigDecimal.valueOf(remCoin!!).toPlainString())
+
+                    } catch (e: Exception) {
                         println("error")
                     }
 

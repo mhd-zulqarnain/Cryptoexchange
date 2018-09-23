@@ -11,10 +11,10 @@ class Apputils{
         fun showMsg(ctx:Activity, msg:String){
             Toast.makeText(ctx , msg ,Toast.LENGTH_LONG).show()
         }
-        /*fun formatCurrency(amount: String): String {
+        fun formatCurrency(amount: String): String {
             val formatter = DecimalFormat("###,###,##")
             return formatter.format(java.lang.Double.parseDouble(amount))
-        }*/
+        }
 
         fun isValidEmail(target: CharSequence): Boolean {
             return if (TextUtils.isEmpty(target)) {

@@ -1,4 +1,4 @@
-package com.company.redcode.royalcryptoexchange
+package com.company.redcode.royalcryptoexchange.ui
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.widget.LinearLayout
+import com.company.redcode.royalcryptoexchange.OrderDetailActivity
+import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.OrderAdapater
 import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.Trade
@@ -57,7 +59,7 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         order_recycler!!.layoutManager =orderlayout
         orderAdapater = OrderAdapater(this@AdvertismentDetailActivity, orderList){ post ->
             //action
-            val intent = Intent(this@AdvertismentDetailActivity,OrderDetailActivity::class.java)
+            val intent = Intent(this@AdvertismentDetailActivity, OrderDetailActivity::class.java)
             var obj = Gson().toJson(orderList[post])
             intent.putExtra("order",obj)
             startActivity(intent)

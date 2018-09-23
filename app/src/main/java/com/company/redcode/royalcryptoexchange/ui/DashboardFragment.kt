@@ -3,7 +3,6 @@ package com.company.redcode.royalcryptoexchange.ui
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -15,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.company.redcode.royalcryptoexchange.AdvertismentDetailActivity
 import com.company.redcode.royalcryptoexchange.OrderDetailActivity
 
 import com.company.redcode.royalcryptoexchange.R
@@ -81,7 +79,7 @@ class DashboardFragment : Fragment() {
         
 
         adsAdapater = AdsDashboardAdapater(activity!!, adsList){ post ->
-            val intent = Intent(activity!!,AdvertismentDetailActivity::class.java)
+            val intent = Intent(activity!!, AdvertismentDetailActivity::class.java)
             var obj = Gson().toJson(adsList[post])
             intent.putExtra("trade",obj)
             startActivity(intent)

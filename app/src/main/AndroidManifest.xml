@@ -67,7 +67,7 @@
             android:theme="@style/BuyTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".AdvertisementActivity"
+            android:name=".ui.AdvertisementActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
@@ -75,7 +75,7 @@
         <activity android:name=".SplashActivity">
 
         </activity>
-        <activity android:name=".AdvertismentDetailActivity"></activity>
+        <activity android:name=".ui.AdvertismentDetailActivity"></activity>
     </application>
 
 </manifest>
