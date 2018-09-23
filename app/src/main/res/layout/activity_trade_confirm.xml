@@ -1,22 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="18dp"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_gravity="center"
 
     >
 
-    <TextView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="4dp"
+        android:background="#346980"
+        android:minHeight="?attr/actionBarSize">
 
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Order Details" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/oswald_regular"
-        android:text="Payment Process "
-        android:layout_margin="8dp"
-        android:layout_marginTop="12dp"
-        android:textSize="35dp" />
+        android:layout_gravity="center"
+        android:layout_margin="18dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Order "
+                android:fontFamily="@font/oswald_regular"
+                android:textSize="35dp"
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Details"
+                android:fontFamily="@font/oswald_regular"
+                android:textColor="@color/backgoundBtn"
+                android:textSize="35dp"
+                />
+
+
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,21 +71,19 @@
         android:weightSum="3">
 
         <TextView
+            style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Seller Name "
-            style="@style/buyActivityText"
-            />
+            android:text="Seller Name " />
 
         <TextView
-            android:id="@+id/seller_name"
+            android:id="@+id/dealer_name"
+            style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            style="@style/buyActivityText"
-            android:text="Mr Seller"
-            />
+            android:text="Mr Seller" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,20 +94,21 @@
         android:weightSum="3">
 
         <TextView
+            style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Amount "
-            style="@style/buyActivityText"/>
+            android:text="Amount " />
 
         <TextView
             android:id="@+id/btc_amount"
+            style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="1200"
-            style="@style/buyActivityText" />
+            android:text="1200" />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,11 +119,11 @@
         android:weightSum="3">
 
         <TextView
+            style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Payment method "
-            style="@style/buyActivityText" />
+            android:text="Payment method " />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -89,24 +133,10 @@
 
             <TextView
                 android:id="@+id/tv_terms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Method : Bank Transfer"
-                style="@style/buyActivityText"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Bank : Hbl"
-                style="@style/buyActivityText"/>
-
-            <TextView
                 style="@style/buyActivityText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="IBN : 123123123" />
+                android:text="Method : Bank Transfer" />
 
 
         </LinearLayout>
@@ -120,20 +150,20 @@
         android:orientation="horizontal"
         android:weightSum="3">
 
-         <TextView
+        <TextView
+            style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Price Charged : PKR "
-            style="@style/buyActivityText"/>
+            android:text="Price " />
 
         <TextView
             android:id="@+id/price_tv"
+            style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="1200"
-            style="@style/buyActivityText" />
+            android:text="1200" />
     </LinearLayout>
 
     <LinearLayout
@@ -144,39 +174,41 @@
         android:weightSum="3">
 
         <TextView
+            style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Time Remaining "
-            style="@style/buyActivityText"/>
+            android:text="Time Remaining " />
 
         <TextView
             android:id="@+id/timer_tv"
+            style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="1200"
-            style="@style/buyActivityText" />
+            android:text="1200" />
     </LinearLayout>
+
     <Button
         android:id="@+id/btn_paid"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="15dp"
         android:layout_gravity="center"
-        android:textColor="#fff"
+        android:layout_marginLeft="15dp"
         android:background="@drawable/layout_curve_btn_paid"
-        android:text="I have Paid" />
+        android:text="I have Paid"
+        android:textColor="#fff" />
+
     <Button
-        android:layout_marginTop="10dp"
         android:id="@+id/btn_later"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:textColor="@color/backgoundTheme"
+        android:layout_marginTop="10dp"
         android:background="@drawable/white_curve_btn"
-        android:text="Pay later" />
-
+        android:text="Pay later"
+        android:textColor="@color/backgoundTheme" />
+    </LinearLayout>
 </LinearLayout>

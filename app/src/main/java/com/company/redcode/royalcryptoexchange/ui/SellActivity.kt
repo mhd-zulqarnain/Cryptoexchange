@@ -148,17 +148,7 @@ class SellActivity : AppCompatActivity() {
         })
     }
 
-    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
 
-        var feeAmount = 4
-        var totalPrice: Double = coinNum * price
-        var fees: Double = totalPrice * feeAmount / 100
-        var actualPrice: Double = totalPrice - fees
-
-        var coinRem: Double = actualPrice / price
-
-        return coinRem
-    }
 
 
 }

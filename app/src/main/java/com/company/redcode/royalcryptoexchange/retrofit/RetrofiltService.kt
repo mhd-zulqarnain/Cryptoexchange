@@ -29,6 +29,9 @@ interface RetrofiltService {
                   @Path("amount") amount: String , @Path("exeamount") exeamount: String , @Path("exefee") exefee: String,@Path("price") price: String,@Path("fees") fees: String,
                   @Path("ulimit") ulimit: String,@Path("llimit") llimit: String,@Path("ctype") ctype: String): Call<Response>
 
+    //string fuacid, string ordertype, string fupid, string amnt, string exec_amount, string exec_fees, string pric, string fes, string uplimit,
+// \ string lowlimit, string currencytyp
+
     @GET("Select_UserAccount/{userid}")
     @Headers("Content-Type:application/json")
     fun getUserById(@Path("userid") userid:String): Call<Users>
@@ -49,4 +52,23 @@ interface RetrofiltService {
     @GET("Select_UserOrder/{fuac_id}")
     @Headers("Content-Type:application/json")
     fun getOrderById(@Path("fuac_id") fuac_id:String): Call<ArrayList<Order>>
+
+    /*get orders by trade id*/
+    @GET("Select_TradeOrder/{FUT_Id}")
+    @Headers("Content-Type:application/json")
+    fun getOrderByTradeId(@Path("FUT_Id") FUT_Id:String): Call<ArrayList<Order>>
+
+    @POST("Add_UserOrder/{userid}/{ord_userid}/{fuac_id}/{fut_id}/{price}/{amount}/{payment_method}/{upperlimit}/{lowerlimit}/{bitamount}" +
+            "/{bitprice}/{status}/{description}/{notify_status}")
+    @Headers("Content-Type:application/json")
+    fun addNewOrder(@Path("userid") userid:String,@Path("ord_userid") ord_userid:String,@Path("fuac_id") fuac_id:String,@Path("fut_id") fut_id:String,
+                    @Path("price") price:String,@Path("amount") amount:String,@Path("payment_method") payment_method:String,@Path("upperlimit") upperlimit:String,
+                    @Path("lowerlimit") lowerlimit:String, @Path("bitamount") bitamount:String, @Path("bitprice") bitprice:String, @Path("status") status:String,
+                    @Path("description") description:String,@Path("notify_status") notify_status:String): Call<Response>
+
+/*get payment and terms details*/
+    @GET("Select_tradeDetail/{userId}/{pid}")
+    @Headers("Content-Type:application/json")
+    fun gettermAndPayment(@Path("userId") userId:String,@Path("pid") pid:String): Call<OrderTerms>
 }
+

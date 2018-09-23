@@ -60,7 +60,7 @@ class BuyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy)
         toolbar = findViewById(R.id.toolbar_top)
-        initView()
+        //initView()
     }
 
     @SuppressLint("NewApi")

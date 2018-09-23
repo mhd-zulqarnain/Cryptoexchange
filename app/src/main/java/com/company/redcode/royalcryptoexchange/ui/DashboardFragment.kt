@@ -2,6 +2,7 @@ package com.company.redcode.royalcryptoexchange.ui
 
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +15,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import com.company.redcode.royalcryptoexchange.AdvertismentDetailActivity
+import com.company.redcode.royalcryptoexchange.OrderDetailActivity
 
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.AdsDashboardAdapater
@@ -22,6 +25,7 @@ import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.SharedPref
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -68,12 +72,19 @@ class DashboardFragment : Fragment() {
 
         orderAdapater = OrderAdapater(activity!!, orderList){ post ->
             //action
+            val intent = Intent(activity!!,OrderDetailActivity::class.java)
+            var obj = Gson().toJson(orderList[post])
+            intent.putExtra("order",obj)
+            startActivity(intent)
         }
         getOrderList()
         
 
         adsAdapater = AdsDashboardAdapater(activity!!, adsList){ post ->
-            //action
+            val intent = Intent(activity!!,AdvertismentDetailActivity::class.java)
+            var obj = Gson().toJson(adsList[post])
+            intent.putExtra("trade",obj)
+            startActivity(intent)
         }
         advertisment_recycler!!.adapter = adsAdapater
         order_recycler!!.adapter = orderAdapater
