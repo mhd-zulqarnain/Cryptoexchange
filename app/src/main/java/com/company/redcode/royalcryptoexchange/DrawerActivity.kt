@@ -72,6 +72,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_support->{
                 SupportFragment()
             }
+            R.id.nav_dispute ->{
+                DisputetFragment();
+            }
             else -> {
                 HomeFragment()
             }

@@ -2,6 +2,7 @@ package com.company.redcode.royalcryptoexchange.ui
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -26,8 +27,8 @@ import com.google.gson.Gson
 
 class ProfileFragment : Fragment() {
 
-    var btn_add_bank: LinearLayout? = null
-    var btn_add_img: ImageButton? = null
+    var btn_add_bank: Button? = null
+    var btn_add_img: Button? = null
     var spinner_payment_method: Spinner? = null
     var bank_recycler_view: RecyclerView? = null
     val SELECT_PICTURE: Int = 4
@@ -52,7 +53,7 @@ class ProfileFragment : Fragment() {
 
     private fun initView(view: View?) {
 
-        btn_add_bank = view!!.findViewById(R.id.btn_add_bank)
+        btn_add_bank = view!!.findViewById(R.id.addaccount)
         attach_img_1 = view!!.findViewById(R.id.attach_img_1)
         attach_img_2 = view!!.findViewById(R.id.attach_img_2)
         attach_img_3 = view!!.findViewById(R.id.attach_img_3)
@@ -72,7 +73,7 @@ class ProfileFragment : Fragment() {
 
     }
     private fun showImageAddDialog() {
-        val view: View = LayoutInflater.from(activity!!).inflate(R.layout.select_image_dialog, null)
+        val view: View = LayoutInflater.from((activity as Context?)!!).inflate(R.layout.select_image_dialog, null)
         val alertBox = AlertDialog.Builder(activity!!)
         alertBox.setView(view)
         alertBox.setCancelable(true)

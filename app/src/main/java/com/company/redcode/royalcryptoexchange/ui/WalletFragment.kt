@@ -1,6 +1,8 @@
 package com.company.redcode.royalcryptoexchange.ui
 
 
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -28,9 +30,12 @@ class WalletFragment : Fragment() {
 
     private fun initView(view: View) {
         var wollet = arrayListOf<Wallet>()
-        wollet.add(Wallet("BTC Wallet","BTC","10000",12000))
-        wollet.add(Wallet("BCH Wallet","BCH","420000",4))
-        wollet.add(Wallet("BTH Wallet","BTC","20000",24000))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.openbitcoin),"BTC","BTC","10000",12000))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.xrpcoin),"XRP","XRP","420000",4))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.ethhcoin),"ETH","ETH","20000",24000))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.eoscoin),"EOS","EOS","10000",12000))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.adacoin),"ADA","ADA","420000",4))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.ltccoin),"LTC","LTC","20000",24000))
 
 
         var recyclerView = view.findViewById(R.id.wollet_recycler) as RecyclerView

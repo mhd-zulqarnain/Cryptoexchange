@@ -28,7 +28,7 @@ class SupportFragment : Fragment() {
     private var attach_img_4: ImageView? = null
     private var myImgJson: String? = null
 
-    var btn_add: ImageButton? = null
+    var btn_add: Button? = null
     var coin: String = " "
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +49,7 @@ class SupportFragment : Fragment() {
         val coin_type_spinner = view.findViewById(R.id.spinner) as Spinner
         val spinnerAdapter = ArrayAdapter.createFromResource(activity!!,R.array.array_support_title, android.R.layout.simple_spinner_item)
 
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_textview)
         coin_type_spinner.adapter = spinnerAdapter
         coin_type_spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
