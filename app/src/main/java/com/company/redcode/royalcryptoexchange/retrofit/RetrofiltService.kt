@@ -78,4 +78,15 @@ interface RetrofiltService {
     @POST("Add_UserDocument/{fuac_id}/{userdoc}")
     @Headers("Content-Type:application/json")
     fun add_userdoc(@Path("fuac_id") fuac_id: String, @Path("userdoc") userdoc: String): Call<Response>
+
+    // add bank details
+    @POST("Add_UserPaymentDetail/{fuac_id}/{type}/{account}/{title}/{bankname}/{bankcode}")
+    @Headers("Content-Type:application/json")
+    fun add_paymentdetail(@Path("fuac_id") fuac_id: String, @Path("type") type: String,@Path("account") account: String,@Path("title") title: String,@Path("bankname") bankname: String,@Path("bankcode") bankcode: String): Call<PaymentMethod>
+// select images
+    @GET("Select_UserDocument/{fuac_id}")
+    @Headers("Content-Type:application/json")
+    fun user_document(@Path("fuac_id") fuac_id: String): Call<ArrayList<Document>>
+
+
 }

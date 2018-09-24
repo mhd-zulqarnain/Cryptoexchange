@@ -22,16 +22,16 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.UserBankAdapater
-import com.company.redcode.royalcryptoexchange.models.Bank
-import com.company.redcode.royalcryptoexchange.models.ImageObject
-import com.company.redcode.royalcryptoexchange.models.Users
+import com.company.redcode.royalcryptoexchange.models.*
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.*
 import com.example.admin.camerawork.CameraActivity
 import com.google.gson.Gson
 import com.rengwuxian.materialedittext.MaterialEditText
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,15 +66,27 @@ class ProfileFragment : Fragment() {
     var repass_:EditText?=null
     var email_ :EditText?=null;
     var btnupdate:Button?=null
+    var docimage : LinearLayout?=null;
     var profile_terms : MaterialEditText? = null;
-
-
+    var image : String = "http://wpassignment123.000webhostapp.com/uploads/";
+    var list = ArrayList<Bank>()
+    var docver:String?=null;
     var sharedpref : SharedPref= SharedPref.getInstance()!!
+    var spinnervalue ="Jazz Cash"
+    var etbankname:EditText ? = null
+    var etbankcode:EditText ? = null
+    var etcnic:EditText ? = null
+    var etaccountttile:EditText ? = null
+    var etmobilenumber:EditText ? = null
+    var etaccountnumber:EditText ? = null
+    var btnaddpayment:Button ? = null
+
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
-
+        image = "uploads/";
         val builder = android.app.AlertDialog.Builder(activity!!)
         builder.setView(R.layout.layout_dialog_progress)
         builder.setCancelable(false)
@@ -90,6 +102,8 @@ class ProfileFragment : Fragment() {
         repass_ = view!!.findViewById(R.id.profile_repass)
         btnupdate = view!!.findViewById(R.id.btnprofileupdate);
         profile_terms = view!!.findViewById(R.id.profile_terms);
+        docimage = view!!.findViewById(R.id.docimage);
+
 
 
 
@@ -105,7 +119,13 @@ class ProfileFragment : Fragment() {
         attach_img_2 = view!!.findViewById(R.id.attach_img_2)
         attach_img_3 = view!!.findViewById(R.id.attach_img_3)
 
+
+        //api call image document
+
+
+
         var obj: Users =sharedpref.getProfilePref(activity!!)
+  //      var obj: Users =sharedpref.getProfilePref(activity!!)
 
         fname!!.setText(obj.FirstName)
         lname!!.setText(obj.LastName);
@@ -114,11 +134,37 @@ class ProfileFragment : Fragment() {
         repass_!!.setText(obj.Password);
         email_!!.setText(obj.Email);
         phno!!.setText(obj.PhoneNum);
-
+        docver = obj.DocumentVerification;
         if(obj.Terms!="Your Terms")
         profile_terms!!.setText(obj.Terms)
 
         fuac_id=obj.UAC_Id;
+        val im1:ImageView = view.findViewById(R.id.attach_img_1)
+        val im3:ImageView = view.findViewById(R.id.attach_img_3)
+        val im2:ImageView = view.findViewById(R.id.attach_img_2)
+if(docver!="Verified"){
+        ApiClint.getInstance()?.getService()?.user_document(fuac_id!!)?.enqueue(object: Callback<ArrayList<Document>>{
+            override fun onFailure(call: Call<ArrayList<Document>>?, t: Throwable?) {
+print("Error in Showing Image "+t)
+            }
+
+            override fun onResponse(call: Call<ArrayList<Document>>?, response: retrofit2.Response<ArrayList<Document>>?) {
+            if(response!=null){
+                var doclist = response!!.body();
+if(doclist!![0].User_Document!=null)
+                Picasso.with(activity!!).load(image+ doclist!![0].User_Document).into(im1);
+if(doclist!![1].User_Document!=null)
+                Picasso.with(activity!!).load(image+ doclist!![1].User_Document).into(im2);
+if(doclist!![2].User_Document!=null)
+                Picasso.with(activity!!).load(image+ doclist!![2].User_Document).into(im3);
+            }}
+
+        })
+}else{
+    docimage!!.visibility= (View.INVISIBLE);
+      var ll:LinearLayout=  view.findViewById(R.id.adddoc);
+    ll!!.visibility = View.INVISIBLE
+}
         btn_add_img = view!!.findViewById(R.id.btn_add_img)
 
         btn_add_bank!!.setOnClickListener {
@@ -133,6 +179,32 @@ class ProfileFragment : Fragment() {
             profileValidiation();
         })
 
+    }
+
+
+    fun addbank(acc_cnic:String,acctitle:String,banknumber:String,bankcode:String){
+        ApiClint?.getInstance()?.getService()?.add_paymentdetail(fuac_id!!,spinnervalue!!,acc_cnic!!,acctitle!!,banknumber!!,bankcode!!)?.enqueue(object : Callback<PaymentMethod>{
+            override fun onFailure(call: Call<PaymentMethod>?, t: Throwable?) {
+                print("Error While Adding Bank Details"+t)
+            }
+
+            override fun onResponse(call: Call<PaymentMethod>?, response: retrofit2.Response<PaymentMethod>?) {
+                if (response != null) {
+                    var apiResponse = response.body()
+                    //   if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                    //     var status = response.body()!!.message
+                    Toast.makeText(activity!!, "Payment Method Added!!", Toast.LENGTH_SHORT).show()
+                    list.add(Bank(apiResponse!!.UP_Id,apiResponse!!.Account,apiResponse!!.BankName))
+                    adapter!!.notifyDataSetChanged();
+                    //finish();
+                } else {
+                    Toast.makeText(activity!!, "Error!! ", Toast.LENGTH_SHORT).show()
+
+                }
+            }
+
+
+        })
     }
 
      fun profileValidiation(){
@@ -238,12 +310,47 @@ class ProfileFragment : Fragment() {
 
         dialog.show()
     }
+
     private fun showTradeDialog() {
 
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialog_new_bank, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
         alertBox.setView(view)
         val dialog = alertBox.create()
+
+
+
+        etaccountnumber = view!!.findViewById(R.id.et_accountnumber)
+        etbankcode = view!!.findViewById(R.id.et_bankcode)
+        etbankname = view!!.findViewById(R.id.et_bankname)
+        etaccountttile = view!!.findViewById(R.id.et_accounttitle)
+        etcnic = view!!.findViewById(R.id.et_cnic)
+        etmobilenumber = view!!.findViewById(R.id.et_mobilenumber)
+        btnaddpayment = view!!.findViewById(R.id.btn_addpayment)
+
+
+
+
+
+
+
+        btnaddpayment!!.setOnClickListener{view->
+
+
+            val account:String = etaccountnumber!!.text.toString();
+            val title:String  = etaccountttile!!.text.toString()
+            val name:String  = etbankname!!.text.toString()
+            val cnic :String = etcnic!!.text.toString()
+            val mob :String = etmobilenumber!!.text.toString()
+            val code :String = etbankcode!!.text.toString()
+
+            if(spinnervalue == "Bank Transfer")
+                addbank(title.toString(),account.toString(),name.toString(),code.toString());
+            else
+                addbank(cnic.toString(),"null",mob.toString(),"null");
+
+        }
+
 
         //-------------------------------------------------------------------------
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -257,7 +364,9 @@ class ProfileFragment : Fragment() {
         spinner_payment_method!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+
                 val item = parent!!.getItemAtPosition(pos);
+                spinnervalue = item.toString();
                 if(item.equals("Bank Transfer")){
                     mobile_method_view!!.visibility = View.GONE
                     bank_view!!.visibility = View.VISIBLE
@@ -268,11 +377,13 @@ class ProfileFragment : Fragment() {
             }
         })
 
-         var list = ArrayList<Bank>()
-         list.add(Bank("ahmed", "Bank Transfer"))
-         list.add(Bank("ahmed", "Bank Transfer"))
-         list.add(Bank("ahmed", "Bank Transfer"))
-         list.add(Bank("ahmed", "Bank Transfer"))
+
+        //bank
+
+///         list.add(Bank("ahmed", "Bank Transfer"))
+   //      list.add(Bank("ahmed", "Bank Transfer"))
+     //    list.add(Bank("ahmed", "Bank Transfer"))
+       //  list.add(Bank("ahmed", "Bank Transfer"))
 
 
           adapter = UserBankAdapater(activity!!, list) { position ->
@@ -374,8 +485,6 @@ class ProfileFragment : Fragment() {
                         //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
                         imagename!!.add(response)
 
-
-
                         userdoc(fuac_id!!, response!!, object : ServiceListener<String> {
                             override fun success(obj: String) {
                                 if(i==size){
@@ -412,12 +521,18 @@ class ProfileFragment : Fragment() {
                         } );
 
 
-                    }, Response.ErrorListener { Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show() }) {
+                    }, Response.ErrorListener { Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
+                    progressBar!!.dismiss()
+            }) {
                 //@Throws(AuthFailureError::class)
                 override fun getParams(): Map<String, String> {
                     val imageData = imageTostring(bitmap!!)
                     val params = HashMap<String, String>()
+                 //   params.put("image",imageData);
+                   // params.put("string1","ali")
                     params["image"] = imageData
+                    params["Saving"] = image;
+
                     return params
                 }
             }
