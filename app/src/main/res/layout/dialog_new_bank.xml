@@ -231,6 +231,44 @@
                 android:layout_marginTop="5dp"
                 android:background="#fff"></View>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    style="@style/bankDialogText"
+                    android:text="Type"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/bankDialogText"
+                    android:text="Mobile/Bank"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:textAlignment="center"
+                    style="@style/bankDialogText"
+                    android:text="Action"
+                    />
+
+
+            </LinearLayout>
+
+
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/bank_recycler_view"
                 android:layout_width="match_parent"
