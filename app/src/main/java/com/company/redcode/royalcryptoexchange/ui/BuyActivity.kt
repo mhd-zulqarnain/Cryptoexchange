@@ -26,9 +26,7 @@ import retrofit2.Response
 import java.util.*
 
 
-
 class BuyActivity : AppCompatActivity() {
-
 
 
     var seller_filter_group: RadioGroup? = null
@@ -40,7 +38,7 @@ class BuyActivity : AppCompatActivity() {
     var coin: String = "BTC"
     var tradelist = ArrayList<Trade>()
     var adapter: TableBuyerAdapater? = null
-    var total:Double? = null
+    var total: Double? = null
     /*Dialog item */
     var btnCancel: Button? = null
     var ed_currency: TextView? = null
@@ -56,11 +54,8 @@ class BuyActivity : AppCompatActivity() {
     private var currentItems: Int? = 0
     private var totalItems: Int? = 0
     private var scrollOutItems: Int? = 0
-    private var back_btn:ImageView? = null
 
-    var loading: Boolean? = false
-
-    var toolbar :Toolbar ? = null
+    var toolbar: Toolbar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy)
@@ -72,12 +67,12 @@ class BuyActivity : AppCompatActivity() {
     private fun initView() {
 
         seller_coin_filter = findViewById(R.id.seller_coin_filter)
-        seller_filter_group =findViewById(R.id.seller_filter_group)
+        seller_filter_group = findViewById(R.id.seller_filter_group)
         seller_price_filter = findViewById(R.id.seller_price_filter)
         seller_limit_filter = findViewById(R.id.seller_limit_filter)
 
 
-        val coin_type_spinner =findViewById(R.id.curreny_type_spinner) as Spinner
+        val coin_type_spinner = findViewById(R.id.curreny_type_spinner) as Spinner
 
         val builder = AlertDialog.Builder(this@BuyActivity!!)
         builder.setView(R.layout.layout_dialog_progress)
@@ -91,6 +86,7 @@ class BuyActivity : AppCompatActivity() {
             var obj = Gson().toJson(tradelist[position])
             val intent = Intent(this@BuyActivity, BuyingDetailActivity::class.java)
             intent.putExtra("tradeObject", obj)
+            intent.putExtra("orderType", "BUY")
             startActivity(intent)
         }
 
@@ -164,20 +160,18 @@ class BuyActivity : AppCompatActivity() {
         tradelist.clear()
 
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.getTradeByType(coin, "buy")?.enqueue(object : Callback<ArrayList<Trade>> {
-            override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
-                response?.body()?.forEach { trade ->
-                    tradelist.add(trade)
-                }
-                progressBar!!.dismiss()
-                adapter!!.notifyDataSetChanged()
-            }
-
+        ApiClint.getInstance()?.getService()?.getTrade("buy", coin)?.enqueue(object : Callback<ArrayList<Trade>> {
             override fun onFailure(call: Call<ArrayList<Trade>>?, t: Throwable?) {
-                println("error tpye  " + t.toString())
-                progressBar!!.dismiss()
-                Toast.makeText(this@BuyActivity, "Network error ", Toast.LENGTH_LONG).show()
-
+                println("failed "+t)
+            }
+            override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
+                if (response?.body() != null) {
+                    response?.body()?.forEach { trade ->
+                        tradelist.add(trade)
+                    }
+                    progressBar!!.dismiss()
+                    adapter!!.notifyDataSetChanged()
+                }
             }
         })
     }
@@ -204,7 +198,7 @@ class BuyActivity : AppCompatActivity() {
             runOnUiThread {
                 Handler().postDelayed(
                         {
-                            if ((adapter!!.num) *15 < tradelist!!.size) {
+                            if ((adapter!!.num) * 15 < tradelist!!.size) {
                                 adapter!!.num = adapter!!.num + 1
                             }
                             progressdialog.dismiss()

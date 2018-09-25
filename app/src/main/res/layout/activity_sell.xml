@@ -145,7 +145,7 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="62dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -187,15 +187,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:background="#fff"
-                android:layout_marginTop="-7dp"
-                android:layout_marginBottom="3dp"/>
+             />
 
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/table_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </LinearLayout>
 

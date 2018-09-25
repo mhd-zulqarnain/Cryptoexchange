@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:orientation="vertical"
-                android:visibility="gone">
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -76,6 +76,7 @@
                         style="@style/bankDialogText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:id="@+id/et_accountnumber"
                         android:layout_weight="2"
                         android:hint="384628372898"
                         android:inputType="number" />
@@ -94,13 +95,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Account title "
-                        android:textColor="#000" />
+                        />
 
                     <EditText
                         style="@style/bankDialogText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
+                        android:id="@+id/et_accounttitle"
                         android:hint="Account title"
 
                         android:inputType="text" />
@@ -125,7 +127,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-
+android:id="@+id/et_bankname"
                         android:hint="Bank name"
                         android:inputType="text" />
 
@@ -149,7 +151,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-
+                    android:id="@+id/et_bankcode"
                         android:hint="Bank code"
                         android:inputType="text" />
 
@@ -168,6 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
+                    android:visibility="visible"
                     android:orientation="horizontal">
 
                     <TextView
@@ -182,6 +185,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
+                        android:id="@+id/et_mobilenumber"
                         android:hint="384628372898"
                         android:inputType="number" />
 
@@ -207,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:hint="Your nic number"
-
+                        android:id="@+id/et_cnic"
                         android:inputType="number" />
 
                 </LinearLayout>
@@ -217,7 +221,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/layout_curve_btn_paid"
-                android:text="Add" />
+                android:text="Add"
+                android:id="@+id/btn_addpayment"/>
 
             <View
                 android:layout_width="match_parent"

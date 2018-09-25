@@ -18,16 +18,7 @@
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
             android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan"
-
-            >
-
-
-
-        </activity>
-
-        <activity android:name="com.example.admin.camerawork.DebuteCamera"
-            android:screenOrientation="portrait">
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
@@ -37,19 +28,19 @@
             android:focusableInTouchMode="true"
             android:theme="@style/BuyTheme"
             android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".ui.BuyingDetailActivity"
             android:label="Buy activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".TradeConfirmActivity" />
+        <activity android:name=".OrderDetailActivity" />
         <activity
             android:name=".ui.ProfileActivity"
             android:focusable="true"
@@ -59,27 +50,8 @@
             />
         <activity
             android:name=".DrawerActivity"
-            android:theme="@style/BuyTheme"
-            android:screenOrientation="portrait"
-            >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
-        </activity>
-
-        <activity android:name=".ui.DisputeActivity"
-            android:screenOrientation="portrait"
-            >
-
-
-        </activity>
-
-
+            android:theme="@style/BuyTheme"></activity>
+        <activity android:name=".ui.DisputeActivity"></activity>
         <activity
             android:name="com.example.admin.camerawork.CameraActivity"
             android:theme="@style/AppTheme"
@@ -100,14 +72,15 @@
             android:theme="@style/BuyTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".AdvertisementActivity"
+            android:name=".ui.AdvertisementActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
             android:theme="@style/BuyTheme" />
-        <activity android:name=".SplashActivity"
-            android:screenOrientation="portrait"
-            ></activity>
+        <activity android:name=".SplashActivity"/>
+
+        <activity android:name=".ui.AdvertismentDetailActivity"></activity>
+        <!--Release payment activity-->
     </application>
 
 </manifest>

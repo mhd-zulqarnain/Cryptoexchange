@@ -72,6 +72,9 @@
     </style>
 
     <!--end-->
+    <style name="ProgressDialogtheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 
     <style name="editTextStyle">
         <item name="android:layout_marginTop">12dp</item>

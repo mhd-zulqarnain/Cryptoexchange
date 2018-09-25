@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/color_gradient_profile"
@@ -16,11 +15,11 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-<ImageView
-    android:layout_width="150dp"
-    android:layout_height="150dp"
-    android:src="@mipmap/ic_launcher_logo"
-    />
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@mipmap/ic_launcher_logo"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,51 +32,60 @@
 
 
     <LinearLayout
+        android:layout_margin="10dp"
+
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/editLableStyle">
+            android:text="Email"
+            android:layout_marginLeft="3dp"/>
 
 
             <EditText
-                android:id="@+id/ed_password"
+                android:id="@+id/ed_email"
                 style="@style/signUpEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Email"
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionNext"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/editLableStyle">
-
-
-            <EditText
-                android:id="@+id/user_email"
-                style="@style/signUpEditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/prompt_password"
-                android:imeOptions="actionDone"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true" />
 
-        </android.support.design.widget.TextInputLayout>
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prompt_password"
+            android:layout_marginLeft="3dp"/>
+            <EditText
+                android:id="@+id/ed_password"
+                style="@style/signUpEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+
+
+        <TextView
+            android:id="@+id/tv_forget_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_forget_password"
+            android:layout_margin="4dp"
+            android:textColor="#b6bde7"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
