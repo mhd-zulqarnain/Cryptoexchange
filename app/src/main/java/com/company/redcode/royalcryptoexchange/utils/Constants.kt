@@ -14,7 +14,7 @@ class Constants{
         const val STATUS_FAILED = "failed"
         const val STATUS_DISPUTE = "dispute"
         const val STATUS_OPEN = "open"
-        const val STATUS_IN_PROGRESS = "in-progress"
+        const val STATUS_IN_PROGRESS = "in-process"
         const val STATUS_COMPLETED = "completed"
         const val STATUS_CANCEL = "cancel"
 
