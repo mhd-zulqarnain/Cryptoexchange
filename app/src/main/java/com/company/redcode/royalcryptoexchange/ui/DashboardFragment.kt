@@ -77,7 +77,6 @@ class DashboardFragment : Fragment() {
         }
         getOrderList()
         
-
         adsAdapater = AdsDashboardAdapater(activity!!, adsList){ post ->
             val intent = Intent(activity!!, AdvertismentDetailActivity::class.java)
             var obj = Gson().toJson(adsList[post])
@@ -109,7 +108,6 @@ class DashboardFragment : Fragment() {
                     }
                 }
             })
-
 
 }
     }

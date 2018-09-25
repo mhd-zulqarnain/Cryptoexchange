@@ -41,6 +41,7 @@ class BuyingDetailActivity : AppCompatActivity() {
     var progressBar: AlertDialog? = null
     var sharedPref = SharedPref.getInstance()
     var orderTerms: OrderTerms = OrderTerms()
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,12 +94,7 @@ class BuyingDetailActivity : AppCompatActivity() {
 
         pkr_ed!!.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-              /*  if(pkr_ed!!.text.toString().trim() != "")
-                if(ed_currency!!.text.toString().trim() != "")
-                if (pkr_ed!!.text.toString().toDouble() > trade.Amount!!.toDouble()) {
-                    Apputils.showMsg(this@BuyingDetailActivity, "Ecurrency must be less than total amount")
 
-                }*/
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -106,11 +102,16 @@ class BuyingDetailActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "") {
+//                    if (pkr_ed!!.text.toString().toDouble() < trade.Amount!!.toDouble()) {
+                    if(pkr_ed!!.text.toString()=="."){
+                        pkr_ed.setText("0.")
+                    }
                     if (pkr_ed!!.text.toString().toDouble() < trade.Amount!!.toDouble()) {
-                        var eachprice = trade.Price!!.toDouble() / trade.Amount!!.toDouble()
-                        var txtuseramount = eachprice * pkr_ed!!.text.toString().toDouble()
+
+                        var txtuseramount = trade.Price!!.toDouble() * pkr_ed!!.text.toString().toDouble()
                         ecuurency_ed.setText(BigDecimal.valueOf(txtuseramount!!).toPlainString())
                     }
+//                    }
                     else{
                         ecuurency_ed.setText("")
                     }
@@ -144,6 +145,15 @@ class BuyingDetailActivity : AppCompatActivity() {
             Apputils.showMsg(this@BuyingDetailActivity, "Invalid amount")
             return
         }
+        if(ecuurency_ed!!.text.toString().toDouble()> trade.LowerLimit!!.toDouble()/* &&
+                ecuurency_ed!!.text.toString().toLong()> trade.LowerLimit!!.toLong()*/){
+            Apputils.showMsg(this@BuyingDetailActivity, "Price should be greater than lower limit")
+            return
+
+        }else if(ecuurency_ed!!.text.toString().toDouble()> trade.UpperLimit!!.toDouble()){
+            Apputils.showMsg(this@BuyingDetailActivity, "Limit crossed")
+            return
+        }
         if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "") {
 
             if (pkr_ed!!.text.toString().toDouble() > trade.Amount!!.toDouble()) {
@@ -152,17 +162,6 @@ class BuyingDetailActivity : AppCompatActivity() {
             }
         }
         if (isTermAccept) {
-//            order.Amount =
-            /* var intent = Intent(this, OrderDetailActivity::class.java)
-             var obj = Gson().toJson(trade)
-             val order = Gson().toJson(order)
-             intent.putExtra("tradeObj", obj)
-             intent.putExtra("order", order)
-             intent.putExtra("coinUsed", ecuurency_ed.text.toString())
-             intent.putExtra("priceCharged", pkr_ed.text.toString())
-             startActivity(intent)
-             finish()*/
-
 
             addOrder(serviceListener = object : ServiceListener<String> {
                 override fun success(obj: String) {

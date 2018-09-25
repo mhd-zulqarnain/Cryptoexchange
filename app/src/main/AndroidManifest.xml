@@ -72,10 +72,10 @@
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
             android:theme="@style/BuyTheme" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity"/>
 
-        </activity>
         <activity android:name=".ui.AdvertismentDetailActivity"></activity>
+        <!--Release payment activity-->
     </application>
 
 </manifest>
