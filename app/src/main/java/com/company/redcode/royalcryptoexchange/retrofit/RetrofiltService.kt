@@ -99,4 +99,9 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getPaymentDetailListByUid(@Path("fuac_id") fuac_id: String): Call<ArrayList<PaymentMethod>>
 
+    //delete bank detail
+    @DELETE("Delete_UserPaymentDetail/{UP_Id}")
+    @Headers("Content-Type:application/json")
+    fun delete_bank(@Path("UP_Id") UP_Id: String): Call<Response>
+
 }

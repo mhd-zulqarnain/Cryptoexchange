@@ -10,6 +10,11 @@ import android.widget.TextView
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Bank
 import com.company.redcode.royalcryptoexchange.models.PaymentMethod
+import com.company.redcode.royalcryptoexchange.models.Response
+import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.utils.Constants
+import retrofit2.Call
+import retrofit2.Callback
 
 class UserBankAdapater(var ctx: Context, var model: ArrayList<PaymentMethod>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<UserBankAdapater.MyViewHolder>() {
 
@@ -25,9 +30,9 @@ class UserBankAdapater(var ctx: Context, var model: ArrayList<PaymentMethod>, pr
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bindView(model[position])
 
-        /* holder.btn_edit!!.setOnClickListener{
+         holder.btn_edit!!.setOnClickListener{
              onItemClick(position)
-         }*/
+         }
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -47,6 +52,7 @@ class UserBankAdapater(var ctx: Context, var model: ArrayList<PaymentMethod>, pr
 
             btn_edit = itemView.findViewById(R.id.btn_edit)
             btn_edit!!.setOnClickListener {
+//api delete
 
             }
 

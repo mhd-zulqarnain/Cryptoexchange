@@ -22,7 +22,6 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.bumptech.glide.Glide
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.UserBankAdapater
 import com.company.redcode.royalcryptoexchange.models.*
@@ -32,7 +31,6 @@ import com.example.admin.camerawork.CameraActivity
 import com.google.gson.Gson
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
 import java.io.ByteArrayOutputStream
@@ -151,13 +149,15 @@ class ProfileFragment : Fragment() {
                 override fun onResponse(call: Call<ArrayList<Document>>?, response: retrofit2.Response<ArrayList<Document>>?) {
                     if(response!=null){
                         var doclist = response!!.body();
-                        if(doclist!![0].User_Document!=null)
+                        var size = doclist!!.size;
+                        if(size>0){
+                        if(doclist[0]!=null)
                             Picasso.with(activity!!).load(image+ doclist!![0].User_Document).into(im1);
-                        if(doclist!![1].User_Document!=null)
+                        if(size>1 && doclist[1]!=null)
                             Picasso.with(activity!!).load(image+ doclist!![1].User_Document).into(im2);
-                        if(doclist!![2].User_Document!=null)
+                        if(size>2 && doclist[2]!=null)
                             Picasso.with(activity!!).load(image+ doclist!![2].User_Document).into(im3);
-                    }}
+                    }}}
 
             })
         }else{
@@ -385,10 +385,39 @@ class ProfileFragment : Fragment() {
         //    list.add(Bank("ahmed", "Bank Transfer"))
         //  list.add(Bank("ahmed", "Bank Transfer"))
 
+        ApiClint?.getInstance()?.getService()?.getPaymentDetailListByUid(fuac_id!!)?.enqueue(object : Callback<ArrayList<PaymentMethod>> {
+            override fun onResponse(call: Call<ArrayList<PaymentMethod>>?, response: retrofit2.Response<ArrayList<PaymentMethod>>?) {
+              if(response!=null) {
+                  var lis = response!!.body()
+                  var count = lis!!.size;
+for (i:Int in 0 until  count)
+                   list.add(PaymentMethod(lis.get(i).UP_Id,lis.get(i).FUAC_Id,lis.get(i).Type,lis.get(i).Account,lis.get(i).AccountTitle,lis.get(i).BankName,lis.get(i).BankCode))
+              adapter!!.notifyDataSetChanged();
+              }
+            }
 
+            override fun onFailure(call: Call<ArrayList<PaymentMethod>>?, t: Throwable?) {
+                print("Error!!")
+            }
+
+        })
+
+//        list.add(PaymentMethod())
         adapter = UserBankAdapater(activity!!, list) { position ->
             //             showTradeDialog()
+/*        apadter(list.get(position).UP_Id,object:ServiceListener<String>{
+            override fun success(obj: String) {
+
+            }
+
+            override fun fail(error: ServiceError) {
+
+            }
+
+        });
+*/
             list.removeAt(position)
+
             adapter!!.notifyDataSetChanged()
         }
         var layout = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
@@ -401,6 +430,30 @@ class ProfileFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+
+     fun apadter(uP_Id: String?, param: ServiceListener<String>) {
+
+        ApiClint.getInstance()?.getService()?.delete_bank(uP_Id!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                print("Error")
+            }
+
+            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+
+                if(response!=null){
+                    var api = response!!.body()
+                    if(api!!.status == Constants.STATUS_SUCCESS){
+
+                    } else if(api!!.status == "failed"){
+
+                    }
+                }
+            }
+
+
+        })
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
