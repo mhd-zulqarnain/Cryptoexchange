@@ -30,12 +30,11 @@ class WalletFragment : Fragment() {
 
     private fun initView(view: View) {
         var wollet = arrayListOf<Wallet>()
-        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.openbitcoin),"BTC","BTC","10000",12000))
-        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.xrpcoin),"XRP","XRP","420000",4))
-        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.ethhcoin),"ETH","ETH","20000",24000))
-        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.eoscoin),"EOS","EOS","10000",12000))
-        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.adacoin),"ADA","ADA","420000",4))
-        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.ltccoin),"LTC","LTC","20000",24000))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.openbitcoin),"BTC","BTC","10000",475))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.bchcoin),"BCH","BCH","420000",9864))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.btggold),"BTG","BTG","10000",1243))
+        wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.ethhcoin),"ETH","ETH","20000",9803))
+
 
 
         var recyclerView = view.findViewById(R.id.wollet_recycler) as RecyclerView

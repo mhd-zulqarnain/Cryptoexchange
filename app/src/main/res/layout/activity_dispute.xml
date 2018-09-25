@@ -5,84 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/color_gradient_profile">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="7"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        >
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_weight="0.7"
-            android:layout_gravity="clip_vertical"
-            android:layout_height="0dp"
-            android:text="Dispute "
-            android:textSize="28sp"
-            android:fontFamily="@font/oswald_regular"
-             />
-
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_weight="1.7"
-            app:met_baseColor="#ffffff"
-            app:met_primaryColor="#45a12e"
-            app:met_errorColor="#ba020e"
-            app:met_textColor="#fff"
-
-            app:met_minCharacters="1"
-            app:met_maxCharacters="200"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            android:layout_height="0dp"
-            android:hint="Message"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:src="@drawable/ic_no_img_24dp"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:weightSum="2"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_margin="22dp"
-            >
-
-            <Button
-                android:id="@+id/wallet_cancel"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:textSize="16sp"
-                android:background="#c60236"
-                android:layout_marginRight="22dp"
-
-                />
-
-            <Button
-                android:id="@+id/wallet_ok"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:background="#21a41f"
-                android:textSize="16sp" />
-
-        </LinearLayout>
 
 
 
-
-
-    </LinearLayout>
 
 </LinearLayout>
