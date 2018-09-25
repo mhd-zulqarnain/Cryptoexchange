@@ -75,7 +75,18 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun update_profile(@Path("fuac_id") fuac_id: String, @Path("fname") fname: String, @Path("lname") lname: String, @Path("pass") pass: String, @Path("terms") terms: String): Call<Response>
 
+
+    /*update order status*/
+    @PUT("Update_UserOrder/{order_id}/{status}")
+    @Headers("Content-Type:application/json")
+    fun update_order_status(@Path("order_id") order_id: String, @Path("status") status: String): Call<Response>
+
     @POST("Add_UserDocument/{fuac_id}/{userdoc}")
     @Headers("Content-Type:application/json")
     fun add_userdoc(@Path("fuac_id") fuac_id: String, @Path("userdoc") userdoc: String): Call<Response>
+
+    /*update order status*/
+    @GET("Select_Userpaymentdetail/{fuac_id}")
+    @Headers("Content-Type:application/json")
+    fun getPaymentDetailListByUid(@Path("fuac_id") fuac_id: String): Call<ArrayList<PaymentMethod>>
 }

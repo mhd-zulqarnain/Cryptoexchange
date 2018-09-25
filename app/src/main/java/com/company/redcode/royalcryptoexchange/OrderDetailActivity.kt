@@ -7,12 +7,15 @@ import android.os.CountDownTimer
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.View
 import com.company.redcode.royalcryptoexchange.R.id.tv_terms
 import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.OrderTerms
+import com.company.redcode.royalcryptoexchange.models.Response
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_trade_confirm.*
 import retrofit2.Call
@@ -32,14 +35,10 @@ class OrderDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trade_confirm)
         toolbar = findViewById(R.id.toolbar_top)
-        /*  var obj = intent.getStringExtra("tradeObj")*/
         var orderObj = intent.getStringExtra("order")
-
         order = Gson().fromJson(orderObj, Order::class.java)
 
-//        price = intent.getStringExtra("priceCharged")
         initView()
-//        order.Price = price
 
         val builder = AlertDialog.Builder(this@OrderDetailActivity)
         builder.setView(R.layout.layout_dialog_progress)
@@ -47,8 +46,36 @@ class OrderDetailActivity : AppCompatActivity() {
         progressBar = builder.create()
         getTerm()
 
-        btn_back.setOnClickListener {
-            finish()
+        if(order.Status== Constants.STATUS_CANCEL){
+            status_tv!!.text = "cancelled"
+        }else
+            status_tv!!.text = order.Status
+
+        if (order.Status == Constants.STATUS_OPEN) {
+            btn_paid.visibility = View.VISIBLE
+            btn_later.visibility = View.VISIBLE
+            btn_dispute.visibility = View.VISIBLE
+
+
+        } else if (order.Status == Constants.STATUS_DISPUTE) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+
+        } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.VISIBLE
+        }else if (order.Status == Constants.STATUS_COMPLETED) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+        }
+        else if (order.Status == Constants.STATUS_CANCEL) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+
         }
 
 
@@ -105,8 +132,17 @@ class OrderDetailActivity : AppCompatActivity() {
 
         }
 
-        btn_later.setOnClickListener{
+        btn_later.setOnClickListener {
             finish()
+        }
+        btn_back.setOnClickListener {
+            finish()
+        }
+        btn_paid.setOnClickListener {
+            updateStatus(Constants.STATUS_IN_PROGRESS, order.ORD_Id!!)
+        }
+        btn_dispute.setOnClickListener {
+            updateStatus(Constants.STATUS_DISPUTE, order.ORD_Id!!)
         }
     }
 
@@ -129,5 +165,24 @@ class OrderDetailActivity : AppCompatActivity() {
             "0$number"
         } else number.toString()
 
+    }
+
+
+    fun updateStatus(status:String,order_id:String){
+        progressBar!!.show()
+        ApiClint.getInstance()?.getService()?.update_order_status(order_id,status)!!.enqueue(object :Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                print("error "+t)
+                progressBar!!.dismiss()
+            }
+
+            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<Response>?) {
+                if (response?.body() != null) {
+                    finish()
+                    progressBar!!.dismiss()
+                }
+            }
+
+        })
     }
 }

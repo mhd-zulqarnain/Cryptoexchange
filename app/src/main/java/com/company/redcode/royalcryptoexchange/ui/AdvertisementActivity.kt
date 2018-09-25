@@ -11,8 +11,11 @@ import android.text.Html
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.R
+import com.company.redcode.royalcryptoexchange.adapter.CustomSpinnerAdapter
+import com.company.redcode.royalcryptoexchange.models.PaymentMethod
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Apputils
@@ -41,7 +44,7 @@ class AdvertisementActivity : AppCompatActivity() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initView() {
-
+//        getSpinnerPaymentMethod()
         spinner_coin_type.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
@@ -93,14 +96,8 @@ class AdvertisementActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun validation() {
 
-        /*if (!ed_amount!!.text.toString().trim().isEmpty() && ed_amount!!.text.toString().trim() != "" &&
-                !ed_price!!.text.toString().trim().isEmpty() && ed_price!!.text.toString().trim() != "") {
 
-            var amount = ed_amount!!.text.toString().toDouble()
-            var price = ed_price!!.text.toString().toDouble()
-//            var total = amount * price
 
-        }*/
         if (ed_amount!!.text.toString() == "") {
             ed_amount!!.error = Html.fromHtml("<font color='black'>Enter the amount i.e the number of coin</font>")
             ed_amount!!.requestFocus()
@@ -141,6 +138,13 @@ class AdvertisementActivity : AppCompatActivity() {
         if (l_limit!!.text.toString().toDouble() > u_limit!!.text.toString().toDouble()) {
             Apputils.showMsg(this@AdvertisementActivity, "Upper limit should  be greater")
             return
+        }
+
+        var amount = ed_amount!!.text.toString().toDouble()*ed_price!!.text.toString().toDouble()
+
+        if (u_limit.text.toString().toDouble()>amount) {
+            Apputils.showMsg(this@AdvertisementActivity, "Upper limit should  be smaller than $amount")
+          return
         }
 
         postNewTrade()
@@ -191,6 +195,41 @@ class AdvertisementActivity : AppCompatActivity() {
                     }
                 }
             }
+        })
+
+    }
+    fun getSpinnerPaymentMethod(){
+        var mypaymentList = ArrayList<PaymentMethod>()
+        var adpater = CustomSpinnerAdapter(  this@AdvertisementActivity, R.layout.single_row_payment_spinner, mypaymentList)
+
+        spinner_payment_method.adapter = adpater
+
+        val userId = sharedPref!!.getProfilePref(this@AdvertisementActivity).UAC_Id
+        ApiClint.getInstance()?.getService()?.getPaymentDetailListByUid("1013")!!.enqueue(object :Callback<ArrayList<PaymentMethod>>{
+            override fun onFailure(call: Call<ArrayList<PaymentMethod>>?, t: Throwable?) {
+                println("error")
+                Apputils.showMsg(this@AdvertisementActivity,"network error")
+            }
+
+            override fun onResponse(call: Call<ArrayList<PaymentMethod>>?, response: Response<ArrayList<PaymentMethod>>?) {
+                if (response != null) {
+                    if(response.body()!=null){
+                        var spinnerItem =""
+                        response.body()!!.forEach{
+                          /*  if(it.Type=="bank"){
+                                 spinnerItem = it.Type+"\n"+it.Account+"\n"+it.AccountTitle+"\n"+it.BankCode
+                            }
+                            else
+                            spinnerItem = it.Type+"\n"+it.BankName
+*/
+                            mypaymentList.add(it)
+                            adpater.notifyDataSetChanged()
+                        }
+                    }
+                }
+
+            }
+
         })
 
     }

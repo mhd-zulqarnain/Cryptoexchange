@@ -188,6 +188,28 @@
             android:layout_weight="2"
             android:text="1200" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            style="@style/buyActivityText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Status" />
+
+        <TextView
+            android:id="@+id/status_tv"
+            style="@style/buyActivityText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="cancel" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_paid"
@@ -200,15 +222,33 @@
         android:text="I have Paid"
         android:textColor="#fff" />
 
-    <Button
-        android:id="@+id/btn_later"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/white_curve_btn"
-        android:text="Pay later"
-        android:textColor="@color/backgoundTheme" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="9dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_later"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/white_curve_btn"
+                android:text="Pay later"
+                android:textColor="@color/backgoundTheme"
+
+                />
+            <Button
+                android:id="@+id/btn_dispute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dispute"
+                android:layout_marginLeft="12dp"
+                android:textColor="@color/backgoundTheme"
+                android:background="@drawable/white_curve_btn"
+                android:layout_gravity="center"/>
+
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
