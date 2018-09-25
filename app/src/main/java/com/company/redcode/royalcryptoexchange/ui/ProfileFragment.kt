@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
     var docimage : LinearLayout?=null;
     var profile_terms : MaterialEditText? = null;
     var image : String = "http://wpassignment123.000webhostapp.com/uploads/";
-    var list = ArrayList<Bank>()
+    var list = ArrayList<PaymentMethod>()
     var docver:String?=null;
     var sharedpref : SharedPref= SharedPref.getInstance()!!
     var spinnervalue ="Jazz Cash"
@@ -161,9 +161,9 @@ if(doclist!![2].User_Document!=null)
 
         })
 }else{
-    docimage!!.visibility= (View.INVISIBLE);
+    docimage!!.visibility= (View.GONE);
       var ll:LinearLayout=  view.findViewById(R.id.adddoc);
-    ll!!.visibility = View.INVISIBLE
+    ll!!.visibility = View.GONE
 }
         btn_add_img = view!!.findViewById(R.id.btn_add_img)
 
@@ -194,7 +194,7 @@ if(doclist!![2].User_Document!=null)
                     //   if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
                     //     var status = response.body()!!.message
                     Toast.makeText(activity!!, "Payment Method Added!!", Toast.LENGTH_SHORT).show()
-                    list.add(Bank(apiResponse!!.UP_Id,apiResponse!!.Account,apiResponse!!.BankName))
+                    list.add(PaymentMethod(apiResponse!!.UP_Id,apiResponse!!.Account,apiResponse!!.BankName))
                     adapter!!.notifyDataSetChanged();
                     //finish();
                 } else {
