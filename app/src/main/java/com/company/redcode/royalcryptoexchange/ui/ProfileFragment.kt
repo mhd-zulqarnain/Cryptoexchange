@@ -39,7 +39,7 @@ import java.util.HashMap
 
 class ProfileFragment : Fragment() {
     var URL = "http://wpassignment123.000webhostapp.com/upload.php"
-    var imagename:ArrayList<String>?=null;
+    var imagename: ArrayList<String>? = null;
     var btn_add_bank: Button? = null
     var btn_add_img: Button? = null
     var spinner_payment_method: Spinner? = null
@@ -50,34 +50,34 @@ class ProfileFragment : Fragment() {
     private var myImgJson: String? = null
     private var bank_view: LinearLayout? = null
     private var mobile_method_view: LinearLayout? = null
-    var adapter: UserBankAdapater? =null
+    var adapter: UserBankAdapater? = null
     var progressBar: android.app.AlertDialog? = null
     private var attach_img_1: ImageView? = null
     private var attach_img_2: ImageView? = null
     private var attach_img_3: ImageView? = null
-    var fuac_id:String?=null;
-    var fname :EditText?=null
-    var lname:EditText?=null
-    var cnic_:EditText?=null
-    var phno:EditText?=null
-    var pass_:EditText?=null
-    var repass_:EditText?=null
-    var email_ :EditText?=null;
-    var btnupdate:Button?=null
-    var docimage : LinearLayout?=null;
-    var profile_terms : MaterialEditText? = null;
-    var image : String = "http://wpassignment123.000webhostapp.com/uploads/";
+    var fuac_id: String? = null;
+    var fname: EditText? = null
+    var lname: EditText? = null
+    var cnic_: EditText? = null
+    var phno: EditText? = null
+    var pass_: EditText? = null
+    var repass_: EditText? = null
+    var email_: EditText? = null;
+    var btnupdate: Button? = null
+    var docimage: LinearLayout? = null;
+    var profile_terms: MaterialEditText? = null;
+    var image: String = "http://wpassignment123.000webhostapp.com/uploads/";
     var list = ArrayList<PaymentMethod>()
-    var docver:String?=null;
-    var sharedpref : SharedPref= SharedPref.getInstance()!!
-    var spinnervalue ="Jazz Cash"
-    var etbankname:EditText ? = null
-    var etbankcode:EditText ? = null
-    var etcnic:EditText ? = null
-    var etaccountttile:EditText ? = null
-    var etmobilenumber:EditText ? = null
-    var etaccountnumber:EditText ? = null
-    var btnaddpayment:Button ? = null
+    var docver: String? = null;
+    var sharedpref: SharedPref = SharedPref.getInstance()!!
+    var spinnervalue = "Jazz Cash"
+    var etbankname: EditText? = null
+    var etbankcode: EditText? = null
+    var etcnic: EditText? = null
+    var etaccountttile: EditText? = null
+    var etmobilenumber: EditText? = null
+    var etaccountnumber: EditText? = null
+    var btnaddpayment: Button? = null
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -96,7 +96,7 @@ class ProfileFragment : Fragment() {
         phno = view!!.findViewById(R.id.profile_mob)
         cnic_ = view!!.findViewById(R.id.profile_cnic)
         email_ = view!!.findViewById(R.id.profile_email)
-        pass_= view!!.findViewById(R.id.profile_pass)
+        pass_ = view!!.findViewById(R.id.profile_pass)
         repass_ = view!!.findViewById(R.id.profile_repass)
         btnupdate = view!!.findViewById(R.id.btnprofileupdate);
         profile_terms = view!!.findViewById(R.id.profile_terms);
@@ -121,8 +121,7 @@ class ProfileFragment : Fragment() {
         //api call image document
 
 
-
-        var obj: Users =sharedpref.getProfilePref(activity!!)
+        var obj: Users = sharedpref.getProfilePref(activity!!)
         //      var obj: Users =sharedpref.getProfilePref(activity!!)
 
         fname!!.setText(obj.FirstName)
@@ -133,36 +132,38 @@ class ProfileFragment : Fragment() {
         email_!!.setText(obj.Email);
         phno!!.setText(obj.PhoneNum);
         docver = obj.DocumentVerification;
-        if(obj.Terms!="Your Terms")
+        if (obj.Terms != "Your Terms")
             profile_terms!!.setText(obj.Terms)
 
-        fuac_id=obj.UAC_Id;
-        val im1:ImageView = view.findViewById(R.id.attach_img_1)
-        val im3:ImageView = view.findViewById(R.id.attach_img_3)
-        val im2:ImageView = view.findViewById(R.id.attach_img_2)
-        if(docver!="Verified"){
-            ApiClint.getInstance()?.getService()?.user_document(fuac_id!!)?.enqueue(object: Callback<ArrayList<Document>>{
+        fuac_id = obj.UAC_Id;
+        val im1: ImageView = view.findViewById(R.id.attach_img_1)
+        val im3: ImageView = view.findViewById(R.id.attach_img_3)
+        val im2: ImageView = view.findViewById(R.id.attach_img_2)
+        if (docver != "Verified") {
+            ApiClint.getInstance()?.getService()?.user_document(fuac_id!!)?.enqueue(object : Callback<ArrayList<Document>> {
                 override fun onFailure(call: Call<ArrayList<Document>>?, t: Throwable?) {
-                    print("Error in Showing Image "+t)
+                    print("Error in Showing Image " + t)
                 }
 
                 override fun onResponse(call: Call<ArrayList<Document>>?, response: retrofit2.Response<ArrayList<Document>>?) {
-                    if(response!=null){
+                    if (response != null) {
                         var doclist = response!!.body();
                         var size = doclist!!.size;
-                        if(size>0){
-                        if(doclist[0]!=null)
-                            Picasso.with(activity!!).load(image+ doclist!![0].User_Document).into(im1);
-                        if(size>1 && doclist[1]!=null)
-                            Picasso.with(activity!!).load(image+ doclist!![1].User_Document).into(im2);
-                        if(size>2 && doclist[2]!=null)
-                            Picasso.with(activity!!).load(image+ doclist!![2].User_Document).into(im3);
-                    }}}
+                        if (size > 0) {
+                            if (doclist[0] != null)
+                                Picasso.with(activity!!).load(image + doclist!![0].User_Document).into(im1);
+                            if (size > 1 && doclist[1] != null)
+                                Picasso.with(activity!!).load(image + doclist!![1].User_Document).into(im2);
+                            if (size > 2 && doclist[2] != null)
+                                Picasso.with(activity!!).load(image + doclist!![2].User_Document).into(im3);
+                        }
+                    }
+                }
 
             })
-        }else{
-            docimage!!.visibility= (View.GONE);
-            var ll:LinearLayout=  view.findViewById(R.id.adddoc);
+        } else {
+            docimage!!.visibility = (View.GONE);
+            var ll: LinearLayout = view.findViewById(R.id.adddoc);
             ll!!.visibility = View.GONE
         }
         btn_add_img = view!!.findViewById(R.id.btn_add_img)
@@ -182,10 +183,10 @@ class ProfileFragment : Fragment() {
     }
 
 
-    fun addbank(acc_cnic:String,acctitle:String,banknumber:String,bankcode:String){
-        ApiClint?.getInstance()?.getService()?.add_paymentdetail(fuac_id!!,spinnervalue!!,acc_cnic!!,acctitle!!,banknumber!!,bankcode!!)?.enqueue(object : Callback<PaymentMethod>{
+    fun addbank(acc_cnic: String, acctitle: String, banknumber: String, bankcode: String) {
+        ApiClint?.getInstance()?.getService()?.add_paymentdetail(fuac_id!!, spinnervalue!!, acc_cnic!!, acctitle!!, banknumber!!, bankcode!!)?.enqueue(object : Callback<PaymentMethod> {
             override fun onFailure(call: Call<PaymentMethod>?, t: Throwable?) {
-                print("Error While Adding Bank Details"+t)
+                print("Error While Adding Bank Details" + t)
             }
 
             override fun onResponse(call: Call<PaymentMethod>?, response: retrofit2.Response<PaymentMethod>?) {
@@ -194,7 +195,7 @@ class ProfileFragment : Fragment() {
                     //   if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
                     //     var status = response.body()!!.message
                     Toast.makeText(activity!!, "Payment Method Added!!", Toast.LENGTH_SHORT).show()
-                    list.add(PaymentMethod(apiResponse!!.UP_Id,apiResponse!!.FUAC_Id,apiResponse!!.Type,apiResponse!!.Account,apiResponse!!.AccountTitle,apiResponse!!.BankName,apiResponse!!.BankCode))
+                    list.add(PaymentMethod(apiResponse!!.UP_Id, apiResponse!!.FUAC_Id, apiResponse!!.Type, apiResponse!!.Account, apiResponse!!.AccountTitle, apiResponse!!.BankName, apiResponse!!.BankCode))
                     adapter!!.notifyDataSetChanged();
                     //finish();
                 } else {
@@ -207,11 +208,11 @@ class ProfileFragment : Fragment() {
         })
     }
 
-    fun profileValidiation(){
-        var firstname :String = fname!!.text.toString();
-        var lastname :String = lname!!.text.toString();
+    fun profileValidiation() {
+        var firstname: String = fname!!.text.toString();
+        var lastname: String = lname!!.text.toString();
         var password: String = pass_!!.text.toString();
-        var repass:String = repass_!!.text.toString();
+        var repass: String = repass_!!.text.toString();
         var terms: String = profile_terms!!.text.toString()
 //                    && password!="" && firstname!="" && lastname!=""
 
@@ -251,11 +252,11 @@ class ProfileFragment : Fragment() {
             repass_!!.requestFocus()
             return
         }
-        if (profile_terms!!.text.toString()==""){
-            terms="Your Terms";
+        if (profile_terms!!.text.toString() == "") {
+            terms = "Your Terms";
             //   profile_terms!!.setText(terms);
         }
-        ApiClint.getInstance()?.getService()?.update_profile(fuac_id!!,firstname!!,lastname!!,password!!,terms!!)?.enqueue(object :Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+        ApiClint.getInstance()?.getService()?.update_profile(fuac_id!!, firstname!!, lastname!!, password!!, terms!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                 println("error")
             }
@@ -263,7 +264,7 @@ class ProfileFragment : Fragment() {
             override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
                 if (response != null) {
                     var apiResponse = response.body()
-                    if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                    if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
                         var status = response.body()!!.message
                         Toast.makeText(activity!!, "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
                         //finish();
@@ -274,16 +275,11 @@ class ProfileFragment : Fragment() {
                 }
             }
 
-        } );
-
-
-
-
-
-
+        });
 
 
     }
+
     private fun showImageAddDialog() {
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.select_image_dialog, null)
         val alertBox = AlertDialog.Builder(activity!!)
@@ -334,20 +330,20 @@ class ProfileFragment : Fragment() {
 
 
 
-        btnaddpayment!!.setOnClickListener{view->
+        btnaddpayment!!.setOnClickListener { view ->
 
 
-            val account:String = etaccountnumber!!.text.toString();
-            val title:String  = etaccountttile!!.text.toString()
-            val name:String  = etbankname!!.text.toString()
-            val cnic :String = etcnic!!.text.toString()
-            val mob :String = etmobilenumber!!.text.toString()
-            val code :String = etbankcode!!.text.toString()
+            val account: String = etaccountnumber!!.text.toString();
+            val title: String = etaccountttile!!.text.toString()
+            val name: String = etbankname!!.text.toString()
+            val cnic: String = etcnic!!.text.toString()
+            val mob: String = etmobilenumber!!.text.toString()
+            val code: String = etbankcode!!.text.toString()
 
-            if(spinnervalue == "Bank Transfer")
-                addbank(title.toString(),account.toString(),name.toString(),code.toString());
+            if (spinnervalue == "Bank Transfer")
+                addbank(title.toString(), account.toString(), name.toString(), code.toString());
             else
-                addbank(cnic.toString(),"null",mob.toString(),"null");
+                addbank(cnic.toString(), "null", mob.toString(), "null");
 
         }
 
@@ -367,10 +363,10 @@ class ProfileFragment : Fragment() {
 
                 val item = parent!!.getItemAtPosition(pos);
                 spinnervalue = item.toString();
-                if(item.equals("Bank Transfer")){
+                if (item.equals("Bank Transfer")) {
                     mobile_method_view!!.visibility = View.GONE
                     bank_view!!.visibility = View.VISIBLE
-                }else {
+                } else {
                     mobile_method_view!!.visibility = View.VISIBLE
                     bank_view!!.visibility = View.GONE
                 }
@@ -387,13 +383,13 @@ class ProfileFragment : Fragment() {
 
         ApiClint?.getInstance()?.getService()?.getPaymentDetailListByUid(fuac_id!!)?.enqueue(object : Callback<ArrayList<PaymentMethod>> {
             override fun onResponse(call: Call<ArrayList<PaymentMethod>>?, response: retrofit2.Response<ArrayList<PaymentMethod>>?) {
-              if(response!=null) {
-                  var lis = response!!.body()
-                  var count = lis!!.size;
-for (i:Int in 0 until  count)
-                   list.add(PaymentMethod(lis.get(i).UP_Id,lis.get(i).FUAC_Id,lis.get(i).Type,lis.get(i).Account,lis.get(i).AccountTitle,lis.get(i).BankName,lis.get(i).BankCode))
-              adapter!!.notifyDataSetChanged();
-              }
+                if (response != null) {
+                    var lis = response!!.body()
+                    var count = lis!!.size;
+                    for (i: Int in 0 until count)
+                        list.add(PaymentMethod(lis.get(i).UP_Id, lis.get(i).FUAC_Id, lis.get(i).Type, lis.get(i).Account, lis.get(i).AccountTitle, lis.get(i).BankName, lis.get(i).BankCode))
+                    adapter!!.notifyDataSetChanged();
+                }
             }
 
             override fun onFailure(call: Call<ArrayList<PaymentMethod>>?, t: Throwable?) {
@@ -404,21 +400,29 @@ for (i:Int in 0 until  count)
 
 //        list.add(PaymentMethod())
         adapter = UserBankAdapater(activity!!, list) { position ->
+
             //             showTradeDialog()
-/*        apadter(list.get(position).UP_Id,object:ServiceListener<String>{
-            override fun success(obj: String) {
+            progressBar!!.show()
+            deletepayment(list.get(position).UP_Id, object : ServiceListener<String> {
+                override fun success(obj: String) {
+                    Toast.makeText(activity!!, obj, Toast.LENGTH_SHORT).show()
+                    if(obj.equals("Method Deleted!!"))
+                    {
+                        list.removeAt(position)
+                        adapter!!.notifyDataSetChanged()
+                    }
+                    progressBar!!.dismiss()
 
-            }
+                }
 
-            override fun fail(error: ServiceError) {
+                override fun fail(error: ServiceError) {
+                    Toast.makeText(activity!!, "Trade Exists on this Payment!!", Toast.LENGTH_SHORT).show()
+                    progressBar!!.dismiss()
+                }
 
-            }
+            });
 
-        });
-*/
-            list.removeAt(position)
 
-            adapter!!.notifyDataSetChanged()
         }
         var layout = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         bank_recycler_view!!.layoutManager = layout
@@ -433,21 +437,22 @@ for (i:Int in 0 until  count)
     }
 
 
-     fun apadter(uP_Id: String?, param: ServiceListener<String>) {
+    fun deletepayment(uP_Id: String?, param: ServiceListener<String>) {
 
-        ApiClint.getInstance()?.getService()?.delete_bank(uP_Id!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+        ApiClint.getInstance()?.getService()?.delete_bank(uP_Id!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                 print("Error")
             }
 
             override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
 
-                if(response!=null){
+                if (response != null) {
                     var api = response!!.body()
-                    if(api!!.status == Constants.STATUS_SUCCESS){
+                    if (api!!.status == Constants.STATUS_SUCCESS) {
+                        param.success("Method Deleted!!")
 
-                    } else if(api!!.status == "failed"){
-
+                    } else if (api!!.status == "failed") {
+                        param.success("Trade Exists on this Payment!!")
                     }
                 }
             }
@@ -471,14 +476,14 @@ for (i:Int in 0 until  count)
                 for (i in 0 until count) {
                     val imageUri = data.clipData.getItemAt(i).uri
                     val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imageUri)
-                    if (i ==0)
+                    if (i == 0)
                         attach_img_1!!.setImageBitmap(bitmap)
-                    if (i ==1)
+                    if (i == 1)
                         attach_img_2!!.setImageBitmap(bitmap)
-                    if (i ==2)
+                    if (i == 2)
                         attach_img_3!!.setImageBitmap(bitmap)
 
-                    uploadtoserver(bitmap,i,(count-1))
+                    uploadtoserver(bitmap, i, (count - 1))
                 }
 
             } else if (data.data != null) {
@@ -486,11 +491,8 @@ for (i:Int in 0 until  count)
 
                 val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imagePath)
                 attach_img_1!!.setImageBitmap(bitmap)
-                uploadtoserver(bitmap,2,2)
+                uploadtoserver(bitmap, 2, 2)
             }
-
-
-
 
 
         } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
@@ -499,17 +501,17 @@ for (i:Int in 0 until  count)
             var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
             var list = obj.camList
 
-            for(i in 0 until list!!.size){
+            for (i in 0 until list!!.size) {
 
-                if (i ==0)
+                if (i == 0)
                     attach_img_1!!.setImageBitmap(list[i])
-                if (i ==1)
+                if (i == 1)
                     attach_img_2!!.setImageBitmap(list[i])
-                if (i ==2)
+                if (i == 2)
                     attach_img_3!!.setImageBitmap(list[i])
 
-                var c : Int = list!!.size-1;
-                uploadtoserver(list[i],i,(c))
+                var c: Int = list!!.size - 1;
+                uploadtoserver(list[i], i, (c))
 
             }
 
@@ -531,7 +533,7 @@ for (i:Int in 0 until  count)
     }
 
 
-    fun uploadtoserver(bitmap:Bitmap,i:Int,size:Int){
+    fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
 
         val StrRequest = object : StringRequest(Request.Method.POST, URL,
                 Response.Listener { response ->
@@ -540,10 +542,11 @@ for (i:Int in 0 until  count)
 
                     userdoc(fuac_id!!, response!!, object : ServiceListener<String> {
                         override fun success(obj: String) {
-                            if(i==size){
+                            if (i == size) {
                                 Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
                                 progressBar!!.dismiss()
-                            }}
+                            }
+                        }
 
                         override fun fail(error: ServiceError) {
                             Toast.makeText(activity!!, "Service error!! ", Toast.LENGTH_SHORT).show()
@@ -552,7 +555,7 @@ for (i:Int in 0 until  count)
 
 
 
-                    ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!,response!!)?.enqueue(object :Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+                    ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!, response!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
                         override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                             //   println("error")
                         }
@@ -560,7 +563,7 @@ for (i:Int in 0 until  count)
                         override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
                             if (response != null) {
                                 var apiResponse = response.body()
-                                if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                                if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
                                     var status = response.body()!!.message
                                     // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
                                     //finish();
@@ -571,10 +574,11 @@ for (i:Int in 0 until  count)
                             }
                         }
 
-                    } );
+                    });
 
 
-                }, Response.ErrorListener { Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
+                }, Response.ErrorListener {
+            Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
             progressBar!!.dismiss()
         }) {
             //@Throws(AuthFailureError::class)
@@ -594,6 +598,7 @@ for (i:Int in 0 until  count)
         requestQueue.add(StrRequest)
 
     }
+
     private fun imageTostring(bitmap: Bitmap): String {
         val outStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)

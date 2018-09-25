@@ -15,39 +15,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:weightSum="15.6"
             android:background="@drawable/terms_back_ground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="-50dp">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/oswald_regular"
-                android:text="  Add Payment Method  "
+                android:text="Add Payment Method"
                 android:textSize="25sp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:weightSum="3"
-                android:layout_gravity="center"
-                android:orientation="horizontal"
-                >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    ></LinearLayout>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/text"
                     style="@style/bankDialogText"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Payment Method"
 
@@ -55,9 +42,7 @@
 
                 <Spinner
                     android:id="@+id/spinner_payment_method"
-                    android:layout_width="0dp"
-                    style="@style/bankDialogText"
-                    android:layout_weight="1.3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/method_payment">
 
@@ -65,181 +50,196 @@
 
             </LinearLayout>
 
-
-
             <LinearLayout
+                android:id="@+id/bank_view"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical"
+                >
 
-                <TextView
-                    android:id="@+id/text2"
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:text="Account #" />
+                    android:layout_weight="4"
+                    android:orientation="horizontal">
 
-                <EditText
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/text2"
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Account #" />
+
+                    <EditText
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/et_accountnumber"
+                        android:layout_weight="2"
+                        android:hint="384628372898"
+                        android:inputType="number" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/et_accountnumber"
-                    android:layout_weight="1.3"
-                    android:hint="384628372898"
-                    android:inputType="number" />
+                    android:layout_weight="4"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Account title "
+                        />
+
+                    <EditText
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/et_accounttitle"
+                        android:hint="Account title"
+
+                        android:inputType="text" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Bank name" />
+
+                    <EditText
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/et_bankname"
+                        android:hint="Bank name"
+                        android:inputType="text" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Bank code " />
+
+                    <EditText
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/et_bankcode"
+                        android:hint="Bank code"
+                        android:inputType="text" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/mobile_method_view"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
 
-                <TextView
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:text="Account title "
-                    />
+                    android:layout_weight="4"
+                    android:visibility="visible"
+                    android:orientation="horizontal">
 
-                <EditText
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
+                    <TextView
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Mobile #" />
+
+                    <EditText
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/et_mobilenumber"
+                        android:hint="384628372898"
+                        android:inputType="number" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
-                    android:id="@+id/et_accounttitle"
-                    android:hint="Account title"
+                    android:layout_weight="4"
+                    android:orientation="horizontal">
 
-                    android:inputType="text" />
+                    <TextView
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
 
+                        android:text="NIC #" />
+
+                    <EditText
+                        style="@style/bankDialogText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="Your nic number"
+                        android:id="@+id/et_cnic"
+                        android:inputType="number" />
+
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_curve_btn_paid"
+                android:text="Add"
+                android:id="@+id/btn_addpayment"/>
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="#fff"></View>
 
-                <TextView
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:text="Bank name" />
-
-                <EditText
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
-                    android:id="@+id/et_bankname"
-                    android:hint="Bank name"
-                    android:inputType="text" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/bank_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
 
-                <TextView
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:text="Bank code " />
+            </android.support.v7.widget.RecyclerView>
 
-                <EditText
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
-                    android:id="@+id/et_bankcode"
-                    android:hint="Bank code"
-                    android:inputType="text" />
-
-            </LinearLayout>
-
-
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:weightSum="2"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:text="Mobile #" />
-
-                <EditText
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
-                    android:id="@+id/et_mobilenumber"
-                    android:hint="384628372898"
-                    android:inputType="number" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:weightSum="2"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-
-                    android:text="NIC #" />
-
-                <EditText
-                    style="@style/bankDialogText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
-                    android:hint="Your nic number"
-                    android:id="@+id/et_cnic"
-                    android:inputType="number" />
-
-            </LinearLayout>
         </LinearLayout>
-
-
-
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -250,76 +250,5 @@
             android:clickable="true"
             android:src="@drawable/ic_cancel_black_24dp" />
     </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="5"
-        android:orientation="vertical"
-        >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:layout_gravity="center"
-            android:background="@drawable/layout_curve_btn_submit"
-            android:text="Add"
-            android:id="@+id/btn_addpayment"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:background="#fff"></View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:weightSum="3"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/bankDialogText"
-                android:text="Type"
-                />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/bankDialogText"
-                android:text="Mobile/Bank"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                style="@style/bankDialogText"
-                android:text="Action"
-                />
-
-
-        </LinearLayout>
-
-
-
-
-    </LinearLayout>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/bank_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp">
-
-    </android.support.v7.widget.RecyclerView>
-
 
 </LinearLayout>
