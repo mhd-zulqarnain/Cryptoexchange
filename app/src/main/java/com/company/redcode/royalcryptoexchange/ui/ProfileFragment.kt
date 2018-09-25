@@ -151,13 +151,14 @@ class ProfileFragment : Fragment() {
                 override fun onResponse(call: Call<ArrayList<Document>>?, response: retrofit2.Response<ArrayList<Document>>?) {
                     if(response!=null){
                         var doclist = response!!.body();
-                        if(doclist!![0].User_Document!=null)
+
+                        /*if(doclist!![0].User_Document!=null)
                             Picasso.with(activity!!).load(image+ doclist!![0].User_Document).into(im1);
                         if(doclist!![1].User_Document!=null)
                             Picasso.with(activity!!).load(image+ doclist!![1].User_Document).into(im2);
                         if(doclist!![2].User_Document!=null)
                             Picasso.with(activity!!).load(image+ doclist!![2].User_Document).into(im3);
-                    }}
+                    */}}
 
             })
         }else{

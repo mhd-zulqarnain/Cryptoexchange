@@ -58,7 +58,7 @@ class BuyingDetailActivity : AppCompatActivity() {
     fun getTerm() {
         progressBar!!.show()
 
-        ApiClint.getInstance()?.getService()?.gettermAndPayment(trade.FUAC_Id.toString()!!, "3")?.enqueue(object : Callback<OrderTerms> {
+        ApiClint.getInstance()?.getService()?.gettermAndPayment(trade.FUAC_Id.toString()!!, trade.FUP_Id.toString())?.enqueue(object : Callback<OrderTerms> {
             override fun onFailure(call: Call<OrderTerms>?, t: Throwable?) {
                 progressBar!!.dismiss()
             }
@@ -67,9 +67,12 @@ class BuyingDetailActivity : AppCompatActivity() {
                 progressBar!!.dismiss()
                 if (response != null) {
                     orderTerms = response.body()!!
-                    tv_payment_method.setText(orderTerms.PaymentMethod!!.BankName)
+
                     if (orderTerms.PaymentMethod!!.Type == "Bank")
-                        tv_payment_method.text = tv_payment_method.text.toString() + "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
+                        tv_payment_method.text = "Type: "+ orderTerms.PaymentMethod!!.Type+ "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
+                    else {
+                        tv_payment_method.setText("Type: "+ orderTerms.PaymentMethod!!.Type+"\n Number:"+orderTerms.PaymentMethod!!.BankName)
+                    }
                 }
             }
         })
@@ -103,7 +106,7 @@ class BuyingDetailActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "") {
 //                    if (pkr_ed!!.text.toString().toDouble() < trade.Amount!!.toDouble()) {
-                    if(pkr_ed!!.text.toString()=="."){
+                    if (pkr_ed!!.text.toString() == ".") {
                         pkr_ed.setText("0.")
                     }
                     if (pkr_ed!!.text.toString().toDouble() < trade.Amount!!.toDouble()) {
@@ -112,7 +115,7 @@ class BuyingDetailActivity : AppCompatActivity() {
                         ecuurency_ed.setText(BigDecimal.valueOf(txtuseramount!!).toPlainString())
                     }
 //                    }
-                    else{
+                    else {
                         ecuurency_ed.setText("")
                     }
                 }
@@ -137,20 +140,20 @@ class BuyingDetailActivity : AppCompatActivity() {
 
     private fun validation() {
 
-        if(pkr_ed!!.text.toString().trim() == ""){
+        if (pkr_ed!!.text.toString().trim() == "") {
             Apputils.showMsg(this@BuyingDetailActivity, "Enter the amount")
             return
         }
-        if(ecuurency_ed!!.text.toString().trim() == ""){
+        if (ecuurency_ed!!.text.toString().trim() == "") {
             Apputils.showMsg(this@BuyingDetailActivity, "Invalid amount")
             return
         }
-        if(ecuurency_ed!!.text.toString().toDouble()> trade.LowerLimit!!.toDouble()/* &&
-                ecuurency_ed!!.text.toString().toLong()> trade.LowerLimit!!.toLong()*/){
+        if (ecuurency_ed!!.text.toString().toDouble() < trade.LowerLimit!!.toDouble()/* &&
+                ecuurency_ed!!.text.toString().toLong()> trade.LowerLimit!!.toLong()*/) {
             Apputils.showMsg(this@BuyingDetailActivity, "Price should be greater than lower limit")
             return
 
-        }else if(ecuurency_ed!!.text.toString().toDouble()> trade.UpperLimit!!.toDouble()){
+        } else if (ecuurency_ed!!.text.toString().toDouble() > trade.UpperLimit!!.toDouble()) {
             Apputils.showMsg(this@BuyingDetailActivity, "Limit crossed")
             return
         }
@@ -221,7 +224,7 @@ class BuyingDetailActivity : AppCompatActivity() {
 
     private fun showTradeDialog() {
         val view: View = LayoutInflater.from(this@BuyingDetailActivity).inflate(R.layout.dilalog_terms_trade, null)
-        val alertBox =AlertDialog.Builder(this@BuyingDetailActivity)
+        val alertBox = AlertDialog.Builder(this@BuyingDetailActivity)
         alertBox.setView(view)
         alertBox.setCancelable(false)
         val dialog = alertBox.create()

@@ -179,7 +179,7 @@ class AdvertisementActivity : AppCompatActivity() {
         val mtrade = Trade(null, userId, orderType, paymentId.toLong(), ed_amount.text.toString(), "0", "0", ed_price.text.toString(), fees.toString(), u_limit.text.toString().toLong(), l_limit.text.toString().toLong(), coin, null, null)
         println(Gson().toJson(mtrade))
         ApiClint.getInstance()?.getService()?.addTrade(fuac_id = mtrade.FUAC_Id.toString(),
-                ordertype = mtrade.OrderType.toString(), fup_id = "3",
+                ordertype = mtrade.OrderType.toString(), fup_id =mtrade.FUP_Id.toString(),
                 amount = mtrade.Amount.toString(), exeamount = mtrade.ExecutedAmount!!, exefee = mtrade.ExecutedFees!!, price = mtrade.Price.toString(), fees = mtrade.Fees.toString(),
                 ulimit = mtrade.UpperLimit.toString(), llimit = mtrade.LowerLimit.toString(),
                 ctype = mtrade.CurrencyType.toString())?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
@@ -221,7 +221,7 @@ class AdvertisementActivity : AppCompatActivity() {
 
 
         val userId = sharedPref!!.getProfilePref(this@AdvertisementActivity).UAC_Id
-        ApiClint.getInstance()?.getService()?.getPaymentDetailListByUid("1013")!!.enqueue(object : Callback<ArrayList<PaymentMethod>> {
+        ApiClint.getInstance()?.getService()?.getPaymentDetailListByUid(userId!!)!!.enqueue(object : Callback<ArrayList<PaymentMethod>> {
             override fun onFailure(call: Call<ArrayList<PaymentMethod>>?, t: Throwable?) {
                 println("error")
                 Apputils.showMsg(this@AdvertisementActivity, "network error")
@@ -232,7 +232,7 @@ class AdvertisementActivity : AppCompatActivity() {
                     if (response.body() != null) {
                         var spinnerItem = ""
                         if (response.body()!!.size == 0) {
-                            mypaymentList.add(PaymentMethod("null", "null", "No Payment method added"))
+                            mypaymentList.add(PaymentMethod("null", "null", "No Payment method added",null,null,"Not added"))
                         } else {
                             paymentId = response.body()!!.get(0).UP_Id!!
                         }

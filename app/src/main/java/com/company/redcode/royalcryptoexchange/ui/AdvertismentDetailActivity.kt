@@ -1,7 +1,6 @@
 package com.company.redcode.royalcryptoexchange.ui
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -12,15 +11,12 @@ import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-import com.company.redcode.royalcryptoexchange.OrderDetailActivity
 import com.company.redcode.royalcryptoexchange.R
-import com.company.redcode.royalcryptoexchange.R.id.btn_back
 import com.company.redcode.royalcryptoexchange.adapter.OrderAdapater
-import com.company.redcode.royalcryptoexchange.adapter.UserBankAdapater
-import com.company.redcode.royalcryptoexchange.models.Bank
 import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
@@ -59,16 +55,16 @@ class AdvertismentDetailActivity : AppCompatActivity() {
 
     private fun initView() {
 
-        tv_details.text = "Amount:"+trade.Amount+"\n"+"Price:"+trade.Price+"\n"+"Type:"+trade.OrderType
+        tv_details.text = "Amount:" + trade.Amount + "\n" + "Price:" + trade.Price + "\n" + "Type:" + trade.OrderType
         order_recycler = findViewById(R.id.order_recycler)
         val orderlayout = LinearLayoutManager(this@AdvertismentDetailActivity, LinearLayout.VERTICAL, false)
-        order_recycler!!.layoutManager =orderlayout
-        orderAdapater = OrderAdapater(this@AdvertismentDetailActivity, orderList){ post ->
+        order_recycler!!.layoutManager = orderlayout
+        orderAdapater = OrderAdapater(this@AdvertismentDetailActivity, orderList) { post ->
             //action
-           /* val intent = Intent(this@AdvertismentDetailActivity, OrderDetailActivity::class.java)
-            var obj = Gson().toJson(orderList[post])
-            intent.putExtra("order",obj)
-            startActivity(intent)*/
+            /* val intent = Intent(this@AdvertismentDetailActivity, OrderDetailActivity::class.java)
+             var obj = Gson().toJson(orderList[post])
+             intent.putExtra("order",obj)
+             startActivity(intent)*/
 
             showOrderReleaseDialog(orderList[post])
         }
@@ -78,7 +74,7 @@ class AdvertismentDetailActivity : AppCompatActivity() {
 
     }
 
-    private fun showOrderReleaseDialog(order:Order) {
+    private fun showOrderReleaseDialog(order: Order) {
 
         val view: View = LayoutInflater.from(this@AdvertismentDetailActivity).inflate(R.layout.dialog_order_release, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder(this@AdvertismentDetailActivity)
@@ -94,30 +90,27 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         val btn_cancel: Button = view.findViewById(R.id.btn_cancel)
         val tv_status: TextView = view.findViewById(R.id.tv_status)
 
-        if(order.Status==Constants.STATUS_CANCEL){
+        if (order.Status == Constants.STATUS_CANCEL) {
             tv_status.text = "Cancelled"
-        }else
+        } else
             tv_status.text = order.Status
 
-        if(order.Status==Constants.STATUS_OPEN){
+        if (order.Status == Constants.STATUS_OPEN) {
             btn_release.visibility = View.GONE
-        }
-        else if(order.Status==Constants.STATUS_IN_PROGRESS){
+        } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
             btn_release.visibility = View.VISIBLE
             btn_cancel.visibility = View.GONE
-        }
-        else if(order.Status==Constants.STATUS_COMPLETED){
+        } else if (order.Status == Constants.STATUS_COMPLETED) {
+            btn_release.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+        } else if (order.Status == Constants.STATUS_CANCEL) {
+            btn_release.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+        } else if (order.Status == Constants.STATUS_DISPUTE) {
             btn_release.visibility = View.GONE
             btn_cancel.visibility = View.GONE
         }
-        else if(order.Status==Constants.STATUS_CANCEL){
-            btn_release.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-        } else if(order.Status==Constants.STATUS_DISPUTE){
-            btn_release.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-        }
-        tv_name.text = "U-"+order.FUAC_Id
+        tv_name.text = "U-" + order.FUAC_Id
         tv_coin_amount.text = order.BitAmount
         tv_price.text = order.BitPrice
 
@@ -130,21 +123,49 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         }
 
         btn_release.setOnClickListener {
-            updateStatus(Constants.STATUS_COMPLETED,order.ORD_Id!!)
+            orderRelease(order.ORD_Id, trade.Fees, trade.Amount, order.BitAmount, order.Amount, trade.UT_Id)
+            dialog.dismiss()
         }
 
 
         dialog.show()
     }
 
-    fun getOrderList(){
-        var fut_id=trade.UT_Id
+    private fun orderRelease(orD_Id: String?, fees: String?, amount: String?,
+                             bitAmount: String?, amount2: String?, uT_Id: Int?) {
+        progressBar!!.show()
+
+        ApiClint.getInstance()?.getService()?.orderIRelease(orD_Id!!, fees!!, amount!!, bitAmount!!,
+                amount2!!, uT_Id!!.toString())!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+
+                print("error " + t)
+                progressBar!!.dismiss()
+
+            }
+
+            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+
+                if (response?.body() != null) {
+                    progressBar!!.dismiss()
+                    Apputils.showMsg(this@AdvertismentDetailActivity, "Trade release")
+                    setResult(RESULT_OK);
+                    finish()
+                }
+            }
+
+        })
+    }
+
+    fun getOrderList() {
+        var fut_id = trade.UT_Id
         progressBar!!.show()
         ApiClint.getInstance()?.getService()?.getOrderByTradeId(fut_id.toString())!!.enqueue(object : Callback<java.util.ArrayList<Order>> {
             override fun onFailure(call: Call<java.util.ArrayList<Order>>?, t: Throwable?) {
-                print("error "+t)
+                print("error " + t)
                 progressBar!!.dismiss()
             }
+
             override fun onResponse(call: Call<java.util.ArrayList<Order>>?, response: Response<java.util.ArrayList<Order>>?) {
                 if (response?.body() != null) {
                     response?.body()?.forEach { order ->
@@ -158,22 +179,28 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         })
     }
 
-    fun updateStatus(status:String,order_id:String){
+    fun updateStatus(status: String, order_id: String) {
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.update_order_status(order_id,status)!!.enqueue(object :Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+        ApiClint.getInstance()?.getService()?.update_order_status(order_id, status)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
-                print("error "+t)
+                print("error " + t)
                 progressBar!!.dismiss()
             }
 
             override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
                 if (response?.body() != null) {
+                    setResult(RESULT_OK);
                     finish()
                     progressBar!!.dismiss()
                 }
             }
 
         })
-        }
+    }
+
+    override fun onBackPressed() {
+//        setResult(RESULT_OK);
+        super.onBackPressed()
+    }
 
 }
