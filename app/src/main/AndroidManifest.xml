@@ -20,7 +20,9 @@
             android:theme="@style/BuyTheme"
             android:windowSoftInputMode="adjustPan">
         </activity>
+
         <activity
+            android:screenOrientation="portrait"
             android:name=".auth.SignInActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -42,16 +44,19 @@
         <activity
             android:name=".ui.ProfileActivity"
             android:focusable="true"
-            android:focusableInTouchMode="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity
             android:name=".DrawerActivity"
             android:theme="@style/BuyTheme"></activity>
         <activity android:name=".ui.DisputeActivity"></activity>
         <activity
             android:name="com.example.admin.camerawork.CameraActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ui.BuyActivity"
             android:focusable="true"

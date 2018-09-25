@@ -2,6 +2,7 @@ package com.company.redcode.royalcryptoexchange.ui
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
@@ -41,8 +42,8 @@ import java.util.HashMap
 
 class ProfileFragment : Fragment() {
     var URL = "http://wpassignment123.000webhostapp.com/upload.php"
-    var imagename:ArrayList<String>?=null;
-    var btn_add_bank: LinearLayout? = null
+    var imagename: ArrayList<String>? = null;
+    var btn_add_bank: Button? = null
     var btn_add_img: ImageButton? = null
     var spinner_payment_method: Spinner? = null
     var bank_recycler_view: RecyclerView? = null
@@ -52,34 +53,34 @@ class ProfileFragment : Fragment() {
     private var myImgJson: String? = null
     private var bank_view: LinearLayout? = null
     private var mobile_method_view: LinearLayout? = null
-    var adapter: UserBankAdapater? =null
+    var adapter: UserBankAdapater? = null
     var progressBar: android.app.AlertDialog? = null
     private var attach_img_1: ImageView? = null
     private var attach_img_2: ImageView? = null
     private var attach_img_3: ImageView? = null
-    var fuac_id:String?=null;
-    var fname :EditText?=null
-    var lname:EditText?=null
-    var cnic_:EditText?=null
-    var phno:EditText?=null
-    var pass_:EditText?=null
-    var repass_:EditText?=null
-    var email_ :EditText?=null;
+    var fuac_id: String? = null;
+    var fname: EditText? = null
+    var lname: EditText? = null
+    var cnic_: EditText? = null
+    var phno: EditText? = null
+    var pass_: EditText? = null
+    var repass_: EditText? = null
+    var email_: EditText? = null;
     var btnupdate:Button?=null
-    var docimage : LinearLayout?=null;
+    var docimage: LinearLayout? = null;
     var profile_terms : MaterialEditText? = null;
-    var image : String = "http://wpassignment123.000webhostapp.com/uploads/";
+    var image: String = "http://wpassignment123.000webhostapp.com/uploads/";
     var list = ArrayList<Bank>()
-    var docver:String?=null;
-    var sharedpref : SharedPref= SharedPref.getInstance()!!
-    var spinnervalue ="Jazz Cash"
-    var etbankname:EditText ? = null
-    var etbankcode:EditText ? = null
-    var etcnic:EditText ? = null
-    var etaccountttile:EditText ? = null
-    var etmobilenumber:EditText ? = null
-    var etaccountnumber:EditText ? = null
-    var btnaddpayment:Button ? = null
+    var docver: String? = null;
+    var sharedpref: SharedPref = SharedPref.getInstance()!!
+    var spinnervalue = "Jazz Cash"
+    var etbankname: EditText? = null
+    var etbankcode: EditText? = null
+    var etcnic: EditText? = null
+    var etaccountttile: EditText? = null
+    var etmobilenumber: EditText? = null
+    var etaccountnumber: EditText? = null
+    var btnaddpayment: Button? = null
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -98,10 +99,10 @@ class ProfileFragment : Fragment() {
         phno = view!!.findViewById(R.id.profile_mob)
         cnic_ = view!!.findViewById(R.id.profile_cnic)
         email_ = view!!.findViewById(R.id.profile_email)
-        pass_= view!!.findViewById(R.id.profile_pass)
+        pass_ = view!!.findViewById(R.id.profile_pass)
         repass_ = view!!.findViewById(R.id.profile_repass)
-        btnupdate = view!!.findViewById(R.id.btnprofileupdate);
-        profile_terms = view!!.findViewById(R.id.profile_terms);
+         btnupdate = view!!.findViewById(R.id.btnprofileupdate);
+          profile_terms = view!!.findViewById(R.id.profile_terms);
         docimage = view!!.findViewById(R.id.docimage);
 
 
@@ -114,7 +115,7 @@ class ProfileFragment : Fragment() {
 
     private fun initView(view: View?) {
 
-        btn_add_bank = view!!.findViewById(R.id.btn_add_bank)
+        btn_add_bank = view!!.findViewById(R.id.addaccount)
         attach_img_1 = view!!.findViewById(R.id.attach_img_1)
         attach_img_2 = view!!.findViewById(R.id.attach_img_2)
         attach_img_3 = view!!.findViewById(R.id.attach_img_3)
@@ -123,9 +124,8 @@ class ProfileFragment : Fragment() {
         //api call image document
 
 
-
-        var obj: Users =sharedpref.getProfilePref(activity!!)
-  //      var obj: Users =sharedpref.getProfilePref(activity!!)
+        var obj: Users = sharedpref.getProfilePref(activity!!)
+        //      var obj: Users =sharedpref.getProfilePref(activity!!)
 
         fname!!.setText(obj.FirstName)
         lname!!.setText(obj.LastName);
@@ -135,36 +135,37 @@ class ProfileFragment : Fragment() {
         email_!!.setText(obj.Email);
         phno!!.setText(obj.PhoneNum);
         docver = obj.DocumentVerification;
-        if(obj.Terms!="Your Terms")
-        profile_terms!!.setText(obj.Terms)
+        if (obj.Terms != "Your Terms")
+        //profile_terms!!.setText(obj.Terms)
 
-        fuac_id=obj.UAC_Id;
-        val im1:ImageView = view.findViewById(R.id.attach_img_1)
-        val im3:ImageView = view.findViewById(R.id.attach_img_3)
-        val im2:ImageView = view.findViewById(R.id.attach_img_2)
-if(docver!="Verified"){
-        ApiClint.getInstance()?.getService()?.user_document(fuac_id!!)?.enqueue(object: Callback<ArrayList<Document>>{
-            override fun onFailure(call: Call<ArrayList<Document>>?, t: Throwable?) {
-print("Error in Showing Image "+t)
-            }
+            fuac_id = obj.UAC_Id;
+        val im1: ImageView = view.findViewById(R.id.attach_img_1)
+        val im3: ImageView = view.findViewById(R.id.attach_img_3)
+        val im2: ImageView = view.findViewById(R.id.attach_img_2)
+        if (docver != "Verified") {
+            ApiClint.getInstance()?.getService()?.user_document(fuac_id!!)?.enqueue(object : Callback<ArrayList<Document>> {
+                override fun onFailure(call: Call<ArrayList<Document>>?, t: Throwable?) {
+                    print("Error in Showing Image " + t)
+                }
 
-            override fun onResponse(call: Call<ArrayList<Document>>?, response: retrofit2.Response<ArrayList<Document>>?) {
-            if(response!=null){
-                var doclist = response!!.body();
-if(doclist!![0].User_Document!=null)
-                Picasso.with(activity!!).load(image+ doclist!![0].User_Document).into(im1);
-if(doclist!![1].User_Document!=null)
-                Picasso.with(activity!!).load(image+ doclist!![1].User_Document).into(im2);
-if(doclist!![2].User_Document!=null)
-                Picasso.with(activity!!).load(image+ doclist!![2].User_Document).into(im3);
-            }}
+                override fun onResponse(call: Call<ArrayList<Document>>?, response: retrofit2.Response<ArrayList<Document>>?) {
+                    if (response != null) {
+                        var doclist = response!!.body();
+                        if (doclist!![0].User_Document != null)
+                            Picasso.with(activity!!).load(image + doclist!![0].User_Document).into(im1);
+                        if (doclist!![1].User_Document != null)
+                            Picasso.with(activity!!).load(image + doclist!![1].User_Document).into(im2);
+                        if (doclist!![2].User_Document != null)
+                            Picasso.with(activity!!).load(image + doclist!![2].User_Document).into(im3);
+                    }
+                }
 
-        })
-}else{
-    docimage!!.visibility= (View.INVISIBLE);
-      var ll:LinearLayout=  view.findViewById(R.id.adddoc);
-    ll!!.visibility = View.INVISIBLE
-}
+            })
+        } else {
+            docimage!!.visibility = (View.INVISIBLE);
+           /* var ll:LinearLayout=  view.findViewById(R.id.adddoc);
+            ll!!.visibility = View.INVISIBLE*/
+        }
         btn_add_img = view!!.findViewById(R.id.btn_add_img)
 
         btn_add_bank!!.setOnClickListener {
@@ -175,17 +176,17 @@ if(doclist!![2].User_Document!=null)
             showImageAddDialog()
         }
 
-        btnupdate!!.setOnClickListener(View.OnClickListener {
-            profileValidiation();
-        })
+         btnupdate!!.setOnClickListener(View.OnClickListener {
+             profileValidiation();
+         })
 
     }
 
 
-    fun addbank(acc_cnic:String,acctitle:String,banknumber:String,bankcode:String){
-        ApiClint?.getInstance()?.getService()?.add_paymentdetail(fuac_id!!,spinnervalue!!,acc_cnic!!,acctitle!!,banknumber!!,bankcode!!)?.enqueue(object : Callback<PaymentMethod>{
+    fun addbank(acc_cnic: String, acctitle: String, banknumber: String, bankcode: String) {
+        ApiClint?.getInstance()?.getService()?.add_paymentdetail(fuac_id!!, spinnervalue!!, acc_cnic!!, acctitle!!, banknumber!!, bankcode!!)?.enqueue(object : Callback<PaymentMethod> {
             override fun onFailure(call: Call<PaymentMethod>?, t: Throwable?) {
-                print("Error While Adding Bank Details"+t)
+                print("Error While Adding Bank Details" + t)
             }
 
             override fun onResponse(call: Call<PaymentMethod>?, response: retrofit2.Response<PaymentMethod>?) {
@@ -194,7 +195,7 @@ if(doclist!![2].User_Document!=null)
                     //   if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
                     //     var status = response.body()!!.message
                     Toast.makeText(activity!!, "Payment Method Added!!", Toast.LENGTH_SHORT).show()
-                    list.add(Bank(apiResponse!!.UP_Id,apiResponse!!.Account,apiResponse!!.BankName))
+                    list.add(Bank(apiResponse!!.UP_Id, apiResponse!!.Account, apiResponse!!.BankName))
                     adapter!!.notifyDataSetChanged();
                     //finish();
                 } else {
@@ -207,85 +208,78 @@ if(doclist!![2].User_Document!=null)
         })
     }
 
-     fun profileValidiation(){
-            var firstname :String = fname!!.text.toString();
-            var lastname :String = lname!!.text.toString();
-            var password: String = pass_!!.text.toString();
-            var repass:String = repass_!!.text.toString();
-            var terms: String = profile_terms!!.text.toString()
+    fun profileValidiation() {
+        var firstname: String = fname!!.text.toString();
+        var lastname: String = lname!!.text.toString();
+        var password: String = pass_!!.text.toString();
+        var repass: String = repass_!!.text.toString();
+        var terms: String = profile_terms!!.text.toString()
 //                    && password!="" && firstname!="" && lastname!=""
 
 
-         if (fname!!.text.toString() == "") {
-             fname!!.error = Html.fromHtml("<font color='black'>Enter user first name</font>")
-             fname!!.requestFocus()
-             return
-         }
-         if (lname!!.text.toString() == "") {
-             lname!!.error = Html.fromHtml("<font color='black'>Enter user last name</font>")
-             lname!!.requestFocus()
-             return
-         }
-         if (pass_!!.text.toString() == "") {
-             pass_!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
-             pass_!!.requestFocus()
-             return
-         }
+        if (fname!!.text.toString() == "") {
+            fname!!.error = Html.fromHtml("<font color='black'>Enter user first name</font>")
+            fname!!.requestFocus()
+            return
+        }
+        if (lname!!.text.toString() == "") {
+            lname!!.error = Html.fromHtml("<font color='black'>Enter user last name</font>")
+            lname!!.requestFocus()
+            return
+        }
+        if (pass_!!.text.toString() == "") {
+            pass_!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+            pass_!!.requestFocus()
+            return
+        }
 
-         if (pass_!!.text.toString().trim { it <= ' ' }.length < 8) {
-             pass_!!.error = Html.fromHtml("<font color='black'>password is short must be greater then 8 digits</font>")
-             pass_!!.requestFocus()
-             return
-         }
-         if (fname!!.text.toString() == lname!!.text.toString()) {
-             fname!!.error = Html.fromHtml("<font color='black'>Could not be same</font>")
-             lname!!.error = Html.fromHtml("<font color='black'>Could not be same</font>")
-             fname!!.requestFocus()
-             lname!!.requestFocus()
-             return
-         }
-         if (pass_!!.text.toString() != repass_!!.text.toString()) {
-             pass_!!.error = Html.fromHtml("<font color='black'>Should be same</font>")
-             repass_!!.error = Html.fromHtml("<font color='black'>Should be same</font>")
-             pass_!!.requestFocus()
-             repass_!!.requestFocus()
-             return
-         }
+        if (pass_!!.text.toString().trim { it <= ' ' }.length < 8) {
+            pass_!!.error = Html.fromHtml("<font color='black'>password is short must be greater then 8 digits</font>")
+            pass_!!.requestFocus()
+            return
+        }
+        if (fname!!.text.toString() == lname!!.text.toString()) {
+            fname!!.error = Html.fromHtml("<font color='black'>Could not be same</font>")
+            lname!!.error = Html.fromHtml("<font color='black'>Could not be same</font>")
+            fname!!.requestFocus()
+            lname!!.requestFocus()
+            return
+        }
+        if (pass_!!.text.toString() != repass_!!.text.toString()) {
+            pass_!!.error = Html.fromHtml("<font color='black'>Should be same</font>")
+            repass_!!.error = Html.fromHtml("<font color='black'>Should be same</font>")
+            pass_!!.requestFocus()
+            repass_!!.requestFocus()
+            return
+        }
          if (profile_terms!!.text.toString()==""){
              terms="Your Terms";
           //   profile_terms!!.setText(terms);
          }
-             ApiClint.getInstance()?.getService()?.update_profile(fuac_id!!,firstname!!,lastname!!,password!!,terms!!)?.enqueue(object :Callback<com.company.redcode.royalcryptoexchange.models.Response>{
-                 override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
-                     println("error")
-                 }
+                ApiClint.getInstance()?.getService()?.update_profile(fuac_id!!,firstname!!,lastname!!,password!!,terms!!)?.enqueue(object :Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+                    override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                        println("error")
+                    }
 
-                 override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
-                     if (response != null) {
-                         var apiResponse = response.body()
-                         if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
-                             var status = response.body()!!.message
-                             Toast.makeText(activity!!, "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
-                             //finish();
-                         } else {
-                             Toast.makeText(activity!!, "Error!! ", Toast.LENGTH_SHORT).show()
+                    override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+                        if (response != null) {
+                            var apiResponse = response.body()
+                            if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                                var status = response.body()!!.message
+                                Toast.makeText(activity!!, "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
+                                //finish();
+                            } else {
+                                Toast.makeText(activity!!, "Error!! ", Toast.LENGTH_SHORT).show()
 
-                         }
-                     }
-                 }
+                            }
+                        }
+                    }
 
-             } );
+                } );
+    }
 
-
-
-
-
-
-
-
-     }
     private fun showImageAddDialog() {
-        val view: View = LayoutInflater.from(activity!!).inflate(R.layout.select_image_dialog, null)
+        val view: View = LayoutInflater.from((activity as Context?)!!).inflate(R.layout.select_image_dialog, null)
         val alertBox = AlertDialog.Builder(activity!!)
         alertBox.setView(view)
         alertBox.setCancelable(true)
@@ -334,20 +328,20 @@ if(doclist!![2].User_Document!=null)
 
 
 
-        btnaddpayment!!.setOnClickListener{view->
+        btnaddpayment!!.setOnClickListener { view ->
 
 
-            val account:String = etaccountnumber!!.text.toString();
-            val title:String  = etaccountttile!!.text.toString()
-            val name:String  = etbankname!!.text.toString()
-            val cnic :String = etcnic!!.text.toString()
-            val mob :String = etmobilenumber!!.text.toString()
-            val code :String = etbankcode!!.text.toString()
+            val account: String = etaccountnumber!!.text.toString();
+            val title: String = etaccountttile!!.text.toString()
+            val name: String = etbankname!!.text.toString()
+            val cnic: String = etcnic!!.text.toString()
+            val mob: String = etmobilenumber!!.text.toString()
+            val code: String = etbankcode!!.text.toString()
 
-            if(spinnervalue == "Bank Transfer")
-                addbank(title.toString(),account.toString(),name.toString(),code.toString());
+            if (spinnervalue == "Bank Transfer")
+                addbank(title.toString(), account.toString(), name.toString(), code.toString());
             else
-                addbank(cnic.toString(),"null",mob.toString(),"null");
+                addbank(cnic.toString(), "null", mob.toString(), "null");
 
         }
 
@@ -367,10 +361,10 @@ if(doclist!![2].User_Document!=null)
 
                 val item = parent!!.getItemAtPosition(pos);
                 spinnervalue = item.toString();
-                if(item.equals("Bank Transfer")){
+                if (item.equals("Bank Transfer")) {
                     mobile_method_view!!.visibility = View.GONE
                     bank_view!!.visibility = View.VISIBLE
-                }else {
+                } else {
                     mobile_method_view!!.visibility = View.VISIBLE
                     bank_view!!.visibility = View.GONE
                 }
@@ -381,19 +375,19 @@ if(doclist!![2].User_Document!=null)
         //bank
 
 ///         list.add(Bank("ahmed", "Bank Transfer"))
-   //      list.add(Bank("ahmed", "Bank Transfer"))
-     //    list.add(Bank("ahmed", "Bank Transfer"))
-       //  list.add(Bank("ahmed", "Bank Transfer"))
+        //      list.add(Bank("ahmed", "Bank Transfer"))
+        //    list.add(Bank("ahmed", "Bank Transfer"))
+        //  list.add(Bank("ahmed", "Bank Transfer"))
 
 
-          adapter = UserBankAdapater(activity!!, list) { position ->
-//             showTradeDialog()
-             list.removeAt(position)
-              adapter!!.notifyDataSetChanged()
-         }
-         var layout = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
-         bank_recycler_view!!.layoutManager = layout
-         bank_recycler_view!!.adapter = adapter
+        adapter = UserBankAdapater(activity!!, list) { position ->
+            //             showTradeDialog()
+            list.removeAt(position)
+            adapter!!.notifyDataSetChanged()
+        }
+        var layout = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
+        bank_recycler_view!!.layoutManager = layout
+        bank_recycler_view!!.adapter = adapter
 
 
         btnClose.setOnClickListener {
@@ -418,14 +412,14 @@ if(doclist!![2].User_Document!=null)
                 for (i in 0 until count) {
                     val imageUri = data.clipData.getItemAt(i).uri
                     val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imageUri)
-                    if (i ==0)
-                    attach_img_1!!.setImageBitmap(bitmap)
-                    if (i ==1)
-                     attach_img_2!!.setImageBitmap(bitmap)
-                    if (i ==2)
-                     attach_img_3!!.setImageBitmap(bitmap)
+                    if (i == 0)
+                        attach_img_1!!.setImageBitmap(bitmap)
+                    if (i == 1)
+                        attach_img_2!!.setImageBitmap(bitmap)
+                    if (i == 2)
+                        attach_img_3!!.setImageBitmap(bitmap)
 
-                    uploadtoserver(bitmap,i,(count-1))
+                    uploadtoserver(bitmap, i, (count - 1))
                 }
 
             } else if (data.data != null) {
@@ -433,11 +427,8 @@ if(doclist!![2].User_Document!=null)
 
                 val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imagePath)
                 attach_img_1!!.setImageBitmap(bitmap)
-                uploadtoserver(bitmap,2,2)
+                uploadtoserver(bitmap, 2, 2)
             }
-
-
-
 
 
         } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
@@ -446,23 +437,23 @@ if(doclist!![2].User_Document!=null)
             var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
             var list = obj.camList
 
-            for(i in 0 until list!!.size){
+            for (i in 0 until list!!.size) {
 
-                if (i ==0)
+                if (i == 0)
                     attach_img_1!!.setImageBitmap(list[i])
-                if (i ==1)
+                if (i == 1)
                     attach_img_2!!.setImageBitmap(list[i])
-                if (i ==2)
+                if (i == 2)
                     attach_img_3!!.setImageBitmap(list[i])
 
-                var c : Int = list!!.size-1;
-                uploadtoserver(list[i],i,(c))
+                var c: Int = list!!.size - 1;
+                uploadtoserver(list[i], i, (c))
 
             }
 
         }
 
-       // progressBar!!.dismiss()
+        // progressBar!!.dismiss()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -478,69 +469,72 @@ if(doclist!![2].User_Document!=null)
     }
 
 
-    fun uploadtoserver(bitmap:Bitmap,i:Int,size:Int){
+    fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
 
-            val StrRequest = object : StringRequest(Request.Method.POST, URL,
-                    Response.Listener { response ->
-                        //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
-                        imagename!!.add(response)
+        val StrRequest = object : StringRequest(Request.Method.POST, URL,
+                Response.Listener { response ->
+                    //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
+                    imagename!!.add(response)
 
-                        userdoc(fuac_id!!, response!!, object : ServiceListener<String> {
-                            override fun success(obj: String) {
-                                if(i==size){
-                                    Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+                    userdoc(fuac_id!!, response!!, object : ServiceListener<String> {
+                        override fun success(obj: String) {
+                            if (i == size) {
+                                Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
                                 progressBar!!.dismiss()
-                            }}
-
-                            override fun fail(error: ServiceError) {
-                                Toast.makeText(activity!!, "Service error!! ", Toast.LENGTH_SHORT).show()
                             }
-                        })
+                        }
+
+                        override fun fail(error: ServiceError) {
+                            Toast.makeText(activity!!, "Service error!! ", Toast.LENGTH_SHORT).show()
+                        }
+                    })
 
 
 
-                        ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!,response!!)?.enqueue(object :Callback<com.company.redcode.royalcryptoexchange.models.Response>{
-                            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
-                             //   println("error")
-                            }
+                    ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!, response!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+                        override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                            //   println("error")
+                        }
 
-                            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
-                                if (response != null) {
-                                    var apiResponse = response.body()
-                                    if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
-                                        var status = response.body()!!.message
-                                       // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
-                                        //finish();
-                                    } else {
-                               //         Toast.makeText(activity!!, "Error in Image uploading!! ", Toast.LENGTH_SHORT).show()
+                        override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+                            if (response != null) {
+                                var apiResponse = response.body()
+                                if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                                    var status = response.body()!!.message
+                                    // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+                                    //finish();
+                                } else {
+                                    //         Toast.makeText(activity!!, "Error in Image uploading!! ", Toast.LENGTH_SHORT).show()
 
-                                    }
                                 }
                             }
+                        }
 
-                        } );
+                    });
 
 
-                    }, Response.ErrorListener { Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
-                    progressBar!!.dismiss()
-            }) {
-                //@Throws(AuthFailureError::class)
-                override fun getParams(): Map<String, String> {
-                    val imageData = imageTostring(bitmap!!)
-                    val params = HashMap<String, String>()
-                 //   params.put("image",imageData);
-                   // params.put("string1","ali")
-                    params["image"] = imageData
-                    params["Saving"] = image;
+                }, Response.ErrorListener {
+            Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
+            progressBar!!.dismiss()
+        }) {
+            //@Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val imageData = imageTostring(bitmap!!)
+                val params = HashMap<String, String>()
+                //   params.put("image",imageData);
+                // params.put("string1","ali")
+                params["image"] = imageData
+                params["Saving"] = image;
 
-                    return params
-                }
+                return params
             }
+        }
 
-            val requestQueue = Volley.newRequestQueue(activity!!)
-            requestQueue.add(StrRequest)
+        val requestQueue = Volley.newRequestQueue(activity!!)
+        requestQueue.add(StrRequest)
 
     }
+
     private fun imageTostring(bitmap: Bitmap): String {
         val outStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)

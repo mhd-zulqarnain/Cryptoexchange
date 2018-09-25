@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="5"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         >
 
 
@@ -22,11 +22,10 @@
 
 
                 <ImageView
-                    android:id="@+id/cardview_image2"
+                    android:id="@+id/cardview_img"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/openbitcoin"
 
                     />
 
@@ -34,7 +33,7 @@
                     android:textColor="#ffffff"
                     android:id="@+id/catagory"
                     android:layout_width="0dp"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.7"
                     android:layout_height="wrap_content"
                     android:text="BTC"
                     android:textSize="16sp" />
@@ -42,19 +41,20 @@
                 <TextView
                     android:id="@+id/balance"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.1"
                     android:layout_height="wrap_content"
                     android:text="Balance"
                     android:textColor="#effd71"
-                    android:textSize="15dp"/>
+                    android:textSize="15sp"/>
 
                 <Button
                     android:id="@+id/send"
                     android:layout_width="0dp"
-                    android:layout_weight="1.1"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:layout_marginRight="12dp"
+                    android:layout_height="40dp"
                     android:text="Send"
-                    android:textSize="8dp"
+                    android:textSize="12sp"
                     android:textColor="#fff"
                     android:background="@drawable/button_yellow_border"
 
@@ -63,12 +63,12 @@
         <Button
             android:id="@+id/RECEIVE"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.1"
+            android:layout_height="40dp"
+            android:layout_weight="0.9"
             android:text="recieve"
             android:background="@drawable/button_yellow_border"
             android:textColor="#ffff"
-            android:textSize="8dp" />
+            android:textSize="12sp" />
 
 
 
