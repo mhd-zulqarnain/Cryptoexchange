@@ -6,7 +6,7 @@ class Trade(
         var UT_Id:Int? = null,
         var FUAC_Id: Int? = null,
         var OrderType: String? = null,
-        var FUP_Id: Int? = null,
+        var FUP_Id: Long? = null,
         var Amount: String? = null,
         var ExecutedAmount: String? = null,
         var ExecutedFees: String? = null,

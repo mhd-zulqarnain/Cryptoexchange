@@ -11,7 +11,6 @@ import android.text.Html
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.CustomSpinnerAdapter
@@ -27,7 +26,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.math.BigDecimal
-import java.text.DecimalFormat
 
 class AdvertisementActivity : AppCompatActivity() {
     var remCoin: Double? = null;
@@ -35,6 +33,7 @@ class AdvertisementActivity : AppCompatActivity() {
     var coin: String = "BTC"
     var orderType: String = "Buy"
     var progressBar: AlertDialog? = null
+    var paymentId = "null"
     var sharedPref = SharedPref.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +43,7 @@ class AdvertisementActivity : AppCompatActivity() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initView() {
-//        getSpinnerPaymentMethod()
+
         spinner_coin_type.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
@@ -80,22 +79,23 @@ class AdvertisementActivity : AppCompatActivity() {
 
                 }
             }
+
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
-        btn_post.setOnClickListener{
+        btn_post.setOnClickListener {
             validation()
         }
         btn_cancel.setOnClickListener {
             finish()
         }
+        getSpinnerPaymentMethod()
     }
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun validation() {
-
 
 
         if (ed_amount!!.text.toString() == "") {
@@ -110,7 +110,7 @@ class AdvertisementActivity : AppCompatActivity() {
         }
 
         if (u_limit!!.text.toString() == "") {
-            u_limit!!.error =  Html.fromHtml("<font color='black'>Enter the Limit</font>")
+            u_limit!!.error = Html.fromHtml("<font color='black'>Enter the Limit</font>")
             u_limit!!.requestFocus()
             return
 
@@ -140,11 +140,11 @@ class AdvertisementActivity : AppCompatActivity() {
             return
         }
 
-        var amount = ed_amount!!.text.toString().toDouble()*ed_price!!.text.toString().toDouble()
+        var amount = ed_amount!!.text.toString().toDouble() * ed_price!!.text.toString().toDouble()
 
-        if (u_limit.text.toString().toDouble()>amount) {
+        if (u_limit.text.toString().toDouble() > amount) {
             Apputils.showMsg(this@AdvertisementActivity, "Upper limit should  be smaller than $amount")
-          return
+            return
         }
 
         postNewTrade()
@@ -163,6 +163,11 @@ class AdvertisementActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun postNewTrade() {
 
+
+        if (paymentId == "null") {
+            Apputils.showMsg(this@AdvertisementActivity, "No payment method selected")
+            return
+        }
         val builder = AlertDialog.Builder(this@AdvertisementActivity!!)
         builder.setView(R.layout.layout_dialog_progress)
         builder.setCancelable(false)
@@ -171,13 +176,13 @@ class AdvertisementActivity : AppCompatActivity() {
         progressBar!!.show()
 
         val userId = sharedPref!!.getProfilePref(this@AdvertisementActivity).UAC_Id!!.toInt()
-        val mtrade = Trade(null,userId,orderType,1,ed_amount.text.toString(),"0","0",ed_price.text.toString(),fees.toString(),u_limit.text.toString().toLong(),l_limit.text.toString().toLong(),coin,null,null)
+        val mtrade = Trade(null, userId, orderType, paymentId.toLong(), ed_amount.text.toString(), "0", "0", ed_price.text.toString(), fees.toString(), u_limit.text.toString().toLong(), l_limit.text.toString().toLong(), coin, null, null)
         println(Gson().toJson(mtrade))
         ApiClint.getInstance()?.getService()?.addTrade(fuac_id = mtrade.FUAC_Id.toString(),
-                ordertype = mtrade.OrderType.toString(),fup_id ="3",
-                amount = mtrade.Amount.toString(),exeamount = mtrade.ExecutedAmount!!,exefee = mtrade.ExecutedFees!!,price = mtrade.Price.toString(),fees = mtrade.Fees.toString(),
-                ulimit = mtrade.UpperLimit.toString(),llimit = mtrade.LowerLimit.toString(),
-                ctype = mtrade.CurrencyType.toString())?.enqueue(object: Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+                ordertype = mtrade.OrderType.toString(), fup_id = "3",
+                amount = mtrade.Amount.toString(), exeamount = mtrade.ExecutedAmount!!, exefee = mtrade.ExecutedFees!!, price = mtrade.Price.toString(), fees = mtrade.Fees.toString(),
+                ulimit = mtrade.UpperLimit.toString(), llimit = mtrade.LowerLimit.toString(),
+                ctype = mtrade.CurrencyType.toString())?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                 println("error")
             }
@@ -185,7 +190,7 @@ class AdvertisementActivity : AppCompatActivity() {
             override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
                 if (response != null) {
                     var apiResponse = response.body()
-                    if ( apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                    if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
                         var status = response.body()!!.message
                         Toast.makeText(baseContext, "Trade Added Successfully", Toast.LENGTH_SHORT).show()
                         finish();
@@ -198,30 +203,40 @@ class AdvertisementActivity : AppCompatActivity() {
         })
 
     }
-    fun getSpinnerPaymentMethod(){
+
+    fun getSpinnerPaymentMethod() {
         var mypaymentList = ArrayList<PaymentMethod>()
-        var adpater = CustomSpinnerAdapter(  this@AdvertisementActivity, R.layout.single_row_payment_spinner, mypaymentList)
+        var adpater = CustomSpinnerAdapter(this@AdvertisementActivity, mypaymentList)
 
         spinner_payment_method.adapter = adpater
+        spinner_payment_method.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                var item = parent!!.getItemAtPosition(pos);
+                var obj = item as PaymentMethod
+                if (obj.UP_Id != null)
+                    paymentId = obj.UP_Id!!
+            }
+        })
+
 
         val userId = sharedPref!!.getProfilePref(this@AdvertisementActivity).UAC_Id
-        ApiClint.getInstance()?.getService()?.getPaymentDetailListByUid("1013")!!.enqueue(object :Callback<ArrayList<PaymentMethod>>{
+        ApiClint.getInstance()?.getService()?.getPaymentDetailListByUid("1013")!!.enqueue(object : Callback<ArrayList<PaymentMethod>> {
             override fun onFailure(call: Call<ArrayList<PaymentMethod>>?, t: Throwable?) {
                 println("error")
-                Apputils.showMsg(this@AdvertisementActivity,"network error")
+                Apputils.showMsg(this@AdvertisementActivity, "network error")
             }
 
             override fun onResponse(call: Call<ArrayList<PaymentMethod>>?, response: Response<ArrayList<PaymentMethod>>?) {
                 if (response != null) {
-                    if(response.body()!=null){
-                        var spinnerItem =""
-                        response.body()!!.forEach{
-                          /*  if(it.Type=="bank"){
-                                 spinnerItem = it.Type+"\n"+it.Account+"\n"+it.AccountTitle+"\n"+it.BankCode
-                            }
-                            else
-                            spinnerItem = it.Type+"\n"+it.BankName
-*/
+                    if (response.body() != null) {
+                        var spinnerItem = ""
+                        if (response.body()!!.size == 0) {
+                            mypaymentList.add(PaymentMethod("null", "null", "No Payment method added"))
+                        } else {
+                            paymentId = response.body()!!.get(0).UP_Id!!
+                        }
+                        response.body()!!.forEach {
                             mypaymentList.add(it)
                             adpater.notifyDataSetChanged()
                         }
