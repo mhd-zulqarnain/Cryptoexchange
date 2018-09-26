@@ -143,7 +143,7 @@ class AdvertisementActivity : AppCompatActivity() {
         var amount = ed_amount!!.text.toString().toDouble() * ed_price!!.text.toString().toDouble()
 
         if (u_limit.text.toString().toDouble() > amount) {
-            Apputils.showMsg(this@AdvertisementActivity, "Upper limit should  be smaller than $amount")
+            Apputils.showMsg(this@AdvertisementActivity, "Upper limit should  be smaller than ${amount.toInt()}")
             return
         }
 

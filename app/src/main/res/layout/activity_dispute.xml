@@ -1,88 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/color_gradient_profile">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="7"
+        android:layout_margin="20dp"
         android:orientation="vertical"
-        android:layout_margin="10dp"
-        >
+       >
         <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/textView4"
             android:layout_width="match_parent"
-            android:layout_weight="0.7"
-            android:layout_gravity="clip_vertical"
-            android:layout_height="0dp"
-            android:text="Dispute "
-            android:textSize="28sp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/oswald_regular"
-             />
+            android:text="Dispute"
+            android:textSize="28sp" />
 
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_weight="1.7"
-            app:met_baseColor="#ffffff"
-            app:met_primaryColor="#45a12e"
-            app:met_errorColor="#ba020e"
-            app:met_textColor="#fff"
-
-            app:met_minCharacters="1"
-            app:met_maxCharacters="200"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            android:layout_height="0dp"
-            android:hint="Message"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:src="@drawable/ic_no_img_24dp"
-            />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:weightSum="2"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:orientation="horizontal"
-            android:layout_margin="22dp"
-            >
+            android:weightSum="3">
+
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Trader " />
+
+            <TextView
+                android:id="@+id/ed_seller_id"
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Mr Seller" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dealer " />
+
+            <TextView
+                android:id="@+id/ed_Buyer_id"
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Mr Buyer" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Amount " />
+
+            <TextView
+                android:id="@+id/btc_amount"
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="1200" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+
+            android:weightSum="3">
+
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Payment method " />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_payment"
+                    style="@style/buyActivityText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Method : Bank Transfer" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Price " />
+
+            <TextView
+                android:id="@+id/ed_price_id"
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="1200" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="2"
+            android:src="@drawable/ic_no_img_24dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <Button
-                android:id="@+id/wallet_cancel"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:textSize="16sp"
-                android:background="#c60236"
-                android:layout_marginRight="22dp"
+                android:id="@+id/add_image"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/button_payment_layout"
+                android:drawableRight="@drawable/ic_note_add_black_24dp"
+                android:text="Add Documents"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
 
                 />
 
-            <Button
-                android:id="@+id/wallet_ok"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:background="#21a41f"
-                android:textSize="16sp" />
 
         </LinearLayout>
 
 
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/ed_dispute_msg"
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Description"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            app:met_baseColor="#ffffff"
+            app:met_primaryColor="#45a12e"
+            app:met_textColor="#fff" />
 
 
+        <Button
+            android:id="@+id/btn_submit_dispute"
+            style="@style/bankDialogText"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="7dp"
+            android:gravity="center"
+            android:background="@drawable/layout_curve_btn_submit"
+            android:text="Submit"
+
+            />
 
     </LinearLayout>
+
 
 </LinearLayout>

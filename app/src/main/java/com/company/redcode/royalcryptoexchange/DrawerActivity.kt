@@ -112,9 +112,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_support->{
                 SupportFragment()
             }
-            R.id.nav_dispute ->{
-                DisputetFragment();
-            }
+
             else -> {
                 HomeFragment()
             }
@@ -132,4 +130,5 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         val fragment = supportFragmentManager.findFragmentById(R.id.relativeLayout)
         fragment!!.onActivityResult(requestCode, resultCode, data)
     }
+
 }

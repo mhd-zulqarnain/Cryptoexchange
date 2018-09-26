@@ -1,6 +1,8 @@
 package com.company.redcode.royalcryptoexchange.ui
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -51,6 +53,9 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
+        btn_delete.setOnClickListener {
+            deletTrade()
+        }
     }
 
     private fun initView() {
@@ -60,17 +65,36 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         val orderlayout = LinearLayoutManager(this@AdvertismentDetailActivity, LinearLayout.VERTICAL, false)
         order_recycler!!.layoutManager = orderlayout
         orderAdapater = OrderAdapater(this@AdvertismentDetailActivity, orderList) { post ->
-            //action
-            /* val intent = Intent(this@AdvertismentDetailActivity, OrderDetailActivity::class.java)
-             var obj = Gson().toJson(orderList[post])
-             intent.putExtra("order",obj)
-             startActivity(intent)*/
-
             showOrderReleaseDialog(orderList[post])
         }
         order_recycler!!.adapter = orderAdapater
 
         getOrderList()
+
+    }
+
+    private fun deletTrade() {
+        progressBar!!.show()
+        ApiClint.getInstance()?.getService()?.delete_trade(trade.UT_Id.toString())!!.enqueue(object : Callback<String> {
+            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                print("error")
+                progressBar!!.hide()
+            }
+
+            override fun onResponse(call: Call<String>?, response: Response<String>?) {
+                if (response != null) {
+                    if (response.body() == Constants.STATUS_SUCCESS) {
+                        Apputils.showMsg(this@AdvertismentDetailActivity, "Trade removed ")
+                        setResult(Activity.RESULT_OK)
+                        finish()
+                    } else {
+                        Apputils.showMsg(this@AdvertismentDetailActivity, "Failed orders are in progress ")
+
+                    }
+                }
+                progressBar!!.hide()
+            }
+        })
 
     }
 
@@ -88,6 +112,7 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         val tv_price: TextView = view.findViewById(R.id.tv_price)
         val btn_release: Button = view.findViewById(R.id.btn_release)
         val btn_cancel: Button = view.findViewById(R.id.btn_cancel)
+        val btn_dispute: Button = view.findViewById(R.id.btn_dispute)
         val tv_status: TextView = view.findViewById(R.id.tv_status)
 
         if (order.Status == Constants.STATUS_CANCEL) {
@@ -100,18 +125,22 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
             btn_release.visibility = View.VISIBLE
             btn_cancel.visibility = View.GONE
+            btn_dispute.visibility = View.VISIBLE
         } else if (order.Status == Constants.STATUS_COMPLETED) {
             btn_release.visibility = View.GONE
             btn_cancel.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
         } else if (order.Status == Constants.STATUS_CANCEL) {
             btn_release.visibility = View.GONE
             btn_cancel.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
         } else if (order.Status == Constants.STATUS_DISPUTE) {
             btn_release.visibility = View.GONE
             btn_cancel.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
         }
         tv_name.text = "U-" + order.FUAC_Id
-        tv_coin_amount.text = order.BitAmount
+        tv_coin_amount.text = order.BitAmount+trade.OrderType
         tv_price.text = order.BitPrice
 
         btnClose.setOnClickListener {
@@ -120,6 +149,13 @@ class AdvertismentDetailActivity : AppCompatActivity() {
 
         btn_cancel.setOnClickListener {
             updateStatus(Constants.STATUS_CANCEL, order.ORD_Id!!)
+        }
+        btn_dispute.setOnClickListener {
+            //updateStatus(Constants.STATUS_CANCEL, order.ORD_Id!!)
+            var intent = Intent(this@AdvertismentDetailActivity, DisputeActivity::class.java)
+            var obj = Gson().toJson(order)
+            intent.putExtra("order", obj)
+            startActivityForResult(intent, 44)
         }
 
         btn_release.setOnClickListener {
@@ -203,4 +239,10 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
+    }
 }
