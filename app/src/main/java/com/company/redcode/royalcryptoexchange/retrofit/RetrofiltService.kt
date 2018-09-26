@@ -110,6 +110,11 @@ interface RetrofiltService {
     fun orderIRelease(@Path("ord_id") ord_id: String,@Path("utfee") utfee: String,@Path("utamount") utamount: String,
                       @Path("uobitamount") uobitamount: String,@Path("uoamount") uoamount: String,@Path("ut_id") ut_id: String): Call<Response>
 
+   //delete bank detail
+    @DELETE("Delete_UserPaymentDetail/{UP_Id}")
+    @Headers("Content-Type:application/json")
+    fun delete_bank(@Path("UP_Id") UP_Id: String): Call<Response>
+
 }
 
 //"irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}"

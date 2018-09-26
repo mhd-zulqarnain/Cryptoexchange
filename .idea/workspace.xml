@@ -42,52 +42,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="single_row_payment_spinner.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/single_row_payment_spinner.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="18" column="38" lean-forward="false" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdvertisementActivity.kt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/ui/AdvertisementActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1529">
-              <caret line="207" column="54" lean-forward="false" selection-start-line="207" selection-start-column="54" selection-end-line="207" selection-end-column="54" />
-              <folding>
-                <element signature="e#52#1134#0" expanded="true" />
-                <element signature="e#1781#2069#0" expanded="false" />
-                <element signature="e#2170#2463#0" expanded="false" />
-                <element signature="e#2335#2453#0" expanded="false" />
-                <element signature="e#2530#3505#0" expanded="false" />
-                <element signature="e#3761#5597#0" expanded="false" />
-                <element signature="e#3812#3997#1" expanded="false" />
-                <element signature="e#4044#4215#1" expanded="false" />
-                <element signature="e#4262#4420#1" expanded="false" />
-                <element signature="e#4466#4623#1" expanded="false" />
-                <element signature="e#4672#4843#1" expanded="false" />
-                <element signature="e#5648#5804#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RetrofiltService.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/retrofit/RetrofiltService.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="96" column="3" lean-forward="false" selection-start-line="96" selection-start-column="3" selection-end-line="99" selection-end-column="99" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Trade.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/models/Trade.kt">
           <provider selected="true" editor-type-id="text-editor">
@@ -98,69 +52,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaymentMethod.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/models/PaymentMethod.kt">
+      <file leaf-file-name="OrderDetailActivity.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/OrderDetailActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="35" />
+            <state relative-caret-position="336">
+              <caret line="24" column="18" lean-forward="false" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+              <folding>
+                <marker date="1537947944037" expanded="true" signature="7825:7835" ph="{...}" />
+                <marker date="1537947944037" expanded="false" signature="7825:7842" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DashboardFragment.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/ui/DashboardFragment.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="861">
+              <caret line="81" column="62" lean-forward="false" selection-start-line="81" selection-start-column="62" selection-end-line="81" selection-end-column="62" />
+              <folding>
+                <marker date="1537947944059" expanded="false" signature="60:73" ph="..." />
+                <marker date="1537947944059" expanded="true" signature="5568:5574" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdvertismentDetailActivity.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/ui/AdvertismentDetailActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="196" column="0" lean-forward="false" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_advertisement.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_advertisement.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="62" column="28" lean-forward="false" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomSpinnerAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/adapter/CustomSpinnerAdapter.java">
+      <file leaf-file-name="DrawerActivity.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/DrawerActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="644">
-              <caret line="50" column="19" lean-forward="false" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
+              <caret line="128" column="5" lean-forward="false" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#779#780#0" expanded="true" />
-                <element signature="e#816#817#0" expanded="true" />
-                <element signature="e#873#874#0" expanded="true" />
-                <element signature="e#917#918#0" expanded="true" />
-                <element signature="e#974#975#0" expanded="true" />
-                <element signature="e#998#999#0" expanded="true" />
+                <marker date="1537947944034" expanded="true" signature="1117:4819" ph="{...}" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProfileFragment.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/ui/ProfileFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="924">
-              <caret line="87" column="54" lean-forward="false" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
-              <folding>
-                <marker date="1537875405691" expanded="true" signature="21721:22016" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_profile.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-323">
-              <caret line="264" column="30" lean-forward="false" selection-start-line="264" selection-start-column="30" selection-end-line="264" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
@@ -2372,7 +2308,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="59" />
     <option name="y" value="10" />
     <option name="width" value="1634" />
@@ -2403,24 +2339,6 @@
             </path>
             <path>
               <item name="cryptoexchange" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="cryptoexchange" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="royalcryptoexchange" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cryptoexchange" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="royalcryptoexchange" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="retrofit" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cryptoexchange" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
@@ -2441,7 +2359,7 @@
     <property name="DEBUGGABLE_PROCESS" value="com.company.redcode.royalcryptoexchange" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="DEBUGGER_ID" value="Auto" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537875529460" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537948143870" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.1.3" />
   </component>
   <component name="RecentsManager">
@@ -2826,8 +2744,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1698" height="1018" extended-state="6" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1698" height="1018" extended-state="7" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298122" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2844,8 +2761,8 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24537608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32276994" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24537608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35093898" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32853717" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292232" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3335,9 +3252,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/ui/DashboardFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="50" column="54" lean-forward="false" selection-start-line="50" selection-start-column="54" selection-end-line="50" selection-end-column="54" />
-          <folding />
+        <state relative-caret-position="861">
+          <caret line="81" column="62" lean-forward="false" selection-start-line="81" selection-start-column="62" selection-end-line="81" selection-end-column="62" />
+          <folding>
+            <marker date="1537947944059" expanded="false" signature="60:73" ph="..." />
+            <marker date="1537947944059" expanded="true" signature="5568:5574" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3486,9 +3406,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/DrawerActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="32" column="41" lean-forward="true" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
-          <folding />
+        <state relative-caret-position="644">
+          <caret line="128" column="5" lean-forward="false" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
+          <folding>
+            <marker date="1537947944034" expanded="true" signature="1117:4819" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3588,9 +3510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="e#617#815#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3612,11 +3531,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/ui/AdvertismentDetailActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-798">
-          <caret line="31" column="6" lean-forward="false" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
-          <folding>
-            <element signature="e#6410#7180#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="138">
+          <caret line="196" column="0" lean-forward="false" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3624,7 +3541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
           <caret line="657" column="0" lean-forward="false" selection-start-line="657" selection-start-column="0" selection-end-line="657" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3651,9 +3567,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="903">
           <caret line="43" column="34" lean-forward="false" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
-          <folding>
-            <element signature="e#57#452#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3661,9 +3574,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="924">
           <caret line="87" column="54" lean-forward="false" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
-          <folding>
-            <marker date="1537875405691" expanded="true" signature="21721:22016" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3678,19 +3589,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/adapter/CustomSpinnerAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="26" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/adapter/CustomSpinnerAdapter.kt" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/company/redcode/royalcryptoexchange/models/PaymentMethod.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
           <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3717,15 +3620,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="644">
           <caret line="50" column="19" lean-forward="false" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#779#780#0" expanded="true" />
-            <element signature="e#816#817#0" expanded="true" />
-            <element signature="e#873#874#0" expanded="true" />
-            <element signature="e#917#918#0" expanded="true" />
-            <element signature="e#974#975#0" expanded="true" />
-            <element signature="e#998#999#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3742,7 +3636,7 @@
         <state relative-caret-position="1529">
           <caret line="207" column="54" lean-forward="false" selection-start-line="207" selection-start-column="54" selection-end-line="207" selection-end-column="54" />
           <folding>
-            <element signature="e#52#1134#0" expanded="true" />
+            <element signature="e#52#1134#0" expanded="false" />
             <element signature="e#1781#2069#0" expanded="false" />
             <element signature="e#2170#2463#0" expanded="false" />
             <element signature="e#2335#2453#0" expanded="false" />
