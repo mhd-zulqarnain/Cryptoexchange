@@ -127,4 +127,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val fragment = supportFragmentManager.findFragmentById(R.id.relativeLayout)
+        fragment!!.onActivityResult(requestCode, resultCode, data)
+    }
 }

@@ -31,6 +31,7 @@ import com.example.admin.camerawork.CameraActivity
 import com.google.gson.Gson
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
 import java.io.ByteArrayOutputStream
@@ -325,11 +326,6 @@ class ProfileFragment : Fragment() {
         btnaddpayment = view!!.findViewById(R.id.btn_addpayment)
 
 
-
-
-
-
-
         btnaddpayment!!.setOnClickListener { view ->
 
 
@@ -340,10 +336,26 @@ class ProfileFragment : Fragment() {
             val mob: String = etmobilenumber!!.text.toString()
             val code: String = etbankcode!!.text.toString()
 
-            if (spinnervalue == "Bank Transfer")
-                addbank(title.toString(), account.toString(), name.toString(), code.toString());
-            else
+
+
+
+
+            if (spinnervalue == "Bank Transfer") {
+                var check :Boolean = validate(1);
+                    if(check) {
+                        addbank(title.toString(), account.toString(), name.toString(), code.toString());
+                        etaccountnumber!!.setText("")
+                        etaccountttile!!.setText("")
+                        etbankname!!.setText("")
+                        etbankcode!!.setText("")
+                    }
+            } else {
+                var check :Boolean =validate(0);
+                if(check){
                 addbank(cnic.toString(), "null", mob.toString(), "null");
+                etcnic!!.setText("")
+                etmobilenumber!!.setText("")
+            }}
 
         }
 
@@ -406,8 +418,7 @@ class ProfileFragment : Fragment() {
             deletepayment(list.get(position).UP_Id, object : ServiceListener<String> {
                 override fun success(obj: String) {
                     Toast.makeText(activity!!, obj, Toast.LENGTH_SHORT).show()
-                    if(obj.equals("Method Deleted!!"))
-                    {
+                    if (obj.equals("Method Deleted!!")) {
                         list.removeAt(position)
                         adapter!!.notifyDataSetChanged()
                     }
@@ -434,6 +445,46 @@ class ProfileFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+     private fun  validate(i: Int):Boolean {
+        if (i == 0) {
+            if (etcnic!!.text.toString() == "") {
+                etcnic!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+                etcnic!!.requestFocus()
+                return false
+            }
+            if (etmobilenumber!!.text.toString() == "") {
+                etmobilenumber!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+                etmobilenumber!!.requestFocus()
+                return false
+            }
+
+        }else if(i==1){
+            if (etaccountnumber!!.text.toString() == "") {
+                etaccountnumber!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+                etaccountnumber!!.requestFocus()
+                return false
+            }
+            if (etaccountttile!!.text.toString() == "") {
+                etaccountttile!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+                etaccountttile!!.requestFocus()
+                return false
+            }
+            if (etbankcode!!.text.toString() == "") {
+                etbankcode!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+                etbankcode!!.requestFocus()
+                return false
+            }
+            if (etbankname!!.text.toString() == "") {
+                etbankname!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+                etbankname!!.requestFocus()
+                return false
+            }
+
+
+        }
+        return true;
     }
 
 

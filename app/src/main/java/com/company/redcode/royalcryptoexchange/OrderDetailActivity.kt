@@ -8,14 +8,14 @@ import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
-import com.company.redcode.royalcryptoexchange.R.id.tv_terms
 import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.OrderTerms
 import com.company.redcode.royalcryptoexchange.models.Response
-import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
+import com.company.redcode.royalcryptoexchange.utils.ServiceError
+import com.company.redcode.royalcryptoexchange.utils.ServiceListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_trade_confirm.*
 import retrofit2.Call
@@ -44,11 +44,11 @@ class OrderDetailActivity : AppCompatActivity() {
         builder.setView(R.layout.layout_dialog_progress)
         builder.setCancelable(false)
         progressBar = builder.create()
-        getTerm()
 
-        if(order.Status== Constants.STATUS_CANCEL){
+
+        if (order.Status == Constants.STATUS_CANCEL) {
             status_tv!!.text = "cancelled"
-        }else
+        } else
             status_tv!!.text = order.Status
 
         if (order.Status == Constants.STATUS_OPEN) {
@@ -66,25 +66,29 @@ class OrderDetailActivity : AppCompatActivity() {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.VISIBLE
-        }else if (order.Status == Constants.STATUS_COMPLETED) {
+        } else if (order.Status == Constants.STATUS_COMPLETED) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.GONE
-        }
-        else if (order.Status == Constants.STATUS_CANCEL) {
+        } else if (order.Status == Constants.STATUS_CANCEL) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.GONE
 
         }
 
+        getPayementId(object :ServiceListener<String>{
+            override fun success(obj: String) {
+                getTerm(obj)
+            }
+            override fun fail(error: ServiceError) {}
+        })
 
     }
 
-    fun getTerm() {
+    fun getTerm(pid: String) {
         progressBar!!.show()
-
-        ApiClint.getInstance()?.getService()?.gettermAndPayment(order.User_Id.toString()!!, "3")?.enqueue(object : Callback<OrderTerms> {
+        ApiClint.getInstance()?.getService()?.gettermAndPayment(order.User_Id.toString()!!, pid)?.enqueue(object : Callback<OrderTerms> {
             override fun onFailure(call: Call<OrderTerms>?, t: Throwable?) {
                 progressBar!!.dismiss()
             }
@@ -93,15 +97,18 @@ class OrderDetailActivity : AppCompatActivity() {
                 progressBar!!.dismiss()
                 if (response != null) {
                     orderTerms = response.body()!!
-                    tv_terms.setText("Method:" + orderTerms.PaymentMethod!!.BankName)
+
                     if (orderTerms.PaymentMethod!!.Type == "Bank")
-                        tv_terms.text = tv_terms.text.toString() + "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
+                        tv_terms.text = "Type: "+ orderTerms.PaymentMethod!!.Type+ "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
+                    else {
+                        tv_terms.setText("Type: "+ orderTerms.PaymentMethod!!.Type+"\n Number:"+orderTerms.PaymentMethod!!.BankName)
+                    }
+
                 }
             }
         })
 
     }
-
 
     private fun initView() {
         var deadline = Apputils.getTimeStamp(order.Expire.toString())?.toLong();
@@ -167,22 +174,41 @@ class OrderDetailActivity : AppCompatActivity() {
 
     }
 
-
-    fun updateStatus(status:String,order_id:String){
+    fun updateStatus(status: String, order_id: String) {
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.update_order_status(order_id,status)!!.enqueue(object :Callback<com.company.redcode.royalcryptoexchange.models.Response>{
+        ApiClint.getInstance()?.getService()?.update_order_status(order_id, status)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
-                print("error "+t)
+                print("error " + t)
                 progressBar!!.dismiss()
             }
-
             override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<Response>?) {
                 if (response?.body() != null) {
+                    setResult(RESULT_OK);
                     finish()
                     progressBar!!.dismiss()
                 }
             }
 
+        })
+    }
+
+    fun getPayementId(serviceListener: ServiceListener<String>) {
+        progressBar!!.show()
+        ApiClint.getInstance()?.getService()?.getUserPaymentId(order.FUT_Id!!)!!.enqueue(object : Callback<String> {
+            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                println("ERROR")
+                progressBar!!.dismiss()
+                Apputils.showMsg(this@OrderDetailActivity, "Network error")
+            }
+
+            override fun onResponse(call: Call<String>?, response: retrofit2.Response<String>?) {
+                progressBar!!.dismiss()
+                if (response != null) {
+                    if (response!!.body() != "0") {
+                        serviceListener.success(response.body()!!)
+                    }
+                }
+            }
         })
     }
 }
