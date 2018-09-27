@@ -7,6 +7,12 @@ class Constants{
         const val BASE_URL = "http://royalcrypto.gear.host/Service1.svc/"
         const val BTC_PKR_RATE = 0.0000011
         const val TRADE_LIMIT_AMOUNT = 5000
+        const val ImageURL = "http://royalcryptoexchange.com/upload.php"
+            const val ImageURLold = "http://wpassignment123.000webhostapp.com/upload.php"
+        const val ProfilePath = "UserDocument/"
+        const val SupportPath = "SupportDocument/"
+        const val DisputePath = "UserDisputeDocument/"
+        const val OrderReceiptPath = "UserOrderReceipt/"
         const val STATUS_ACTIVE = "Active"
         const val STATUS_INACTIVE = "InActive"
         const val STATUS_SUCCESS = "success"
