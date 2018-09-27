@@ -39,7 +39,7 @@ import java.util.HashMap
 
 
 class ProfileFragment : Fragment() {
-    var URL = "http://wpassignment123.000webhostapp.com/upload.php"
+    var URL = Constants.ImageURL;
     var imagename: ArrayList<String>? = null;
     var btn_add_bank: Button? = null
     var btn_add_img: Button? = null
@@ -67,7 +67,7 @@ class ProfileFragment : Fragment() {
     var btnupdate: Button? = null
     var docimage: LinearLayout? = null;
     var profile_terms: MaterialEditText? = null;
-    var image: String = "http://wpassignment123.000webhostapp.com/uploads/";
+    var image: String = Constants.ProfilePath;
     var list = ArrayList<PaymentMethod>()
     var docver: String? = null;
     var sharedpref: SharedPref = SharedPref.getInstance()!!
@@ -85,7 +85,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
-        image = "uploads/";
+
         val builder = android.app.AlertDialog.Builder(activity!!)
         builder.setView(R.layout.layout_dialog_progress)
         builder.setCancelable(false)
@@ -295,12 +295,12 @@ class ProfileFragment : Fragment() {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            startActivityForResult(intent, REQUSET_GALLERY_CODE)
+            activity!!.startActivityForResult(intent, REQUSET_GALLERY_CODE)
             dialog.dismiss()
         }
         camera_dialog.setOnClickListener {
             var intent = Intent(activity!!, CameraActivity::class.java)
-            startActivityForResult(intent, CAMERA_INTENT)
+            activity!!.startActivityForResult(intent, CAMERA_INTENT)
             dialog.dismiss()
         }
 
@@ -518,7 +518,6 @@ class ProfileFragment : Fragment() {
         progressBar!!.show()
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
 
-
             if (data.clipData != null) {
                 var count: Int = data.clipData.itemCount
                 if (count > 4) {
@@ -549,8 +548,10 @@ class ProfileFragment : Fragment() {
         } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
             var result = data!!.getStringExtra("camera intent")
             myImgJson = result
-            var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
-            var list = obj.camList
+
+
+            val obj = Gson().fromJson(myImgJson, ImageObject::class.java)
+            val list = obj.camList
 
             for (i in 0 until list!!.size) {
 

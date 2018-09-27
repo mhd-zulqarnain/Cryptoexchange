@@ -2,26 +2,42 @@ package com.company.redcode.royalcryptoexchange.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.ImageObject
+import com.company.redcode.royalcryptoexchange.models.Response
+import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.utils.Constants
+import com.company.redcode.royalcryptoexchange.utils.ServiceError
+import com.company.redcode.royalcryptoexchange.utils.ServiceListener
 import com.example.admin.camerawork.CameraActivity
 import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import java.io.ByteArrayOutputStream
+import java.util.HashMap
 
 
 class SupportFragment : Fragment() {
+    var URL = Constants.ImageURL;
     private val CAMERA_INTENT = 555
     private val REQUSET_GALLERY_CODE: Int = 44
+    var progressBar: android.app.AlertDialog? = null
     private var attach_img_1: ImageView? = null
     private var attach_img_2: ImageView? = null
     private var attach_img_3: ImageView? = null
@@ -36,11 +52,20 @@ class SupportFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view: View = inflater.inflate(R.layout.fragment_support, container, false)
         initView(view)
+
+        val builder = android.app.AlertDialog.Builder(activity!!)
+        builder.setView(R.layout.layout_dialog_progress)
+        builder.setCancelable(false)
+        progressBar = builder.create()
+
+
         return view
+
 
     }
 
@@ -98,8 +123,9 @@ class SupportFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        progressBar!!.show()
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            var galList = ArrayList<String>()
+
             if (data.clipData != null) {
                 var count: Int = data.clipData.itemCount
                 if (count > 5) {
@@ -117,20 +143,17 @@ class SupportFragment : Fragment() {
                     if (i ==4)
                         attach_img_4!!.setImageBitmap(bitmap)
 
-                    galList.add(imageUri.toString())
+                    uploadtoserver(bitmap, i, (count - 1))
                 }
 
             } else if (data.data != null) {
                 val imagePath = data.data
-                galList.add(imagePath.toString())
+
                 val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imagePath)
                 attach_img_1!!.setImageBitmap(bitmap)
+                uploadtoserver(bitmap, 2, 2)
 
             }
-
-            var obj = ImageObject(null, galList)
-            var gson = Gson();
-            myImgJson = gson.toJson(obj)
 
 
 
@@ -151,11 +174,99 @@ class SupportFragment : Fragment() {
                     attach_img_3!!.setImageBitmap(list[i])
                 if (i ==3)
                     attach_img_4!!.setImageBitmap(list[i])
+
+                var c: Int = list!!.size - 1;
+                uploadtoserver(list[i], i, (c))
             }
 
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+    fun userdoc(fuac: String, doc: String, serviceListener: ServiceListener<String>) {
+        ApiClint.getInstance()?.getService()?.add_userdoc(fuac, doc)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {}
+
+            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+                serviceListener.success("success")
+            }
+        })
+    }
+
+
+    fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
+
+        val StrRequest = object : StringRequest(Request.Method.POST, URL,
+                com.android.volley.Response.Listener { response ->
+                    //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
+          //          imagename!!.add(response)
+
+                    userdoc("1027", response!!, object : ServiceListener<String> {
+                        override fun success(obj: String) {
+                            if (i == size) {
+                                Toast.makeText(activity!!, "Success", Toast.LENGTH_SHORT).show()
+                                progressBar!!.dismiss()
+                            }
+                        }
+
+                        override fun fail(error: ServiceError) {
+                            Toast.makeText(activity!!, "Service error!! ", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+
+
+
+                    ApiClint.getInstance()?.getService()?.add_userdoc("1027", response!!)?.enqueue(object : Callback<Response> {
+                        override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                            //   println("error")
+                        }
+
+                        override fun onResponse(call: Call<Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+                            if (response != null) {
+                                var apiResponse = response.body()
+                                if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                                    var status = response.body()!!.message
+                                    // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+                                    //finish();
+                                } else {
+                                    //         Toast.makeText(activity!!, "Error in Image uploading!! ", Toast.LENGTH_SHORT).show()
+
+                                }
+                            }
+                        }
+
+                    });
+
+
+                }, com.android.volley.Response.ErrorListener {
+            Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
+            progressBar!!.dismiss()
+        }) {
+            //@Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val imageData = imageTostring(bitmap!!)
+                val params = HashMap<String, String>()
+                //   params.put("image",imageData);
+                // params.put("string1","ali")
+                params["image"] = imageData
+                params["Saving"] = Constants.SupportPath;
+
+                return params
+            }
+        }
+
+        val requestQueue = Volley.newRequestQueue(activity!!)
+        requestQueue.add(StrRequest)
+
+    }
+
+    private fun imageTostring(bitmap: Bitmap): String {
+        val outStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+        val imageBytes = outStream.toByteArray()
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
+    }
+
 }
 
 
