@@ -22,15 +22,12 @@ import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_buying_details.*
-import kotlinx.android.synthetic.main.dilalog_view_trade.*
 import retrofit2.Call
 import retrofit2.Callback
-import java.lang.reflect.Method
 import java.math.BigDecimal
-import java.text.DecimalFormat
 
 
-class BuyingDetailActivity : AppCompatActivity() {
+class PlaceOrderActivity : AppCompatActivity() {
 
     val JSON_TRARE: String = "tradeObject"
     val ORDER_TYPE: String = "orderType"
@@ -81,7 +78,7 @@ class BuyingDetailActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initView() {
-        val builder = AlertDialog.Builder(this@BuyingDetailActivity)
+        val builder = AlertDialog.Builder(this@PlaceOrderActivity)
         builder.setView(R.layout.layout_dialog_progress)
         builder.setCancelable(false)
         progressBar = builder.create()
@@ -141,26 +138,26 @@ class BuyingDetailActivity : AppCompatActivity() {
     private fun validation() {
 
         if (pkr_ed!!.text.toString().trim() == "") {
-            Apputils.showMsg(this@BuyingDetailActivity, "Enter the amount")
+            Apputils.showMsg(this@PlaceOrderActivity, "Enter the amount")
             return
         }
         if (ecuurency_ed!!.text.toString().trim() == "") {
-            Apputils.showMsg(this@BuyingDetailActivity, "Invalid amount")
+            Apputils.showMsg(this@PlaceOrderActivity, "Invalid amount")
             return
         }
         if (ecuurency_ed!!.text.toString().toDouble() < trade.LowerLimit!!.toDouble()/* &&
                 ecuurency_ed!!.text.toString().toLong()> trade.LowerLimit!!.toLong()*/) {
-            Apputils.showMsg(this@BuyingDetailActivity, "Price should be greater than lower limit")
+            Apputils.showMsg(this@PlaceOrderActivity, "Price should be greater than lower limit")
             return
 
         } else if (ecuurency_ed!!.text.toString().toDouble() > trade.UpperLimit!!.toDouble()) {
-            Apputils.showMsg(this@BuyingDetailActivity, "Limit crossed")
+            Apputils.showMsg(this@PlaceOrderActivity, "Limit crossed")
             return
         }
         if (!pkr_ed!!.text.toString().trim().isEmpty() && pkr_ed!!.text.toString().trim() != "") {
 
             if (pkr_ed!!.text.toString().toDouble() > trade.Amount!!.toDouble()) {
-                Apputils.showMsg(this@BuyingDetailActivity, "Ecurrency must be less than total amount")
+                Apputils.showMsg(this@PlaceOrderActivity, "Ecurrency must be less than total amount")
                 return
             }
         }
@@ -168,16 +165,16 @@ class BuyingDetailActivity : AppCompatActivity() {
 
             addOrder(serviceListener = object : ServiceListener<String> {
                 override fun success(obj: String) {
-                    Apputils.showMsg(this@BuyingDetailActivity, obj)
+                    Apputils.showMsg(this@PlaceOrderActivity, obj)
                     finish()
                 }
 
                 override fun fail(error: ServiceError) {
-                    Apputils.showMsg(this@BuyingDetailActivity, "Fail to add new order")
+                    Apputils.showMsg(this@PlaceOrderActivity, "Fail to add new order")
                 }
             })
         } else {
-            Apputils.showMsg(this@BuyingDetailActivity, "Please accept the terms")
+            Apputils.showMsg(this@PlaceOrderActivity, "Please accept the terms")
         }
 
     }
@@ -189,13 +186,13 @@ class BuyingDetailActivity : AppCompatActivity() {
         order.BitPrice = ecuurency_ed.text.toString()
         order.UpperLimit = trade.UpperLimit.toString()
         order.LowerLimit = trade.LowerLimit.toString()
-        order.FUAC_Id = sharedPref!!.getProfilePref(this@BuyingDetailActivity).UAC_Id
+        order.FUAC_Id = sharedPref!!.getProfilePref(this@PlaceOrderActivity).UAC_Id
         order.FUT_Id = trade.UT_Id.toString()
         order.Notify_Status = "true"
         order.PaymentMethod = "bank"
         order.Status = "open"
-        order.ORD_UserId = sharedPref!!.getProfilePref(this@BuyingDetailActivity).UAC_Id
-        order.User_Id = trade.FUAC_Id.toString()
+        order.ORD_UserId = "U-"+sharedPref!!.getProfilePref(this@PlaceOrderActivity).UAC_Id
+        order.User_Id = "U-"+trade.FUAC_Id.toString()
 
         if (orderType == "buy")
             order.Description = "bought"
@@ -223,8 +220,8 @@ class BuyingDetailActivity : AppCompatActivity() {
     }
 
     private fun showTradeDialog() {
-        val view: View = LayoutInflater.from(this@BuyingDetailActivity).inflate(R.layout.dilalog_terms_trade, null)
-        val alertBox = AlertDialog.Builder(this@BuyingDetailActivity)
+        val view: View = LayoutInflater.from(this@PlaceOrderActivity).inflate(R.layout.dilalog_terms_trade, null)
+        val alertBox = AlertDialog.Builder(this@PlaceOrderActivity)
         alertBox.setView(view)
         alertBox.setCancelable(false)
         val dialog = alertBox.create()

@@ -23,6 +23,8 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_trade_confirm.*
 import retrofit2.Call
 import retrofit2.Callback
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class OrderDetailActivity : AppCompatActivity() {
@@ -58,32 +60,38 @@ class OrderDetailActivity : AppCompatActivity() {
             btn_paid.visibility = View.VISIBLE
             btn_later.visibility = View.VISIBLE
             btn_dispute.visibility = View.VISIBLE
+            btn_cancel.visibility = View.VISIBLE
 
 
         } else if (order.Status == Constants.STATUS_DISPUTE) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
 
         } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.VISIBLE
+            btn_cancel.visibility = View.GONE
         } else if (order.Status == Constants.STATUS_COMPLETED) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
         } else if (order.Status == Constants.STATUS_CANCEL) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
 
         }
 
-        getPayementId(object :ServiceListener<String>{
+        getPayementId(object : ServiceListener<String> {
             override fun success(obj: String) {
                 getTerm(obj)
             }
+
             override fun fail(error: ServiceError) {}
         })
 
@@ -91,7 +99,8 @@ class OrderDetailActivity : AppCompatActivity() {
 
     fun getTerm(pid: String) {
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.gettermAndPayment(order.User_Id.toString()!!, pid)?.enqueue(object : Callback<OrderTerms> {
+        var ownerId = order.User_Id.toString().substring(2)
+        ApiClint.getInstance()?.getService()?.gettermAndPayment(ownerId, pid)?.enqueue(object : Callback<OrderTerms> {
             override fun onFailure(call: Call<OrderTerms>?, t: Throwable?) {
                 progressBar!!.dismiss()
             }
@@ -102,9 +111,9 @@ class OrderDetailActivity : AppCompatActivity() {
                     orderTerms = response.body()!!
 
                     if (orderTerms.PaymentMethod!!.Type == "Bank")
-                        tv_terms.text = "Type: "+ orderTerms.PaymentMethod!!.Type+ "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
+                        tv_terms.text = "Type: " + orderTerms.PaymentMethod!!.Type + "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
                     else {
-                        tv_terms.setText("Type: "+ orderTerms.PaymentMethod!!.Type+"\n Number:"+orderTerms.PaymentMethod!!.BankName)
+                        tv_terms.setText("Type: " + orderTerms.PaymentMethod!!.Type + "\n Number:" + orderTerms.PaymentMethod!!.BankName)
                     }
 
                 }
@@ -117,29 +126,34 @@ class OrderDetailActivity : AppCompatActivity() {
         var deadline = Apputils.getTimeStamp(order.Expire.toString())?.toLong();
         val publishedDate = Apputils.getTimeStamp(order.Order_Date.toString())?.toLong();
         println("current deadline " + deadline)
+
         var currentTime = System.currentTimeMillis()
         var time = deadline?.minus(currentTime)
 
         println("time now " + time)
 
-        dealer_name.setText("U-" + order.User_Id)
+        dealer_name.setText(order.User_Id)
         btc_amount.setText(order.BitAmount)
         price_tv.setText(order.Price + "PKR")
-        if (currentTime > deadline!!) {
-            timer_tv.setText("Expired")
+        if (order.Status == "dispute") {
+            timer_tv.text ="Disputed Order"
         } else {
-            val countDown = object : CountDownTimer(time!!, 1000) {
+            if (currentTime > deadline!!) {
+                timer_tv.setText("Expired")
+            } else {
+                val countDown = object : CountDownTimer(time!!, 1000) {
 
-                override fun onTick(millisUntilFinished: Long) {
+                    override fun onTick(millisUntilFinished: Long) {
 
-                    timer_tv.setText(" " + formatMilliSecondsToTime(millisUntilFinished));
+                        timer_tv.setText(" " + formatMilliSecondsToTime(millisUntilFinished));
+                    }
+
+                    override fun onFinish() {}
                 }
+                countDown.start()
 
-                override fun onFinish() {}
+
             }
-            countDown.start()
-
-
         }
 
         btn_later.setOnClickListener {
@@ -149,12 +163,32 @@ class OrderDetailActivity : AppCompatActivity() {
             finish()
         }
         btn_paid.setOnClickListener {
-            updateStatus(Constants.STATUS_IN_PROGRESS, order.ORD_Id!!)
+
+            // updateStatus(Constants.STATUS_IN_PROGRESS, order.ORD_Id!!)
+
+            var intent = Intent(this@OrderDetailActivity, DisputeActivity::class.java)
+            var obj = Gson().toJson(order)
+            intent.putExtra("order", obj)
+            intent.putExtra("activity", "paid")
+            startActivityForResult(intent, 44)
+
+        }
+        btn_cancel.setOnClickListener {
+
+            // updateStatus(Constants.STATUS_IN_PROGRESS, order.ORD_Id!!)
+
+            var intent = Intent(this@OrderDetailActivity, DisputeActivity::class.java)
+            var obj = Gson().toJson(order)
+            intent.putExtra("order", obj)
+            intent.putExtra("activity", "cancel")
+            startActivityForResult(intent, 44)
+
         }
         btn_dispute.setOnClickListener {
             var intent = Intent(this@OrderDetailActivity, DisputeActivity::class.java)
             var obj = Gson().toJson(order)
             intent.putExtra("order", obj)
+            intent.putExtra("activity", "dispute")
             startActivityForResult(intent, 44)
         }
     }
@@ -187,6 +221,7 @@ class OrderDetailActivity : AppCompatActivity() {
                 print("error " + t)
                 progressBar!!.dismiss()
             }
+
             override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<Response>?) {
                 if (response?.body() != null) {
                     setResult(RESULT_OK);

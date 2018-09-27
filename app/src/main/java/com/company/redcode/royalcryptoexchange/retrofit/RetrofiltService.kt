@@ -127,6 +127,20 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun addDispute(@Body userOrderDispute: UserOrderDispute): Call<String>
 
+    //I have paid
+    @POST("UserOrder_Pay")
+    @Headers("Content-Type:application/json")
+    fun orderPaid(@Body userOrderPay: UserOrderPay): Call<String>
+
+    //I have paid
+    @POST("UserCancel_Order")
+    @Headers("Content-Type:application/json")
+    fun cancelOrder(@Body userCancelOrder: UserCancelOrder): Call<String>
+
+  @POST("Add_SupportTicket")
+    @Headers("Content-Type:application/json")
+    fun add_support(@Body supportTicket: SupportTicket): Call<String>
+
 }
 
 //"irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}"

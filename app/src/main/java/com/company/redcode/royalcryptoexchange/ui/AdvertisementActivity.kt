@@ -66,7 +66,7 @@ class AdvertisementActivity : AppCompatActivity() {
                         val amount = ed_amount!!.text.toString().toDouble()
 
 
-                        //Apputils.showMsg(this@BuyingDetailActivity, " Limit ")
+                        //Apputils.showMsg(this@PlaceOrderActivity, " Limit ")
 
                         remCoin = getCoinAfterFee(amount)
                         fees = amount * 4 / 100

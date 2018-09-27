@@ -17,16 +17,10 @@ import android.view.ViewGroup
 import android.widget.*
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.TableBuyerAdapater
-import com.company.redcode.royalcryptoexchange.models.ApiResponse
 import com.company.redcode.royalcryptoexchange.models.Trade
-import com.company.redcode.royalcryptoexchange.models.Users
-import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.google.gson.Gson
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.*
 
 
@@ -98,7 +92,7 @@ class BuyFragment : Fragment() {
         adapter = TableBuyerAdapater(activity!!, tradelist) { position ->
 
             var obj = Gson().toJson(tradelist[position])
-            val intent = Intent(activity!!, BuyingDetailActivity::class.java)
+            val intent = Intent(activity!!, PlaceOrderActivity::class.java)
             intent.putExtra("tradeObject", obj)
             startActivity(intent)
         }
