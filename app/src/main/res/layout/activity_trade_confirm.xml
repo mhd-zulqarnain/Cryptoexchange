@@ -217,7 +217,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginLeft="15dp"
         android:background="@drawable/layout_curve_btn_paid"
         android:text="I have Paid"
         android:textColor="#fff" />
@@ -243,6 +242,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dispute"
+                android:layout_marginLeft="12dp"
+                android:textColor="@color/backgoundTheme"
+                android:background="@drawable/white_curve_btn"
+                android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
                 android:layout_marginLeft="12dp"
                 android:textColor="@color/backgoundTheme"
                 android:background="@drawable/white_curve_btn"

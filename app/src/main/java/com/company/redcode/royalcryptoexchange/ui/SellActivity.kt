@@ -82,7 +82,7 @@ class SellActivity : AppCompatActivity() {
         adapter = TableSellerAdapater(this@SellActivity, tradelist) { position ->
 
             var obj = Gson().toJson(tradelist[position])
-            val intent = Intent(this@SellActivity, BuyingDetailActivity::class.java)
+            val intent = Intent(this@SellActivity, PlaceOrderActivity::class.java)
 
             intent.putExtra("tradeObject", obj)
             intent.putExtra("orderType", "sell")
