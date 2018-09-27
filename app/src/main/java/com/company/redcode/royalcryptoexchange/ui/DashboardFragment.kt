@@ -52,11 +52,7 @@ class DashboardFragment : Fragment() {
         builder.setView(R.layout.layout_dialog_progress)
         builder.setCancelable(false)
         progressBar = builder.create()
-
         initView(view)
-
-
-
         return view
     }
 

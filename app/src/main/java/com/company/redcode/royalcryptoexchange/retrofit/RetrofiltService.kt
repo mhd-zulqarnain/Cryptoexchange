@@ -88,32 +88,44 @@ interface RetrofiltService {
     // add bank details
     @POST("Add_UserPaymentDetail/{fuac_id}/{type}/{account}/{title}/{bankname}/{bankcode}")
     @Headers("Content-Type:application/json")
-    fun add_paymentdetail(@Path("fuac_id") fuac_id: String, @Path("type") type: String,@Path("account") account: String,@Path("title") title: String,@Path("bankname") bankname: String,@Path("bankcode") bankcode: String): Call<PaymentMethod>
-// select images
+    fun add_paymentdetail(@Path("fuac_id") fuac_id: String, @Path("type") type: String, @Path("account") account: String, @Path("title") title: String, @Path("bankname") bankname: String, @Path("bankcode") bankcode: String): Call<PaymentMethod>
+
+    // select images
     @GET("Select_UserDocument/{fuac_id}")
     @Headers("Content-Type:application/json")
     fun user_document(@Path("fuac_id") fuac_id: String): Call<ArrayList<Document>>
 
-   /*update order status*/
+    /*update order status*/
     @GET("Select_Userpaymentdetail/{fuac_id}")
     @Headers("Content-Type:application/json")
     fun getPaymentDetailListByUid(@Path("fuac_id") fuac_id: String): Call<ArrayList<PaymentMethod>>
 
- /*get user payment id status*/
+    /*get user payment id status*/
     @GET("getupid/{tradeId}")
     @Headers("Content-Type:application/json")
     fun getUserPaymentId(@Path("tradeId") tradeId: String): Call<String>
 
- /*update order status*/
+    /*update order status*/
     @POST("irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}")
     @Headers("Content-Type:application/json")
-    fun orderIRelease(@Path("ord_id") ord_id: String,@Path("utfee") utfee: String,@Path("utamount") utamount: String,
-                      @Path("uobitamount") uobitamount: String,@Path("uoamount") uoamount: String,@Path("ut_id") ut_id: String): Call<Response>
+    fun orderIRelease(@Path("ord_id") ord_id: String, @Path("utfee") utfee: String, @Path("utamount") utamount: String,
+                      @Path("uobitamount") uobitamount: String, @Path("uoamount") uoamount: String, @Path("ut_id") ut_id: String): Call<Response>
 
-   //delete bank detail
+    //delete bank detail
     @DELETE("Delete_UserPaymentDetail/{UP_Id}")
     @Headers("Content-Type:application/json")
     fun delete_bank(@Path("UP_Id") UP_Id: String): Call<Response>
+
+
+    //delete bank detail
+    @POST("tradestatuschange/{UT_Id}")
+    @Headers("Content-Type:application/json")
+    fun delete_trade(@Path("UT_Id") UT_Id: String): Call<String>
+
+    //delete bank detail
+    @POST("UserOrder_Dispute")
+    @Headers("Content-Type:application/json")
+    fun addDispute(@Body userOrderDispute: UserOrderDispute): Call<String>
 
 }
 

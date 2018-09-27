@@ -49,7 +49,7 @@ class DebuteCamera : AppCompatActivity() {
 */
         //window.requestFeature(Window.FEATURE_ACTION_BAR)
         // supportActionBar!!.hide()
-        setContentView(R.layout.debute_camera)
+        setContentView(R.layout.dispute_camera)
         initilizeViews()
 
         if (ContextCompat.checkSelfPermission(this@DebuteCamera,

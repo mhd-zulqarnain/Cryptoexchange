@@ -1,6 +1,8 @@
 package com.company.redcode.royalcryptoexchange
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -12,6 +14,7 @@ import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.OrderTerms
 import com.company.redcode.royalcryptoexchange.models.Response
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.ui.DisputeActivity
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.company.redcode.royalcryptoexchange.utils.ServiceError
@@ -149,7 +152,10 @@ class OrderDetailActivity : AppCompatActivity() {
             updateStatus(Constants.STATUS_IN_PROGRESS, order.ORD_Id!!)
         }
         btn_dispute.setOnClickListener {
-            updateStatus(Constants.STATUS_DISPUTE, order.ORD_Id!!)
+            var intent = Intent(this@OrderDetailActivity, DisputeActivity::class.java)
+            var obj = Gson().toJson(order)
+            intent.putExtra("order", obj)
+            startActivityForResult(intent, 44)
         }
     }
 
@@ -210,5 +216,12 @@ class OrderDetailActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
     }
 }

@@ -156,6 +156,18 @@
                         android:background="@drawable/layout_release_order"
                         android:textColor="#fff"
                         />
+                    <Button
+                        android:id="@+id/btn_dispute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:text="Dispute"
+                        android:textSize="10dp"
+                        android:background="@drawable/layout_release_order"
+                        android:textColor="#fff"
+                        />
 
                 </LinearLayout>
             </LinearLayout>
