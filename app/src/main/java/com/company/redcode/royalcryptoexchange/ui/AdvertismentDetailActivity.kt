@@ -148,13 +148,18 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         }
 
         btn_cancel.setOnClickListener {
-            updateStatus(Constants.STATUS_CANCEL, order.ORD_Id!!)
+            var intent = Intent(this@AdvertismentDetailActivity, DisputeActivity::class.java)
+            var obj = Gson().toJson(order)
+            intent.putExtra("order", obj)
+            intent.putExtra("activity", "cancel")
+            startActivityForResult(intent, 44)
         }
         btn_dispute.setOnClickListener {
             //updateStatus(Constants.STATUS_CANCEL, order.ORD_Id!!)
             var intent = Intent(this@AdvertismentDetailActivity, DisputeActivity::class.java)
             var obj = Gson().toJson(order)
             intent.putExtra("order", obj)
+            intent.putExtra("activity", "dispute")
             startActivityForResult(intent, 44)
         }
 
