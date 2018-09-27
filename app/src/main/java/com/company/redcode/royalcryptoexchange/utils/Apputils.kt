@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.widget.Toast
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
+import java.util.*
 
 class Apputils{
     companion object {
@@ -27,6 +28,7 @@ class Apputils{
         fun getTimeStamp(time: String): String? {
             try {
                 val dateFormat = SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa")
+               // dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5"));
                 val parsedDate = dateFormat.parse(time)
                 val time = parsedDate.getTime()
                 return time.toString()

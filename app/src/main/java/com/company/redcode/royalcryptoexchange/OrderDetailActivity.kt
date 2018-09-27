@@ -23,6 +23,8 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_trade_confirm.*
 import retrofit2.Call
 import retrofit2.Callback
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class OrderDetailActivity : AppCompatActivity() {
@@ -117,6 +119,7 @@ class OrderDetailActivity : AppCompatActivity() {
         var deadline = Apputils.getTimeStamp(order.Expire.toString())?.toLong();
         val publishedDate = Apputils.getTimeStamp(order.Order_Date.toString())?.toLong();
         println("current deadline " + deadline)
+
         var currentTime = System.currentTimeMillis()
         var time = deadline?.minus(currentTime)
 
@@ -155,6 +158,7 @@ class OrderDetailActivity : AppCompatActivity() {
             var intent = Intent(this@OrderDetailActivity, DisputeActivity::class.java)
             var obj = Gson().toJson(order)
             intent.putExtra("order", obj)
+            intent.putExtra("activity", "dispute")
             startActivityForResult(intent, 44)
         }
     }

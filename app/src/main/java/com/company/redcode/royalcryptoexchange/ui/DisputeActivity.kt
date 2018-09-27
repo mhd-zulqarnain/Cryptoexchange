@@ -5,6 +5,7 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.view.View
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.OrderTerms
@@ -22,6 +23,7 @@ import retrofit2.Callback
 
 class DisputeActivity : AppCompatActivity() {
     var order: Order = Order()
+    var activityType: String = ""
     var progressBar: AlertDialog? = null
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -30,6 +32,7 @@ class DisputeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dispute)
 
         var obj = intent.getStringExtra("order");
+        activityType = intent.getStringExtra("activity");
         order = Gson().fromJson(obj, Order::class.java)
 
         val builder = AlertDialog.Builder(this@DisputeActivity)
@@ -59,6 +62,29 @@ class DisputeActivity : AppCompatActivity() {
             addispute()
             updateStatus(Constants.STATUS_DISPUTE, order.ORD_Id!!)
         }
+
+        if(activityType=="dispute"){
+            image_view.visibility = View.VISIBLE
+            tv_title.text ="Create Dispute"
+            ed_dispute_msg.hint ="Enter the dispute messege"
+            add_image.text ="Enter the dispute messege"
+        }
+        if(activityType=="paid"){
+            image_view.visibility = View.VISIBLE
+            tv_title.text ="Upload the Recipt"
+            ed_dispute_msg.hint ="Enter a messege for dealer"
+            add_image.text ="Upload script"
+            btn_submit_dispute.text ="Done"
+        }
+        if(activityType=="cancel"){
+            image_view.visibility = View.GONE
+            tv_title.text ="Upload the Recipt"
+            ed_dispute_msg.hint ="Enter a Reason for order cancelling"
+            add_image.visibility = View.GONE
+            image_view.visibility = View.GONE
+            btn_submit_dispute.text ="Done"
+        }
+
     }
 
     fun getPayementId(serviceListener: ServiceListener<String>) {
