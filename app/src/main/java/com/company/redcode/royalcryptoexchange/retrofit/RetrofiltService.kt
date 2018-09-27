@@ -127,6 +127,10 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun addDispute(@Body userOrderDispute: UserOrderDispute): Call<String>
 
+    @POST("Add_SupportTicket")
+    @Headers("Content-Type:application/json")
+    fun add_support(@Body supportTicket: SupportTicket): Call<String>
+
 }
 
 //"irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}"

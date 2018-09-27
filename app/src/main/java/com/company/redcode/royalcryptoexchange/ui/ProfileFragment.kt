@@ -39,7 +39,7 @@ import java.util.HashMap
 
 
 class ProfileFragment : Fragment() {
-    var URL = Constants.ImageURL;
+    var URL = Constants.IMAGE_URLold;
     var imagename: ArrayList<String>? = null;
     var btn_add_bank: Button? = null
     var btn_add_img: Button? = null
@@ -56,6 +56,7 @@ class ProfileFragment : Fragment() {
     private var attach_img_1: ImageView? = null
     private var attach_img_2: ImageView? = null
     private var attach_img_3: ImageView? = null
+    private var attach_img_4: ImageView? = null
     var fuac_id: String? = null;
     var fname: EditText? = null
     var lname: EditText? = null
@@ -117,7 +118,7 @@ class ProfileFragment : Fragment() {
         attach_img_1 = view!!.findViewById(R.id.attach_img_1)
         attach_img_2 = view!!.findViewById(R.id.attach_img_2)
         attach_img_3 = view!!.findViewById(R.id.attach_img_3)
-
+        attach_img_4 = view!!.findViewById(R.id.attach_img_4)
 
         //api call image document
 
@@ -140,6 +141,7 @@ class ProfileFragment : Fragment() {
         val im1: ImageView = view.findViewById(R.id.attach_img_1)
         val im3: ImageView = view.findViewById(R.id.attach_img_3)
         val im2: ImageView = view.findViewById(R.id.attach_img_2)
+        val im4: ImageView = view.findViewById(R.id.attach_img_4)
         if (docver != "Verified") {
             ApiClint.getInstance()?.getService()?.user_document(fuac_id!!)?.enqueue(object : Callback<ArrayList<Document>> {
                 override fun onFailure(call: Call<ArrayList<Document>>?, t: Throwable?) {
@@ -157,6 +159,8 @@ class ProfileFragment : Fragment() {
                                 Picasso.with(activity!!).load(image + doclist!![1].User_Document).into(im2);
                             if (size > 2 && doclist[2] != null)
                                 Picasso.with(activity!!).load(image + doclist!![2].User_Document).into(im3);
+                            if (size > 3 && doclist[3] != null)
+                                Picasso.with(activity!!).load(image + doclist!![3].User_Document).into(im4);
                         }
                     }
                 }
@@ -512,6 +516,8 @@ class ProfileFragment : Fragment() {
         })
     }
 
+
+
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -520,8 +526,8 @@ class ProfileFragment : Fragment() {
 
             if (data.clipData != null) {
                 var count: Int = data.clipData.itemCount
-                if (count > 4) {
-                    count = 3
+                if (count > 5) {
+                    count = 4
                 }
                 for (i in 0 until count) {
                     val imageUri = data.clipData.getItemAt(i).uri
@@ -532,6 +538,8 @@ class ProfileFragment : Fragment() {
                         attach_img_2!!.setImageBitmap(bitmap)
                     if (i == 2)
                         attach_img_3!!.setImageBitmap(bitmap)
+                    if(i==3)
+                        attach_img_4!!.setImageBitmap(bitmap)
 
                     uploadtoserver(bitmap, i, (count - 1))
                 }
@@ -561,6 +569,8 @@ class ProfileFragment : Fragment() {
                     attach_img_2!!.setImageBitmap(list[i])
                 if (i == 2)
                     attach_img_3!!.setImageBitmap(list[i])
+                if (i == 3)
+                    attach_img_4!!.setImageBitmap(list[i])
 
                 var c: Int = list!!.size - 1;
                 uploadtoserver(list[i], i, (c))
@@ -568,8 +578,8 @@ class ProfileFragment : Fragment() {
             }
 
         }
-
-        // progressBar!!.dismiss()
+        else
+         progressBar!!.dismiss()
         super.onActivityResult(requestCode, resultCode, data)
     }
 

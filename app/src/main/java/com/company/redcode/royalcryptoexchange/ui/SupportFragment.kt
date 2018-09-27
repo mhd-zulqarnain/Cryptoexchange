@@ -1,14 +1,21 @@
 package com.company.redcode.royalcryptoexchange.ui
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.annotation.RequiresApi
+import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
+import android.text.Html
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,14 +26,18 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.company.redcode.royalcryptoexchange.R
+import com.company.redcode.royalcryptoexchange.models.ApiResponse
 import com.company.redcode.royalcryptoexchange.models.ImageObject
 import com.company.redcode.royalcryptoexchange.models.Response
+import com.company.redcode.royalcryptoexchange.models.SupportTicket
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.company.redcode.royalcryptoexchange.utils.ServiceError
 import com.company.redcode.royalcryptoexchange.utils.ServiceListener
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.example.admin.camerawork.CameraActivity
 import com.google.gson.Gson
+import com.rengwuxian.materialedittext.MaterialEditText
 import retrofit2.Call
 import retrofit2.Callback
 import java.io.ByteArrayOutputStream
@@ -34,24 +45,23 @@ import java.util.HashMap
 
 
 class SupportFragment : Fragment() {
-    var URL = Constants.ImageURL;
+    var URL = Constants.IMAGE_URLold;
     private val CAMERA_INTENT = 555
     private val REQUSET_GALLERY_CODE: Int = 44
     var progressBar: android.app.AlertDialog? = null
+    private val MY_PERMISSIONS_REQUEST_CAMERA = 999
     private var attach_img_1: ImageView? = null
     private var attach_img_2: ImageView? = null
     private var attach_img_3: ImageView? = null
     private var attach_img_4: ImageView? = null
     private var myImgJson: String? = null
-
+    var sharedpref: SharedPref = SharedPref.getInstance()!!
+    var et_supportmessage: MaterialEditText? = null
+    var btn_supportsubmit: Button? = null
     var btn_add: Button? = null
     var coin: String = " "
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-
+    var image: String = "a"
+    var fuac_id: String? = null
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -63,6 +73,7 @@ class SupportFragment : Fragment() {
         builder.setCancelable(false)
         progressBar = builder.create()
 
+        fuac_id = sharedpref.getProfilePref(activity!!).UAC_Id!!
 
         return view
 
@@ -72,7 +83,7 @@ class SupportFragment : Fragment() {
     private fun initView(view: View) {
         btn_add = view!!.findViewById(R.id.btn_add)
         val coin_type_spinner = view.findViewById(R.id.spinner) as Spinner
-        val spinnerAdapter = ArrayAdapter.createFromResource(activity!!,R.array.array_support_title, android.R.layout.simple_spinner_item)
+        val spinnerAdapter = ArrayAdapter.createFromResource(activity!!, R.array.array_support_title, android.R.layout.simple_spinner_item)
 
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_textview)
         coin_type_spinner.adapter = spinnerAdapter
@@ -81,7 +92,7 @@ class SupportFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
                 val item = parent!!.getItemAtPosition(pos);
                 coin = item.toString()
-                Log.d("Selected Item ", " "+coin)
+                Log.d("Selected Item ", " " + coin)
             }
         })
         btn_add!!.setOnClickListener {
@@ -91,8 +102,53 @@ class SupportFragment : Fragment() {
         attach_img_2 = view!!.findViewById(R.id.attach_img_2)
         attach_img_3 = view!!.findViewById(R.id.attach_img_3)
         attach_img_4 = view!!.findViewById(R.id.attach_img_4)
+        btn_supportsubmit = view!!.findViewById(R.id.btn_supportsubmit)
+        et_supportmessage = view!!.findViewById(R.id.et_supportmessage)
+
+
+        btn_supportsubmit!!.setOnClickListener { v ->
+
+            validate()
+
+        }
 
     }
+
+    fun validate() {
+        if (et_supportmessage!!.text.toString() == "") {
+            et_supportmessage!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+            et_supportmessage!!.requestFocus()
+            return
+        }
+
+        if (image == "") {
+            Toast.makeText(activity!!, "Please Upload Image", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        progressBar!!.show()
+        var support = SupportTicket(null, coin, et_supportmessage!!.text.toString(), image, fuac_id!!)
+        ApiClint.getInstance()?.getService()?.add_support(support)?.enqueue(object : Callback<String> {
+            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                print("error")
+            }
+
+            override fun onResponse(call: Call<String>?, response: retrofit2.Response<String>?) {
+                if (response != null) {
+                    var api: String? = response!!.body();
+                    if (api == "success")
+                        Toast.makeText(activity!!, "Your Support has been Added", Toast.LENGTH_SHORT).show()
+                    else if (api == "fail")
+                        Toast.makeText(activity!!, "Unable to Add Support", Toast.LENGTH_SHORT).show()
+                progressBar!!.dismiss()
+                }
+            }
+
+        })
+
+    }
+
 
     private fun supportImageDialoge() {
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.select_image_dialog, null)
@@ -107,18 +163,44 @@ class SupportFragment : Fragment() {
         gallery_dialog.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            startActivityForResult(intent, REQUSET_GALLERY_CODE)
+           // intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            activity!!.startActivityForResult(intent, REQUSET_GALLERY_CODE)
             dialog.dismiss()
         }
         camera_dialog.setOnClickListener {
-            var intent = Intent(activity!!, CameraActivity::class.java)
-            startActivityForResult(intent, CAMERA_INTENT)
+
+
+            if (ContextCompat.checkSelfPermission(activity!!,
+                            Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                activity!!.startActivityForResult(intent, CAMERA_INTENT)
+
+            } else {
+                askForCameraPermission()
+                Toast.makeText(activity!!, "Please Allow app to Use Camera of your Device. Thanks", Toast.LENGTH_SHORT).show()
+            }
             dialog.dismiss()
+
+
         }
 
         dialog.show()
     }
+
+
+    private fun askForCameraPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)) {
+            Snackbar.make(view!!.findViewById<View>(android.R.id.content), "Need permission for loading data", Snackbar.LENGTH_INDEFINITE).setAction("ENABLE",
+                    View.OnClickListener {
+                        //asking all required permissions
+                        ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.CAMERA), MY_PERMISSIONS_REQUEST_CAMERA)
+                    }).show()
+        } else {
+            ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.CAMERA),
+                    MY_PERMISSIONS_REQUEST_CAMERA)
+        }
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
 
@@ -126,27 +208,7 @@ class SupportFragment : Fragment() {
         progressBar!!.show()
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
 
-            if (data.clipData != null) {
-                var count: Int = data.clipData.itemCount
-                if (count > 5) {
-                    count = 4
-                }
-                for (i in 0 until count) {
-                    val imageUri = data.clipData.getItemAt(i).uri
-                    val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imageUri)
-                    if (i ==0)
-                        attach_img_1!!.setImageBitmap(bitmap)
-                    if (i ==1)
-                        attach_img_2!!.setImageBitmap(bitmap)
-                    if (i ==2)
-                        attach_img_3!!.setImageBitmap(bitmap)
-                    if (i ==4)
-                        attach_img_4!!.setImageBitmap(bitmap)
-
-                    uploadtoserver(bitmap, i, (count - 1))
-                }
-
-            } else if (data.data != null) {
+            if (data.data != null) {
                 val imagePath = data.data
 
                 val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imagePath)
@@ -156,30 +218,35 @@ class SupportFragment : Fragment() {
             }
 
 
-
-
         } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
-            var result = data!!.getStringExtra("camera intent")
-            myImgJson = result
-            var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
-            var list = obj.camList
+//            Bitmap image = (Bitmap) data.getExtras().get("data");
+            var result: Uri = data!!.data
+//            myImgJson = result
 
-            for(i in 0 until list!!.size){
-
-                if (i ==0)
-                    attach_img_1!!.setImageBitmap(list[i])
-                if (i ==1)
-                    attach_img_2!!.setImageBitmap(list[i])
-                if (i ==2)
-                    attach_img_3!!.setImageBitmap(list[i])
-                if (i ==3)
-                    attach_img_4!!.setImageBitmap(list[i])
-
-                var c: Int = list!!.size - 1;
-                uploadtoserver(list[i], i, (c))
-            }
+            val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), result)
+            attach_img_1!!.setImageBitmap(bitmap)
+            uploadtoserver(bitmap, 2, 2)
+            /* var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
+             var list = obj.camList
+ */
+//            for (i in 0 until list!!.size) {
+//
+//                if (i == 0)
+//                    attach_img_1!!.setImageBitmap(list[i])
+//                if (i == 1)
+//                    attach_img_2!!.setImageBitmap(list[i])
+//                if (i == 2)
+//                    attach_img_3!!.setImageBitmap(list[i])
+//                if (i == 3)
+//                    attach_img_4!!.setImageBitmap(list[i])
+//
+//                var c: Int = list!!.size - 1;
+//                uploadtoserver(list[i], i, (c))
+//            }
 
         }
+        else
+            progressBar!!.dismiss()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -199,44 +266,10 @@ class SupportFragment : Fragment() {
         val StrRequest = object : StringRequest(Request.Method.POST, URL,
                 com.android.volley.Response.Listener { response ->
                     //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
-          //          imagename!!.add(response)
-
-                    userdoc("1027", response!!, object : ServiceListener<String> {
-                        override fun success(obj: String) {
-                            if (i == size) {
-                                Toast.makeText(activity!!, "Success", Toast.LENGTH_SHORT).show()
-                                progressBar!!.dismiss()
-                            }
-                        }
-
-                        override fun fail(error: ServiceError) {
-                            Toast.makeText(activity!!, "Service error!! ", Toast.LENGTH_SHORT).show()
-                        }
-                    })
-
-
-
-                    ApiClint.getInstance()?.getService()?.add_userdoc("1027", response!!)?.enqueue(object : Callback<Response> {
-                        override fun onFailure(call: Call<Response>?, t: Throwable?) {
-                            //   println("error")
-                        }
-
-                        override fun onResponse(call: Call<Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
-                            if (response != null) {
-                                var apiResponse = response.body()
-                                if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
-                                    var status = response.body()!!.message
-                                    // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
-                                    //finish();
-                                } else {
-                                    //         Toast.makeText(activity!!, "Error in Image uploading!! ", Toast.LENGTH_SHORT).show()
-
-                                }
-                            }
-                        }
-
-                    });
-
+                    //          imagename!!.add(response)
+                    image = response;
+                Toast.makeText(activity!!, image, Toast.LENGTH_SHORT).show()
+            progressBar!!.dismiss()
 
                 }, com.android.volley.Response.ErrorListener {
             Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
