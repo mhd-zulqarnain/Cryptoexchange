@@ -2,6 +2,7 @@ package com.company.redcode.royalcryptoexchange.ui
 
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -13,6 +14,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.TextView
+import com.company.redcode.royalcryptoexchange.OrderDetailActivity
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.OrderTerms
@@ -25,6 +27,8 @@ import kotlinx.android.synthetic.main.activity_buying_details.*
 import retrofit2.Call
 import retrofit2.Callback
 import java.math.BigDecimal
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PlaceOrderActivity : AppCompatActivity() {
@@ -166,6 +170,10 @@ class PlaceOrderActivity : AppCompatActivity() {
             addOrder(serviceListener = object : ServiceListener<String> {
                 override fun success(obj: String) {
                     Apputils.showMsg(this@PlaceOrderActivity, obj)
+                    val intent = Intent(this@PlaceOrderActivity, OrderDetailActivity::class.java)
+                    var obj = Gson().toJson(order)
+                    intent.putExtra("order", obj)
+                    startActivity(intent)
                     finish()
                 }
 
@@ -193,6 +201,16 @@ class PlaceOrderActivity : AppCompatActivity() {
         order.Status = "open"
         order.ORD_UserId = "U-"+sharedPref!!.getProfilePref(this@PlaceOrderActivity).UAC_Id
         order.User_Id = "U-"+trade.FUAC_Id.toString()
+
+
+        val deadline = Date()
+        deadline.time = System.currentTimeMillis() + 6*60 * 60 * 1000
+        val dateFormat = SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa")
+        val dateText = dateFormat.format(deadline)
+
+
+        order.Order_Date = System.currentTimeMillis().toString()
+        order.Expire = dateText.toString()
 
         if (orderType == "buy")
             order.Description = "bought"

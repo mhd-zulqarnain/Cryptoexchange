@@ -12,7 +12,9 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
 import android.text.Html
+import android.text.TextWatcher
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
@@ -67,7 +69,7 @@ class ProfileFragment : Fragment() {
     var email_: EditText? = null;
     var btnupdate: Button? = null
     var docimage: LinearLayout? = null;
-    var profile_terms: MaterialEditText? = null;
+    var profile_terms: EditText? = null;
     var image: String = Constants.ProfilePath;
     var list = ArrayList<PaymentMethod>()
     var docver: String? = null;
@@ -105,7 +107,22 @@ class ProfileFragment : Fragment() {
         docimage = view!!.findViewById(R.id.docimage);
 
 
+//        profile_terms.performContextClick()
+    /*    profile_terms!!.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
 
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (profile_terms!!.text.toString() == "") {
+                    var clean = Apputils.stringClean(profile_terms!!.text.toString())
+                    profile_terms!!.setText(clean)
+                }
+            }
+        })*/
 
         imagename = ArrayList();
         initView(view)
@@ -345,21 +362,22 @@ class ProfileFragment : Fragment() {
 
 
             if (spinnervalue == "Bank Transfer") {
-                var check :Boolean = validate(1);
-                    if(check) {
-                        addbank(title.toString(), account.toString(), name.toString(), code.toString());
-                        etaccountnumber!!.setText("")
-                        etaccountttile!!.setText("")
-                        etbankname!!.setText("")
-                        etbankcode!!.setText("")
-                    }
+                var check: Boolean = validate(1);
+                if (check) {
+                    addbank(title.toString(), account.toString(), name.toString(), code.toString());
+                    etaccountnumber!!.setText("")
+                    etaccountttile!!.setText("")
+                    etbankname!!.setText("")
+                    etbankcode!!.setText("")
+                }
             } else {
-                var check :Boolean =validate(0);
-                if(check){
-                addbank(cnic.toString(), "null", mob.toString(), "null");
-                etcnic!!.setText("")
-                etmobilenumber!!.setText("")
-            }}
+                var check: Boolean = validate(0);
+                if (check) {
+                    addbank(cnic.toString(), "null", mob.toString(), "null");
+                    etcnic!!.setText("")
+                    etmobilenumber!!.setText("")
+                }
+            }
 
         }
 
@@ -451,7 +469,7 @@ class ProfileFragment : Fragment() {
         dialog.show()
     }
 
-     private fun  validate(i: Int):Boolean {
+    private fun validate(i: Int): Boolean {
         if (i == 0) {
             if (etcnic!!.text.toString() == "") {
                 etcnic!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
@@ -464,7 +482,7 @@ class ProfileFragment : Fragment() {
                 return false
             }
 
-        }else if(i==1){
+        } else if (i == 1) {
             if (etaccountnumber!!.text.toString() == "") {
                 etaccountnumber!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
                 etaccountnumber!!.requestFocus()
@@ -516,8 +534,6 @@ class ProfileFragment : Fragment() {
         })
     }
 
-
-
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -538,7 +554,7 @@ class ProfileFragment : Fragment() {
                         attach_img_2!!.setImageBitmap(bitmap)
                     if (i == 2)
                         attach_img_3!!.setImageBitmap(bitmap)
-                    if(i==3)
+                    if (i == 3)
                         attach_img_4!!.setImageBitmap(bitmap)
 
                     uploadtoserver(bitmap, i, (count - 1))
@@ -577,9 +593,8 @@ class ProfileFragment : Fragment() {
 
             }
 
-        }
-        else
-         progressBar!!.dismiss()
+        } else
+            progressBar!!.dismiss()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -668,4 +683,20 @@ class ProfileFragment : Fragment() {
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
 
+/*override fun onBackPressed() {
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val fragmentCurrent = supportFragmentManager.findFragmentById(R.id.relativeLayout)
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            if (fragmentCurrent!!.equals(HomeFragment())) {
+                supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                super.onBackPressed()
+            } else {
+                supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                replaceFragment(cameraFragment)
+            }
+
+        }
+    }*/
 }
