@@ -32,6 +32,7 @@ import com.google.gson.Gson
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import java.io.ByteArrayOutputStream
@@ -40,7 +41,7 @@ import java.util.HashMap
 
 class ProfileFragment : Fragment() {
     var URL = Constants.IMAGE_URLold;
-    var imagename: ArrayList<String>? = null;
+
     var btn_add_bank: Button? = null
     var btn_add_img: Button? = null
     var spinner_payment_method: Spinner? = null
@@ -107,7 +108,7 @@ class ProfileFragment : Fragment() {
 
 
 
-        imagename = ArrayList();
+
         initView(view)
         return view
     }
@@ -600,24 +601,30 @@ class ProfileFragment : Fragment() {
         val StrRequest = object : StringRequest(Request.Method.POST, URL,
                 Response.Listener { response ->
                     //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
-                    imagename!!.add(response)
-
-                    userdoc(fuac_id!!, response!!, object : ServiceListener<String> {
-                        override fun success(obj: String) {
-                            if (i == size) {
-                                Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
-                                progressBar!!.dismiss()
-                            }
-                        }
-
-                        override fun fail(error: ServiceError) {
-                            Toast.makeText(activity!!, "Service error!! ", Toast.LENGTH_SHORT).show()
-                        }
-                    })
+                    var imagename:String?=null;
+                    var status:String?=null;
+                    try {
+                        var json : JSONObject = JSONObject(response);
+                        status= json.getString("Status");
+                        if(status == "OK") {
+                            imagename = json.getString("Message");
 
 
+                            userdoc(fuac_id!!, imagename!!, object : ServiceListener<String> {
+                                override fun success(obj: String) {
+                                    if (i == size) {
+                                        Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+                                        progressBar!!.dismiss()
+                                    }
+                                }
 
-                    ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!, response!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+                                override fun fail(error: ServiceError) {
+                                    Toast.makeText(activity!!, "Server error!! ", Toast.LENGTH_SHORT).show()
+                                }
+                            })
+
+
+                    ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!, imagename!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
                         override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                             //   println("error")
                         }
@@ -637,7 +644,11 @@ class ProfileFragment : Fragment() {
                         }
 
                     });
+                } else if(status == "false")
+            imagename = "test";
+    }catch (e:Exception){
 
+    }
 
                 }, Response.ErrorListener {
             Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
