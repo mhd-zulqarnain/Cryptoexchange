@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -21,12 +22,14 @@ import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
 import retrofit2.Call
 import retrofit2.Callback
+import android.support.v4.widget.DrawerLayout
+
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private var userId:String ?= null
-    private var USER_KEY:String ="user id"
-    private var  mPref= SharedPref.getInstance()
+    private var userId: String? = null
+    private var USER_KEY: String = "user id"
+    private var mPref = SharedPref.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,17 +46,18 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         supportFragmentManager.beginTransaction().add(R.id.relativeLayout, HomeFragment()).commit();
         nav_view.setNavigationItemSelectedListener(this)
         userId = intent.getStringExtra(USER_KEY)
-        getuserData(userId,object:ServiceListener<Users>{
+        getuserData(userId, object : ServiceListener<Users> {
             override fun success(obj: Users) {
                 mPref!!.setProfilePref(this@DrawerActivity, obj)
             }
+
             override fun fail(error: ServiceError) {}
         })
 
     }
 
-    private fun getuserData(userId: String?,serviceListener: ServiceListener<Users>) {
-        ApiClint.getInstance()?.getService()?.getUserById(userId!!)!!.enqueue(object :Callback<Users>{
+    private fun getuserData(userId: String?, serviceListener: ServiceListener<Users>) {
+        ApiClint.getInstance()?.getService()?.getUserById(userId!!)!!.enqueue(object : Callback<Users> {
             override fun onFailure(call: Call<Users>?, t: Throwable?) {
                 Toast.makeText(this@DrawerActivity, "Shared prefrence error", Toast.LENGTH_SHORT).show()
 
@@ -61,21 +65,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
             override fun onResponse(call: Call<Users>?, response: retrofit2.Response<Users>?) {
                 print("object success ")
-               if(response!!.body()!= null){
-                   serviceListener.success(response.body()!!)
-               }
+                if (response!!.body() != null) {
+                    serviceListener.success(response.body()!!)
+                }
             }
         })
 
     }
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
@@ -106,10 +103,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_dashboard -> {
                 DashboardFragment()
             }
-            R.id.nav_wallet ->{
+            R.id.nav_wallet -> {
                 WalletFragment()
             }
-            R.id.nav_support->{
+            R.id.nav_support -> {
                 SupportFragment()
             }
 
@@ -129,6 +126,22 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val fragment = supportFragmentManager.findFragmentById(R.id.relativeLayout)
         fragment!!.onActivityResult(requestCode, resultCode, data)
+    }
+
+
+    override fun onBackPressed() {
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val fragmentCurrent = supportFragmentManager.findFragmentById(R.id.relativeLayout)
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            if (fragmentCurrent !is HomeFragment) {
+                supportFragmentManager.beginTransaction().replace(R.id.relativeLayout, HomeFragment()).commit();
+            } else {
+                super.onBackPressed()
+            }
+
+        }
     }
 
 }

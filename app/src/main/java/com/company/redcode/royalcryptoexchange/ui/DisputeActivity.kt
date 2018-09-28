@@ -5,14 +5,13 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.*
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
-import com.company.redcode.royalcryptoexchange.utils.Apputils
-import com.company.redcode.royalcryptoexchange.utils.Constants
-import com.company.redcode.royalcryptoexchange.utils.ServiceError
-import com.company.redcode.royalcryptoexchange.utils.ServiceListener
+import com.company.redcode.royalcryptoexchange.utils.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_dispute.*
 import retrofit2.Call
@@ -92,6 +91,21 @@ class DisputeActivity : AppCompatActivity() {
             btn_submit_dispute.text = "Done"
         }
 
+        ed_dispute_msg!!.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (ed_dispute_msg!!.text.toString() == "") {
+                    var clean = Apputils.stringClean(ed_dispute_msg!!.text.toString())
+                    ed_dispute_msg!!.setText(clean)
+                }
+            }
+        })
     }
 
     fun getPayementId(serviceListener: ServiceListener<String>) {
@@ -162,7 +176,7 @@ class DisputeActivity : AppCompatActivity() {
         }
         var userOrderDispute = UserOrderDispute()
 
-        userOrderDispute.FUAC_Id = order.FUAC_Id
+        userOrderDispute.FUAC_Id = SharedPref.getInstance()!!.getProfilePref(this@DisputeActivity).UAC_Id
         userOrderDispute.FUT_Id = order.FUT_Id
         userOrderDispute.Image = "test"
         userOrderDispute.Message = ed_dispute_msg.text.toString()
