@@ -50,6 +50,7 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:id="@+id/bank_view"
                 android:layout_width="match_parent"
@@ -127,7 +128,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:id="@+id/et_bankname"
+			android:id="@+id/et_bankname"
                         android:hint="Bank name"
                         android:inputType="text" />
 
@@ -151,7 +152,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:id="@+id/et_bankcode"
+                    android:id="@+id/et_bankcode"
                         android:hint="Bank code"
                         android:inputType="text" />
 
@@ -219,8 +220,8 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/layout_curve_btn_paid"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_curve_btn_submit"
                 android:text="Add"
                 android:id="@+id/btn_addpayment"/>
 
@@ -228,14 +229,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="7dp"
                 android:background="#fff"></View>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
                 android:weightSum="3"
-                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 >
@@ -243,7 +247,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
                     style="@style/bankDialogText"
                     android:text="Type"
                     />
@@ -259,7 +262,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:textAlignment="center"
                     style="@style/bankDialogText"
                     android:text="Action"
                     />
@@ -280,13 +282,13 @@
         </LinearLayout>
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/btn_close"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="top|right"
-            android:clickable="true"
-            android:src="@drawable/ic_cancel_black_24dp" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/btn_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="top|right"
+        android:clickable="true"
+        android:src="@drawable/ic_cancel_black_24dp" />
     </FrameLayout>
 
 </LinearLayout>

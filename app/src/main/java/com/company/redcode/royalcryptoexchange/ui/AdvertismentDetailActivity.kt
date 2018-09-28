@@ -53,6 +53,9 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
+
+
+
         btn_delete.setOnClickListener {
             deletTrade()
         }

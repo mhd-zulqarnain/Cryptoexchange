@@ -9,24 +9,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="12dp"
+        android:weightSum="25"
         android:orientation="vertical">
 
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             android:fontFamily="@font/oswald_regular"
             android:text="Add Advertisement"
             android:textSize="28sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
+
                 style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -38,6 +44,7 @@
                 android:id="@+id/spinner_order_type"
                 style="@style/adsActivityStyle"
                 android:layout_width="0dp"
+                android:popupBackground="#000"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:entries="@array/order_type"/>
@@ -46,7 +53,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -63,9 +73,10 @@
                 android:id="@+id/spinner_payment_method"
                 style="@style/adsActivityStyle"
                 android:layout_width="0dp"
-
+                android:popupBackground="#000"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+                android:entries="@array/method_payment"
                 >
 
             </Spinner>
@@ -73,7 +84,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -92,7 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-
+                android:popupBackground="#000"
                 android:entries="@array/array_coin">
 
             </Spinner>
@@ -102,15 +116,19 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:alpha="0.5"
             android:background="#fff" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -126,14 +144,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+
                 android:imeOptions="actionNext"
                 android:inputType="numberDecimal"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:textColorHint="#AFABAB"
+                android:hint="Enter Amount"
+                />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="2.5"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -154,17 +179,24 @@
                 android:layout_weight="2"
                 android:imeOptions="actionNext"
                 android:inputType="number"
+                android:textSize="15dp"
+                android:textColorHint="#AFABAB"
+                android:hint="Enter Price"
 
-                android:textSize="15dp" />
+                />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
+                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -184,7 +216,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -204,6 +239,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:maxLength="10"
+                android:text="Total"
                 android:textSize="15dp" />
 
         </LinearLayout>
@@ -212,8 +248,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:alpha="0.5"
             android:background="#fff" />
@@ -222,7 +258,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="2.5"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -242,12 +282,18 @@
                 android:layout_weight="2"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:textColorHint="#AFABAB"
+                android:hint="Enter Upper Limit"
+                />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="2.5"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -257,7 +303,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Lower Limit "
-                android:textSize="15dp" />
+                android:textSize="15dp"
+
+                />
 
             <EditText
                 android:id="@+id/l_limit"
@@ -267,27 +315,43 @@
                 android:layout_weight="2"
                 android:imeOptions="actionDone"
                 android:inputType="number"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:textColorHint="#AFABAB"
+                android:hint="Enter Lower Limit"
+                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2.3"
+            android:weightSum="3"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_post"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add Post" />
+
 
             <Button
                 android:id="@+id/btn_cancel"
-                android:layout_width="wrap_content"
+                android:layout_marginRight="7dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Cancel" />
+                android:background="@drawable/layout_curve_btn_cancel"
+                android:text="   Cancel   "
+                android:fontFamily="@font/oswald_bold"
+                />
+            <Button
+                android:id="@+id/btn_post"
+                android:layout_width="0dp"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_curve_btn_submit"
+                android:text="   Add Post   "
+                android:fontFamily="@font/oswald_bold"
+                />
         </LinearLayout>
 
     </LinearLayout>

@@ -49,7 +49,7 @@
                 android:text="Order "
                 android:fontFamily="@font/oswald_regular"
                 android:textSize="35dp"
-                 />
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,163 +63,163 @@
 
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
-
-        <TextView
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Seller Name " />
-
-        <TextView
-            android:id="@+id/dealer_name"
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Mr Seller" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
-
-        <TextView
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Amount " />
-
-        <TextView
-            android:id="@+id/btc_amount"
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="1200" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal"
-
-        android:weightSum="3">
-
-        <TextView
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Payment method " />
-
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:orientation="vertical">
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <TextView
-                android:id="@+id/tv_terms"
                 style="@style/buyActivityText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Method : Bank Transfer" />
+                android:layout_weight="1"
+                android:text="Seller Name " />
 
+            <TextView
+                android:id="@+id/dealer_name"
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Mr Seller" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Amount " />
+
+            <TextView
+                android:id="@+id/btc_amount"
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="1200" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+
+            android:weightSum="3">
+
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Payment method " />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_terms"
+                    style="@style/buyActivityText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Method : Bank Transfer" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
-
-        <TextView
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Price " />
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-        <TextView
-            android:id="@+id/price_tv"
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Price " />
+
+            <TextView
+                android:id="@+id/price_tv"
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="1200" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="1200" />
-    </LinearLayout>
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Time Remaining " />
 
-        <TextView
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/timer_tv"
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="1200" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Time Remaining " />
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-        <TextView
-            android:id="@+id/timer_tv"
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
+            <TextView
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Status" />
+
+            <TextView
+                android:id="@+id/status_tv"
+                style="@style/buyActivityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="cancel" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_paid"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="1200" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
-
-        <TextView
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Status" />
-
-        <TextView
-            android:id="@+id/status_tv"
-            style="@style/buyActivityText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="cancel" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_paid"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:background="@drawable/layout_curve_btn_paid"
-        android:text="I have Paid"
-        android:textColor="#fff" />
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@drawable/layout_curve_btn_paid"
+            android:text="I have Paid"
+            android:textColor="#fff" />
 
         <LinearLayout
             android:layout_width="match_parent"

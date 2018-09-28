@@ -8,15 +8,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/tv_bnk_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Bank Name"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/tv_bnk_name"
             android:layout_width="match_parent"
@@ -26,10 +18,14 @@
             android:text="Bank Name"
             android:textColor="#fff"
             android:textSize="15sp" />
-
-        <View
+        <TextView
+            android:id="@+id/tv_bnk_title"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#fff"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Bank Name"
+            android:textColor="#fff"
+            android:textSize="18sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

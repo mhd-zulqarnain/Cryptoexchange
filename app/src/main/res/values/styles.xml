@@ -16,6 +16,8 @@
         <item name="colorPrimaryDark">#000</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/backgoundBuy</item>
+        <!--   Spinner Divider -->
+        <item name="android:dropDownListViewStyle">@style/mySpinnerStyle</item>
 
         <item name="android:editTextColor">@color/BuyActivityText</item>
         <item name="android:textColorPrimary">@color/BuyActivityText</item>
@@ -47,12 +49,17 @@
         <item name="android:textColorSecondary">@color/whitColor</item>
 
     </style>
+    <!--   Spinner Divider -->
+    <style name="mySpinnerStyle" parent="android:Widget.ListView.DropDown">
+        <item name="android:divider">#d6a9a0a0</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
 
     <!--Sign up edittext style-->
 
     <style name="signUpEditTextStyle">
         <item name="android:textSize">15sp</item>
-  <!--      <item name="android:layout_marginTop">10dp</item>-->
+        <!--      <item name="android:layout_marginTop">10dp</item>-->
     </style>
 
 
@@ -105,6 +112,7 @@
         <item name="colorControlNormal">@color/whitColor</item>
         <item name="colorControlActivated">@color/whitColor</item>
     </style>
+
 
 
 

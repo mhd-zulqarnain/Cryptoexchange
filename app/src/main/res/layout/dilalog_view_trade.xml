@@ -195,12 +195,17 @@
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm"/>
+            android:text="     Confirm     "
+            android:background="@drawable/layout_curve_btn_submit"
+            android:layout_marginRight="20dp"
+            />
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"/>
+            android:text="     Cancel     "
+            android:background="@drawable/layout_curve_btn_cancel"
+            />
     </LinearLayout>
 
 </LinearLayout>

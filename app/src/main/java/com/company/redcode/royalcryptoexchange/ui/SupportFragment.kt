@@ -82,19 +82,10 @@ class SupportFragment : Fragment() {
 
     private fun initView(view: View) {
         btn_add = view!!.findViewById(R.id.btn_add)
-        val coin_type_spinner = view.findViewById(R.id.spinner) as Spinner
-        val spinnerAdapter = ArrayAdapter.createFromResource(activity!!, R.array.array_support_title, android.R.layout.simple_spinner_item)
+//        val coin_type_spinner = view.findViewById(R.id.spinner) as Spinner
+//        val spinnerAdapter = ArrayAdapter.createFromResource(activity!!, R.array.array_support_title, android.R.layout.simple_spinner_item)
 
-        spinnerAdapter.setDropDownViewResource(R.layout.spinner_textview)
-        coin_type_spinner.adapter = spinnerAdapter
-        coin_type_spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                val item = parent!!.getItemAtPosition(pos);
-                coin = item.toString()
-                Log.d("Selected Item ", " " + coin)
-            }
-        })
+//
         btn_add!!.setOnClickListener {
             supportImageDialoge()
         }

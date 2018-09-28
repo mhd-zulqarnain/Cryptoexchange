@@ -42,7 +42,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:text="Sell E-Currency"
-        android:textSize="30sp"
+        android:fontFamily="@font/oswald_regular"
+        android:textSize="28sp"
         />
 
     <LinearLayout

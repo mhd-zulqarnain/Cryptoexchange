@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/color_gradient_profile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="23.5"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="2.5"
+            android:layout_height="0dp"
+            android:text="Dispute"
+            android:textSize="28sp"
+            android:fontFamily="@font/oswald_regular"
+            />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.5"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:orientation="horizontal"
+            android:weightSum="6">
+            <TextView
+                style="@style/signUpEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.7"
+                android:text="Seller ID"
+                android:textColor="#fff" />
+
+            <EditText
+                style="@style/signUpEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@null"
+                android:hint="Enter Seller ID"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_weight="1.5"
+            android:orientation="horizontal"
+            android:weightSum="6">
+            <TextView
+                style="@style/signUpEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.7"
+                android:text="Buyer ID"
+                android:textColor="#fff" />
+
+            <EditText
+                style="@style/signUpEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@null"
+                android:hint="Enter Buyer ID"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:orientation="vertical"
+            android:weightSum="5.5">
+            <TextView
+                style="@style/signUpEditTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:text="Payment Method"
+                android:textColor="#fff" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:weightSum="3"
+                android:orientation="vertical"
+                >
+            <EditText
+                style="@style/signUpEditTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="Edit Text 1"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+                android:maxLines="1"
+                android:singleLine="true" />
+                <EditText
+                    style="@style/signUpEditTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="Edit Text 2"
+                    android:layout_gravity="center"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+                <EditText
+                    style="@style/signUpEditTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:layout_gravity="center"
+                    android:hint="Edit Text 3"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </LinearLayout>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:orientation="horizontal"
+                android:weightSum="6">
+                <TextView
+                    style="@style/signUpEditTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
+                    android:text="Price"
+                    android:textColor="#fff" />
+
+                <EditText
+                    style="@style/signUpEditTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="@null"
+                    android:hint="Enter Price"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:orientation="horizontal"
+                android:weightSum="6">
+                <TextView
+                    style="@style/signUpEditTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
+                    android:text="Type"
+                    android:textColor="#fff" />
+
+                <EditText
+                    style="@style/signUpEditTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="@null"
+                    android:hint="Enter Type"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+
+
+
+        </LinearLayout>
+
+
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="80dp"
+            android:layout_weight="2"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_no_img_24dp"
+            android:layout_marginBottom="5dp"
+            />
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/add_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.7"
+                android:background="@drawable/button_payment_layout"
+                android:drawableRight="@drawable/ic_note_add_black_24dp"
+                android:text="Add Documents"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/profile_terms"
+            style="@style/signUpEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4.3"
+            android:hint="Enter your Description"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            app:met_baseColor="#ffffff"
+            app:met_primaryColor="#45a12e"
+            app:met_textColor="#fff" />
+
+
+
+
+
+
+
+
+            <Button
+                android:layout_marginTop="7dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="1.5"
+                android:layout_height="0dp"
+                android:text="          Submit          "
+                android:layout_gravity="center"
+                android:background="@drawable/layout_curve_btn_submit"
+                style="@style/bankDialogText"
+
+                />
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>

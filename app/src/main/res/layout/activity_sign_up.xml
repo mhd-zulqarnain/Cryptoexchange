@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="19.05"
-        android:id="@+id/mainlayout"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         >
