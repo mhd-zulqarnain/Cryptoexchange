@@ -133,9 +133,9 @@ interface RetrofiltService {
     fun orderPaid(@Body userOrderPay: UserOrderPay): Call<String>
 
     //I have paid
-    @POST("UserCancel_Order")
+    @POST("UserCancel_Order/{bitamount}")
     @Headers("Content-Type:application/json")
-    fun cancelOrder(@Body userCancelOrder: UserCancelOrder): Call<String>
+    fun cancelOrder(@Path("bitamount") bitamount: String,@Body userCancelOrder: UserCancelOrder): Call<String>
 
   @POST("Add_SupportTicket")
     @Headers("Content-Type:application/json")

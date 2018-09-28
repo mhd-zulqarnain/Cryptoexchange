@@ -24,6 +24,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.company.redcode.royalcryptoexchange.DrawerActivity
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.UserBankAdapater
 import com.company.redcode.royalcryptoexchange.models.*
@@ -66,7 +67,6 @@ class ProfileFragment : Fragment() {
     var cnic_: EditText? = null
     var phno: EditText? = null
     var pass_: EditText? = null
-    var repass_: EditText? = null
     var email_: EditText? = null;
     var btnupdate: Button? = null
     var docimage: LinearLayout? = null;
@@ -83,7 +83,9 @@ class ProfileFragment : Fragment() {
     var etmobilenumber: EditText? = null
     var etaccountnumber: EditText? = null
     var btnaddpayment: Button? = null
+    var btn_pass_change: Button? = null
 
+    var password: String = ""
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -102,28 +104,28 @@ class ProfileFragment : Fragment() {
         cnic_ = view!!.findViewById(R.id.profile_cnic)
         email_ = view!!.findViewById(R.id.profile_email)
         pass_ = view!!.findViewById(R.id.profile_pass)
-        repass_ = view!!.findViewById(R.id.profile_repass)
         btnupdate = view!!.findViewById(R.id.btnprofileupdate);
         profile_terms = view!!.findViewById(R.id.profile_terms);
         docimage = view!!.findViewById(R.id.docimage);
+        btn_pass_change = view!!.findViewById(R.id.btn_pass_change);
 
 
 //        profile_terms.performContextClick()
-    /*    profile_terms!!.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
+        /*    profile_terms!!.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(editable: Editable?) {
 
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (profile_terms!!.text.toString() == "") {
-                    var clean = Apputils.stringClean(profile_terms!!.text.toString())
-                    profile_terms!!.setText(clean)
                 }
-            }
-        })*/
+
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    if (profile_terms!!.text.toString() == "") {
+                        var clean = Apputils.stringClean(profile_terms!!.text.toString())
+                        profile_terms!!.setText(clean)
+                    }
+                }
+            })*/
 
 
         initView(view)
@@ -148,7 +150,8 @@ class ProfileFragment : Fragment() {
         lname!!.setText(obj.LastName);
         cnic_!!.setText(obj.CNIC);
         pass_!!.setText(obj.Password);
-        repass_!!.setText(obj.Password);
+        password = obj.Password!!
+
         email_!!.setText(obj.Email);
         phno!!.setText(obj.PhoneNum);
         docver = obj.DocumentVerification;
@@ -202,11 +205,15 @@ class ProfileFragment : Fragment() {
         btnupdate!!.setOnClickListener(View.OnClickListener {
             profileValidiation();
         })
+        btn_pass_change!!.setOnClickListener(View.OnClickListener {
+            showChangePasswordDialog();
+        })
 
     }
 
 
     fun addbank(acc_cnic: String, acctitle: String, banknumber: String, bankcode: String) {
+
         ApiClint?.getInstance()?.getService()?.add_paymentdetail(fuac_id!!, spinnervalue!!, acc_cnic!!, acctitle!!, banknumber!!, bankcode!!)?.enqueue(object : Callback<PaymentMethod> {
             override fun onFailure(call: Call<PaymentMethod>?, t: Throwable?) {
                 print("Error While Adding Bank Details" + t)
@@ -234,8 +241,8 @@ class ProfileFragment : Fragment() {
     fun profileValidiation() {
         var firstname: String = fname!!.text.toString();
         var lastname: String = lname!!.text.toString();
-        var password: String = pass_!!.text.toString();
-        var repass: String = repass_!!.text.toString();
+        var password: String = password
+//        var repass: String = repass_!!.text.toString();
         var terms: String = profile_terms!!.text.toString()
 //                    && password!="" && firstname!="" && lastname!=""
 
@@ -250,17 +257,17 @@ class ProfileFragment : Fragment() {
             lname!!.requestFocus()
             return
         }
-        if (pass_!!.text.toString() == "") {
-            pass_!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
-            pass_!!.requestFocus()
-            return
-        }
+        /* if (pass_!!.text.toString() == "") {
+             pass_!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+             pass_!!.requestFocus()
+             return
+         }*/
 
-        if (pass_!!.text.toString().trim { it <= ' ' }.length < 8) {
-            pass_!!.error = Html.fromHtml("<font color='black'>password is short must be greater then 8 digits</font>")
-            pass_!!.requestFocus()
-            return
-        }
+        /* if (pass_!!.text.toString().trim { it <= ' ' }.length < 8) {
+             pass_!!.error = Html.fromHtml("<font color='black'>password is short must be greater then 8 digits</font>")
+             pass_!!.requestFocus()
+             return
+         }*/
         if (fname!!.text.toString() == lname!!.text.toString()) {
             fname!!.error = Html.fromHtml("<font color='black'>Could not be same</font>")
             lname!!.error = Html.fromHtml("<font color='black'>Could not be same</font>")
@@ -268,13 +275,13 @@ class ProfileFragment : Fragment() {
             lname!!.requestFocus()
             return
         }
-        if (pass_!!.text.toString() != repass_!!.text.toString()) {
+        /*if (pass_!!.text.toString() != repass_!!.text.toString()) {
             pass_!!.error = Html.fromHtml("<font color='black'>Should be same</font>")
             repass_!!.error = Html.fromHtml("<font color='black'>Should be same</font>")
             pass_!!.requestFocus()
             repass_!!.requestFocus()
             return
-        }
+        }*/
         if (profile_terms!!.text.toString() == "") {
             terms = "Your Terms";
             //   profile_terms!!.setText(terms);
@@ -290,7 +297,9 @@ class ProfileFragment : Fragment() {
                     if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
                         var status = response.body()!!.message
                         Toast.makeText(activity!!, "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
+                        (activity as DrawerActivity).updateUserProfile()
                         //finish();
+                        activity!!.supportFragmentManager.popBackStack()
                     } else {
                         Toast.makeText(activity!!, "Error!! ", Toast.LENGTH_SHORT).show()
 
@@ -330,14 +339,53 @@ class ProfileFragment : Fragment() {
         dialog.show()
     }
 
+    private fun showChangePasswordDialog() {
+        val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dilalog_new_pass, null)
+        val alertBox = AlertDialog.Builder(activity!!)
+        alertBox.setView(view)
+        alertBox.setCancelable(true)
+        val dialog = alertBox.create()
+
+        val ed_old_pass: EditText = view.findViewById(R.id.ed_old_pass)
+        val ed_new_pass: EditText = view.findViewById(R.id.ed_new_pass)
+        val ed_confirm_pass: EditText = view.findViewById(R.id.ed_confirm_pass)
+        val btn_verify: Button = view.findViewById(R.id.btn_verify)
+
+        btn_verify.setOnClickListener {
+            if (ed_old_pass.text.toString() == password && ed_old_pass.text.toString().trim() != "") {
+                if (ed_new_pass.text.toString().trim() != "" && ed_confirm_pass.text.toString().trim() != "") {
+                    if (ed_new_pass.text.toString().trim() == ed_confirm_pass.text.toString().trim()) {
+                        if (ed_new_pass!!.text.toString().trim { it <= ' ' }.length < 8) {
+                            Apputils.showMsg(activity!!, "Password should be greater than 8")
+                        } else {
+                            password = ed_confirm_pass.text.toString()
+                            Apputils.showMsg(activity!!, "New password added please update")
+                            dialog.dismiss()
+                        }
+                    } else {
+                        Apputils.showMsg(activity!!, "Password not matched")
+
+                    }
+
+                } else {
+                    Apputils.showMsg(activity!!, "Fill all fields")
+                }
+
+            } else {
+                Apputils.showMsg(activity!!, "Old Password is wrong")
+            }
+        }
+        dialog.show()
+    }
+
     private fun showTradeDialog() {
+
+        list = ArrayList<PaymentMethod>()
 
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialog_new_bank, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
         alertBox.setView(view)
         val dialog = alertBox.create()
-
-
 
         etaccountnumber = view!!.findViewById(R.id.et_accountnumber)
         etbankcode = view!!.findViewById(R.id.et_bankcode)
@@ -346,10 +394,7 @@ class ProfileFragment : Fragment() {
         etcnic = view!!.findViewById(R.id.et_cnic)
         etmobilenumber = view!!.findViewById(R.id.et_mobilenumber)
         btnaddpayment = view!!.findViewById(R.id.btn_addpayment)
-
-
         btnaddpayment!!.setOnClickListener { view ->
-
 
             val account: String = etaccountnumber!!.text.toString();
             val title: String = etaccountttile!!.text.toString()
@@ -357,10 +402,6 @@ class ProfileFragment : Fragment() {
             val cnic: String = etcnic!!.text.toString()
             val mob: String = etmobilenumber!!.text.toString()
             val code: String = etbankcode!!.text.toString()
-
-
-
-
 
             if (spinnervalue == "Bank Transfer") {
                 var check: Boolean = validate(1);
@@ -408,13 +449,6 @@ class ProfileFragment : Fragment() {
             }
         })
 
-
-        //bank
-
-///         list.add(Bank("ahmed", "Bank Transfer"))
-        //      list.add(Bank("ahmed", "Bank Transfer"))
-        //    list.add(Bank("ahmed", "Bank Transfer"))
-        //  list.add(Bank("ahmed", "Bank Transfer"))
 
         ApiClint?.getInstance()?.getService()?.getPaymentDetailListByUid(fuac_id!!)?.enqueue(object : Callback<ArrayList<PaymentMethod>> {
             override fun onResponse(call: Call<ArrayList<PaymentMethod>>?, response: retrofit2.Response<ArrayList<PaymentMethod>>?) {
@@ -616,12 +650,12 @@ class ProfileFragment : Fragment() {
         val StrRequest = object : StringRequest(Request.Method.POST, URL,
                 Response.Listener { response ->
                     //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
-                    var imagename:String?=null;
-                    var status:String?=null;
+                    var imagename: String? = null;
+                    var status: String? = null;
                     try {
-                        var json : JSONObject = JSONObject(response);
-                        status= json.getString("Status");
-                        if(status == "OK") {
+                        var json: JSONObject = JSONObject(response);
+                        status = json.getString("Status");
+                        if (status == "OK") {
                             imagename = json.getString("Message");
 
 
@@ -639,31 +673,31 @@ class ProfileFragment : Fragment() {
                             })
 
 
-                    ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!, imagename!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
-                        override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
-                            //   println("error")
-                        }
-
-                        override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
-                            if (response != null) {
-                                var apiResponse = response.body()
-                                if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
-                                    var status = response.body()!!.message
-                                    // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
-                                    //finish();
-                                } else {
-                                    //         Toast.makeText(activity!!, "Error in Image uploading!! ", Toast.LENGTH_SHORT).show()
-
+                            ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!, imagename!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+                                override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                                    //   println("error")
                                 }
-                            }
-                        }
 
-                    });
-                } else if(status == "false")
-            imagename = "test";
-    }catch (e:Exception){
+                                override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+                                    if (response != null) {
+                                        var apiResponse = response.body()
+                                        if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
+                                            var status = response.body()!!.message
+                                            // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+                                            //finish();
+                                        } else {
+                                            //         Toast.makeText(activity!!, "Error in Image uploading!! ", Toast.LENGTH_SHORT).show()
 
-    }
+                                        }
+                                    }
+                                }
+
+                            });
+                        } else if (status == "false")
+                            imagename = "test";
+                    } catch (e: Exception) {
+
+                    }
 
                 }, Response.ErrorListener {
             Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
