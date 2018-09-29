@@ -15,6 +15,7 @@ import android.support.annotation.RequiresApi
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.Toolbar
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,7 @@ class DisputeActivity : AppCompatActivity() {
     private val REQUSET_GALLERY_CODE: Int = 44
     var progressBar: android.app.AlertDialog? = null
     private val MY_PERMISSIONS_REQUEST_CAMERA = 999
+    var toolbar: Toolbar? = null
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +60,7 @@ class DisputeActivity : AppCompatActivity() {
         var obj = intent.getStringExtra("order");
         activityType = intent.getStringExtra("activity");
         order = Gson().fromJson(obj, Order::class.java)
+        toolbar = findViewById(R.id.toolbar_top)
 
         val builder = AlertDialog.Builder(this@DisputeActivity)
         builder.setView(R.layout.layout_dialog_progress)
@@ -65,6 +68,9 @@ class DisputeActivity : AppCompatActivity() {
         progressBar = builder.create()
 
         initView()
+        btn_back.setOnClickListener {
+            finish()
+        }
 
     }
 
@@ -200,7 +206,7 @@ class DisputeActivity : AppCompatActivity() {
 
         } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
 //            Bitmap image = (Bitmap) data.getExtras().get("data");
-            var result: Uri = data!!.data
+            var result: Uri = data.data
 //            myImgJson = result
 
             val bitmap = MediaStore.Images.Media.getBitmap(this@DisputeActivity.getContentResolver(), result)
@@ -230,9 +236,6 @@ class DisputeActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-
-
-
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
 
         val StrRequest = object : StringRequest(Request.Method.POST, URL,
@@ -260,7 +263,7 @@ class DisputeActivity : AppCompatActivity() {
         }) {
             //@Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
-                val imageData = imageTostring(bitmap!!)
+                val imageData = imageTostring(bitmap)
                 val params = HashMap<String, String>()
                 //   params.put("image",imageData);
                 // params.put("string1","ali")
@@ -284,8 +287,6 @@ class DisputeActivity : AppCompatActivity() {
     }
 
 
-
-
     fun getPayementId(serviceListener: ServiceListener<String>) {
         progressBar!!.show()
         ApiClint.getInstance()?.getService()?.getUserPaymentId(order.FUT_Id!!)!!.enqueue(object : Callback<String> {
@@ -298,7 +299,7 @@ class DisputeActivity : AppCompatActivity() {
             override fun onResponse(call: Call<String>?, response: retrofit2.Response<String>?) {
                 progressBar!!.dismiss()
                 if (response != null) {
-                    if (response!!.body() != "0") {
+                    if (response.body() != "0") {
                         serviceListener.success(response.body()!!)
                     }
                 }
@@ -320,7 +321,7 @@ class DisputeActivity : AppCompatActivity() {
                     var orderTerms = response.body()!!
 
                     if (orderTerms.PaymentMethod!!.Type == "Bank")
-                        tv_payment.text = "Type: " + orderTerms.PaymentMethod!!.Type + "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
+                        tv_payment.text = "Type: " + orderTerms.PaymentMethod!!.Type + "\nCode:" + orderTerms.PaymentMethod!!.BankCode
                     else {
                         tv_payment.setText("Type: " + orderTerms.PaymentMethod!!.Type + "\n Number:" + orderTerms.PaymentMethod!!.BankName)
                     }
@@ -360,6 +361,7 @@ class DisputeActivity : AppCompatActivity() {
 
         userOrderDispute.FUAC_Id = order.FUAC_Id
         userOrderDispute.FUT_Id = order.FUT_Id
+        userOrderDispute.FORD_Id = order.ORD_Id
         userOrderDispute.Image = image
         userOrderDispute.Message = ed_dispute_msg.text.toString()
         userOrderDispute.UOD_Id = "0"
@@ -401,6 +403,7 @@ class DisputeActivity : AppCompatActivity() {
         userOrderPay.FUT_Id = order.FUT_Id
         userOrderPay.Image = image
         userOrderPay.UserId = order.User_Id
+        userOrderPay.FORD_Id = order.ORD_Id
 
         progressBar!!.show()
         ApiClint.getInstance()?.getService()?.orderPaid(userOrderPay)!!.enqueue(object : Callback<String> {
@@ -435,7 +438,7 @@ class DisputeActivity : AppCompatActivity() {
         userCancelOrder.FTrade_UserId = order.User_Id
 
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.cancelOrder(userCancelOrder)!!.enqueue(object : Callback<String> {
+        ApiClint.getInstance()?.getService()?.cancelOrder(order.BitAmount!!,userCancelOrder)!!.enqueue(object : Callback<String> {
             override fun onFailure(call: Call<String>?, t: Throwable?) {
                 print("error " + t)
                 progressBar!!.dismiss()

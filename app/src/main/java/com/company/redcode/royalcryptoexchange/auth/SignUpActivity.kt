@@ -134,7 +134,7 @@ class SignUpActivity : AppCompatActivity() {
                 Email = ed_email.text.toString(),
                 FirstName = ed_first_name.text.toString(), IsActive = "false",
                 IsPhoneNumActive = "false", LastName = ed_last_name.text.toString(), LoginDate = "null", LogoutDate = "null", Password = ed_pasword.text.toString(),
-                PhoneNum = ed_mobile_number.text.toString(), Terms = "null", UAC_Id = "null", UserId = "null")
+                PhoneNum = "+92"+ed_mobile_number.text.toString(), Terms = "null", UAC_Id = "null", UserId = "null")
         progressDialog?.show()
 
         ApiClint.getInstance()?.getService()?.signUpUser(user.FirstName!!, user.LastName!!, email = user.Email!!,
