@@ -111,7 +111,7 @@ class OrderDetailActivity : AppCompatActivity() {
                     orderTerms = response.body()!!
 
                     if (orderTerms.PaymentMethod!!.Type == "Bank")
-                        tv_terms.text = "Type: " + orderTerms.PaymentMethod!!.Type + "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
+                        tv_terms.text = "Type: " + orderTerms.PaymentMethod!!.Type + "\nCode:" + orderTerms.PaymentMethod!!.BankCode
                     else {
                         tv_terms.setText("Type: " + orderTerms.PaymentMethod!!.Type + "\n Number:" + orderTerms.PaymentMethod!!.BankName)
                     }
@@ -134,9 +134,11 @@ class OrderDetailActivity : AppCompatActivity() {
 
         dealer_name.setText(order.User_Id)
         btc_amount.setText(order.BitAmount)
-        price_tv.setText(order.Price + "PKR")
+        price_tv.setText(order.BitPrice + "PKR")
         if (order.Status == "dispute") {
             timer_tv.text ="Disputed Order"
+        }else if (order.Status == "cancelled") {
+            timer_tv.text ="Order Cancelled"
         } else {
             if (currentTime > deadline!!) {
                 timer_tv.setText("Expired")
@@ -253,10 +255,13 @@ class OrderDetailActivity : AppCompatActivity() {
         })
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             setResult(Activity.RESULT_OK)
             finish()
         }
     }
+
+
 }

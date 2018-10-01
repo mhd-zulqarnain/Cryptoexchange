@@ -38,6 +38,7 @@ import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.example.admin.camerawork.CameraActivity
 import com.google.gson.Gson
 import com.rengwuxian.materialedittext.MaterialEditText
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import java.io.ByteArrayOutputStream
@@ -115,6 +116,10 @@ class SupportFragment : Fragment() {
         if (image == "") {
             Toast.makeText(activity!!, "Please Upload Image", Toast.LENGTH_SHORT).show()
             return
+        }
+        if(image=="test"){
+            Toast.makeText(activity!!,"Error in Image uploading",Toast.LENGTH_SHORT).show()
+            return;
         }
 
 
@@ -241,15 +246,7 @@ class SupportFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun userdoc(fuac: String, doc: String, serviceListener: ServiceListener<String>) {
-        ApiClint.getInstance()?.getService()?.add_userdoc(fuac, doc)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
-            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {}
 
-            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
-                serviceListener.success("success")
-            }
-        })
-    }
 
 
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
@@ -258,7 +255,17 @@ class SupportFragment : Fragment() {
                 com.android.volley.Response.Listener { response ->
                     //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
                     //          imagename!!.add(response)
-                    image = response;
+                    try {
+                        var json : JSONObject = JSONObject(response);
+                        var status = json.get("Status");
+                        if(status == "OK")
+                            image = json.getString("Message");
+                        else if(status == "false")
+                            image = "test";
+
+                    }catch (e:Exception){
+
+                    }
                 Toast.makeText(activity!!, image, Toast.LENGTH_SHORT).show()
             progressBar!!.dismiss()
 

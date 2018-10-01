@@ -179,9 +179,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:singleLine="true"
-                android:textColorHint="#AFABAB"
-                />
+                android:singleLine="true" />
 
         </LinearLayout>
 
@@ -255,9 +253,8 @@
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:singleLine="true"
-                android:textColorHint="#AFABAB"
-                />
+                android:enabled="false"
+                android:singleLine="true" />
 
 
         </LinearLayout>
@@ -273,12 +270,15 @@
             android:orientation="horizontal"
             android:weightSum="6">
 
-            <TextView
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.7"
-                android:text="Retype"
+            <Button
+                android:id="@+id/btn_pass_change"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:padding="5dp"
+                android:text="Change password "
+                android:background="#d95050"
+                android:textSize="12sp"
+                android:drawableRight="@drawable/ic_vpn_key_black_24dp"
                 android:textColor="#fff" />
 
             <EditText
@@ -436,7 +436,7 @@
             android:textColor="#fff" />
 
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/profile_terms"
             style="@style/signUpEditTextStyle"
             android:layout_width="match_parent"

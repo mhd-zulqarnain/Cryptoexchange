@@ -9,7 +9,6 @@ import java.util.*
 import java.util.Arrays.asList
 
 
-
 class Apputils {
     companion object {
         fun showMsg(ctx: Activity, msg: String) {
@@ -43,14 +42,21 @@ class Apputils {
             return null
         }
 
-        fun stringContainsItemFromList(inputStr: String, items: Array<String>): Boolean {
+        fun stringClean(inputStr: String): String {
+//            val items = arrayOf("Hello", "World")
+//            val input = "Hello world my # is 123 mail me @ test@test.com  03368625703"
+            val EMAIL_PATTERN = "([^.@\\s]+)(\\.[^.@\\s]+)*@([^.@\\s]+\\.)+([^.@\\s]+)"
 
-            for (i in items.indices) {
-                if (inputStr.contains(items[i])) {
+            val output = inputStr.replace(EMAIL_PATTERN.toRegex(), "") // Replace emails by an empty string
+
+                    .replace("(?:[0-9] ?){11,11}".toRegex(), "") // Replace any digit by an empty string
+
+           /* for (i in items.indices) {
+                if (output.contains(items[i])) {
                     return true
                 }
-            }
-            return false
+            }*/
+            return output
         }
     }
 }
