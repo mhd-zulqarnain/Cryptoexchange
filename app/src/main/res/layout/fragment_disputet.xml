@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/color_gradient_profile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="7"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_weight="0.5"
+            android:layout_gravity="clip_vertical"
+            android:layout_height="wrap_content"
+            android:text="Dispute"
+            android:textSize="28sp"
+            android:fontFamily="@font/oswald_regular"
+            />
+
+
+
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            app:met_baseColor="#ffffff"
+            app:met_primaryColor="#45a12e"
+            app:met_errorColor="#ba020e"
+            app:met_textColor="#fff"
+
+            app:met_minCharacters="1"
+            app:met_maxCharacters="200"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:layout_height="0dp"
+            android:hint="Message"/>
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:src="@drawable/ic_no_img_24dp"
+            />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    ></LinearLayout>
+
+
+
+
+            <Button
+                android:id="@+id/wallet_ok"
+                android:layout_width="wrap_content"
+                android:layout_weight="0.7"
+                android:layout_height="0dp"
+                android:text="          Submit          "
+                android:layout_gravity="center"
+                android:background="@drawable/layout_curve_btn_submit"
+                style="@style/bankDialogText"
+
+                />
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
