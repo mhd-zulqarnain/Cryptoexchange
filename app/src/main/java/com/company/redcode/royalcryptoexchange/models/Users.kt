@@ -17,4 +17,5 @@ data class Users(var CNIC: String? = null,
                  var Terms: String? = null,
                  var UAC_Id: String? = null,
                  var UserId: String? = null
+
 )

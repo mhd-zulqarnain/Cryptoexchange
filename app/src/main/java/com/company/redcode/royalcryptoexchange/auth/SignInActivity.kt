@@ -15,6 +15,7 @@ import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Response
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.*
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,7 +65,9 @@ class SignInActivity : AppCompatActivity() {
             return
         }
         progressDialog?.show()
-        ApiClint.getInstance()?.getService()?.signIn(ed_email!!.text.toString(), ed_password!!.text.toString())
+        var token = FirebaseInstanceId.getInstance().getToken()
+       var fcm = Response("",token.toString())
+        ApiClint.getInstance()?.getService()?.signIn(ed_email!!.text.toString(), ed_password!!.text.toString(),fcm)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         Apputils.showMsg(this@SignInActivity, "failed")

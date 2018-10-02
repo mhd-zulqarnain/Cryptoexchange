@@ -9,7 +9,10 @@ interface RetrofiltService {
 
     @POST("Add_UserAccount/{fname}/{lastName}/{email}/{mobile}/{password}/{cnic}/{dob}")
     @Headers("Content-Type:application/json")
-    fun signUpUser(@Path("fname") fname: String, @Path("lastName") lastName: String, @Path("email") email: String, @Path("mobile") mobile: String, @Path("password") password: String, @Path("cnic") cnic: String, @Path("dob") dob: String): Call<Response>
+    fun signUpUser(@Path("fname") fname: String, @Path("lastName") lastName: String,
+                   @Path("email") email: String, @Path("mobile") mobile: String,
+                   @Path("password") password: String, @Path("cnic") cnic: String,
+                   @Path("dob") dob: String,@Body response: Response): Call<Response>
 
     @POST("VerifyEmail/{userId}/{code}")
     @Headers("Content-Type:application/json")
@@ -17,7 +20,7 @@ interface RetrofiltService {
 
     @POST("Login/{userEmail}/{password}")
     @Headers("Content-Type:application/json")
-    fun signIn(@Path("userEmail") userEmail: String, @Path("password") password: String): Call<Response>
+    fun signIn(@Path("userEmail") userEmail: String, @Path("password") password: String, @Body response: Response): Call<Response>
 
     @POST("forgot_pass/{userEmail}")
     @Headers("Content-Type:application/json")

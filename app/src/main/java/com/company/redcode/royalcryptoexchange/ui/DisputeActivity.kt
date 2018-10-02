@@ -27,10 +27,7 @@ import com.android.volley.toolbox.Volley
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.*
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
-import com.company.redcode.royalcryptoexchange.utils.Apputils
-import com.company.redcode.royalcryptoexchange.utils.Constants
-import com.company.redcode.royalcryptoexchange.utils.ServiceError
-import com.company.redcode.royalcryptoexchange.utils.ServiceListener
+import com.company.redcode.royalcryptoexchange.utils.*
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_dispute.*
@@ -434,7 +431,7 @@ class DisputeActivity : AppCompatActivity() {
 
         userCancelOrder.FORD_Id = order.ORD_Id
         userCancelOrder.FUT_Id = order.FUT_Id
-        userCancelOrder.FUserId = order.ORD_UserId
+        userCancelOrder.FUserId = SharedPref.getInstance()!!.getProfilePref(this@DisputeActivity).UAC_Id
         userCancelOrder.FTrade_UserId = order.User_Id
 
         progressBar!!.show()

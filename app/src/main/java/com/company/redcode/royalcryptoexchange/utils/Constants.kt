@@ -8,7 +8,8 @@ class Constants{
         const val BTC_PKR_RATE = 0.0000011
         const val TRADE_LIMIT_AMOUNT = 5000
         const val IMAGE_URL = "http://royalcryptoexchange.com/upload.php"
-            const val IMAGE_URLold = "http://wpassignment123.000webhostapp.com/upload.php"
+//            const val IMAGE_URLold = "http://wpassignment123.000webhostapp.com/upload.php"
+            const val IMAGE_URLold = "http://www.redcodetechnologies.com/upload.php"
         const val ProfilePath = "UserDocument/"
         const val SupportPath = "SupportDocument/"
         const val DisputePath = "UserDisputeDocument/"
