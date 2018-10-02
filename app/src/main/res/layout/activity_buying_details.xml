@@ -1,26 +1,37 @@
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/color_gradient_profile"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="18dp"
     android:orientation="vertical">
 
+
+
+
+
     <TextView
         android:id="@+id/tv_title_trade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/oswald_regular"
         android:text="Buying trade details "
-        android:textSize="35dp" />
+        android:textSize="28dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:orientation="horizontal"
-        android:weightSum="3">
+        android:weightSum="3"
+        android:layout_marginTop="10dp"
+        >
 
         <TextView
             style="@style/buyActivityText"
@@ -167,7 +178,7 @@
             android:gravity="center"
             android:hint="Ecurrrency"
             android:inputType="numberDecimal"
-            android:textColor="#DDAAAAAA"
+            android:textColor="#dd000000"
             android:textColorHint="#DDAAAAAA"
             android:textSize="15dp" />
 
@@ -182,7 +193,7 @@
             android:gravity="center"
             android:hint="Price"
             android:inputType="number"
-            android:textColor="#DDAAAAAA"
+            android:textColor="#dd000000"
             android:maxLength="10"
             android:textColorHint="#DDAAAAAA"
             android:textSize="15dp" />
@@ -195,8 +206,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginLeft="15dp"
-        android:background="@drawable/layout_curve_btn_paid"
-        android:text="Trade"
+        android:background="@drawable/layout_curve_btn_submit"
+        android:text="T r a d e"
+        android:fontFamily="@font/oswald_semibold"
         android:textColor="@color/backgoundTheme" />
+</LinearLayout>
 </LinearLayout>

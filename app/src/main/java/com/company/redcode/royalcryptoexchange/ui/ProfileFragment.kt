@@ -297,7 +297,7 @@ class ProfileFragment : Fragment() {
                     if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
                         var status = response.body()!!.message
                         Toast.makeText(activity!!, "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
-                        (activity as DrawerActivity).updateUserProfile()
+                     //   (activity as DrawerActivity).updateUserProfile()
                         //finish();
                         activity!!.supportFragmentManager.popBackStack()
                     } else {

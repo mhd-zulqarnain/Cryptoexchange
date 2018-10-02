@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -51,24 +54,29 @@ class SignUpActivity : AppCompatActivity() {
         }
         ed_cnic.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
-//                val length = editable?.length
-//                if (prevL < length!! && (length == 5 || length == 13)) {
-//                    editable?.append("-")
-//                }
+
                 if (editable!!.length == 5 || editable.length == 13) {
                     editable.append('-');
                 }
+
+
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                /*if (ed_cnic.text.toString().length == 5 || ed_cnic.text.toString().length == 13) {
-                    //ed_cnic.text = ed_cnic.text.append('-');
-                }*/
+
+
             }
         })
+
+
+
+
+
+
     }
 
     fun signUp(v: View) {
