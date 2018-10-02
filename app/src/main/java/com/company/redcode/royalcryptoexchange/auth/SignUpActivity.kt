@@ -151,7 +151,7 @@ class SignUpActivity : AppCompatActivity() {
                 mobile = user.PhoneNum!!, password = ed_pasword.text.toString(), cnic = user.CNIC!!, dob = user.DateOfBirth!!, response = fcm)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
-                        Apputils.showMsg(this@SignUpActivity, "failed")
+                        Apputils.showMsg(this@SignUpActivity, " Try later server error")
                         println("response " + t)
                         progressDialog?.dismiss()
                     }

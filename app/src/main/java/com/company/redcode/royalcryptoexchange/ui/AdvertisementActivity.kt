@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
@@ -34,11 +35,18 @@ class AdvertisementActivity : AppCompatActivity() {
     var orderType: String = "Buy"
     var progressBar: AlertDialog? = null
     var paymentId = "null"
+    var toolbar: Toolbar? = null
+
     var sharedPref = SharedPref.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_advertisement)
+        toolbar = findViewById(R.id.toolbar_top)
+
         initView()
+        btn_back.setOnClickListener {
+            finish()
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -219,12 +227,14 @@ class AdvertisementActivity : AppCompatActivity() {
             }
         })
 
+        progressBar!!.show()
 
         val userId = sharedPref!!.getProfilePref(this@AdvertisementActivity).UAC_Id
         ApiClint.getInstance()?.getService()?.getPaymentDetailListByUid(userId!!)!!.enqueue(object : Callback<ArrayList<PaymentMethod>> {
             override fun onFailure(call: Call<ArrayList<PaymentMethod>>?, t: Throwable?) {
                 println("error")
                 Apputils.showMsg(this@AdvertisementActivity, "network error")
+                progressBar!!.dismiss()
             }
 
             override fun onResponse(call: Call<ArrayList<PaymentMethod>>?, response: Response<ArrayList<PaymentMethod>>?) {
@@ -240,6 +250,8 @@ class AdvertisementActivity : AppCompatActivity() {
                             mypaymentList.add(it)
                             adpater.notifyDataSetChanged()
                         }
+                        progressBar!!.dismiss()
+
                     }
                 }
 

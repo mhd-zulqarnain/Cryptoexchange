@@ -46,7 +46,7 @@ import java.util.HashMap
 
 
 class SupportFragment : Fragment() {
-    var URL = Constants.IMAGE_URLold;
+    var URL = Constants.IMAGE_URL;
     private val CAMERA_INTENT = 555
     private val REQUSET_GALLERY_CODE: Int = 44
     var progressBar: android.app.AlertDialog? = null

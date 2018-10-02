@@ -46,24 +46,26 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         supportFragmentManager.beginTransaction().add(R.id.relativeLayout, HomeFragment()).commit();
         nav_view.setNavigationItemSelectedListener(this)
         userId = intent.getStringExtra(USER_KEY)
-        //updateUserProfile()
+        updateUserProfile()
 
     }
 
-//    fun updateUserProfile(){
-//        getuserData(userId, object : ServiceListener<Users> {
-//            override fun success(obj: Users) {
-//                mPref!!.setProfilePref(this@DrawerActivity, obj)
-//            }
-//
-//            override fun fail(error: ServiceError) {}
-//        })
-//    }
+    fun updateUserProfile(){
+        getuserData(userId, object : ServiceListener<Users> {
+            override fun success(obj: Users) {
+                mPref!!.setProfilePref(this@DrawerActivity, obj)
+            }
+
+            override fun fail(error: ServiceError) {}
+        })
+    }
     private fun getuserData(userId: String?, serviceListener: ServiceListener<Users>) {
         ApiClint.getInstance()?.getService()?.getUserById(userId!!)!!.enqueue(object : Callback<Users> {
             override fun onFailure(call: Call<Users>?, t: Throwable?) {
-                Toast.makeText(this@DrawerActivity, "Shared prefrence error", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(this@DrawerActivity, "Network error ", Toast.LENGTH_SHORT).show()
+                mPref!!.clearProfilePref(this@DrawerActivity)
+                startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
+                finish()
             }
 
             override fun onResponse(call: Call<Users>?, response: retrofit2.Response<Users>?) {

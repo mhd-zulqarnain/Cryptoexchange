@@ -12,15 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".auth.SignUpActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            />
+            android:theme="@style/BuyTheme"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
 
         <activity
             android:screenOrientation="portrait"
@@ -29,89 +28,69 @@
             android:focusableInTouchMode="true"
             android:theme="@style/BuyTheme"
             android:windowSoftInputMode="adjustPan">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <activity
             android:name=".ui.PlaceOrderActivity"
             android:label="Buy activity"
-            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".OrderDetailActivity"
-            android:screenOrientation="portrait"
-            />
-
+            android:theme="@style/AppTheme" />
+        <activity android:name=".OrderDetailActivity" />
         <activity
             android:name=".ui.ProfileActivity"
             android:focusable="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"
             />
-
         <activity
             android:name=".DrawerActivity"
-            android:theme="@style/BuyTheme"
-            android:screenOrientation="portrait">
-
-
-
-        </activity>
-
-
-        <activity android:name=".ui.DisputeActivity"
-            android:screenOrientation="portrait"
-            />
-
+            android:theme="@style/BuyTheme"></activity>
+        <activity android:name=".ui.DisputeActivity"></activity>
         <activity
             android:name="com.example.admin.camerawork.CameraActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             />
-
         <activity
             android:name=".ui.BuyActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            />
-
+            android:theme="@style/BuyTheme"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.SellActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-
-            />
-
+            android:theme="@style/BuyTheme"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.AdvertisementActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:theme="@style/BuyTheme"
             android:screenOrientation="portrait"
-            />
+            android:theme="@style/BuyTheme" />
+        <activity android:name=".SplashActivity"/>
 
-        <activity android:name=".SplashActivity"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".ui.AdvertismentDetailActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity android:name=".ui.AdvertismentDetailActivity"></activity>
         <!--Release payment activity-->
-    </application>
 
+        <service android:name=".service.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".service.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
 </manifest>

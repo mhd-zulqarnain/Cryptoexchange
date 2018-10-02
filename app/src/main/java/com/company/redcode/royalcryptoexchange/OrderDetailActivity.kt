@@ -2,6 +2,7 @@ package com.company.redcode.royalcryptoexchange
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -9,16 +10,15 @@ import android.os.CountDownTimer
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.AttributeSet
 import android.view.View
+import com.company.redcode.royalcryptoexchange.auth.SignInActivity
 import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.OrderTerms
 import com.company.redcode.royalcryptoexchange.models.Response
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.ui.DisputeActivity
-import com.company.redcode.royalcryptoexchange.utils.Apputils
-import com.company.redcode.royalcryptoexchange.utils.Constants
-import com.company.redcode.royalcryptoexchange.utils.ServiceError
-import com.company.redcode.royalcryptoexchange.utils.ServiceListener
+import com.company.redcode.royalcryptoexchange.utils.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_trade_confirm.*
 import retrofit2.Call
@@ -34,21 +34,79 @@ class OrderDetailActivity : AppCompatActivity() {
     var progressBar: AlertDialog? = null
     var orderTerms: OrderTerms = OrderTerms()
     var toolbar: Toolbar? = null
+    private var pref: SharedPref = SharedPref.getInstance()!!
+
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trade_confirm)
         toolbar = findViewById(R.id.toolbar_top)
-        var orderObj = intent.getStringExtra("order")
-        order = Gson().fromJson(orderObj, Order::class.java)
-
-        initView()
+        var orderObj = ""
 
         val builder = AlertDialog.Builder(this@OrderDetailActivity)
         builder.setView(R.layout.layout_dialog_progress)
         builder.setCancelable(false)
         progressBar = builder.create()
+
+        var intentType = intent.getStringExtra("type")
+        if (intentType == "activity") {
+            orderObj = intent.getStringExtra("order")
+            order = Gson().fromJson(orderObj, Order::class.java)
+            initView()
+        } else if(intentType == "service"){
+            var orderId:String = intent.getStringExtra("orderId")
+            var request:String = intent.getStringExtra("request")
+            var userId = pref.getProfilePref(this@OrderDetailActivity).UAC_Id
+            if (userId == null) {
+                val intent = Intent(this@OrderDetailActivity, SignInActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+            getOrder(orderId,object :ServiceListener<Order>{
+                override fun success(obj: Order) {
+                    order =obj
+                    initView()
+
+                }
+                override fun fail(error: ServiceError) {
+                }
+
+            })}
+        }
+
+
+    }
+
+    fun getTerm(pid: String) {
+        progressBar!!.show()
+        var ownerId = order.User_Id.toString().substring(2)
+        ApiClint.getInstance()?.getService()?.gettermAndPayment(ownerId, pid)?.enqueue(object : Callback<OrderTerms> {
+            override fun onFailure(call: Call<OrderTerms>?, t: Throwable?) {
+                progressBar!!.dismiss()
+            }
+
+            override fun onResponse(call: Call<OrderTerms>?, response: retrofit2.Response<OrderTerms>?) {
+                progressBar!!.dismiss()
+                if (response != null) {
+                    orderTerms = response.body()!!
+
+                    if (orderTerms.PaymentMethod!!.Type == "Bank")
+                        tv_terms.text = "Type: " + orderTerms.PaymentMethod!!.Type + "\nCode:" + orderTerms.PaymentMethod!!.BankCode
+                    else {
+                        tv_terms.setText("Type: " + orderTerms.PaymentMethod!!.Type + "\n Number:" + orderTerms.PaymentMethod!!.BankName)
+                    }
+
+                }
+            }
+        })
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun initView() {
+
+
 
 
         if (order.Status == Constants.STATUS_CANCEL) {
@@ -95,34 +153,7 @@ class OrderDetailActivity : AppCompatActivity() {
             override fun fail(error: ServiceError) {}
         })
 
-    }
 
-    fun getTerm(pid: String) {
-        progressBar!!.show()
-        var ownerId = order.User_Id.toString().substring(2)
-        ApiClint.getInstance()?.getService()?.gettermAndPayment(ownerId, pid)?.enqueue(object : Callback<OrderTerms> {
-            override fun onFailure(call: Call<OrderTerms>?, t: Throwable?) {
-                progressBar!!.dismiss()
-            }
-
-            override fun onResponse(call: Call<OrderTerms>?, response: retrofit2.Response<OrderTerms>?) {
-                progressBar!!.dismiss()
-                if (response != null) {
-                    orderTerms = response.body()!!
-
-                    if (orderTerms.PaymentMethod!!.Type == "Bank")
-                        tv_terms.text = "Type: " + orderTerms.PaymentMethod!!.Type + "\nCode:" + orderTerms.PaymentMethod!!.BankCode
-                    else {
-                        tv_terms.setText("Type: " + orderTerms.PaymentMethod!!.Type + "\n Number:" + orderTerms.PaymentMethod!!.BankName)
-                    }
-
-                }
-            }
-        })
-
-    }
-
-    private fun initView() {
         var deadline = Apputils.getTimeStamp(order.Expire.toString())?.toLong();
         val publishedDate = Apputils.getTimeStamp(order.Order_Date.toString())?.toLong();
         println("current deadline " + deadline)
@@ -136,9 +167,9 @@ class OrderDetailActivity : AppCompatActivity() {
         btc_amount.setText(order.BitAmount)
         price_tv.setText(order.BitPrice + "PKR")
         if (order.Status == "dispute") {
-            timer_tv.text ="Disputed Order"
-        }else if (order.Status == "cancelled") {
-            timer_tv.text ="Order Cancelled"
+            timer_tv.text = "Disputed Order"
+        } else if (order.Status == "cancelled") {
+            timer_tv.text = "Order Cancelled"
         } else {
             if (currentTime > deadline!!) {
                 timer_tv.setText("Expired")
@@ -254,7 +285,35 @@ class OrderDetailActivity : AppCompatActivity() {
             }
         })
     }
+    fun getOrder(order_id: String,serviceListener: ServiceListener<Order>) {
+        progressBar!!.show()
+        ApiClint.getInstance()?.getService()?.getSingleOrderById(order_id!!)!!.enqueue(object : Callback<Order>{
+            override fun onFailure(call: Call<Order>?, t: Throwable?) {
+                println("ERROR")
+                progressBar!!.dismiss()
+                serviceListener.fail(ServiceError("failed"))
+                Apputils.showMsg(this@OrderDetailActivity, "Network error")
+            }
 
+            override fun onResponse(call: Call<Order>?, response: retrofit2.Response<Order>?) {
+                progressBar!!.dismiss()
+                if (response != null) {
+                    var order :Order= response.body()!!
+                    if (order.Status!="") {
+                        serviceListener.success(order)
+                        progressBar!!.dismiss()
+
+                    }
+
+                }else{
+                    Apputils.showMsg(this@OrderDetailActivity, "Order not found")
+
+                }
+                progressBar!!.dismiss()
+
+            }
+        })
+}
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {

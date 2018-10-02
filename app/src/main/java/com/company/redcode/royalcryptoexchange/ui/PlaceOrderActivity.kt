@@ -166,18 +166,22 @@ class PlaceOrderActivity : AppCompatActivity() {
             }
         }
         if (isTermAccept) {
-
+            progressBar!!.show()
             addOrder(serviceListener = object : ServiceListener<String> {
                 override fun success(obj: String) {
                     Apputils.showMsg(this@PlaceOrderActivity, obj)
                     val intent = Intent(this@PlaceOrderActivity, OrderDetailActivity::class.java)
                     var obj = Gson().toJson(order)
                     intent.putExtra("order", obj)
+                    progressBar!!.dismiss()
+
                     startActivity(intent)
                     finish()
                 }
 
                 override fun fail(error: ServiceError) {
+                    progressBar!!.dismiss()
+
                     Apputils.showMsg(this@PlaceOrderActivity, "Fail to add new order")
                 }
             })
