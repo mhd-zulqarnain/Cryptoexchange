@@ -23,6 +23,8 @@ import kotlinx.android.synthetic.main.app_bar_drawer.*
 import retrofit2.Call
 import retrofit2.Callback
 import android.support.v4.widget.DrawerLayout
+import com.company.redcode.royalcryptoexchange.service.MyFirebaseMessagingService
+import com.google.firebase.iid.FirebaseInstanceId
 
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -47,7 +49,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         nav_view.setNavigationItemSelectedListener(this)
         userId = intent.getStringExtra(USER_KEY)
         updateUserProfile()
-
+        var fcm = FirebaseInstanceId.getInstance().getToken()
+        println(fcm)
     }
 
     fun updateUserProfile(){

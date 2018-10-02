@@ -23,6 +23,7 @@ import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.company.redcode.royalcryptoexchange.utils.ServiceError
 import com.company.redcode.royalcryptoexchange.utils.ServiceListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -128,17 +129,19 @@ class SignUpActivity : AppCompatActivity() {
         val date = Date()
         var dateCreated = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(date)
 
+        var token = FirebaseInstanceId.getInstance().getToken()
 
+        var fcm = Response("",token.toString())
         var user = Users(CNIC = ed_cnic.text.toString(), CreatedDate = "null",
                 DateOfBirth = ed_dob.text.toString(), DocumentVerification = "Un-Verified",
                 Email = ed_email.text.toString(),
                 FirstName = ed_first_name.text.toString(), IsActive = "false",
                 IsPhoneNumActive = "false", LastName = ed_last_name.text.toString(), LoginDate = "null", LogoutDate = "null", Password = ed_pasword.text.toString(),
-                PhoneNum = "+92"+ed_mobile_number.text.toString(), Terms = "null", UAC_Id = "null", UserId = "null")
+                PhoneNum = "92"+ed_mobile_number.text.toString(), Terms = "null", UAC_Id = "null", UserId = "null")
         progressDialog?.show()
 
         ApiClint.getInstance()?.getService()?.signUpUser(user.FirstName!!, user.LastName!!, email = user.Email!!,
-                mobile = user.PhoneNum!!, password = ed_pasword.text.toString(), cnic = user.CNIC!!, dob = user.DateOfBirth!!)
+                mobile = user.PhoneNum!!, password = ed_pasword.text.toString(), cnic = user.CNIC!!, dob = user.DateOfBirth!!, response = fcm)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         Apputils.showMsg(this@SignUpActivity, "failed")
