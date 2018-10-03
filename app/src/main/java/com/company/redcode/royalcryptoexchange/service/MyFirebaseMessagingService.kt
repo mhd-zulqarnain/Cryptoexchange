@@ -26,38 +26,61 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         if (remoteMessage!!.data.size > 0) {
             type = "json"
-            sendNotification(remoteMessage.data.toString())
         }
         if (remoteMessage.notification != null) {
-            type = "messege"
-            sendNotification(remoteMessage.notification.body!!)
+           var  messege = remoteMessage.notification.body
+//            sendNotification(remoteMessage.notification.body!!)
+
+            var data =  remoteMessage.notification.title!!.split(",")
+            val intent = Intent(this@MyFirebaseMessagingService, OrderDetailActivity::class.java)
+
+            intent.putExtra("type", "service")
+            intent.putExtra("orderId", data[1])
+            intent.putExtra("request", data[0])
+
+
+//        val intent = Intent(this, DrawerActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+            val channelId = "Default"
+            val builder = NotificationCompat.Builder(this, channelId)
+                    .setSmallIcon(R.mipmap.ic_launcher_logo)
+                    .setContentTitle("RoyalCrypto")
+                    .setContentText( messege).setAutoCancel(true).setContentIntent(pendingIntent)
+            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT)
+                manager.createNotificationChannel(channel)
+            }
+            manager.notify(0, builder.build())
+
         }
     }
 
-    private fun sendNotification(messegeBody: String) {
+ /*   private fun sendNotification(messegeBody: String) {
         var id = ""
         var messege = ""
-        var title = ""
-        if (type.equals("json")) {
+        var type =messegeBody.notification.body
+       *//* if (type.equals("json")) {
             try {
                 val jsonObject = JSONObject(messegeBody)
-                id = jsonObject.getString("id")
-                messege = jsonObject.getString("messege")
-                title = jsonObject.getString("type")
+                id = jsonObject.getString("title")
+                messege = jsonObject.getString("body")
+                title = jsonObject.getString("intent")
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
 
         } else if (type.equals("messege")) {
             messege = messegeBody
-        }
+        }*//*
 
-     /*   val intent = Intent(this@MyFirebaseMessagingService, DrawerActivity::class.java)
+     *//*   val intent = Intent(this@MyFirebaseMessagingService, DrawerActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, 0 *//* Request code *//*, intent,
-                PendingIntent.FLAG_ONE_SHOT)*/
+        val pendingIntent = PendingIntent.getActivity(this, 0 *//**//* Request code *//**//*, intent,
+                PendingIntent.FLAG_ONE_SHOT)*//*
 
-     /*   val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+     *//*   val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this@MyFirebaseMessagingService)
                 .setContentTitle(title )
                 .setSmallIcon(R.mipmap.ic_launcher_logo)
@@ -66,32 +89,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-*/
-        var data =  title.split(",")
-        val intent = Intent(this@MyFirebaseMessagingService, OrderDetailActivity::class.java)
-
-        intent.putExtra("type", "service")
-        intent.putExtra("orderId", data[1])
-        intent.putExtra("request", data[0])
+*//*
 
 
-//        val intent = Intent(this, DrawerActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-        val channelId = "Default"
-        val builder = NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.mipmap.ic_launcher_logo)
-                .setContentTitle("RoyalCrypto")
-                .setContentText( messege).setAutoCancel(true).setContentIntent(pendingIntent)
-        val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT)
-            manager.createNotificationChannel(channel)
-        }
-        manager.notify(0, builder.build())
 
-
-    }
+    }*/
    /* private fun showNotification(title: String, vacancy: String) {
         val intent = Intent(this, SignInActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

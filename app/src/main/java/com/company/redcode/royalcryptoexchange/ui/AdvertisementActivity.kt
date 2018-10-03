@@ -38,10 +38,16 @@ class AdvertisementActivity : AppCompatActivity() {
     var toolbar: Toolbar? = null
 
     var sharedPref = SharedPref.getInstance()
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_advertisement)
         toolbar = findViewById(R.id.toolbar_top)
+
+        val builder = AlertDialog.Builder(this@AdvertisementActivity!!)
+        builder.setView(R.layout.layout_dialog_progress)
+        builder.setCancelable(false)
+        progressBar = builder.create()
 
         initView()
         btn_back.setOnClickListener {
@@ -176,10 +182,7 @@ class AdvertisementActivity : AppCompatActivity() {
             Apputils.showMsg(this@AdvertisementActivity, "No payment method selected")
             return
         }
-        val builder = AlertDialog.Builder(this@AdvertisementActivity!!)
-        builder.setView(R.layout.layout_dialog_progress)
-        builder.setCancelable(false)
-        progressBar = builder.create()
+
 
         progressBar!!.show()
 
