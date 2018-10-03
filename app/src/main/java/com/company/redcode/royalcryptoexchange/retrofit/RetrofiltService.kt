@@ -144,6 +144,11 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun add_support(@Body supportTicket: SupportTicket): Call<String>
 
+    //Get order by order id
+    @GET("Select_UserOrderSingle/{orderId}")
+    @Headers("Content-Type:application/json")
+    fun getSingleOrderById(@Path("orderId") orderId:String): Call<Order>
+
 }
 
 //"irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}"

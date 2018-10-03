@@ -62,8 +62,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private fun getuserData(userId: String?, serviceListener: ServiceListener<Users>) {
         ApiClint.getInstance()?.getService()?.getUserById(userId!!)!!.enqueue(object : Callback<Users> {
             override fun onFailure(call: Call<Users>?, t: Throwable?) {
-                Toast.makeText(this@DrawerActivity, "Shared prefrence error", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(this@DrawerActivity, "Network error ", Toast.LENGTH_SHORT).show()
+                mPref!!.clearProfilePref(this@DrawerActivity)
+                startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
+                finish()
             }
 
             override fun onResponse(call: Call<Users>?, response: retrofit2.Response<Users>?) {

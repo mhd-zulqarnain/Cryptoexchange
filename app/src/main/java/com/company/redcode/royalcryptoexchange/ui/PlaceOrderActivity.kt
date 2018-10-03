@@ -1,6 +1,7 @@
 package com.company.redcode.royalcryptoexchange.ui
 
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
@@ -70,9 +71,9 @@ class PlaceOrderActivity : AppCompatActivity() {
                     orderTerms = response.body()!!
 
                     if (orderTerms.PaymentMethod!!.Type == "Bank")
-                        tv_payment_method.text = "Type: "+ orderTerms.PaymentMethod!!.Type+ "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
+                        tv_payment_method.text = "Type: " + orderTerms.PaymentMethod!!.Type + "\nCode:" + orderTerms!!.PaymentMethod!!.BankCode
                     else {
-                        tv_payment_method.setText("Type: "+ orderTerms.PaymentMethod!!.Type+"\n Number:"+orderTerms.PaymentMethod!!.BankName)
+                        tv_payment_method.setText("Type: " + orderTerms.PaymentMethod!!.Type + "\n Number:" + orderTerms.PaymentMethod!!.BankName)
                     }
                 }
             }
@@ -166,18 +167,25 @@ class PlaceOrderActivity : AppCompatActivity() {
             }
         }
         if (isTermAccept) {
-
+            progressBar!!.show()
             addOrder(serviceListener = object : ServiceListener<String> {
                 override fun success(obj: String) {
                     Apputils.showMsg(this@PlaceOrderActivity, obj)
                     val intent = Intent(this@PlaceOrderActivity, OrderDetailActivity::class.java)
+                    order.ORD_Id = obj
                     var obj = Gson().toJson(order)
                     intent.putExtra("order", obj)
+                    intent.putExtra("type","activity")
+                    progressBar!!.dismiss()
+
                     startActivity(intent)
+                    setResult(Activity.RESULT_OK)
                     finish()
                 }
 
                 override fun fail(error: ServiceError) {
+                    progressBar!!.dismiss()
+
                     Apputils.showMsg(this@PlaceOrderActivity, "Fail to add new order")
                 }
             })
@@ -199,12 +207,12 @@ class PlaceOrderActivity : AppCompatActivity() {
         order.Notify_Status = "true"
         order.PaymentMethod = "bank"
         order.Status = "open"
-        order.ORD_UserId = "U-"+sharedPref!!.getProfilePref(this@PlaceOrderActivity).UAC_Id
-        order.User_Id = "U-"+trade.FUAC_Id.toString()
+        order.ORD_UserId = "U-" + sharedPref!!.getProfilePref(this@PlaceOrderActivity).UAC_Id
+        order.User_Id = "U-" + trade.FUAC_Id.toString()
 
 
         val deadline = Date()
-        deadline.time = System.currentTimeMillis() + 6*60 * 60 * 1000
+        deadline.time = System.currentTimeMillis() + 6 * 60 * 60 * 1000
         val dateFormat = SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa")
         val dateText = dateFormat.format(deadline)
 
@@ -230,8 +238,12 @@ class PlaceOrderActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                 print("success")
-                print(response!!.body())
-                serviceListener.success("Order placed Succcessfully")
+                if(response!!.body()!=null){
+                    var response:Response = response!!.body()!!
+
+                    serviceListener.success(response.message!!)
+                }
+
 
             }
         })
