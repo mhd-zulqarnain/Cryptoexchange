@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RoyalCrypto Exchange</string>
     <string name="prompt_name">Name</string>
-    <string name="prompt_password">Password </string>
+    <string name="prompt_password">Enter Password </string>
     <string name="action_sign_in">Sign in </string>
     <string name="action_sign_up">Sign up</string>
     <string name="menu_sign_out">Sign out</string>
@@ -21,32 +21,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="array_support_title">
 
-        <item>I want to report fraud</item>
-        <item>I want to report a fraudulent trade</item>
-        <item>I want to report a fraudulent user</item>
-        <item>Help with a disputed trade</item>
-        <item>Problems with a Bitcoin transaction</item>
-        <item>My account is hacked</item>
-        <item>I am a new user</item>
-        <item>My account is on forced holiday</item>
-        <item>I have a problem with my advertisement(s)</item>
-        <item>I have received abusive feedback</item>
-        <item>Report a bug</item>
-        <item>I cant log in to my account</item>
-        <item>I am not receiving the login guard email</item>
-        <item>I do not have my two-factor authentication codes</item>
-        <item>I have forgotten my password</item>
-        <item>I have forgotten my username</item>
-        <item>I have forgotten my email</item>
-        <item>I have forgotten both my email and username</item>
-        <item>I am not receiving my account verification email</item>
-        <item>I am not able to verify my phone number</item>
-        <item>Other</item>
-
-
-    </string-array>
 
     <string-array name="array_currency">
         <item>PKR</item>
@@ -58,11 +33,9 @@
 
     <string-array name="array_coin">
         <item>BTC</item>
-        <item>XRP</item>
+        <item>BCH</item>
+        <item>BTG</item>
         <item>ETH</item>
-        <item>EOS</item>
-        <item>ADA</item>
-        <item>LTC</item>
     </string-array>
 
     <string-array name="array_country">

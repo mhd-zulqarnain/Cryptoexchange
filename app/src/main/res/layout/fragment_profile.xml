@@ -11,15 +11,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="12dp"
         android:orientation="vertical"
-        android:weightSum="39">
+        android:weightSum="40">
+        <!--38.3-->
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:layout_weight="3"
             android:orientation="horizontal"
             android:weightSum="7"
@@ -83,7 +83,10 @@
             android:layout_gravity="center"
             android:layout_weight="2.5"
             android:orientation="horizontal"
-            android:weightSum="6">
+            android:weightSum="6"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <TextView
                 style="@style/signUpEditTextStyle"
@@ -114,7 +117,10 @@
             android:layout_gravity="center"
             android:layout_weight="2.5"
             android:orientation="horizontal"
-            android:weightSum="6">
+            android:weightSum="6"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <TextView
                 style="@style/signUpEditTextStyle"
@@ -147,7 +153,10 @@
             android:layout_gravity="center"
             android:layout_weight="2.5"
             android:orientation="horizontal"
-            android:weightSum="6">
+            android:weightSum="6"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <TextView
                 style="@style/signUpEditTextStyle"
@@ -180,7 +189,10 @@
             android:layout_gravity="center"
             android:layout_weight="2.5"
             android:orientation="horizontal"
-            android:weightSum="6">
+            android:weightSum="6"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <TextView
                 style="@style/signUpEditTextStyle"
@@ -216,7 +228,10 @@
             android:layout_gravity="center"
             android:layout_weight="2.5"
             android:orientation="horizontal"
-            android:weightSum="6">
+            android:weightSum="6"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <TextView
                 style="@style/signUpEditTextStyle"
@@ -251,17 +266,20 @@
             android:layout_gravity="center"
             android:layout_weight="2.5"
             android:orientation="horizontal"
-            android:weightSum="6">
+            android:weightSum="6"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <Button
                 android:id="@+id/btn_pass_change"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:padding="5dp"
-                android:text="Change password "
-                android:background="#d95050"
+                android:text="Change password  "
+                android:background="@drawable/button_yellow_border"
                 android:textSize="12sp"
-                android:drawableRight="@drawable/ic_vpn_key_black_24dp"
+                android:drawableRight="@drawable/sign_in_password_icon"
                 android:textColor="#fff" />
 
         </LinearLayout>
@@ -273,7 +291,10 @@
             android:layout_gravity="center"
             android:layout_weight="2.5"
             android:orientation="horizontal"
-            android:weightSum="6">
+            android:weightSum="6"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <TextView
                 style="@style/signUpEditTextStyle"
@@ -307,13 +328,16 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <Button
                 android:id="@+id/addaccount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1.4"
                 android:background="@drawable/button_payment_layout"
                 android:drawableRight="@drawable/ic_local_atm_black_24dp"
                 android:text="Payment Method"
@@ -330,7 +354,10 @@
             android:layout_weight="4.5"
             android:gravity="center"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="4"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <ImageView
                 android:id="@+id/attach_img_1"
@@ -367,13 +394,16 @@
             android:layout_weight="2"
             android:id="@+id/adddoc"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
 
             <Button
                 android:id="@+id/btn_add_img"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1.4"
                 android:background="@drawable/button_payment_layout"
                 android:drawableRight="@drawable/ic_note_add_black_24dp"
                 android:text="Add Documents"
@@ -390,7 +420,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="Description"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            />
 
 
         <EditText
@@ -403,17 +436,29 @@
             android:inputType="textMultiLine"
             android:lines="4"
             android:imeOptions="actionDone"
-            />
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"/>
         <Button
             android:id="@+id/btnprofileupdate"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_weight="2.5"
+            android:layout_weight="2.7"
             android:background="@drawable/layout_curve_btn_submit"
             android:onClick="profileValidiation"
             android:text="Update"
+            android:fontFamily="@font/oswald_bold"
             android:textColor="#fff" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+
+
+        </LinearLayout>
 
 
     </LinearLayout>

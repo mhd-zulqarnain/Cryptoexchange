@@ -3,9 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/color_gradient_profile"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_margin="15dp"
     android:orientation="vertical"
     tools:context=".ui.DashboardFragment">
+
+
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,8 +24,10 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:drawableRight="@drawable/ic_dashboard_black_24dp"
-        android:text="Dashboard"
-        android:textSize="30sp" />
+        android:text="Dashboard "
+        android:textSize="28sp"
+        android:fontFamily="@font/oswald_regular"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -239,4 +251,5 @@
     </LinearLayout>
 
 
+</LinearLayout>
 </LinearLayout>
