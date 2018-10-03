@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -43,6 +44,7 @@ class PlaceOrderActivity : AppCompatActivity() {
     var progressBar: AlertDialog? = null
     var sharedPref = SharedPref.getInstance()
     var orderTerms: OrderTerms = OrderTerms()
+    var toolbar: Toolbar? = null
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,9 +53,12 @@ class PlaceOrderActivity : AppCompatActivity() {
         var obj = intent.getStringExtra(JSON_TRARE);
         orderType = intent.getStringExtra(ORDER_TYPE);
         trade = Gson().fromJson(obj, Trade::class.java)
-
+        toolbar = findViewById(R.id.toolbar_top)
         initView()
         getTerm()
+        btn_back.setOnClickListener {
+            finish()
+        }
 
     }
 

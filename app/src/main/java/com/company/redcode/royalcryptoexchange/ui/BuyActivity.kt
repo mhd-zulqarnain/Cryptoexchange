@@ -19,6 +19,7 @@ import com.company.redcode.royalcryptoexchange.adapter.TableBuyerAdapater
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.AppExecutors
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_buy.*
 import retrofit2.Call
@@ -161,7 +162,9 @@ class BuyActivity : AppCompatActivity() {
         tradelist.clear()
 
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.getTrade("buy", coin)?.enqueue(object : Callback<ArrayList<Trade>> {
+        var fuacid = SharedPref.getInstance()!!.getProfilePref(this@BuyActivity).UAC_Id
+
+        ApiClint.getInstance()?.getService()?.getTrade("buy", coin,fuacid = fuacid!!)?.enqueue(object : Callback<ArrayList<Trade>> {
             override fun onFailure(call: Call<ArrayList<Trade>>?, t: Throwable?) {
                 println("failed "+t)
             }

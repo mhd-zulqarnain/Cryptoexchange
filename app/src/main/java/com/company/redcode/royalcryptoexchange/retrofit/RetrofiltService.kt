@@ -40,9 +40,9 @@ interface RetrofiltService {
     fun getUserById(@Path("userid") userid: String): Call<Users>
 
     /*get trade by coin type and ordertype*/
-    @GET("Select_UserTrades/{orderType}/{coinType}")
+    @GET("Select_UserTrades/{orderType}/{coinType}/{fuacid}")
     @Headers("Content-Type:application/json")
-    fun getTrade(@Path("orderType") orderType: String, @Path("coinType") coinType: String): Call<ArrayList<Trade>>
+    fun getTrade(@Path("orderType") orderType: String, @Path("coinType") coinType: String,@Path("fuacid") fuacid: String): Call<ArrayList<Trade>>
 
     @POST("MobileFactor/{mbl}")
     @Headers("Content-Type:application/json")
