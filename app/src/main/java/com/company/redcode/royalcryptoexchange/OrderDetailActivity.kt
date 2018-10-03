@@ -304,7 +304,6 @@ class OrderDetailActivity : AppCompatActivity() {
                         progressBar!!.dismiss()
 
                     }
-                    Apputils.showMsg(this@OrderDetailActivity, "Order not found")
 
                 }
                 progressBar!!.dismiss()

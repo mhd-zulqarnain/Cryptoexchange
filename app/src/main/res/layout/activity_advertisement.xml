@@ -42,7 +42,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="35"
+        android:weightSum="34"
         android:layout_margin="12dp"
         android:orientation="vertical"
         >
@@ -55,7 +55,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="3.7"
+            android:layout_weight="2.8"
             android:fontFamily="@font/oswald_regular"
             android:text="Add Advertisement"
             android:textSize="28sp" />
@@ -63,7 +63,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.7"
+            android:layout_weight="2.3"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:orientation="horizontal"
@@ -92,7 +92,7 @@
             android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="2.7"
+            android:layout_weight="2.3"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -121,7 +121,7 @@
             android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="3"
+            android:layout_weight="2.3"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -164,7 +164,7 @@
             android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="2.7"
+            android:layout_weight="3"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -193,7 +193,7 @@
             android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="2.7"
+            android:layout_weight="3"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -247,7 +247,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.7"
+            android:layout_weight="2.3"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:orientation="horizontal"
@@ -294,7 +294,7 @@
             android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="2.7"
+            android:layout_weight="3"
             android:orientation="horizontal"
             android:weightSum="3">
 

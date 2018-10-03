@@ -175,7 +175,7 @@ class PlaceOrderActivity : AppCompatActivity() {
             progressBar!!.show()
             addOrder(serviceListener = object : ServiceListener<String> {
                 override fun success(obj: String) {
-                    Apputils.showMsg(this@PlaceOrderActivity, obj)
+//                    Apputils.showMsg(this@PlaceOrderActivity, obj)
                     val intent = Intent(this@PlaceOrderActivity, OrderDetailActivity::class.java)
                     order.ORD_Id = obj
                     var obj = Gson().toJson(order)

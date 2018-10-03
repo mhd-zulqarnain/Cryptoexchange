@@ -74,13 +74,13 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun gettermAndPayment(@Path("userId") userId: String, @Path("pid") pid: String): Call<OrderTerms>
 
-    @PUT("Update_UserAccount/{fuac_id}/{fname}/{lname}/{pass}/{terms}")
+    @GET("Update_UserAccount/{fuac_id}/{fname}/{lname}/{pass}/{terms}")
     @Headers("Content-Type:application/json")
     fun update_profile(@Path("fuac_id") fuac_id: String, @Path("fname") fname: String, @Path("lname") lname: String, @Path("pass") pass: String, @Path("terms") terms: String): Call<Response>
 
 
     /*update order status*/
-    @PUT("Update_UserOrder/{order_id}/{status}")
+    @POST("Update_UserOrder/{order_id}/{status}")
     @Headers("Content-Type:application/json")
     fun update_order_status(@Path("order_id") order_id: String, @Path("status") status: String): Call<Response>
 
@@ -115,7 +115,7 @@ interface RetrofiltService {
                       @Path("uobitamount") uobitamount: String, @Path("uoamount") uoamount: String, @Path("ut_id") ut_id: String): Call<Response>
 
     //delete bank detail
-    @DELETE("Delete_UserPaymentDetail/{UP_Id}")
+    @POST("Delete_UserPaymentDetail/{UP_Id}")
     @Headers("Content-Type:application/json")
     fun delete_bank(@Path("UP_Id") UP_Id: String): Call<Response>
 
