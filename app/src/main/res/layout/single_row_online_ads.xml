@@ -44,7 +44,7 @@
             android:gravity="center"
             android:text="Action"
             android:textColor="#fff"
-            android:textSize="14sp"
+            android:textSize="11sp"
             android:background="@drawable/action_button_background"
             />
 

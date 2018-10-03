@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".auth.SignUpActivity"
             android:focusable="true"
@@ -22,12 +23,13 @@
         </activity>
 
         <activity
-            android:screenOrientation="portrait"
             android:name=".auth.SignInActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,9 +40,14 @@
         <activity
             android:name=".ui.PlaceOrderActivity"
             android:label="Buy activity"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".OrderDetailActivity" />
+            />
+
+        <activity android:name=".OrderDetailActivity"
+            android:screenOrientation="portrait"
+            />
+
         <activity
             android:name=".ui.ProfileActivity"
             android:focusable="true"
@@ -48,22 +55,32 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan"
             />
+
         <activity
             android:name=".DrawerActivity"
-            android:theme="@style/BuyTheme"></activity>
-        <activity android:name=".ui.DisputeActivity"></activity>
+            android:theme="@style/BuyTheme"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".ui.DisputeActivity"
+            android:screenOrientation="portrait"
+            />
+
         <activity
             android:name="com.example.admin.camerawork.CameraActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             />
+
         <activity
             android:name=".ui.BuyActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:screenOrientation="portrait"
             android:theme="@style/BuyTheme"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            />
+
         <activity
             android:name=".ui.SellActivity"
             android:focusable="true"
@@ -71,15 +88,21 @@
             android:screenOrientation="portrait"
             android:theme="@style/BuyTheme"
             android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".ui.AdvertisementActivity"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:screenOrientation="portrait"
             android:theme="@style/BuyTheme" />
-        <activity android:name=".SplashActivity"/>
 
-        <activity android:name=".ui.AdvertismentDetailActivity"></activity>
+        <activity android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".ui.AdvertismentDetailActivity"
+            android:screenOrientation="portrait"
+            />
         <!--Release payment activity-->
 
         <service android:name=".service.MyFirebaseMessagingService">
@@ -92,5 +115,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
     </application>
 </manifest>
