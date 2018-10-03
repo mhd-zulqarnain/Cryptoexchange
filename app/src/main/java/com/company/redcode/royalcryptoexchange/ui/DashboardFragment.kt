@@ -70,7 +70,7 @@ class DashboardFragment : Fragment() {
             val intent = Intent(activity!!, OrderDetailActivity::class.java)
             var obj = Gson().toJson(orderList[post])
             intent.putExtra("order", obj)
-            intent.putExtra("tpye", "activity")
+            intent.putExtra("type", "activity")
             startActivityForResult(intent,REQUEST_CODE)
         }
         getOrderList()

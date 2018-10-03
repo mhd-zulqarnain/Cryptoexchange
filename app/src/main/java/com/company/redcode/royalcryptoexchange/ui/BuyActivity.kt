@@ -1,6 +1,7 @@
 package com.company.redcode.royalcryptoexchange.ui
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
@@ -87,7 +88,7 @@ class BuyActivity : AppCompatActivity() {
             val intent = Intent(this@BuyActivity, PlaceOrderActivity::class.java)
             intent.putExtra("tradeObject", obj)
             intent.putExtra("orderType", "BUY")
-            startActivity(intent)
+            startActivityForResult(intent,44)
         }
 
         val layoutManager = LinearLayoutManager(this@BuyActivity, LinearLayout.VERTICAL, false)
@@ -209,4 +210,9 @@ class BuyActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            getAllTrade()
+        }
+    }
 }
