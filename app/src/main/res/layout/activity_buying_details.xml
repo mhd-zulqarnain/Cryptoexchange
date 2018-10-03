@@ -174,7 +174,7 @@
             android:layout_height="45dp"
             android:layout_margin="8dp"
             android:layout_weight="2"
-            android:background="@drawable/white_curve_btn"
+            android:background="@drawable/white_edittext"
             android:gravity="center"
             android:hint="Ecurrrency"
             android:inputType="numberDecimal"
@@ -188,7 +188,7 @@
             android:layout_height="45dp"
             android:layout_margin="8dp"
             android:layout_weight="2"
-            android:background="@drawable/white_curve_btn"
+            android:background="@drawable/white_edittext"
             android:enabled="false"
             android:gravity="center"
             android:hint="Price"
@@ -207,8 +207,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:background="@drawable/layout_curve_btn_submit"
-        android:text="T r a d e"
-        android:fontFamily="@font/oswald_semibold"
-        android:textColor="@color/backgoundTheme" />
+        android:text="TRADE"
+        android:fontFamily="@font/oswald_semibold"/>
 </LinearLayout>
 </LinearLayout>

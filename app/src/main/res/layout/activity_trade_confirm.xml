@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
-
+    android:background="@drawable/color_gradient_profile"
     >
 
     <android.support.v7.widget.Toolbar
@@ -49,7 +48,7 @@
                 android:layout_height="match_parent"
                 android:text="Order "
                 android:fontFamily="@font/oswald_regular"
-                android:textSize="35dp"
+                android:textSize="28dp"
                  />
 
             <TextView
@@ -58,7 +57,7 @@
                 android:text="Details"
                 android:fontFamily="@font/oswald_regular"
                 android:textColor="@color/backgoundBtn"
-                android:textSize="35dp"
+                android:textSize="28dp"
                 />
 
 
@@ -218,7 +217,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:background="@drawable/layout_curve_btn_paid"
+        android:background="@drawable/layout_curve_btn_submit"
         android:text="I have Paid"
         android:textColor="#fff" />
 
@@ -233,9 +232,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/white_curve_btn"
+                android:background="@drawable/layout_release_order"
                 android:text="Pay later"
-                android:textColor="@color/backgoundTheme"
 
                 />
             <Button
@@ -244,8 +242,7 @@
                 android:layout_height="wrap_content"
                 android:text="Dispute"
                 android:layout_marginLeft="12dp"
-                android:textColor="@color/backgoundTheme"
-                android:background="@drawable/white_curve_btn"
+                android:background="@drawable/layout_release_order"
                 android:layout_gravity="center"/>
             <Button
                 android:id="@+id/btn_cancel"
@@ -253,8 +250,7 @@
                 android:layout_height="wrap_content"
                 android:text="Cancel"
                 android:layout_marginLeft="12dp"
-                android:textColor="@color/backgoundTheme"
-                android:background="@drawable/white_curve_btn"
+                android:background="@drawable/layout_curve_btn_cancel"
                 android:layout_gravity="center"/>
 
 

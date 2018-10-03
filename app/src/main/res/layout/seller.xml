@@ -21,9 +21,7 @@
             android:text="Seller "
             android:textSize="28sp"
             android:fontFamily="@font/oswald_regular"
-            android:layout_marginTop="10dp
-
-"
+            android:layout_marginTop="10dp"
             />
 
 
@@ -33,6 +31,8 @@
             android:layout_height="0dp"
             android:layout_weight="0.6"
             android:weightSum="6"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
             android:orientation="horizontal"
             android:layout_gravity="center">
             <TextView
@@ -52,7 +52,10 @@
             android:layout_weight="0.6"
             android:weightSum="6"
             android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
+            >
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1.7"
@@ -71,7 +74,10 @@
             android:layout_weight="0.6"
             android:weightSum="6"
             android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
+            >
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1.7"
@@ -103,7 +109,7 @@
                 android:textSize="16sp"
                 android:background="@drawable/layout_curve_btn_cancel"
                 android:layout_marginRight="22dp"
-
+                android:fontFamily="@font/oswald_semibold"
                 />
 
             <Button
@@ -113,7 +119,9 @@
                 android:layout_height="wrap_content"
                 android:text="I Paid"
                 android:background="@drawable/layout_curve_btn_submit"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/oswald_semibold"
+                />
 
         </LinearLayout>
 

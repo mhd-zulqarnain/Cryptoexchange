@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/color_gradient_profile"
-    >
+    android:fillViewport="true"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_top"
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#346980"
-            android:layout_marginBottom="4dp"
-            android:minHeight="?attr/actionBarSize">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
-            <ImageView
-                android:id="@+id/btn_back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="left"
-                android:src="@drawable/ic_arrow_back_black_24dp" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_top"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#346980"
+                android:minHeight="?attr/actionBarSize">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Buy currency"
-                android:layout_gravity="center"
-                />
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="left"
+                    android:src="@drawable/ic_arrow_back_black_24dp" />
 
-        </android.support.v7.widget.Toolbar>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Advertisement"
+                    android:layout_gravity="center"
+                    />
 
-
-
-
-
+            </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:weightSum="35"
         android:layout_margin="12dp"
-        android:weightSum="26"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
+        <!--31.2-->
+
 
 
 
@@ -52,7 +55,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="3.7"
             android:fontFamily="@font/oswald_regular"
             android:text="Add Advertisement"
             android:textSize="28sp" />
@@ -60,16 +63,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="2.7"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
 
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -78,11 +79,10 @@
 
             <Spinner
                 android:id="@+id/spinner_order_type"
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:popupBackground="#000"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1.97"
                 android:entries="@array/order_type"/>
 
         </LinearLayout>
@@ -92,12 +92,11 @@
             android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="2.6"
+            android:layout_weight="2.7"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,11 +106,10 @@
 
             <Spinner
                 android:id="@+id/spinner_payment_method"
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:popupBackground="#000"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1.97"
                 android:entries="@array/method_payment"
                 >
 
@@ -123,12 +121,11 @@
             android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -138,10 +135,9 @@
 
             <Spinner
                 android:id="@+id/spinner_coin_type"
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1.97"
                 android:popupBackground="#000"
                 android:entries="@array/array_coin">
 
@@ -151,20 +147,24 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="7dp"
             android:alpha="0.5"
             android:background="#fff" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            ></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="2.3"
+            android:layout_weight="2.7"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -180,7 +180,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-
                 android:imeOptions="actionNext"
                 android:inputType="numberDecimal"
                 android:textSize="15dp"
@@ -199,17 +198,14 @@
             android:weightSum="3">
 
             <TextView
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Price "
-
                 android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/ed_price"
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -227,12 +223,11 @@
             android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="2"
+            android:layout_weight="2.3"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -241,7 +236,6 @@
 
             <TextView
                 android:id="@+id/tv_fees"
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -253,14 +247,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="2.7"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -270,7 +263,6 @@
 
             <TextView
                 android:id="@+id/tv_total"
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -285,16 +277,21 @@
             android:layout_height="1dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
             android:alpha="0.5"
             android:background="#fff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            ></LinearLayout>
 
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:layout_weight="2.7"
@@ -302,7 +299,6 @@
             android:weightSum="3">
 
             <TextView
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -311,7 +307,6 @@
 
             <EditText
                 android:id="@+id/u_limit"
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -328,12 +323,11 @@
             android:layout_height="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_weight="2.7"
+            android:layout_weight="4"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -344,7 +338,6 @@
 
             <EditText
                 android:id="@+id/l_limit"
-                style="@style/adsActivityStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -358,9 +351,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.3"
+            android:layout_weight="2.7"
             android:weightSum="3"
-            android:layout_marginTop="30dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -390,10 +382,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
+            android:orientation="vertical"
             ></LinearLayout>
 
     </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+
+    </ScrollView>
+

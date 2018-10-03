@@ -51,7 +51,7 @@
                 style="@style/signUpEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Email"
+                android:hint="Enter Email"
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:text="@string/text_forget_password"
             android:layout_margin="4dp"
-            android:textColor="#b6bde7"
+            android:textColor="#00a927"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -106,7 +106,9 @@
                 android:text="@string/action_sign_in"
                 android:textColor="#Fff"
                 android:layout_marginTop="12dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/oswald_semibold"
+                />
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -122,7 +124,9 @@
                 android:text="@string/action_sign_up"
                 android:textColor="#Fff"
                 android:layout_marginTop="12dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/oswald_semibold"
+                />
         </LinearLayout>
 
 

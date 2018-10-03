@@ -54,6 +54,7 @@
                     android:layout_marginRight="12dp"
                     android:layout_height="40dp"
                     android:text="Send"
+                    android:fontFamily="@font/oswald_semibold"
                     android:textSize="12sp"
                     android:textColor="#fff"
                     android:background="@drawable/button_red_border"
@@ -68,7 +69,9 @@
             android:text="recieve"
             android:background="@drawable/button_yellow_border"
             android:textColor="#ffff"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:fontFamily="@font/oswald_semibold"
+            />
 
 
 

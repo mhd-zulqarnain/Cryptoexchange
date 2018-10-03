@@ -34,7 +34,10 @@
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ok"/>
+        android:text="Ok"
+        android:background="@drawable/layout_release_order"
+        android:fontFamily="@font/oswald_semibold"
+        />
 
 
 
