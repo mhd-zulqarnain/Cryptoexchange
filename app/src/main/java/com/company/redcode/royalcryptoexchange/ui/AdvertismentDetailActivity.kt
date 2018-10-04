@@ -60,7 +60,7 @@ class AdvertismentDetailActivity : AppCompatActivity() {
 
     private fun initView() {
 
-        tv_details.text = "Amount:" + trade.Amount + "\n" + "Price:" + trade.Price + "\n" + "Type:" + trade.OrderType
+        tv_details.text = "Amount:" + trade.Amount + "\n" + "Price:" + trade.Price + "\n" + "Type:" + trade.OrderType+ "\n" + "Ecurrency:" + trade.CurrencyType
         order_recycler = findViewById(R.id.order_recycler)
         val orderlayout = LinearLayoutManager(this@AdvertismentDetailActivity, LinearLayout.VERTICAL, false)
         order_recycler!!.layoutManager = orderlayout

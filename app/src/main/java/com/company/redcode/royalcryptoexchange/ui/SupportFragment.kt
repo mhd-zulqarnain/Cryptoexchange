@@ -46,7 +46,7 @@ import java.util.HashMap
 
 
 class SupportFragment : Fragment() {
-    var URL = Constants.IMAGE_URLold;
+    var URL = Constants.IMAGE_URL;
     private val CAMERA_INTENT = 555
     private val REQUSET_GALLERY_CODE: Int = 44
     var progressBar: android.app.AlertDialog? = null
@@ -215,30 +215,12 @@ class SupportFragment : Fragment() {
         } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
 //            Bitmap image = (Bitmap) data.getExtras().get("data");
             var result: Uri = data!!.data
-//            myImgJson = result
+
 
             val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), result)
             attach_img_1!!.setImageBitmap(bitmap)
             uploadtoserver(bitmap, 2, 2)
-            /* var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
-             var list = obj.camList
- */
-//            for (i in 0 until list!!.size) {
-//
-//                if (i == 0)
-//                    attach_img_1!!.setImageBitmap(list[i])
-//                if (i == 1)
-//                    attach_img_2!!.setImageBitmap(list[i])
-//                if (i == 2)
-//                    attach_img_3!!.setImageBitmap(list[i])
-//                if (i == 3)
-//                    attach_img_4!!.setImageBitmap(list[i])
-//
-//                var c: Int = list!!.size - 1;
-//                uploadtoserver(list[i], i, (c))
-//            }
-
-        }
+     }
         else
             progressBar!!.dismiss()
         super.onActivityResult(requestCode, resultCode, data)
