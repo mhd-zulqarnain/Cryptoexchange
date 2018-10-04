@@ -36,7 +36,6 @@ class WalletFragment : Fragment() {
         wollet.add(Wallet(BitmapFactory.decodeResource(resources, R.mipmap.ethhcoin),"ETH","ETH","20000",9803))
 
 
-
         var recyclerView = view.findViewById(R.id.wollet_recycler) as RecyclerView
         recyclerView.layoutManager= LinearLayoutManager(context,LinearLayout.VERTICAL,false)
         var adopter = WalletAdapter(wollet)

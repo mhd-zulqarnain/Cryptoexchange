@@ -26,10 +26,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.company.redcode.royalcryptoexchange.R
-import com.company.redcode.royalcryptoexchange.models.ApiResponse
-import com.company.redcode.royalcryptoexchange.models.ImageObject
-import com.company.redcode.royalcryptoexchange.models.Response
-import com.company.redcode.royalcryptoexchange.models.SupportTicket
+import com.company.redcode.royalcryptoexchange.models.*
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.company.redcode.royalcryptoexchange.utils.ServiceError
@@ -41,6 +38,7 @@ import com.rengwuxian.materialedittext.MaterialEditText
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.util.HashMap
 
@@ -230,8 +228,44 @@ class SupportFragment : Fragment() {
 
 
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
+        val imageData = imageTostring(bitmap!!)
+        var obj = ImageObj(imageData, Constants.SupportPath)
 
-        val StrRequest = object : StringRequest(Request.Method.POST, URL,
+
+        ApiClint.getInstance()?.getService()?.uploadImage(obj)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                progressBar!!.dismiss()
+                println("failed")
+            }
+
+            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+                println("passed")
+                progressBar!!.dismiss()
+            }
+            /*      override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                      println("error")
+                      progressBar!!.dismiss()
+                  }
+
+                  override fun onResponse(call: Call<String>?, response: Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+                      try {
+                          var json : JSONObject = JSONObject(response!!.body());
+                          var status = json.get("Status");
+                          if(status == "OK")
+                              image = json.getString("Message");
+                          else if(status == "false")
+                              image = "test";
+
+                      }catch (e:Exception){
+                          println("error $e")
+                      }
+                      progressBar!!.dismiss()
+                  }
+            */  })
+
+
+
+           /* val StrRequest = object : StringRequest(Request.Method.POST, URL,
                 com.android.volley.Response.Listener { response ->
                     //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
                     //          imagename!!.add(response)
@@ -254,20 +288,23 @@ class SupportFragment : Fragment() {
             progressBar!!.dismiss()
         }) {
             //@Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
+            override fun getParams(): String {
                 val imageData = imageTostring(bitmap!!)
-                val params = HashMap<String, String>()
+//                val params = HashMap<String, String>()
                 //   params.put("image",imageData);
                 // params.put("string1","ali")
-                params["image"] = imageData
+                *//*params["image"] = imageData
                 params["Saving"] = Constants.SupportPath;
+*//*
 
+                var obj = ImageObj(imageData, Constants.SupportPath)
+                var params:String =Gson().toJson(obj)
                 return params
             }
         }
 
         val requestQueue = Volley.newRequestQueue(activity!!)
-        requestQueue.add(StrRequest)
+        requestQueue.add(StrRequest)*/
 
     }
 
