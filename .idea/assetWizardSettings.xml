@@ -11,26 +11,11 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
-                        <option name="children">
-                          <map>
-                            <entry key="clipartAsset">
-                              <value>
-                                <PersistentState>
-                                  <option name="values">
-                                    <map>
-                                      <entry key="url" value="jar:file:/D:/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_touch_app_black_24dp.xml" />
-                                    </map>
-                                  </option>
-                                </PersistentState>
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_touch_app_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Mir" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_ethcoin" />
+                            <entry key="sourceFile" value="C:\Users\Mir\Desktop\Red Code\ethcoin.svg" />
                           </map>
                         </option>
                       </PersistentState>
