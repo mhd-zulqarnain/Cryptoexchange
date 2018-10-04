@@ -228,7 +228,7 @@ class PlaceOrderActivity : AppCompatActivity() {
         if (orderType == "buy")
             order.Description = "bought"
         else
-            order.Description = "sold"
+            order.Description = "Sold"
 
 
         ApiClint.getInstance()?.getService()?.addNewOrder(
