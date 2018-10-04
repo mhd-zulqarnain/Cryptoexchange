@@ -109,7 +109,7 @@ class OrderDetailActivity : AppCompatActivity() {
 
 
         if (order.Status == Constants.STATUS_CANCEL) {
-            status_tv!!.text = "cancelled"
+            status_tv!!.text = "Cancelled"
         } else
             status_tv!!.text = order.Status
 
@@ -167,7 +167,7 @@ class OrderDetailActivity : AppCompatActivity() {
         price_tv.setText(order.BitPrice + "PKR")
         if (order.Status == "dispute") {
             timer_tv.text = "Disputed Order"
-        } else if (order.Status == "cancelled") {
+        } else if (order.Status == "Cancelled") {
             timer_tv.text = "Order Cancelled"
         } else {
             if (currentTime > deadline!!) {
