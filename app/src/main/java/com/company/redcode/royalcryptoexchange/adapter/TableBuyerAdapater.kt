@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Trade
-import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.OnLoadMoreListener
 
 
@@ -18,6 +18,7 @@ import com.company.redcode.royalcryptoexchange.utils.OnLoadMoreListener
 class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableBuyerAdapater.MyViewHolder>() {
     var num = 1
     var data = model
+    var context:Context = ctx
     var onLoadMoreListener: OnLoadMoreListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_buyer, parent, false))
@@ -34,7 +35,7 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private 
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindView(model[position])
+        holder.bindView(model[position],ctx)
         holder.btn_buy!!.setOnClickListener {
             onItemClick(position)
         }
@@ -57,7 +58,8 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private 
         var tv_seller: TextView? = null
         var btn_buy: Button? = null
 
-        fun bindView(trade: Trade) {
+
+        fun bindView(trade: Trade, ctx: Context) {
 
             tv_price = itemView.findViewById(R.id.tv_price)
             tv_limit = itemView.findViewById(R.id.tv_limit)
@@ -65,6 +67,7 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private 
             tv_seller = itemView.findViewById(R.id.tv_User)
             tv_amount = itemView.findViewById(R.id.tv_amount)
             btn_buy = itemView.findViewById(R.id.btn_buy)
+           var user_status: ImageView = itemView.findViewById(R.id.user_status)
 
 
             tv_limit!!.setText(/*Apputils.formatCurrency(*/trade.UpperLimit.toString() + "-" +
@@ -73,6 +76,14 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private 
 
             tv_amount!!.setText(trade.Amount )
             tv_price!!.setText(/*Apputils.formatCurrency(*/trade.Price!!)/*)*/
+
+            var resources = ctx.getResources()
+            if(trade.ut_status=="0"){
+                user_status.setImageDrawable(resources.getDrawable(R.drawable.ic_offline))
+            }else{
+                user_status.setImageDrawable(resources.getDrawable(R.drawable.ic_online))
+
+            }
         }
 
 

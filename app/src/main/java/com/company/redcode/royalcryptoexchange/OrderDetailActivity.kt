@@ -54,27 +54,28 @@ class OrderDetailActivity : AppCompatActivity() {
             orderObj = intent.getStringExtra("order")
             order = Gson().fromJson(orderObj, Order::class.java)
             initView()
-        } else if(intentType == "service"){
-            var orderId:String = intent.getStringExtra("orderId")
-            var request:String = intent.getStringExtra("request")
+        } else if (intentType == "service") {
+            var orderId: String = intent.getStringExtra("orderId")
+            var request: String = intent.getStringExtra("request")
             var userId = pref.getProfilePref(this@OrderDetailActivity).UAC_Id
             if (userId == null) {
                 val intent = Intent(this@OrderDetailActivity, SignInActivity::class.java)
                 startActivity(intent)
                 finish()
-            }else{
-            getOrder(orderId,object :ServiceListener<Order>{
-                override fun success(obj: Order) {
-                    order =obj
-                    initView()
+            } else {
+                getOrder(orderId, object : ServiceListener<Order> {
+                    override fun success(obj: Order) {
+                        order = obj
+                        initView()
 
-                }
-                override fun fail(error: ServiceError) {
-                }
+                    }
 
-            })}
+                    override fun fail(error: ServiceError) {
+                    }
+
+                })
+            }
         }
-
 
     }
 
@@ -105,8 +106,6 @@ class OrderDetailActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initView() {
-
-
 
 
         if (order.Status == Constants.STATUS_CANCEL) {
@@ -285,9 +284,10 @@ class OrderDetailActivity : AppCompatActivity() {
             }
         })
     }
-    fun getOrder(order_id: String,serviceListener: ServiceListener<Order>) {
+
+    fun getOrder(order_id: String, serviceListener: ServiceListener<Order>) {
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.getSingleOrderById(order_id!!)!!.enqueue(object : Callback<Order>{
+        ApiClint.getInstance()?.getService()?.getSingleOrderById(order_id!!)!!.enqueue(object : Callback<Order> {
             override fun onFailure(call: Call<Order>?, t: Throwable?) {
                 println("ERROR")
                 progressBar!!.dismiss()
@@ -298,20 +298,19 @@ class OrderDetailActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Order>?, response: retrofit2.Response<Order>?) {
                 progressBar!!.dismiss()
                 if (response != null) {
-                    var order :Order= response.body()!!
-                    if (order.Status!="") {
+                    var order: Order = response.body()!!
+                    if (order.Status != "") {
                         serviceListener.success(order)
                         progressBar!!.dismiss()
 
                     }
-                    Apputils.showMsg(this@OrderDetailActivity, "Order not found")
 
                 }
                 progressBar!!.dismiss()
 
             }
         })
-}
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
