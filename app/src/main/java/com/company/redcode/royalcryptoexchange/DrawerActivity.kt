@@ -143,7 +143,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             if (fragmentCurrent !is HomeFragment) {
                 supportFragmentManager.beginTransaction().replace(R.id.relativeLayout, HomeFragment()).addToBackStack(null).commit();
             } else {
-                super.onBackPressed()
+                finish()
             }
 
         }
