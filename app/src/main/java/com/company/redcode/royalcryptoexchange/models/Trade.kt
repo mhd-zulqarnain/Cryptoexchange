@@ -16,7 +16,8 @@ class Trade(
         var LowerLimit: Long? = null,
         var CurrencyType: String? = null,
         var Status: String? = null,
-        var Date: String? = null
+        var Date: String? = null,
+        var ut_status: String? = null
 ){
 
     enum class Order : Comparator<Trade>{

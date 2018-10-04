@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="12dp"
-        android:hint="New password"
+        android:hint="Confirm password"
         android:textColor="#000"
         android:textColorHint="#DDAAAAAA"
         android:inputType="textPassword"
