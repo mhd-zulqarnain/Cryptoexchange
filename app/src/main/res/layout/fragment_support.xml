@@ -3,26 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/color_gradient_profile">
+    android:background="@drawable/royalcryptobackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="15dp"
+        android:layout_margin="12dp"
         android:orientation="vertical"
-        android:weightSum="11.5"
+        android:weightSum="10"
         >
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="clip_vertical"
+            android:layout_weight="1.2"
             android:layout_height="0dp"
-            android:text="Support        "
+            android:text="Support "
             android:textSize="28sp"
-            android:fontFamily="@font/oswald_regular"
 
+            android:fontFamily="@font/oswald_regular"
+            android:drawableRight="@drawable/ic_touch_app_black_24dp"
             />
 
 
@@ -33,35 +33,22 @@
             android:text="Write New Request"
             android:gravity="center"
             android:layout_weight="1"
-            android:textSize="24sp" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:weightSum="3"
-            android:orientation="horizontal"
-            >
+            android:textSize="22sp" />
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.8"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title"
                 android:textSize="20dp" />
 
             <EditText
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:hint="Enter Title" />
+                android:layout_marginBottom="15dp"
+                android:hint="Enter Title"
+                android:backgroundTint="#F6A50A"
+                />
 
-
-        </LinearLayout>
 
 
 

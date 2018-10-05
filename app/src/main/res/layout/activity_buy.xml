@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:orientation="vertical"
-    android:background="@drawable/color_gradient_profile"
+    android:background="@drawable/royalcryptobackground"
     >
 
     <android.support.v7.widget.Toolbar

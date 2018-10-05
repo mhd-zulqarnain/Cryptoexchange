@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:gravity="center"
-            android:text="Action"
+            android:text="Details"
             android:background="@drawable/action_button_background"
             android:textSize="8sp"
             android:layout_marginBottom="5dp"

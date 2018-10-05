@@ -4,7 +4,7 @@
     android:id="@+id/scrollLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/color_gradient_profile"
+    android:background="@drawable/royalcryptobackground"
     android:fillViewport="true"
     android:orientation="vertical">
 
@@ -32,10 +32,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="clip_vertical"
-                android:layout_weight="5"
+                android:layout_weight="2"
                 android:fontFamily="@font/oswald_regular"
                 android:text="Profile "
-                android:textSize="28sp" />
+                android:textSize="28sp"
+                android:drawableRight="@drawable/ic_face_black_24dp"
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                ></LinearLayout>
 
             <TextView
                 style="@style/signUpEditTextStyle"
