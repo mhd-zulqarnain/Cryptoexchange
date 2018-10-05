@@ -271,7 +271,7 @@ class DisputeActivity : AppCompatActivity() {
 
     private fun imageTostring(bitmap: Bitmap): String {
         val outStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outStream)
         val imageBytes = outStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
