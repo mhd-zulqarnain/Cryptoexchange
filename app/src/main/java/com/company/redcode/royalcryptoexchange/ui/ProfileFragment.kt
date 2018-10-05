@@ -72,7 +72,7 @@ class ProfileFragment : Fragment() {
     var btnupdate: Button? = null
     var docimage: LinearLayout? = null;
     var profile_terms: EditText? = null;
-    var image: String = Constants.ProfilePath;
+    var image: String = Constants.IMAGE_URL+"/"+Constants.ProfilePath;
     var list = ArrayList<PaymentMethod>()
     var docver: String? = null;
     var sharedpref: SharedPref = SharedPref.getInstance()!!
