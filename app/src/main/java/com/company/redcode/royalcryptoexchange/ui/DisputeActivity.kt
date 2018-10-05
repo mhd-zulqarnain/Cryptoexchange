@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.*
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.retrofit.MyApiClint
 import com.company.redcode.royalcryptoexchange.utils.*
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -233,46 +234,38 @@ class DisputeActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
+        val imageData = imageTostring(bitmap!!)
+        var obj = ImageObj(imageData, path)
 
-        val StrRequest = object : StringRequest(Request.Method.POST, URL,
-                com.android.volley.Response.Listener { response ->
-                    //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
-                    //          imagename!!.add(response)
-                    try {
-                       var json : JSONObject = JSONObject(response);
-                        var status = json.get("Status");
-                        if(status == "OK")
-                            image = json.getString("Message");
-                        else if(status == "false")
-                            image = "test";
 
-                    }catch (e:Exception){
-
-                    }
-
-                    Toast.makeText(this@DisputeActivity, image, Toast.LENGTH_SHORT).show()
-                    progressBar!!.dismiss()
-
-                }, com.android.volley.Response.ErrorListener {
-            Toast.makeText(this@DisputeActivity, "Error", Toast.LENGTH_SHORT).show()
-            progressBar!!.dismiss()
-        }) {
-            //@Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-                val imageData = imageTostring(bitmap)
-                val params = HashMap<String, String>()
-                //   params.put("image",imageData);
-                // params.put("string1","ali")
-                params["image"] = imageData
-                params["Saving"] = path;
-
-                return params
+        MyApiClint.getInstance()?.getService()?.uploadImage(obj)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                progressBar!!.dismiss()
+                Toast.makeText(this@DisputeActivity,"Failed",Toast.LENGTH_SHORT).show()
+                println("failed")
             }
-        }
 
-        val requestQueue = Volley.newRequestQueue(this@DisputeActivity)
-        requestQueue.add(StrRequest)
+            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<Response>?) {
+                println("passed")
+                if(response!=null){
+                    var ob = response!!.body()
+                    if(ob!!.status== "OK")
+                        image = ob.message!!;
+                    else if(ob!!.status == "false")
+                        image = "test";
+
+                }
+
+
+                Toast.makeText(this@DisputeActivity,"Passed",Toast.LENGTH_SHORT).show()
+                progressBar!!.dismiss()
+            }
+        })
+
+
+
 
     }
 

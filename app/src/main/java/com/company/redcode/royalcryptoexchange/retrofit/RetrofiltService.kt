@@ -149,8 +149,8 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getSingleOrderById(@Path("orderId") orderId:String): Call<Order>
 
-    //Get order by order id
-    @POST("uploadFile.php")
+    //image upload
+    @POST("upload.php")
     @Headers("Content-Type:application/json")
     fun uploadImage(@Body imageObj: ImageObj): Call<Response>
 
