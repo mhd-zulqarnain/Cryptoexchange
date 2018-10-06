@@ -3,7 +3,7 @@ package com.company.redcode.royalcryptoexchange.models
 data class Order(var ORD_Id: String? = null,
                  var User_Id: String? = null,
                  var ORD_UserId: String? = null,
-                 var FUAC_Id: String? = null,
+                 var FUAC_Id: String? = null,  //who place order
                  var FUT_Id: String? = null,
                  var Price: String? = null,
                  var Amount: String? = null,

@@ -176,8 +176,9 @@ class AdvertismentDetailActivity : AppCompatActivity() {
                              bitAmount: String?, amount2: String?, uT_Id: Int?) {
         progressBar!!.show()
 
+        var fuacid = SharedPref.getInstance()!!.getProfilePref(this@AdvertismentDetailActivity).UAC_Id
         ApiClint.getInstance()?.getService()?.orderIRelease(orD_Id!!, fees!!, amount!!, bitAmount!!,
-                amount2!!, uT_Id!!.toString())!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+                amount2!!, uT_Id!!.toString(),fuacid!!)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
 
                 print("error " + t)

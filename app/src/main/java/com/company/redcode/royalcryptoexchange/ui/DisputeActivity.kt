@@ -171,7 +171,6 @@ class DisputeActivity : AppCompatActivity() {
         dialog.show()
     }
 
-
     private fun askForCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this@DisputeActivity, Manifest.permission.CAMERA)) {
             Snackbar.make(findViewById<View>(android.R.id.content), "Need permission for loading data", Snackbar.LENGTH_INDEFINITE).setAction("ENABLE",
@@ -184,8 +183,6 @@ class DisputeActivity : AppCompatActivity() {
                     MY_PERMISSIONS_REQUEST_CAMERA)
         }
     }
-
-
 
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
         val imageData = imageTostring(bitmap!!)
@@ -223,7 +220,6 @@ class DisputeActivity : AppCompatActivity() {
         val imageBytes = outStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
-
 
     fun getPayementId(serviceListener: ServiceListener<String>) {
         progressBar!!.show()
@@ -297,7 +293,7 @@ class DisputeActivity : AppCompatActivity() {
         //image
 
 
-        userOrderDispute.FUAC_Id = order.FUAC_Id
+        userOrderDispute.FUAC_Id = "U-"+SharedPref.getInstance()!!.getProfilePref(this@DisputeActivity).UAC_Id
         userOrderDispute.FUT_Id = order.FUT_Id
         userOrderDispute.FORD_Id = order.ORD_Id
         userOrderDispute.Image = image
@@ -372,8 +368,9 @@ class DisputeActivity : AppCompatActivity() {
 
         userCancelOrder.FORD_Id = order.ORD_Id
         userCancelOrder.FUT_Id = order.FUT_Id
-        userCancelOrder.FUserId = SharedPref.getInstance()!!.getProfilePref(this@DisputeActivity).UAC_Id
+        userCancelOrder.FUserId = "U-"+SharedPref.getInstance()!!.getProfilePref(this@DisputeActivity).UAC_Id
         userCancelOrder.FTrade_UserId = order.User_Id
+        userCancelOrder.Message = ed_dispute_msg.text.toString()
 
         progressBar!!.show()
         ApiClint.getInstance()?.getService()?.cancelOrder(order.BitAmount!!,userCancelOrder)!!.enqueue(object : Callback<String> {

@@ -109,10 +109,10 @@ interface RetrofiltService {
     fun getUserPaymentId(@Path("tradeId") tradeId: String): Call<String>
 
     /*update order status*/
-    @POST("API/Service1.svc/irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}")
+    @POST("API/Service1.svc/irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}/{fuac_id}")
     @Headers("Content-Type:application/json")
     fun orderIRelease(@Path("ord_id") ord_id: String, @Path("utfee") utfee: String, @Path("utamount") utamount: String,
-                      @Path("uobitamount") uobitamount: String, @Path("uoamount") uoamount: String, @Path("ut_id") ut_id: String): Call<Response>
+                      @Path("uobitamount") uobitamount: String, @Path("uoamount") uoamount: String, @Path("ut_id") ut_id: String, @Path("fuac_id") fuac_id: String): Call<Response>
 
     //delete bank detail
     @POST("API/Service1.svc/Delete_UserPaymentDetail/{UP_Id}")

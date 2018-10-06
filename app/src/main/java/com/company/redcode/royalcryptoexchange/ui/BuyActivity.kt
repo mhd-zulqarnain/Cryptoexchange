@@ -180,6 +180,7 @@ class BuyActivity : AppCompatActivity() {
         })
     }
 
+/*
     fun getCoinAfterFee(coinNum: Double, price: Double): Double {
 
         var feeAmount = 4
@@ -191,6 +192,7 @@ class BuyActivity : AppCompatActivity() {
 
         return coinRem
     }
+*/
 
     private fun loadDataFromArrayList() {
         //progressLoadData?.visibility = View.VISIBLE
@@ -202,7 +204,7 @@ class BuyActivity : AppCompatActivity() {
             runOnUiThread {
                 Handler().postDelayed(
                         {
-                            if ((adapter!!.num) * 15 < tradelist!!.size) {
+                            if ((adapter!!.num) * 5 < tradelist!!.size) {
                                 adapter!!.num = adapter!!.num + 1
                             }
                             progressdialog.dismiss()
