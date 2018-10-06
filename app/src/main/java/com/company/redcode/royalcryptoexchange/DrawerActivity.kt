@@ -50,15 +50,18 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     }
 
-    fun updateUserProfile(){
-        getuserData(userId, object : ServiceListener<Users> {
-            override fun success(obj: Users) {
-                mPref!!.setProfilePref(this@DrawerActivity, obj)
-            }
+    fun updateUserProfile() {
+        if (SharedPref.getInstance()!!.getProfilePref(this@DrawerActivity).UAC_Id == null) {
+            getuserData(userId, object : ServiceListener<Users> {
+                override fun success(obj: Users) {
+                    mPref!!.setProfilePref(this@DrawerActivity, obj)
+                }
 
-            override fun fail(error: ServiceError) {}
-        })
+                override fun fail(error: ServiceError) {}
+            })
+        }
     }
+
     private fun getuserData(userId: String?, serviceListener: ServiceListener<Users>) {
         ApiClint.getInstance()?.getService()?.getUserById(userId!!)!!.enqueue(object : Callback<Users> {
             override fun onFailure(call: Call<Users>?, t: Throwable?) {
@@ -143,7 +146,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             if (fragmentCurrent !is HomeFragment) {
                 supportFragmentManager.beginTransaction().replace(R.id.relativeLayout, HomeFragment()).addToBackStack(null).commit();
             } else {
-                super.onBackPressed()
+                finish()
             }
 
         }

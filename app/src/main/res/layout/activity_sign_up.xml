@@ -180,12 +180,12 @@
             android:layout_height="0dp"
             android:layout_weight="1.3"
             android:drawableRight="@drawable/ic_cnic"
-            android:hint="1234567891012"
+            android:hint="12345-1234567-1"
             android:imeOptions="actionDone"
-            android:maxLength="13"
+            android:maxLength="15"
             android:maxLines="1"
             android:singleLine="true"
-
+            android:digits="0123456789 -"
 
             />
 
@@ -215,6 +215,8 @@
             android:layout_height="0dp"
             android:layout_weight="0.05"
             android:background="@color/whitColor" />
+
+
 
         <LinearLayout
             android:layout_width="200dp"

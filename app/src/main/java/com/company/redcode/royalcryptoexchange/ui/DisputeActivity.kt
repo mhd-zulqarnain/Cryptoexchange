@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.*
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.retrofit.MyApiClint
 import com.company.redcode.royalcryptoexchange.utils.*
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -185,100 +186,40 @@ class DisputeActivity : AppCompatActivity() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        progressBar!!.show()
-        if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
-
-            if (data.data != null) {
-                val imagePath = data.data
-
-                val bitmap = MediaStore.Images.Media.getBitmap(this@DisputeActivity.getContentResolver(), imagePath)
-                image_view!!.setImageBitmap(bitmap)
-                uploadtoserver(bitmap, 2, 2)
-
-            }
-
-
-        } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
-//            Bitmap image = (Bitmap) data.getExtras().get("data");
-            var result: Uri = data.data
-//            myImgJson = result
-
-            val bitmap = MediaStore.Images.Media.getBitmap(this@DisputeActivity.getContentResolver(), result)
-            image_view!!.setImageBitmap(bitmap)
-            uploadtoserver(bitmap, 2, 2)
-            /* var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
-             var list = obj.camList
- */
-//            for (i in 0 until list!!.size) {
-//
-//                if (i == 0)
-//                    attach_img_1!!.setImageBitmap(list[i])
-//                if (i == 1)
-//                    attach_img_2!!.setImageBitmap(list[i])
-//                if (i == 2)
-//                    attach_img_3!!.setImageBitmap(list[i])
-//                if (i == 3)
-//                    attach_img_4!!.setImageBitmap(list[i])
-//
-//                var c: Int = list!!.size - 1;
-//                uploadtoserver(list[i], i, (c))
-//            }
-
-        }
-        else
-            progressBar!!.dismiss()
-        super.onActivityResult(requestCode, resultCode, data)
-    }
 
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
+        val imageData = imageTostring(bitmap!!)
+        var obj = ImageObj(imageData, path)
 
-        val StrRequest = object : StringRequest(Request.Method.POST, URL,
-                com.android.volley.Response.Listener { response ->
-                    //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
-                    //          imagename!!.add(response)
-                    try {
-                       var json : JSONObject = JSONObject(response);
-                        var status = json.get("Status");
-                        if(status == "OK")
-                            image = json.getString("Message");
-                        else if(status == "false")
-                            image = "test";
 
-                    }catch (e:Exception){
-
-                    }
-
-                    Toast.makeText(this@DisputeActivity, image, Toast.LENGTH_SHORT).show()
-                    progressBar!!.dismiss()
-
-                }, com.android.volley.Response.ErrorListener {
-            Toast.makeText(this@DisputeActivity, "Error", Toast.LENGTH_SHORT).show()
-            progressBar!!.dismiss()
-        }) {
-            //@Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-                val imageData = imageTostring(bitmap)
-                val params = HashMap<String, String>()
-                //   params.put("image",imageData);
-                // params.put("string1","ali")
-                params["image"] = imageData
-                params["Saving"] = path;
-
-                return params
+        MyApiClint.getInstance()?.getService()?.uploadImage(obj)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                progressBar!!.dismiss()
+                Toast.makeText(this@DisputeActivity,"Failed",Toast.LENGTH_SHORT).show()
+                println("failed")
             }
-        }
 
-        val requestQueue = Volley.newRequestQueue(this@DisputeActivity)
-        requestQueue.add(StrRequest)
+            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<Response>?) {
+                println("passed")
+                if(response!=null){
+                    var ob = response!!.body()
+                    if(ob!!.status== "OK")
+                        image = ob.message!!;
+                    else if(ob!!.status == "false")
+                        image = "test";
+                }
+                progressBar!!.dismiss()
+            }
+        })
+
+
+
 
     }
 
     private fun imageTostring(bitmap: Bitmap): String {
         val outStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outStream)
         val imageBytes = outStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
@@ -451,5 +392,53 @@ class DisputeActivity : AppCompatActivity() {
 
         })
     }
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        progressBar!!.show()
+        if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
+
+            if (data.data != null) {
+                val imagePath = data.data
+
+                val bitmap = MediaStore.Images.Media.getBitmap(this@DisputeActivity.getContentResolver(), imagePath)
+                image_view!!.setImageBitmap(bitmap)
+                uploadtoserver(bitmap, 2, 2)
+
+            }
+
+
+        } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
+//            Bitmap image = (Bitmap) data.getExtras().get("data");
+            val imageBitmap = data.extras.get("data") as Bitmap
+//            myImgJson = result
+
+//            val bitmap = MediaStore.Images.Media.getBitmap(this@DisputeActivity.getContentResolver(), result)
+            image_view!!.setImageBitmap(imageBitmap)
+            uploadtoserver(imageBitmap, 2, 2)
+            /* var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
+             var list = obj.camList
+ */
+//            for (i in 0 until list!!.size) {
+//
+//                if (i == 0)
+//                    attach_img_1!!.setImageBitmap(list[i])
+//                if (i == 1)
+//                    attach_img_2!!.setImageBitmap(list[i])
+//                if (i == 2)
+//                    attach_img_3!!.setImageBitmap(list[i])
+//                if (i == 3)
+//                    attach_img_4!!.setImageBitmap(list[i])
+//
+//                var c: Int = list!!.size - 1;
+//                uploadtoserver(list[i], i, (c))
+//            }
+
+        }
+        else
+            progressBar!!.dismiss()
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
 
 }

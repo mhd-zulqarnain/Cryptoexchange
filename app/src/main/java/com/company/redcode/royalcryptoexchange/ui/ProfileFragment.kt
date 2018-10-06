@@ -29,6 +29,7 @@ import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.UserBankAdapater
 import com.company.redcode.royalcryptoexchange.models.*
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.retrofit.MyApiClint
 import com.company.redcode.royalcryptoexchange.utils.*
 import com.example.admin.camerawork.CameraActivity
 import com.google.gson.Gson
@@ -46,6 +47,7 @@ class ProfileFragment : Fragment() {
     var URL = Constants.IMAGE_URLold;
 
     var btn_add_bank: Button? = null
+    var user_id: TextView? = null
     var btn_add_img: Button? = null
     var spinner_payment_method: Spinner? = null
     var bank_recycler_view: RecyclerView? = null
@@ -71,7 +73,7 @@ class ProfileFragment : Fragment() {
     var btnupdate: Button? = null
     var docimage: LinearLayout? = null;
     var profile_terms: EditText? = null;
-    var image: String = Constants.ProfilePath;
+    var image: String = Constants.IMAGE_URL+"/"+Constants.ProfilePath;
     var list = ArrayList<PaymentMethod>()
     var docver: String? = null;
     var sharedpref: SharedPref = SharedPref.getInstance()!!
@@ -108,6 +110,7 @@ class ProfileFragment : Fragment() {
         profile_terms = view!!.findViewById(R.id.profile_terms);
         docimage = view!!.findViewById(R.id.docimage);
         btn_pass_change = view!!.findViewById(R.id.btn_pass_change);
+        user_id = view!!.findViewById(R.id.user_id);
 
 
 //        profile_terms.performContextClick()
@@ -148,6 +151,7 @@ class ProfileFragment : Fragment() {
 
         fname!!.setText(obj.FirstName)
         lname!!.setText(obj.LastName);
+        user_id!!.setText("U-"+obj.UAC_Id)
         cnic_!!.setText(obj.CNIC);
         pass_!!.setText(obj.Password);
         password = obj.Password!!
@@ -600,7 +604,7 @@ class ProfileFragment : Fragment() {
 
                 val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imagePath)
                 attach_img_1!!.setImageBitmap(bitmap)
-                uploadtoserver(bitmap, 2, 2)
+                uploadtoserver(bitmap, 3, 3)
             }
 
 
@@ -636,7 +640,9 @@ class ProfileFragment : Fragment() {
 
     fun userdoc(fuac: String, doc: String, serviceListener: ServiceListener<String>) {
         ApiClint.getInstance()?.getService()?.add_userdoc(fuac, doc)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
-            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {}
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+
+            }
 
             override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
                 serviceListener.success("success")
@@ -646,18 +652,25 @@ class ProfileFragment : Fragment() {
 
 
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
+        val imageData = imageTostring(bitmap!!)
+        var obj = ImageObj(imageData, Constants.ProfilePath)
 
-        val StrRequest = object : StringRequest(Request.Method.POST, URL,
-                Response.Listener { response ->
-                    //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
+
+        MyApiClint.getInstance()?.getService()?.uploadImage(obj)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+                progressBar!!.dismiss()
+                Toast.makeText(activity!!,"Failed",Toast.LENGTH_SHORT).show()
+                println("failed")
+            }
+
+            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+                println("passed")
+                if(response!=null){
                     var imagename: String? = null;
-                    var status: String? = null;
                     try {
-                        var json: JSONObject = JSONObject(response);
-                        status = json.getString("Status");
-                        if (status == "OK") {
-                            imagename = json.getString("Message");
-
+                        var ob = response!!.body()
+                        if (ob!!.status == "OK") {
+                            imagename = ob.message!!;
 
                             userdoc(fuac_id!!, imagename!!, object : ServiceListener<String> {
                                 override fun success(obj: String) {
@@ -672,76 +685,128 @@ class ProfileFragment : Fragment() {
                                 }
                             })
 
+//                        ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!, imagename!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+//                            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+//                                //   println("error")
+//                            }
+//
+//                            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+//                                if (response != null) {
+//                                    var apiResponse = response.body()
+//                                    if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
+//                                        var status = response.body()!!.message
+//                                        // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+//                                        //finish();
+//                                    } else {
+//                                        //         Toast.makeText(activity!!, "Error in Image uploading!! ", Toast.LENGTH_SHORT).show()
+//
+//                                    }
+//                                }
+//                            }
+//
+//                        });
 
-                            ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!, imagename!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
-                                override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
-                                    //   println("error")
-                                }
 
-                                override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
-                                    if (response != null) {
-                                        var apiResponse = response.body()
-                                        if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
-                                            var status = response.body()!!.message
-                                            // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
-                                            //finish();
-                                        } else {
-                                            //         Toast.makeText(activity!!, "Error in Image uploading!! ", Toast.LENGTH_SHORT).show()
-
-                                        }
-                                    }
-                                }
-
-                            });
-                        } else if (status == "false")
-                            imagename = "test";
-                    } catch (e: Exception) {
-
+                        } else if (ob!!.status == "false")
+                            image = "test";
+                    } catch (e:Exception){
+                        Toast.makeText(activity!!,e.message,Toast.LENGTH_LONG).show()
                     }
+                }
 
-                }, Response.ErrorListener {
-            Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
-            progressBar!!.dismiss()
-        }) {
-            //@Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-                val imageData = imageTostring(bitmap!!)
-                val params = HashMap<String, String>()
-                //   params.put("image",imageData);
-                // params.put("string1","ali")
-                params["image"] = imageData
-                params["Saving"] = image;
 
-                return params
+              //  Toast.makeText(activity!!,"Passed",Toast.LENGTH_SHORT).show()
+                progressBar!!.dismiss()
             }
-        }
+        })
 
-        val requestQueue = Volley.newRequestQueue(activity!!)
-        requestQueue.add(StrRequest)
+
+
 
     }
 
+//    fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
+//
+//        val StrRequest = object : StringRequest(Request.Method.POST, URL,
+//                Response.Listener { response ->
+//                    //Toast.makeText(activity!!, response, Toast.LENGTH_SHORT).show()
+//                    var imagename: String? = null;
+//                    var status: String? = null;
+//                    try {
+//                        var json: JSONObject = JSONObject(response);
+//                        status = json.getString("Status");
+//                        if (status == "OK") {
+//                            imagename = json.getString("Message");
+//
+//
+//                            userdoc(fuac_id!!, imagename!!, object : ServiceListener<String> {
+//                                override fun success(obj: String) {
+//                                    if (i == size) {
+//                                        Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+//                                        progressBar!!.dismiss()
+//                                    }
+//                                }
+//
+//                                override fun fail(error: ServiceError) {
+//                                    Toast.makeText(activity!!, "Server error!! ", Toast.LENGTH_SHORT).show()
+//                                }
+//                            })
+//
+//
+//                            ApiClint.getInstance()?.getService()?.add_userdoc(fuac_id!!, imagename!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+//                                override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
+//                                    //   println("error")
+//                                }
+//
+//                                override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
+//                                    if (response != null) {
+//                                        var apiResponse = response.body()
+//                                        if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
+//                                            var status = response.body()!!.message
+//                                            // Toast.makeText(activity!!, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+//                                            //finish();
+//                                        } else {
+//                                            //         Toast.makeText(activity!!, "Error in Image uploading!! ", Toast.LENGTH_SHORT).show()
+//
+//                                        }
+//                                    }
+//                                }
+//
+//                            });
+//                        } else if (status == "false")
+//                            imagename = "test";
+//                    } catch (e: Exception) {
+//
+//                    }
+//
+//                }, Response.ErrorListener {
+//            Toast.makeText(activity!!, "Error", Toast.LENGTH_SHORT).show()
+//            progressBar!!.dismiss()
+//        }) {
+//            //@Throws(AuthFailureError::class)
+//            override fun getParams(): Map<String, String> {
+//                val imageData = imageTostring(bitmap!!)
+//                val params = HashMap<String, String>()
+//                //   params.put("image",imageData);
+//                // params.put("string1","ali")
+//                params["image"] = imageData
+//                params["Saving"] = image;
+//
+//                return params
+//            }
+//        }
+//
+//        val requestQueue = Volley.newRequestQueue(activity!!)
+//        requestQueue.add(StrRequest)
+//
+//    }
+
     private fun imageTostring(bitmap: Bitmap): String {
         val outStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outStream)
         val imageBytes = outStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
 
-/*override fun onBackPressed() {
-        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
-        val fragmentCurrent = supportFragmentManager.findFragmentById(R.id.relativeLayout)
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
-        } else {
-            if (fragmentCurrent!!.equals(HomeFragment())) {
-                supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                super.onBackPressed()
-            } else {
-                supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                replaceFragment(cameraFragment)
-            }
 
-        }
-    }*/
 }

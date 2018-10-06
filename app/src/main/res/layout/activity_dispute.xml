@@ -212,15 +212,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your Description"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            android:imeOptions="actionDone"
             app:met_baseColor="#ffffff"
             app:met_primaryColor="#45a12e"
             app:met_errorColor="#F6A50A"
             app:met_textColor="#fff"
             android:maxLength="200"
             app:met_minCharacters="100"
-            app:met_maxCharacters="200"
-            android:inputType="textMultiLine"
-            android:lines="2" />
+            app:met_maxCharacters="200" />
 
 
         <Button

@@ -47,7 +47,7 @@ class OrderAdapater(var ctx: Context, var model: ArrayList<Order>, private val o
             tv_date!!.text = order.Order_Date
             tv_price!!.text = order.BitPrice
             if(order.Status== Constants.STATUS_CANCEL){
-                tv_status!!.text = "cancelled"
+                tv_status!!.text = "Cancelled"
             }else
                 tv_status!!.text = order.Status
             tv_description!!.text = order.Description

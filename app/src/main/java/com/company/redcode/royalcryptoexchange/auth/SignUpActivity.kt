@@ -53,22 +53,7 @@ class SignUpActivity : AppCompatActivity() {
         ed_dob.setOnClickListener {
             DateDialog()
         }
-        ed_cnic.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
 
-
-
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-
-            }
-        })
 
 
 
@@ -244,13 +229,14 @@ class SignUpActivity : AppCompatActivity() {
         val cal = Calendar.getInstance()
         var day = cal.get(Calendar.DAY_OF_MONTH);
         var year = cal.get(Calendar.YEAR);
-        var month = cal.get(Calendar.MONTH);
+        var month = cal.get(Calendar.MONTH)+1;
 
         val listener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            ed_dob.setText(dayOfMonth.toString() + "-" + monthOfYear.toString() + "-" + year)
+            var mon  : Int =  monthOfYear + 1;
+            ed_dob.setText(dayOfMonth.toString() + "-" + mon.toString() + "-" + year.toString())
 
         }
-        val dpDialog = DatePickerDialog(this@SignUpActivity, listener, year, month, day)
+        val dpDialog = DatePickerDialog(this@SignUpActivity, listener, year, month+1, day)
         dpDialog.show()
     }
 

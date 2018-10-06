@@ -194,8 +194,10 @@ class SignInActivity : AppCompatActivity() {
                 }
 
                 override fun fail(error: ServiceError) {
+                    dialog.dismiss()
                 }
             })
+
         }
 
 
