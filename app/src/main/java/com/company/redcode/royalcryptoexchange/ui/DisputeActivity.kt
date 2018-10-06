@@ -186,54 +186,6 @@ class DisputeActivity : AppCompatActivity() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        progressBar!!.show()
-        if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
-
-            if (data.data != null) {
-                val imagePath = data.data
-
-                val bitmap = MediaStore.Images.Media.getBitmap(this@DisputeActivity.getContentResolver(), imagePath)
-                image_view!!.setImageBitmap(bitmap)
-                uploadtoserver(bitmap, 2, 2)
-
-            }
-
-
-        } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
-//            Bitmap image = (Bitmap) data.getExtras().get("data");
-            var result: Uri = data.data
-//            myImgJson = result
-
-            val bitmap = MediaStore.Images.Media.getBitmap(this@DisputeActivity.getContentResolver(), result)
-            image_view!!.setImageBitmap(bitmap)
-            uploadtoserver(bitmap, 2, 2)
-            /* var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
-             var list = obj.camList
- */
-//            for (i in 0 until list!!.size) {
-//
-//                if (i == 0)
-//                    attach_img_1!!.setImageBitmap(list[i])
-//                if (i == 1)
-//                    attach_img_2!!.setImageBitmap(list[i])
-//                if (i == 2)
-//                    attach_img_3!!.setImageBitmap(list[i])
-//                if (i == 3)
-//                    attach_img_4!!.setImageBitmap(list[i])
-//
-//                var c: Int = list!!.size - 1;
-//                uploadtoserver(list[i], i, (c))
-//            }
-
-        }
-        else
-            progressBar!!.dismiss()
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
 
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
         val imageData = imageTostring(bitmap!!)
@@ -255,11 +207,7 @@ class DisputeActivity : AppCompatActivity() {
                         image = ob.message!!;
                     else if(ob!!.status == "false")
                         image = "test";
-
                 }
-
-
-                Toast.makeText(this@DisputeActivity,"Passed",Toast.LENGTH_SHORT).show()
                 progressBar!!.dismiss()
             }
         })
@@ -444,5 +392,53 @@ class DisputeActivity : AppCompatActivity() {
 
         })
     }
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        progressBar!!.show()
+        if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
+
+            if (data.data != null) {
+                val imagePath = data.data
+
+                val bitmap = MediaStore.Images.Media.getBitmap(this@DisputeActivity.getContentResolver(), imagePath)
+                image_view!!.setImageBitmap(bitmap)
+                uploadtoserver(bitmap, 2, 2)
+
+            }
+
+
+        } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
+//            Bitmap image = (Bitmap) data.getExtras().get("data");
+            val imageBitmap = data.extras.get("data") as Bitmap
+//            myImgJson = result
+
+//            val bitmap = MediaStore.Images.Media.getBitmap(this@DisputeActivity.getContentResolver(), result)
+            image_view!!.setImageBitmap(imageBitmap)
+            uploadtoserver(imageBitmap, 2, 2)
+            /* var obj = Gson().fromJson(myImgJson, ImageObject::class.java)
+             var list = obj.camList
+ */
+//            for (i in 0 until list!!.size) {
+//
+//                if (i == 0)
+//                    attach_img_1!!.setImageBitmap(list[i])
+//                if (i == 1)
+//                    attach_img_2!!.setImageBitmap(list[i])
+//                if (i == 2)
+//                    attach_img_3!!.setImageBitmap(list[i])
+//                if (i == 3)
+//                    attach_img_4!!.setImageBitmap(list[i])
+//
+//                var c: Int = list!!.size - 1;
+//                uploadtoserver(list[i], i, (c))
+//            }
+
+        }
+        else
+            progressBar!!.dismiss()
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
 
 }

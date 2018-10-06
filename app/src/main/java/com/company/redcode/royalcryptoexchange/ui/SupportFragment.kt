@@ -58,7 +58,7 @@ class SupportFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         var view: View = inflater.inflate(R.layout.fragment_support, container, false)
         initView(view)
-
+        askForCameraPermission()
         val builder = android.app.AlertDialog.Builder(activity!!)
         builder.setView(R.layout.layout_dialog_progress)
         builder.setCancelable(false)
@@ -81,7 +81,7 @@ class SupportFragment : Fragment() {
         attach_img_1 = view!!.findViewById(R.id.attach_img_1)
         btn_supportsubmit = view!!.findViewById(R.id.btn_supportsubmit)
         et_supportmessage = view!!.findViewById(R.id.et_supportmessage)
-        et_title  = view!!.findViewById(R.id.et_title)
+        et_title = view!!.findViewById(R.id.et_title)
 
         btn_supportsubmit!!.setOnClickListener { v ->
 
@@ -106,8 +106,8 @@ class SupportFragment : Fragment() {
             Toast.makeText(activity!!, "Please Upload Image", Toast.LENGTH_SHORT).show()
             return
         }
-        if(image=="test"){
-            Toast.makeText(activity!!,"Error in Image uploading",Toast.LENGTH_SHORT).show()
+        if (image == "test") {
+            Toast.makeText(activity!!, "Error in Image uploading", Toast.LENGTH_SHORT).show()
             return;
         }
 
@@ -126,7 +126,7 @@ class SupportFragment : Fragment() {
                         Toast.makeText(activity!!, "Your Support has been Added", Toast.LENGTH_SHORT).show()
                     else if (api == "fail")
                         Toast.makeText(activity!!, "Unable to Add Support", Toast.LENGTH_SHORT).show()
-                progressBar!!.dismiss()
+                    progressBar!!.dismiss()
                 }
             }
 
@@ -148,7 +148,7 @@ class SupportFragment : Fragment() {
         gallery_dialog.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
-           // intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            // intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             activity!!.startActivityForResult(intent, REQUSET_GALLERY_CODE)
             dialog.dismiss()
         }
@@ -157,12 +157,13 @@ class SupportFragment : Fragment() {
 
             if (ContextCompat.checkSelfPermission(activity!!,
                             Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+
                 var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 activity!!.startActivityForResult(intent, CAMERA_INTENT)
 
             } else {
-                askForCameraPermission()
-                Toast.makeText(activity!!, "Please Allow app to Use Camera of your Device. Thanks", Toast.LENGTH_SHORT).show()
+
+                Toast.makeText(activity!!, "Please Allow app to Use Camera of your Device", Toast.LENGTH_SHORT).show()
             }
             dialog.dismiss()
 
@@ -205,20 +206,23 @@ class SupportFragment : Fragment() {
 
         } else if (requestCode == CAMERA_INTENT && resultCode == Activity.RESULT_OK && data != null) {
 //            Bitmap image = (Bitmap) data.getExtras().get("data");
-            var result: Uri = data!!.data
+            val imageBitmap = data.extras.get("data") as Bitmap
+//            if (data.data != null) {
+//                var result: Uri = data.data
 
 
-            val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), result)
-            attach_img_1!!.setImageBitmap(bitmap)
-            uploadtoserver(bitmap, 2, 2)
-     }
-        else
+//                val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), result)
+                attach_img_1!!.setImageBitmap(imageBitmap)
+                uploadtoserver(imageBitmap, 2, 2)
+           /* }else{
+                println("error")
+                progressBar!!.dismiss()
+
+            }*/
+        } else
             progressBar!!.dismiss()
         super.onActivityResult(requestCode, resultCode, data)
     }
-
-
-
 
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
         val imageData = imageTostring(bitmap!!)
@@ -228,28 +232,26 @@ class SupportFragment : Fragment() {
         MyApiClint.getInstance()?.getService()?.uploadImage(obj)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                 progressBar!!.dismiss()
-                Toast.makeText(activity!!,"Failed",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity!!, "Failed", Toast.LENGTH_SHORT).show()
                 println("failed")
             }
 
             override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
                 println("passed")
-                if(response!=null){
+                if (response != null) {
                     var ob = response!!.body()
-                    if(ob!!.status== "OK")
+                    if (ob!!.status == "OK")
                         image = ob.message!!;
-                    else if(ob!!.status == "false")
+                    else if (ob!!.status == "false")
                         image = "test";
 
                 }
 
 
-                Toast.makeText(activity!!,"Passed",Toast.LENGTH_SHORT).show()
+                //Toast.makeText(activity!!, "Passed", Toast.LENGTH_SHORT).show()
                 progressBar!!.dismiss()
             }
-              })
-
-
+        })
 
 
     }
