@@ -170,6 +170,9 @@ class SignInActivity : AppCompatActivity() {
         alert.setView(view)
         alert.setCancelable(true)
         var dialog = alert.create()
+        //-------------------------------------------------------------------------
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         dialog.show()
         val btnSend: Button = view.findViewById(R.id.btn_recover)
         val ed_dialog_email: EditText = view.findViewById(R.id.ed_email)
@@ -191,8 +194,10 @@ class SignInActivity : AppCompatActivity() {
                 }
 
                 override fun fail(error: ServiceError) {
+                    dialog.dismiss()
                 }
             })
+
         }
 
 

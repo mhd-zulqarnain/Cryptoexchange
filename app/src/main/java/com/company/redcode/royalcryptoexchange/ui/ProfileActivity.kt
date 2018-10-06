@@ -9,9 +9,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.R
-import com.company.redcode.royalcryptoexchange.utils.Apputils
-import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.fragment_profile.*
+
 
 class ProfileActivity : AppCompatActivity() {
 

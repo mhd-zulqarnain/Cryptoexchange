@@ -16,26 +16,32 @@
             android:id="@+id/tv_account_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.4"
+            android:layout_weight="1.2"
             android:text="Bank Name"
-            android:textSize="12sp" />
+            android:textSize="14sp"
+            android:fontFamily="@font/oswald_regular"
+            />
 
         <TextView
             android:id="@+id/tv_account_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.4"
+            android:layout_weight="1.6"
             android:text="1234123"
-            android:textSize="12sp" />
+            android:textSize="14sp"
+            android:fontFamily="@font/oswald_regular"
+            />
+
 
         <Button
             android:id="@+id/btn_edit"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_weight="1"
             android:text="Delete"
-            android:textSize="10dp"
+            android:textSize="13sp"
             android:paddingRight="2dp"
+            android:fontFamily="@font/oswald_regular"
             android:background="@drawable/layout_curve_btn_cancel"
             android:drawableRight="@drawable/ic_delete_black_24dp"
             />

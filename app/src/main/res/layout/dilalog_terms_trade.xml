@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ok"
-        android:background="@drawable/layout_release_order"
+        android:background="@drawable/layout_curve_btn_submit"
         android:fontFamily="@font/oswald_semibold"
         />
 

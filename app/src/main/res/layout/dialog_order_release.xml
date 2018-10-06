@@ -16,38 +16,41 @@
             android:layout_margin="12dp"
             android:background="@drawable/terms_back_ground"
             android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="-50dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_title_trade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/oswald_regular"
-                android:text="Order details "
+                android:text="Order Details "
                 android:textColor="@color/backgoundBtn"
-                android:textSize="35dp" />
+                android:textSize="28sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:weightSum="3"
+
+                    >
 
                     <TextView
                         style="@style/buyActivityText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="User Id: " />
+                        android:text="User ID "
+                        android:layout_gravity="center"
+                        />
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -121,13 +124,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="cancel" />
+                        android:text="Cancel" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -135,11 +138,13 @@
                         android:id="@+id/btn_release"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="12dp"
                         android:layout_alignParentBottom="true"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
-                        android:background="@drawable/layout_release_order"
+                        android:background="@drawable/layout_curve_btn_submit"
                         android:textColor="#fff"
+
                         android:text="Release"
                         android:textSize="10dp"
                         />
@@ -148,12 +153,13 @@
                         android:id="@+id/btn_cancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="12dp"
                         android:layout_alignParentBottom="true"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
                         android:text="Cancel"
                         android:textSize="10dp"
-                        android:background="@drawable/layout_release_order"
+                        android:background="@drawable/layout_curve_btn_cancel"
                         android:textColor="#fff"
                         />
                     <Button

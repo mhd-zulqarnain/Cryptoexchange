@@ -38,6 +38,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             if (data[0] == "dispute") {
                 intent = Intent(this@MyFirebaseMessagingService, DrawerActivity::class.java)
             }else{
+
                 intent = Intent(this@MyFirebaseMessagingService, OrderDetailActivity::class.java)
                 intent.putExtra("type", "service")
                 intent.putExtra("orderId", data[1])
@@ -49,7 +50,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val builder = NotificationCompat.Builder(this, channelId)
                     .setSmallIcon(R.mipmap.ic_launcher_logo)
                     .setContentTitle("RoyalCrypto")
-                    .setContentText(messege).setAutoCancel(true).setContentIntent(pendingIntent)
+                    .setContentText(data[0]).setAutoCancel(true).setContentIntent(pendingIntent)
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT)

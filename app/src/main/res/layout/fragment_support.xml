@@ -3,26 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/color_gradient_profile">
+    android:background="@drawable/royalcryptobackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="15dp"
+        android:layout_margin="12dp"
         android:orientation="vertical"
-        android:weightSum="11.5"
+        android:weightSum="10"
         >
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="clip_vertical"
             android:layout_height="0dp"
-            android:text="Support        "
+            android:text="Support "
             android:textSize="28sp"
             android:fontFamily="@font/oswald_regular"
-
+            android:drawableRight="@drawable/ic_support"
             />
 
 
@@ -48,8 +47,7 @@
             >
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.8"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title"
                 android:textSize="20dp" />
@@ -58,6 +56,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+                android:id="@+id/et_title"
                 android:hint="Enter Title" />
 
 
