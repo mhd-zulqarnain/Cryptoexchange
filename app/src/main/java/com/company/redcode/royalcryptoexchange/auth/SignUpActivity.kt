@@ -56,9 +56,6 @@ class SignUpActivity : AppCompatActivity() {
         ed_cnic.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
 
-                if (editable!!.length == 5 || editable.length == 13) {
-                    editable.append('-');
-                }
 
 
             }

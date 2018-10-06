@@ -179,11 +179,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.3"
-            android:digits="0123456789 -."
             android:drawableRight="@drawable/ic_cnic"
-            android:hint="CNIC"
+            android:hint="1234567891012"
             android:imeOptions="actionDone"
-            android:maxLength="15"
+            android:maxLength="13"
             android:maxLines="1"
             android:singleLine="true"
 
