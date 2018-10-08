@@ -116,6 +116,10 @@ class SignUpActivity : AppCompatActivity() {
             return
         }
 
+        if(!Apputils.isNetworkAvailable(this@SignUpActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         val date = Date()
         var dateCreated = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(date)
 
@@ -209,6 +213,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     fun verifyEmail(code: String, userId: String, serviceListener: ServiceListener<String>) {
+        if (!Apputils.isNetworkAvailable(this@SignUpActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         ApiClint.getInstance()?.getService()?.verifyEmail(userId, code)?.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>?, t: Throwable?) {}
 

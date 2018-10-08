@@ -188,7 +188,10 @@ class DisputeActivity : AppCompatActivity() {
         val imageData = imageTostring(bitmap!!)
         var obj = ImageObj(imageData, path)
 
-
+        if (!Apputils.isNetworkAvailable(this@DisputeActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         MyApiClint.getInstance()?.getService()?.uploadImage(obj)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                 progressBar!!.dismiss()
@@ -222,6 +225,10 @@ class DisputeActivity : AppCompatActivity() {
     }
 
     fun getPayementId(serviceListener: ServiceListener<String>) {
+        if (!Apputils.isNetworkAvailable(this@DisputeActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressBar!!.show()
         ApiClint.getInstance()?.getService()?.getUserPaymentId(order.FUT_Id!!)!!.enqueue(object : Callback<String> {
             override fun onFailure(call: Call<String>?, t: Throwable?) {
@@ -242,6 +249,10 @@ class DisputeActivity : AppCompatActivity() {
     }
 
     fun getTerm(pid: String) {
+        if (!Apputils.isNetworkAvailable(this@DisputeActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressBar!!.show()
         var ownerId = order.User_Id.toString().substring(2)
         ApiClint.getInstance()?.getService()?.gettermAndPayment(ownerId, pid)?.enqueue(object : Callback<OrderTerms> {
@@ -267,6 +278,10 @@ class DisputeActivity : AppCompatActivity() {
     }
 
     fun updateStatus(status: String, order_id: String) {
+        if (!Apputils.isNetworkAvailable(this@DisputeActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         ApiClint.getInstance()?.getService()?.update_order_status(order_id, status)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                 print("error " + t)
@@ -310,6 +325,10 @@ class DisputeActivity : AppCompatActivity() {
             return;
         }
 
+        if (!Apputils.isNetworkAvailable(this@DisputeActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressBar!!.show()
         ApiClint.getInstance()?.getService()?.addDispute(userOrderDispute)!!.enqueue(object : Callback<String> {
             override fun onFailure(call: Call<String>?, t: Throwable?) {
@@ -338,7 +357,10 @@ class DisputeActivity : AppCompatActivity() {
         userOrderPay.Image = image
         userOrderPay.UserId = order.User_Id
         userOrderPay.FORD_Id = order.ORD_Id
-
+        if (!Apputils.isNetworkAvailable(this@DisputeActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressBar!!.show()
         ApiClint.getInstance()?.getService()?.orderPaid(userOrderPay)!!.enqueue(object : Callback<String> {
             override fun onFailure(call: Call<String>?, t: Throwable?) {
@@ -362,6 +384,10 @@ class DisputeActivity : AppCompatActivity() {
         if (ed_dispute_msg.text.toString() == "") {
             Apputils.showMsg(this@DisputeActivity, "Please set a messege")
             ed_dispute_msg!!.requestFocus()
+            return
+        }
+        if (!Apputils.isNetworkAvailable(this@DisputeActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
         var userCancelOrder = UserCancelOrder()
@@ -392,6 +418,10 @@ class DisputeActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (!Apputils.isNetworkAvailable(this@DisputeActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+
+        }else
         progressBar!!.show()
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
 

@@ -1,6 +1,9 @@
 package com.company.redcode.royalcryptoexchange.utils
 
 import android.app.Activity
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.text.TextUtils
 import android.widget.Toast
 import java.text.DecimalFormat
@@ -57,6 +60,14 @@ class Apputils {
                 }
             }*/
             return output
+        }
+        fun isNetworkAvailable(context: Context): Boolean {
+            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            var netInfo: NetworkInfo? = null
+            if (cm != null) {
+                netInfo = cm.activeNetworkInfo
+            }
+            return netInfo != null && netInfo.isConnectedOrConnecting
         }
     }
 }

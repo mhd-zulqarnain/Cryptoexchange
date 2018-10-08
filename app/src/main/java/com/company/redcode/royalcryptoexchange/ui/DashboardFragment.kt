@@ -23,6 +23,7 @@ import com.company.redcode.royalcryptoexchange.adapter.OrderAdapater
 import com.company.redcode.royalcryptoexchange.models.Order
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
 import retrofit2.Call
@@ -88,6 +89,11 @@ class DashboardFragment : Fragment() {
     }
 
     private fun generatetrade() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressBar!!.show();
 //        generateorder();
         adsList.clear()
@@ -113,6 +119,10 @@ class DashboardFragment : Fragment() {
     }
 
     fun getOrderList() {
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         orderList.clear()
         var fuac_id = sharedPref.getProfilePref(activity!!).UAC_Id
         progressBar!!.show()

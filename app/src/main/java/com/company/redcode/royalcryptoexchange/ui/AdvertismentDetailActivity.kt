@@ -54,13 +54,17 @@ class AdvertismentDetailActivity : AppCompatActivity() {
             finish()
         }
         btn_delete.setOnClickListener {
-            deletTrade()
+            if (!Apputils.isNetworkAvailable(this@AdvertismentDetailActivity)) {
+                Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+
+            } else
+                deletTrade()
         }
     }
 
     private fun initView() {
-       // tv_coin_type.text =  "Ecurrency:" + trade.CurrencyType
-        tv_details.text = "Amount:" + trade.Amount + "\n" + "Price:" + trade.Price + "\n" + "Type:" + trade.OrderType +'\n'+"Ecurrency:" + trade.CurrencyType+" "
+        // tv_coin_type.text =  "Ecurrency:" + trade.CurrencyType
+        tv_details.text = "Amount:" + trade.Amount + "\n" + "Price:" + trade.Price + "\n" + "Type:" + trade.OrderType + '\n' + "Ecurrency:" + trade.CurrencyType + " "
         order_recycler = findViewById(R.id.order_recycler)
         val orderlayout = LinearLayoutManager(this@AdvertismentDetailActivity, LinearLayout.VERTICAL, false)
         order_recycler!!.layoutManager = orderlayout
@@ -68,8 +72,10 @@ class AdvertismentDetailActivity : AppCompatActivity() {
             showOrderReleaseDialog(orderList[post])
         }
         order_recycler!!.adapter = orderAdapater
-
-        getOrderList()
+        if (!Apputils.isNetworkAvailable(this@AdvertismentDetailActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+        } else
+            getOrderList()
 
     }
 
@@ -140,7 +146,7 @@ class AdvertismentDetailActivity : AppCompatActivity() {
             btn_dispute.visibility = View.GONE
         }
         tv_name.text = "U-" + order.FUAC_Id
-        tv_coin_amount.text = order.BitAmount+trade.OrderType
+        tv_coin_amount.text = order.BitAmount + trade.OrderType
         tv_price.text = order.BitPrice
 
         btnClose.setOnClickListener {
@@ -174,11 +180,15 @@ class AdvertismentDetailActivity : AppCompatActivity() {
 
     private fun orderRelease(orD_Id: String?, fees: String?, amount: String?,
                              bitAmount: String?, amount2: String?, uT_Id: Int?) {
+        if (!Apputils.isNetworkAvailable(this@AdvertismentDetailActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressBar!!.show()
 
         var fuacid = SharedPref.getInstance()!!.getProfilePref(this@AdvertismentDetailActivity).UAC_Id
 
-        ApiClint.getInstance()?.getService()?.orderIRelease(orD_Id!!, fees!!, amount!!, bitAmount!!, amount2!!, uT_Id!!.toString(),fuacid!!)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+        ApiClint.getInstance()?.getService()?.orderIRelease(orD_Id!!, fees!!, amount!!, bitAmount!!, amount2!!, uT_Id!!.toString(), fuacid!!)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
 
                 print("error " + t)
@@ -200,6 +210,10 @@ class AdvertismentDetailActivity : AppCompatActivity() {
     }
 
     fun getOrderList() {
+        if (!Apputils.isNetworkAvailable(this@AdvertismentDetailActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         var fut_id = trade.UT_Id
         progressBar!!.show()
         ApiClint.getInstance()?.getService()?.getOrderByTradeId(fut_id.toString())!!.enqueue(object : Callback<java.util.ArrayList<Order>> {
@@ -221,24 +235,6 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         })
     }
 
-    fun updateStatus(status: String, order_id: String) {
-        progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.update_order_status(order_id, status)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
-            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
-                print("error " + t)
-                progressBar!!.dismiss()
-            }
-
-            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: Response<com.company.redcode.royalcryptoexchange.models.Response>?) {
-                if (response?.body() != null) {
-                    setResult(RESULT_OK);
-                    finish()
-                    progressBar!!.dismiss()
-                }
-            }
-
-        })
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {

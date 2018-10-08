@@ -34,8 +34,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             var data = remoteMessage.notification.title!!.split(",")
             var intent:Intent = Intent()
 
-//        val intent = Intent(this, DrawerActivity::class.java)
+            var msg = ""
             if (data[0] == "dispute") {
+                msg = "Dispute cre"
+
+                intent = Intent(this@MyFirebaseMessagingService, DrawerActivity::class.java)
+            }else if (data[0] == "release") {
+                msg = "Order has been release"
                 intent = Intent(this@MyFirebaseMessagingService, DrawerActivity::class.java)
             }else{
 

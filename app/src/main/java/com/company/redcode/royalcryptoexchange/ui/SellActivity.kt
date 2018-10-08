@@ -15,6 +15,7 @@ import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.TableSellerAdapater
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_buy.*
@@ -129,6 +130,10 @@ class SellActivity : AppCompatActivity() {
 
 
     private fun getAllTrade() {
+        if (!Apputils.isNetworkAvailable(this@SellActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         tradelist.clear()
         progressBar!!.show()
         var fuacid = SharedPref.getInstance()!!.getProfilePref(this@SellActivity).UAC_Id

@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.TextView
+import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.OrderDetailActivity
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Order
@@ -63,6 +64,10 @@ class PlaceOrderActivity : AppCompatActivity() {
     }
 
     fun getTerm() {
+        if (!Apputils.isNetworkAvailable(this@PlaceOrderActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressBar!!.show()
 
         ApiClint.getInstance()?.getService()?.gettermAndPayment(trade.FUAC_Id.toString()!!, trade.FUP_Id.toString())?.enqueue(object : Callback<OrderTerms> {
@@ -171,6 +176,10 @@ class PlaceOrderActivity : AppCompatActivity() {
                 return
             }
         }
+        if (!Apputils.isNetworkAvailable(this@PlaceOrderActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         if (isTermAccept) {
             progressBar!!.show()
             addOrder(serviceListener = object : ServiceListener<String> {
@@ -229,7 +238,10 @@ class PlaceOrderActivity : AppCompatActivity() {
             order.Description = "bought"
         else
             order.Description = "Sold"
-
+        if (!Apputils.isNetworkAvailable(this@PlaceOrderActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         ApiClint.getInstance()?.getService()?.addNewOrder(
                 order.User_Id!!, order.ORD_UserId!!, order.FUAC_Id!!, order.FUT_Id!!
