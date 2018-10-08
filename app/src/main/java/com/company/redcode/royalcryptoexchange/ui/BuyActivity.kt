@@ -76,7 +76,7 @@ class BuyActivity : AppCompatActivity() {
         seller_filter_group = findViewById(R.id.seller_filter_group)
         seller_price_filter = findViewById(R.id.seller_price_filter)
         seller_limit_filter = findViewById(R.id.seller_limit_filter)
-        set_message = findViewById(R.id.buy_message)
+        set_message = findViewById(R.id.tv_no_data)
 
 
         val coin_type_spinner = findViewById(R.id.curreny_type_spinner) as Spinner
