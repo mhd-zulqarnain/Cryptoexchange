@@ -200,7 +200,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/buy_message"
+            android:id="@+id/tv_no_data"
             android:fontFamily="@font/oswald_regular"
             android:textSize="20sp"
             android:gravity="center"

@@ -189,13 +189,14 @@ class BuyActivity : AppCompatActivity() {
                         tradelist.add(trade)
 
                     }
-                    set_message!!.setText("")
+                    tv_no_data.visibility = View.GONE
                     progressBar!!.dismiss()
                     adapter!!.notifyDataSetChanged()
                 }
                 if(tradelist.size == null || tradelist.size == 0 || response?.body() == null) {
                     Log.d("$$$" , "Working")
-                    set_message!!.setText("Currently no Trade Available!")
+                    tv_no_data!!.setText("Currently no Trade Available!")
+                    tv_no_data.visibility = View.VISIBLE
 
                     //Toast.makeText(this, "Currently no Trade Available!", Toast.LENGTH_LONG).show()
 
@@ -212,22 +213,6 @@ class BuyActivity : AppCompatActivity() {
 
 
     }
-
-    }
-
-/*
-    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
-
-        var feeAmount = 4
-        var totalPrice: Double = coinNum * price
-        var fees: Double = totalPrice * feeAmount / 100
-        var actualPrice: Double = totalPrice - fees
-
-        var coinRem: Double = actualPrice / price
-
-        return coinRem
-    }
-*/
 
     private fun loadDataFromArrayList() {
         //progressLoadData?.visibility = View.VISIBLE
@@ -255,4 +240,20 @@ class BuyActivity : AppCompatActivity() {
             getAllTrade()
         }
     }
-}
+    }
+
+/*
+    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
+
+        var feeAmount = 4
+        var totalPrice: Double = coinNum * price
+        var fees: Double = totalPrice * feeAmount / 100
+        var actualPrice: Double = totalPrice - fees
+
+        var coinRem: Double = actualPrice / price
+
+        return coinRem
+    }
+*/
+
+
