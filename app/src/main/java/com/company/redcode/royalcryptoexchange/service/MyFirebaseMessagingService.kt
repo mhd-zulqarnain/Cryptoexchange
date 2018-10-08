@@ -49,7 +49,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     msg = "Order has been paid"
                 }
                 if (data[0] == "dispute"){
-                    msg = "Order has been canceled"
+                    msg = "Order has been disputed"
                 }
                 intent = Intent(this@MyFirebaseMessagingService, OrderDetailActivity::class.java)
                 intent.putExtra("type", "service")
