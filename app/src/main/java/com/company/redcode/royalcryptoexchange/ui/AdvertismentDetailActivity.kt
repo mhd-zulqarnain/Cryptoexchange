@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -29,6 +30,7 @@ import retrofit2.Response
 
 class AdvertismentDetailActivity : AppCompatActivity() {
 
+    var set_message : TextView? = null
     var order_recycler: RecyclerView? = null
     var orderAdapater: OrderAdapater? = null
     var progressBar: AlertDialog? = null
@@ -59,6 +61,7 @@ class AdvertismentDetailActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        set_message = findViewById(R.id.adv_message)
        // tv_coin_type.text =  "Ecurrency:" + trade.CurrencyType
         tv_details.text = "Amount:" + trade.Amount + "\n" + "Price:" + trade.Price + "\n" + "Type:" + trade.OrderType +'\n'+"Ecurrency:" + trade.CurrencyType+" "
         order_recycler = findViewById(R.id.order_recycler)
@@ -212,8 +215,16 @@ class AdvertismentDetailActivity : AppCompatActivity() {
                     response?.body()?.forEach { order ->
                         orderList.add(order)
                     }
+                    set_message!!.setText("")
                     progressBar!!.dismiss()
                     orderAdapater!!.notifyDataSetChanged()
+                }
+                if(orderList.size == null || orderList.size == 0 || response?.body() == null) {
+                    Log.d("$$$" , "Working")
+                    set_message!!.setText("Currently no Trade Available!")
+
+                    //Toast.makeText(this, "Currently no Trade Available!", Toast.LENGTH_LONG).show()
+
                 }
             }
 

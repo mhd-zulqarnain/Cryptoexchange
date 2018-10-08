@@ -10,10 +10,12 @@ import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.OrderDetailActivity
 
@@ -25,6 +27,7 @@ import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
+import kotlinx.android.synthetic.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +35,8 @@ import retrofit2.Response
 
 class DashboardFragment : Fragment() {
 
+    var set_message1 : TextView? = null
+    var set_message2 : TextView? = null
     var order_recycler: RecyclerView? = null
     var advertisment_recycler: RecyclerView? = null
     var orderAdapater: OrderAdapater? = null
@@ -57,6 +62,8 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initView(view: View?) {
+        set_message1 = view!!.findViewById(R.id.d1_message)
+        set_message2 = view!!.findViewById(R.id.d2_message)
         order_recycler = view!!.findViewById(R.id.order_recycler)
         advertisment_recycler = view!!.findViewById(R.id.advertisment_recycler)
         val orderlayout = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
@@ -103,6 +110,14 @@ class DashboardFragment : Fragment() {
                         response?.body()?.forEach { trade ->
                             adsList.add(trade)
                         }
+                        if(adsList.size == null || adsList.size == 0 || response?.body() == null) {
+                            Log.d("$$$" , "Working")
+                            set_message1!!.setText("Currently no Trade Available!")
+
+                            //Toast.makeText(this, "Currently no Trade Available!", Toast.LENGTH_LONG).show()
+
+                        }
+                        set_message1!!.setText("")
                         progressBar!!.dismiss()
                         adsAdapater!!.notifyDataSetChanged()
                     }
@@ -128,8 +143,16 @@ class DashboardFragment : Fragment() {
                     response?.body()?.forEach { order ->
                         orderList.add(order)
                     }
+                    set_message2!!.setText("")
                     progressBar!!.dismiss()
                     orderAdapater!!.notifyDataSetChanged()
+                }
+                if(orderList.size == null || orderList.size == 0 || response?.body() == null) {
+                    Log.d("$$$" , "Working")
+                    set_message2!!.setText("Currently no Trade Available!")
+
+                    //Toast.makeText(this, "Currently no Trade Available!", Toast.LENGTH_LONG).show()
+
                 }
             }
 

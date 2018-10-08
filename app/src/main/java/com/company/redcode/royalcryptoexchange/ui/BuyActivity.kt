@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.company.redcode.royalcryptoexchange.R
@@ -31,10 +32,12 @@ import java.util.*
 class BuyActivity : AppCompatActivity() {
 
 
+    var set_message : TextView? = null
     var seller_filter_group: RadioGroup? = null
     var seller_limit_filter: RadioButton? = null
     var seller_price_filter: RadioButton? = null
     var seller_coin_filter: RadioButton? = null
+
 
     var progressBar: AlertDialog? = null
     var coin: String = "BTC"
@@ -72,6 +75,7 @@ class BuyActivity : AppCompatActivity() {
         seller_filter_group = findViewById(R.id.seller_filter_group)
         seller_price_filter = findViewById(R.id.seller_price_filter)
         seller_limit_filter = findViewById(R.id.seller_limit_filter)
+        set_message = findViewById(R.id.buy_message)
 
 
         val coin_type_spinner = findViewById(R.id.curreny_type_spinner) as Spinner
@@ -132,12 +136,13 @@ class BuyActivity : AppCompatActivity() {
                 val item = parent!!.getItemAtPosition(pos);
                 coin = item.toString()
                 getAllTrade()
+
             }
         })
 
         seller_filter_group!!.setOnCheckedChangeListener(
                 RadioGroup.OnCheckedChangeListener { group, checkId ->
-                    if (seller_limit_filter!!.isChecked) {
+                    if (seller_limit_filter!!.isChecked ) {
                         Collections.sort(tradelist, Trade.Order.ByLimit.ascending());
                         adapter?.notifyDataSetChanged()
                     }
@@ -159,6 +164,7 @@ class BuyActivity : AppCompatActivity() {
 
 
     private fun getAllTrade() {
+
         tradelist.clear()
 
         progressBar!!.show()
@@ -169,16 +175,39 @@ class BuyActivity : AppCompatActivity() {
                 println("failed "+t)
             }
             override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
+
+
+
+
                 if (response?.body() != null) {
                     response?.body()?.forEach { trade ->
                         tradelist.add(trade)
+
                     }
+                    set_message!!.setText("")
                     progressBar!!.dismiss()
                     adapter!!.notifyDataSetChanged()
                 }
+                if(tradelist.size == null || tradelist.size == 0 || response?.body() == null) {
+                    Log.d("$$$" , "Working")
+                    set_message!!.setText("Currently no Trade Available!")
+
+                    //Toast.makeText(this, "Currently no Trade Available!", Toast.LENGTH_LONG).show()
+
+                }
+
+
+
+
+
+
             }
+
         })
+
+
     }
+
 
     fun getCoinAfterFee(coinNum: Double, price: Double): Double {
 

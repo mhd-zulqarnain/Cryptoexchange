@@ -73,7 +73,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="9dp"
@@ -195,7 +195,18 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/table_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/buy_message"
+            android:fontFamily="@font/oswald_regular"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#cac4c4"
+            />
+
     </LinearLayout>
 </LinearLayout>
 

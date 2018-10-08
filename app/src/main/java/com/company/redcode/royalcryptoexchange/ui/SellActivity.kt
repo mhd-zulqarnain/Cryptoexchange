@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.company.redcode.royalcryptoexchange.R
@@ -26,6 +27,7 @@ import java.util.*
 class SellActivity : AppCompatActivity() {
 
 
+    var set_message : TextView? = null
     var seller_filter_group: RadioGroup? = null
     var seller_limit_filter: RadioButton? = null
     var seller_price_filter: RadioButton? = null
@@ -63,7 +65,7 @@ class SellActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
-
+        set_message = findViewById(R.id.sell_message)
         seller_coin_filter = findViewById(R.id.seller_coin_filter)
         seller_filter_group = findViewById(R.id.seller_filter_group)
         seller_price_filter = findViewById(R.id.seller_price_filter)
@@ -142,8 +144,16 @@ class SellActivity : AppCompatActivity() {
                     response?.body()?.forEach { trade ->
                         tradelist.add(trade)
                     }
+                    set_message!!.setText("")
                     progressBar!!.dismiss()
                     adapter!!.notifyDataSetChanged()
+                }
+                if(tradelist.size == null || tradelist.size == 0 || response?.body() == null) {
+                    Log.d("$$$" , "Working")
+                    set_message!!.setText("Currently no Trade Available!")
+
+                    //Toast.makeText(this, "Currently no Trade Available!", Toast.LENGTH_LONG).show()
+
                 }
             }
         })
