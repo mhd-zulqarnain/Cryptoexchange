@@ -29,28 +29,43 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
         if (remoteMessage.notification != null) {
             var messege = remoteMessage.notification.body
-//            sendNotification(remoteMessage.notification.body!!)
 
             var data = remoteMessage.notification.title!!.split(",")
             var intent:Intent = Intent()
 
-//        val intent = Intent(this, DrawerActivity::class.java)
-            if (data[0] == "dispute") {
-                intent = Intent(this@MyFirebaseMessagingService, DrawerActivity::class.java)
-            }else{
+            var msg = ""
 
+
+                if (data[0] == "release") {
+                    msg = "Order has been release"
+                }
+                if (data[0] == "order"){
+                    msg = "New Order placed"
+                }
+                if (data[0] == "cancel"){
+                    msg = "Order has been canceled"
+                }
+                if (data[0] == "paid"){
+                    msg = "Order has been paid"
+                }
+                if (data[0] == "dispute"){
+                    msg = "Order has been disputed"
+                }
                 intent = Intent(this@MyFirebaseMessagingService, OrderDetailActivity::class.java)
                 intent.putExtra("type", "service")
                 intent.putExtra("orderId", data[1])
                 intent.putExtra("request", data[0])
-            }
+
+
+
+
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
             val channelId = "Default"
             val builder = NotificationCompat.Builder(this, channelId)
                     .setSmallIcon(R.mipmap.ic_launcher_logo)
                     .setContentTitle("RoyalCrypto")
-                    .setContentText(data[0]).setAutoCancel(true).setContentIntent(pendingIntent)
+                    .setContentText(msg).setAutoCancel(true).setContentIntent(pendingIntent)
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT)
@@ -60,64 +75,4 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         }
     }
-
-    /*   private fun sendNotification(messegeBody: String) {
-           var id = ""
-           var messege = ""
-           var type =messegeBody.notification.body
-          *//* if (type.equals("json")) {
-            try {
-                val jsonObject = JSONObject(messegeBody)
-                id = jsonObject.getString("title")
-                messege = jsonObject.getString("body")
-                title = jsonObject.getString("intent")
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-
-        } else if (type.equals("messege")) {
-            messege = messegeBody
-        }*//*
-
-     *//*   val intent = Intent(this@MyFirebaseMessagingService, DrawerActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, 0 *//**//* Request code *//**//*, intent,
-                PendingIntent.FLAG_ONE_SHOT)*//*
-
-     *//*   val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(this@MyFirebaseMessagingService)
-                .setContentTitle(title )
-                .setSmallIcon(R.mipmap.ic_launcher_logo)
-                .setContentText(messege)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent)
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-*//*
-
-
-
-    }*/
-    /* private fun showNotification(title: String, vacancy: String) {
-         val intent = Intent(this, SignInActivity::class.java)
-         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-         val pendingIntent = PendingIntent.getActivity(this, 0 *//* Request code *//*, intent,
-                PendingIntent.FLAG_ONE_SHOT)
-
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(this)
-                .setContentTitle("New job of $title has been added ")
-                .setSmallIcon(R.mipmap.ic_launcher_logo)
-                .setContentText("Vanacy $vacancy")
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent)
-
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        notificationManager.notify(0 *//* ID of notification *//*, notificationBuilder.build())
-    }
-
-*/
-
 }

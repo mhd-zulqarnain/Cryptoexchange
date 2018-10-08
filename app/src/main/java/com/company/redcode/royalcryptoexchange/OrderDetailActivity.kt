@@ -35,7 +35,7 @@ class OrderDetailActivity : AppCompatActivity() {
     var orderTerms: OrderTerms = OrderTerms()
     var toolbar: Toolbar? = null
     private var pref: SharedPref = SharedPref.getInstance()!!
-
+    var serviceRequest:String = ""
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class OrderDetailActivity : AppCompatActivity() {
             initView()
         } else if (intentType == "service") {
             var orderId: String = intent.getStringExtra("orderId")
-            var request: String = intent.getStringExtra("request")
+            serviceRequest = intent.getStringExtra("request")
             var userId = pref.getProfilePref(this@OrderDetailActivity).UAC_Id
             if (userId == null) {
                 val intent = Intent(this@OrderDetailActivity, SignInActivity::class.java)
@@ -107,42 +107,11 @@ class OrderDetailActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initView() {
 
-
-        if (order.Status == Constants.STATUS_CANCEL) {
-            status_tv!!.text = "Cancelled"
-        } else
-            status_tv!!.text = order.Status
-
-        if (order.Status == Constants.STATUS_OPEN) {
-            btn_paid.visibility = View.VISIBLE
-            btn_later.visibility = View.VISIBLE
-            btn_dispute.visibility = View.VISIBLE
-            btn_cancel.visibility = View.VISIBLE
-
-
-        } else if (order.Status == Constants.STATUS_DISPUTE) {
-            btn_paid.visibility = View.GONE
-            btn_later.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-
-        } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
-            btn_paid.visibility = View.GONE
-            btn_later.visibility = View.GONE
-            btn_dispute.visibility = View.VISIBLE
-            btn_cancel.visibility = View.GONE
-        } else if (order.Status == Constants.STATUS_COMPLETED) {
-            btn_paid.visibility = View.GONE
-            btn_later.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-        } else if (order.Status == Constants.STATUS_CANCEL) {
-            btn_paid.visibility = View.GONE
-            btn_later.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-
+        if(serviceRequest!=""){
+            serviceView()
         }
+        else
+            intentView()
 
         getPayementId(object : ServiceListener<String> {
             override fun success(obj: String) {
@@ -225,6 +194,91 @@ class OrderDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun serviceView() {
+        if (serviceRequest == Constants.STATUS_CANCEL) {
+            status_tv!!.text = "Canceled"
+        } else
+            status_tv!!.text = order.Status
+
+        if (serviceRequest == "order") {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.VISIBLE
+            btn_cancel.visibility = View.VISIBLE
+
+
+        } else if (serviceRequest== Constants.STATUS_DISPUTE) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+
+        } else if (serviceRequest == "paid") {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.VISIBLE
+            btn_cancel.visibility = View.GONE
+        }  else if (serviceRequest == "dispute") {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+        } else if (serviceRequest == "release") {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+        } else if (order.Status == Constants.STATUS_COMPLETED) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+        } else if (order.Status == Constants.STATUS_CANCEL) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+
+        }
+    }
+    private fun intentView() {
+        if (order.Status == Constants.STATUS_CANCEL) {
+            status_tv!!.text = "Cancelled"
+        } else
+            status_tv!!.text = order.Status
+
+        if (order.Status == Constants.STATUS_OPEN) {
+            btn_paid.visibility = View.VISIBLE
+            btn_later.visibility = View.VISIBLE
+            btn_dispute.visibility = View.VISIBLE
+            btn_cancel.visibility = View.VISIBLE
+
+
+        } else if (order.Status == Constants.STATUS_DISPUTE) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+
+        } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.VISIBLE
+            btn_cancel.visibility = View.GONE
+        } else if (order.Status == Constants.STATUS_COMPLETED) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+        } else if (order.Status == Constants.STATUS_CANCEL) {
+            btn_paid.visibility = View.GONE
+            btn_later.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+
+        }
+    }
+
     private fun formatMilliSecondsToTime(milliseconds: Long): String {
 
         val seconds = (milliseconds / 1000).toInt() % 60
@@ -246,24 +300,6 @@ class OrderDetailActivity : AppCompatActivity() {
 
     }
 
-    fun updateStatus(status: String, order_id: String) {
-        progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.update_order_status(order_id, status)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
-            override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
-                print("error " + t)
-                progressBar!!.dismiss()
-            }
-
-            override fun onResponse(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, response: retrofit2.Response<Response>?) {
-                if (response?.body() != null) {
-                    setResult(RESULT_OK);
-                    finish()
-                    progressBar!!.dismiss()
-                }
-            }
-
-        })
-    }
 
     fun getPayementId(serviceListener: ServiceListener<String>) {
         progressBar!!.show()

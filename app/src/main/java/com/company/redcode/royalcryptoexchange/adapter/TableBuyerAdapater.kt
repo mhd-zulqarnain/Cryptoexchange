@@ -27,10 +27,10 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private 
 
 
     override fun getItemCount(): Int {
-        return if (num * 15 > data.size) {
+        return if (num * 5 > data.size) {
             data.size
         } else {
-            num * 15
+            num * 5
         }
     }
 

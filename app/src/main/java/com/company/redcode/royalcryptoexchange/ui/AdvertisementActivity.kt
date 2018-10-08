@@ -53,6 +53,10 @@ class AdvertisementActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
+        if(!Apputils.isNetworkAvailable(this@AdvertisementActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -160,7 +164,10 @@ class AdvertisementActivity : AppCompatActivity() {
             Apputils.showMsg(this@AdvertisementActivity, "Upper limit should  be smaller than ${amount.toInt()}")
             return
         }
-
+        if(!Apputils.isNetworkAvailable(this@AdvertisementActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         postNewTrade()
     }
 

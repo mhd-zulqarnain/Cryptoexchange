@@ -64,6 +64,10 @@ class SignInActivity : AppCompatActivity() {
             ed_email!!.requestFocus()
             return
         }
+        if(!Apputils.isNetworkAvailable(this@SignInActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressDialog?.show()
         var token = FirebaseInstanceId.getInstance().getToken()
        var fcm = Response("",token.toString())
@@ -149,6 +153,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun verifyEmail(code: String, userId: String, serviceListener: ServiceListener<String>) {
+        if(!Apputils.isNetworkAvailable(this@SignInActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         ApiClint.getInstance()?.getService()?.verifyEmail(userId, code)?.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>?, t: Throwable?) {}
             override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
@@ -239,6 +247,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun verifyMobile(code: String, serviceListener: ServiceListener<String>) {
+        if(!Apputils.isNetworkAvailable(this@SignInActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         ApiClint.getInstance()?.getService()?.verifyMobile(code)?.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>?, t: Throwable?) {}
             override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
@@ -253,6 +265,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun recoverPassword(ed_dialog_email: EditText, serviceListener: ServiceListener<String>) {
+        if(!Apputils.isNetworkAvailable(this@SignInActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressDialog?.dismiss()
 
         if (!Apputils.isValidEmail(ed_dialog_email!!.text.toString()) || ed_dialog_email!!.text.toString() == "") {
