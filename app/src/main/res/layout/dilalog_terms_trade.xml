@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="42dp"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +34,10 @@
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ok"/>
+        android:text="Ok"
+        android:background="@drawable/layout_curve_btn_submit"
+        android:fontFamily="@font/oswald_semibold"
+        />
 
 
 

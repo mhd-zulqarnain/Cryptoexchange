@@ -37,7 +37,7 @@ class AdsDashboardAdapater(var ctx: Context, var model: ArrayList<Trade>, privat
         var tv_category:TextView? = null
         var tv_executed_amount:TextView? = null
         var tv_executed_fee:TextView? = null
-        var tv_status:TextView? = null
+        var tv_amount:TextView? = null
         var btn_action:Button? = null
 
 
@@ -47,16 +47,14 @@ class AdsDashboardAdapater(var ctx: Context, var model: ArrayList<Trade>, privat
             tv_category = itemView.findViewById(R.id.tv_category)
             tv_executed_amount = itemView.findViewById(R.id.tv_executed_amount)
             tv_executed_fee = itemView.findViewById(R.id.tv_executed_fee)
-            tv_status = itemView.findViewById(R.id.tv_status)
+            tv_amount = itemView.findViewById(R.id.tv_amount)
             btn_action = itemView.findViewById(R.id.btn_action)
 
             tv_time!!.setText(trade.Date)
             tv_category!!.setText(trade.OrderType)
             tv_executed_amount!!.setText(trade.ExecutedAmount)
             tv_executed_fee!!.setText(trade.ExecutedFees)
-            tv_status!!.setText(trade.Status)
-
-
+            tv_amount!!.setText(trade.Amount)
 
         }
 

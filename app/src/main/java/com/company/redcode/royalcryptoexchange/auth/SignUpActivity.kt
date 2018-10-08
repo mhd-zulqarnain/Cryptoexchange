@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -23,6 +26,7 @@ import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.company.redcode.royalcryptoexchange.utils.ServiceError
 import com.company.redcode.royalcryptoexchange.utils.ServiceListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,26 +53,13 @@ class SignUpActivity : AppCompatActivity() {
         ed_dob.setOnClickListener {
             DateDialog()
         }
-        ed_cnic.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
-//                val length = editable?.length
-//                if (prevL < length!! && (length == 5 || length == 13)) {
-//                    editable?.append("-")
-//                }
-                if (editable!!.length == 5 || editable.length == 13) {
-                    editable.append('-');
-                }
-            }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                /*if (ed_cnic.text.toString().length == 5 || ed_cnic.text.toString().length == 13) {
-                    //ed_cnic.text = ed_cnic.text.append('-');
-                }*/
-            }
-        })
+
+
+
+
+
     }
 
     fun signUp(v: View) {
@@ -125,6 +116,10 @@ class SignUpActivity : AppCompatActivity() {
             return
         }
 
+        if(!Apputils.isNetworkAvailable(this@SignUpActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         val date = Date()
         var dateCreated = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(date)
 
@@ -134,14 +129,15 @@ class SignUpActivity : AppCompatActivity() {
                 Email = ed_email.text.toString(),
                 FirstName = ed_first_name.text.toString(), IsActive = "false",
                 IsPhoneNumActive = "false", LastName = ed_last_name.text.toString(), LoginDate = "null", LogoutDate = "null", Password = ed_pasword.text.toString(),
-                PhoneNum = ed_mobile_number.text.toString(), Terms = "null", UAC_Id = "null", UserId = "null")
+                PhoneNum = "0"+ed_mobile_number.text.toString(), Terms = "null", UAC_Id = "null", UserId = "null")
         progressDialog?.show()
-
+        var token = FirebaseInstanceId.getInstance().getToken()
+        var fcm = Response("",token.toString())
         ApiClint.getInstance()?.getService()?.signUpUser(user.FirstName!!, user.LastName!!, email = user.Email!!,
-                mobile = user.PhoneNum!!, password = ed_pasword.text.toString(), cnic = user.CNIC!!, dob = user.DateOfBirth!!)
+                mobile = user.PhoneNum!!, password = ed_pasword.text.toString(), cnic = user.CNIC!!, dob = user.DateOfBirth!!, response = fcm)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
-                        Apputils.showMsg(this@SignUpActivity, "failed")
+                        Apputils.showMsg(this@SignUpActivity, " Try later server error")
                         println("response " + t)
                         progressDialog?.dismiss()
                     }
@@ -217,6 +213,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     fun verifyEmail(code: String, userId: String, serviceListener: ServiceListener<String>) {
+        if (!Apputils.isNetworkAvailable(this@SignUpActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         ApiClint.getInstance()?.getService()?.verifyEmail(userId, code)?.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>?, t: Throwable?) {}
 
@@ -237,13 +237,14 @@ class SignUpActivity : AppCompatActivity() {
         val cal = Calendar.getInstance()
         var day = cal.get(Calendar.DAY_OF_MONTH);
         var year = cal.get(Calendar.YEAR);
-        var month = cal.get(Calendar.MONTH);
+        var month = cal.get(Calendar.MONTH)+1;
 
         val listener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            ed_dob.setText(dayOfMonth.toString() + "-" + monthOfYear.toString() + "-" + year)
+            var mon  : Int =  monthOfYear + 1;
+            ed_dob.setText(dayOfMonth.toString() + "-" + mon.toString() + "-" + year.toString())
 
         }
-        val dpDialog = DatePickerDialog(this@SignUpActivity, listener, year, month, day)
+        val dpDialog = DatePickerDialog(this@SignUpActivity, listener, year, month+1, day)
         dpDialog.show()
     }
 

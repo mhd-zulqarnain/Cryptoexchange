@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Order
+import com.company.redcode.royalcryptoexchange.utils.Constants
 
 class OrderAdapater(var ctx: Context, var model: ArrayList<Order>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<OrderAdapater.MyViewHolder>() {
 
@@ -44,8 +45,11 @@ class OrderAdapater(var ctx: Context, var model: ArrayList<Order>, private val o
             tv_action = itemView.findViewById(R.id.tv_action)
             tv_date = itemView.findViewById(R.id.tv_date)
             tv_date!!.text = order.Order_Date
-            tv_price!!.text = order.Price
-            tv_status!!.text = order.Status
+            tv_price!!.text = order.BitPrice
+            if(order.Status== Constants.STATUS_CANCEL){
+                tv_status!!.text = "Cancelled"
+            }else
+                tv_status!!.text = order.Status
             tv_description!!.text = order.Description
 
 

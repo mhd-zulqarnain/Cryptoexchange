@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@drawable/royalcryptobackground"
     >
 
     <ProgressBar
@@ -18,7 +18,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@mipmap/ic_launcher_logo"
+        android:src="@drawable/logo"
         />
     <TextView
         android:layout_width="match_parent"
@@ -32,6 +32,8 @@
 
 
     <LinearLayout
+        android:layout_margin="10dp"
+
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,12 +51,14 @@
                 style="@style/signUpEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Email"
+                android:hint="Enter Email"
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:drawableRight="@drawable/sign_in_email_icon"
+                />
 
 
 
@@ -72,7 +76,9 @@
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:drawableRight="@drawable/sign_in_password_icon"
+                />
 
 
 
@@ -82,7 +88,7 @@
             android:layout_height="wrap_content"
             android:text="@string/text_forget_password"
             android:layout_margin="4dp"
-            android:textColor="#b6bde7"
+            android:textColor="#00a927"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,7 +106,9 @@
                 android:text="@string/action_sign_in"
                 android:textColor="#Fff"
                 android:layout_marginTop="12dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/oswald_semibold"
+                />
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -116,7 +124,9 @@
                 android:text="@string/action_sign_up"
                 android:textColor="#Fff"
                 android:layout_marginTop="12dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/oswald_semibold"
+                />
         </LinearLayout>
 
 

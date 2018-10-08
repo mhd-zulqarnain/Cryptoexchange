@@ -15,6 +15,7 @@ import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Response
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.*
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,8 +64,14 @@ class SignInActivity : AppCompatActivity() {
             ed_email!!.requestFocus()
             return
         }
+        if(!Apputils.isNetworkAvailable(this@SignInActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressDialog?.show()
-        ApiClint.getInstance()?.getService()?.signIn(ed_email!!.text.toString(), ed_password!!.text.toString())
+        var token = FirebaseInstanceId.getInstance().getToken()
+       var fcm = Response("",token.toString())
+        ApiClint.getInstance()?.getService()?.signIn(ed_email!!.text.toString(), ed_password!!.text.toString(),fcm)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         Apputils.showMsg(this@SignInActivity, "failed")
@@ -146,6 +153,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun verifyEmail(code: String, userId: String, serviceListener: ServiceListener<String>) {
+        if(!Apputils.isNetworkAvailable(this@SignInActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         ApiClint.getInstance()?.getService()?.verifyEmail(userId, code)?.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>?, t: Throwable?) {}
             override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
@@ -167,6 +178,9 @@ class SignInActivity : AppCompatActivity() {
         alert.setView(view)
         alert.setCancelable(true)
         var dialog = alert.create()
+        //-------------------------------------------------------------------------
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         dialog.show()
         val btnSend: Button = view.findViewById(R.id.btn_recover)
         val ed_dialog_email: EditText = view.findViewById(R.id.ed_email)
@@ -188,8 +202,10 @@ class SignInActivity : AppCompatActivity() {
                 }
 
                 override fun fail(error: ServiceError) {
+                    dialog.dismiss()
                 }
             })
+
         }
 
 
@@ -231,6 +247,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun verifyMobile(code: String, serviceListener: ServiceListener<String>) {
+        if(!Apputils.isNetworkAvailable(this@SignInActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         ApiClint.getInstance()?.getService()?.verifyMobile(code)?.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>?, t: Throwable?) {}
             override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
@@ -245,6 +265,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun recoverPassword(ed_dialog_email: EditText, serviceListener: ServiceListener<String>) {
+        if(!Apputils.isNetworkAvailable(this@SignInActivity)){
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressDialog?.dismiss()
 
         if (!Apputils.isValidEmail(ed_dialog_email!!.text.toString()) || ed_dialog_email!!.text.toString() == "") {

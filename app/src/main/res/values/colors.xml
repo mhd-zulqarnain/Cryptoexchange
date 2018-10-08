@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/ActionBAr</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#F6A50A</color>
     <color name="backgoundTheme">#1C2535</color>
     <color name="backgoundBuy">#224255</color>
     <color name="BuyActivityText">#fff</color>
@@ -13,6 +13,7 @@
     <color name="ActionBAr">#356a81</color>
     <color name="backgroundThere">#224255</color>
     <color name="iconColor">#88703f</color>
+    <color name="switchColor">#066b21</color>
 
 
 </resources>

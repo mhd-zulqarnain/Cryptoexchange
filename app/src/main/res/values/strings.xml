@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RoyalCrypto Exchange</string>
     <string name="prompt_name">Name</string>
-    <string name="prompt_password">Password </string>
+    <string name="prompt_password">Enter Password </string>
     <string name="action_sign_in">Sign in </string>
     <string name="action_sign_up">Sign up</string>
     <string name="menu_sign_out">Sign out</string>
@@ -21,12 +21,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="array_support_title">
-        <item>Attempted Froad</item>
-        <item>Low Prize Tranction</item>
-        <item>Not Valid User</item>
-        <item>xxxxxx</item>
-    </string-array>
+
 
     <string-array name="array_currency">
         <item>PKR</item>
@@ -38,11 +33,9 @@
 
     <string-array name="array_coin">
         <item>BTC</item>
-        <item>XRP</item>
+        <item>BCH</item>
+        <item>BTG</item>
         <item>ETH</item>
-        <item>EOS</item>
-        <item>ADA</item>
-        <item>LTC</item>
     </string-array>
 
     <string-array name="array_country">
@@ -66,8 +59,9 @@
     <string-array name="method_payment">
         <item>Easypaisa</item>
         <item>Bank Transfer</item>
-        <item>advcash</item>
-        <item>mobicash</item>
+        <item>Jazz Cash</item>
+        <item>U Paisa</item>
+        <item>Zong Pay</item>
     </string-array>
 
     <string-array name="time_array">

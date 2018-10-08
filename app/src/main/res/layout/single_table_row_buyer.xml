@@ -9,25 +9,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="7">
+        android:weightSum="6">
 
-        <TextView
-            android:id="@+id/tv_User"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Seller"
-            android:textColor="#fff"
-            android:textSize="10sp" />
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/tv_User"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Seller"
+                android:textColor="#fff"
+                android:textSize="10sp"
+                android:layout_marginRight="2dp"/>
+            <ImageView
+                android:id="@+id/user_status"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/ic_online"
+                />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_amount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Amount"
+            android:layout_weight="1.5"
             android:gravity="center"
+            android:text="Amount"
             android:textColor="#fff"
             android:textSize="10sp" />
 
@@ -46,7 +60,7 @@
             android:id="@+id/tv_limit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1.5"
             android:text="Limit"
             android:textColor="#fff"
             android:gravity="center"
@@ -55,11 +69,10 @@
         <Button
             android:id="@+id/btn_buy"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:text="Sell"
             android:background="@drawable/white_curve_btn"
-            android:textColor="@color/backgoundTheme"
             android:textSize="8sp" />
     </LinearLayout>
 

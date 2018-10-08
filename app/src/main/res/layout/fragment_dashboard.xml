@@ -3,9 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/royalcryptobackground"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_margin="15dp"
     android:orientation="vertical"
     tools:context=".ui.DashboardFragment">
+
+
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,8 +24,10 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:drawableRight="@drawable/ic_dashboard_black_24dp"
-        android:text="Dashboard"
-        android:textSize="30sp" />
+        android:text="Dashboard "
+        android:textSize="28sp"
+        android:fontFamily="@font/oswald_regular"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Status"
+                    android:text="Amount"
                     android:textColor="#fff"
                     android:textSize="12dp" />
 
@@ -133,6 +145,20 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2" />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:id="@+id/d1_message"
+            android:fontFamily="@font/oswald_regular"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#cac4c4"
+            />
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -161,7 +187,8 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight=".5"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <View
                 android:layout_width="wrap_content"
@@ -186,7 +213,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center"
                     android:text="Order Description"
                     android:textColor="#fff"
@@ -195,7 +222,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:gravity="center"
                     android:text="Price"
 
@@ -205,7 +232,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:gravity="center"
                     android:text="Status"
                     android:textColor="#fff"
@@ -226,7 +253,8 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:background="#fff" />
+                android:background="#fff"
+                />
 
         </LinearLayout>
 
@@ -235,8 +263,20 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2" />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:id="@+id/d2_message"
+            android:fontFamily="@font/oswald_regular"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#cac4c4"
+            />
 
     </LinearLayout>
 
 
+</LinearLayout>
 </LinearLayout>

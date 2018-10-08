@@ -9,12 +9,15 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.adapter.TableSellerAdapater
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
+import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_buy.*
 import retrofit2.Call
@@ -25,6 +28,7 @@ import java.util.*
 class SellActivity : AppCompatActivity() {
 
 
+    var set_message : TextView? = null
     var seller_filter_group: RadioGroup? = null
     var seller_limit_filter: RadioButton? = null
     var seller_price_filter: RadioButton? = null
@@ -62,7 +66,7 @@ class SellActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
-
+        set_message = findViewById(R.id.sell_message)
         seller_coin_filter = findViewById(R.id.seller_coin_filter)
         seller_filter_group = findViewById(R.id.seller_filter_group)
         seller_price_filter = findViewById(R.id.seller_price_filter)
@@ -82,7 +86,7 @@ class SellActivity : AppCompatActivity() {
         adapter = TableSellerAdapater(this@SellActivity, tradelist) { position ->
 
             var obj = Gson().toJson(tradelist[position])
-            val intent = Intent(this@SellActivity, BuyingDetailActivity::class.java)
+            val intent = Intent(this@SellActivity, PlaceOrderActivity::class.java)
 
             intent.putExtra("tradeObject", obj)
             intent.putExtra("orderType", "sell")
@@ -128,10 +132,14 @@ class SellActivity : AppCompatActivity() {
 
 
     private fun getAllTrade() {
+        if (!Apputils.isNetworkAvailable(this@SellActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         tradelist.clear()
         progressBar!!.show()
-
-        ApiClint.getInstance()?.getService()?.getTrade("sell", coin)?.enqueue(object : Callback<ArrayList<Trade>> {
+        var fuacid = SharedPref.getInstance()!!.getProfilePref(this@SellActivity).UAC_Id
+        ApiClint.getInstance()?.getService()?.getTrade("sell", coin,fuacid = fuacid!!)?.enqueue(object : Callback<ArrayList<Trade>> {
             override fun onFailure(call: Call<ArrayList<Trade>>?, t: Throwable?) {
                 println("error " + t)
             }
@@ -141,24 +149,22 @@ class SellActivity : AppCompatActivity() {
                     response?.body()?.forEach { trade ->
                         tradelist.add(trade)
                     }
+                    set_message!!.setText("")
                     progressBar!!.dismiss()
                     adapter!!.notifyDataSetChanged()
+                }
+                if(tradelist.size == null || tradelist.size == 0 || response?.body() == null) {
+                    Log.d("$$$" , "Working")
+                    set_message!!.setText("Currently no Trade Available!")
+
+                    //Toast.makeText(this, "Currently no Trade Available!", Toast.LENGTH_LONG).show()
+
                 }
             }
         })
     }
 
-    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
 
-        var feeAmount = 4
-        var totalPrice: Double = coinNum * price
-        var fees: Double = totalPrice * feeAmount / 100
-        var actualPrice: Double = totalPrice - fees
-
-        var coinRem: Double = actualPrice / price
-
-        return coinRem
-    }
 
 
 }

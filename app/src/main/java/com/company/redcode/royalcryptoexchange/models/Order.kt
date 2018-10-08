@@ -1,9 +1,9 @@
 package com.company.redcode.royalcryptoexchange.models
 
 data class Order(var ORD_Id: String? = null,
-                 var User_Id	: String? = null,
+                 var User_Id: String? = null,
                  var ORD_UserId: String? = null,
-                 var FUAC_Id: String? = null,
+                 var FUAC_Id: String? = null,  //who place order
                  var FUT_Id: String? = null,
                  var Price: String? = null,
                  var Amount: String? = null,
@@ -17,4 +17,4 @@ data class Order(var ORD_Id: String? = null,
                  var Expire: String? = null,
                  var Description: String? = null,
                  var Notify_Status: String? = null
-                 )
+)
