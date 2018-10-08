@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/color_gradient_profile"
+    android:background="@drawable/royalcryptobackground"
     android:padding="10dp">
 
 
@@ -13,10 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_gravity="clip_vertical"
         android:layout_height="wrap_content"
-        android:text="Wallet"
+        android:text="Wallet "
         android:layout_marginTop="10dp"
         android:textSize="28sp"
         android:fontFamily="@font/oswald_regular"
+        android:drawableRight="@drawable/ic_wallet_black_24dp"
         />
 
 

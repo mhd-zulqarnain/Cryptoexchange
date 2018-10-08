@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.DashboardFragment">
-
+    tools:context=".ui.DashboardFragment"
+    android:background="@drawable/royalcryptobackground"
+    >
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_top"
         android:layout_width="match_parent"
@@ -26,8 +27,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="" />
+            android:text="Advertisement Details"
+            android:layout_gravity="center" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -36,28 +37,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:weightSum="6">
+        android:weightSum="6"
+        android:layout_margin="12dp"
+        >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="6dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Your "
-                android:textSize="20sp" />
+                android:textSize="28sp"
+                android:fontFamily="@font/oswald_regular"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Advertisement"
+                android:text="Advertisement  "
                 android:textColor="@color/backgoundBtn"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="28sp"
+                android:fontFamily="@font/oswald_regular"
+                android:drawableRight="@drawable/ic_advertisementicon"
+                />
 
 
         </LinearLayout>
@@ -90,7 +97,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Details" />
+                android:text="Details"
+                android:textSize="17sp"
+                android:fontFamily="@font/oswald_semibold"
+                />
 
             <TextView
                 android:id="@+id/tv_details"
@@ -114,7 +124,8 @@
                 android:text="Orders"
                 android:textColor="@color/backgoundBtn"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/oswald_semibold"
+                />
 
         </LinearLayout>
 
@@ -135,7 +146,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="5">
+                android:weightSum="5"
+
+                >
 
                 <TextView
                     android:layout_width="0dp"
@@ -149,7 +162,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.6"
                     android:gravity="center"
                     android:text="Order Description"
                     android:textColor="#fff"
@@ -158,7 +171,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:gravity="center"
                     android:text="Price"
 
@@ -168,7 +181,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:gravity="center"
                     android:text="Status"
                     android:textColor="#fff"
@@ -177,7 +190,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:gravity="center"
                     android:text="Action"
                     android:textColor="#fff"

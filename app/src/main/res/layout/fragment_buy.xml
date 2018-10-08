@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:orientation="vertical"
-    android:background="@drawable/color_gradient_profile"
+    android:background="@drawable/royalcryptobackground"
     >
 
     <LinearLayout
@@ -23,11 +23,11 @@
             android:layout_height="0dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="4dp"
-            android:layout_weight=".5"
-            android:fontFamily="@font/mplusregular"
+            android:layout_weight=".6"
+            android:fontFamily="@font/oswald_regular"
             android:text="Place your purchasing rates"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
         <LinearLayout
             android:layout_width="match_parent"

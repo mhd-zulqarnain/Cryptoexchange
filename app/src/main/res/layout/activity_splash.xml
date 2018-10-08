@@ -4,6 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+    tools:context=".SplashActivity"
+    android:background="@drawable/royalcryptobackground"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:text="Powered by ® Red Code "
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="544dp"
+        tools:ignore="MissingConstraints" />
+
+
 
 </android.support.constraint.ConstraintLayout>

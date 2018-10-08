@@ -47,6 +47,7 @@ class ProfileFragment : Fragment() {
     var URL = Constants.IMAGE_URLold;
 
     var btn_add_bank: Button? = null
+    var user_id: TextView? = null
     var btn_add_img: Button? = null
     var spinner_payment_method: Spinner? = null
     var bank_recycler_view: RecyclerView? = null
@@ -109,6 +110,7 @@ class ProfileFragment : Fragment() {
         profile_terms = view!!.findViewById(R.id.profile_terms);
         docimage = view!!.findViewById(R.id.docimage);
         btn_pass_change = view!!.findViewById(R.id.btn_pass_change);
+        user_id = view!!.findViewById(R.id.user_id);
 
 
 //        profile_terms.performContextClick()
@@ -149,6 +151,7 @@ class ProfileFragment : Fragment() {
 
         fname!!.setText(obj.FirstName)
         lname!!.setText(obj.LastName);
+        user_id!!.setText("U-"+obj.UAC_Id)
         cnic_!!.setText(obj.CNIC);
         pass_!!.setText(obj.Password);
         password = obj.Password!!
