@@ -2,6 +2,7 @@ package com.company.redcode.royalcryptoexchange.ui
 
 import android.annotation.TargetApi
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -53,7 +54,7 @@ class AdvertisementActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
-        if(!Apputils.isNetworkAvailable(this@AdvertisementActivity)){
+        if (!Apputils.isNetworkAvailable(this@AdvertisementActivity)) {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
 
         }
@@ -164,7 +165,7 @@ class AdvertisementActivity : AppCompatActivity() {
             Apputils.showMsg(this@AdvertisementActivity, "Upper limit should  be smaller than ${amount.toInt()}")
             return
         }
-        if(!Apputils.isNetworkAvailable(this@AdvertisementActivity)){
+        if (!Apputils.isNetworkAvailable(this@AdvertisementActivity)) {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
@@ -197,7 +198,7 @@ class AdvertisementActivity : AppCompatActivity() {
         val mtrade = Trade(null, userId, orderType, paymentId.toLong(), ed_amount.text.toString(), "0", "0", ed_price.text.toString(), fees.toString(), u_limit.text.toString().toLong(), l_limit.text.toString().toLong(), coin, null, null)
         println(Gson().toJson(mtrade))
         ApiClint.getInstance()?.getService()?.addTrade(fuac_id = mtrade.FUAC_Id.toString(),
-                ordertype = mtrade.OrderType.toString(), fup_id =mtrade.FUP_Id.toString(),
+                ordertype = mtrade.OrderType.toString(), fup_id = mtrade.FUP_Id.toString(),
                 amount = mtrade.Amount.toString(), exeamount = mtrade.ExecutedAmount!!, exefee = mtrade.ExecutedFees!!, price = mtrade.Price.toString(), fees = mtrade.Fees.toString(),
                 ulimit = mtrade.UpperLimit.toString(), llimit = mtrade.LowerLimit.toString(),
                 ctype = mtrade.CurrencyType.toString())?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
@@ -211,6 +212,11 @@ class AdvertisementActivity : AppCompatActivity() {
                     if (apiResponse!!.status == Constants.STATUS_SUCCESS) {
                         var status = response.body()!!.message
                         Toast.makeText(baseContext, "Trade Added Successfully", Toast.LENGTH_SHORT).show()
+                        if (mtrade.OrderType.toString() == "Buy")
+                            startActivity(Intent(this@AdvertisementActivity, BuyActivity::class.java))
+                        else
+                            startActivity(Intent(this@AdvertisementActivity, SellActivity::class.java))
+
                         finish();
                     } else {
                         Toast.makeText(baseContext, "Error!! ", Toast.LENGTH_SHORT).show()
@@ -252,7 +258,7 @@ class AdvertisementActivity : AppCompatActivity() {
                     if (response.body() != null) {
                         var spinnerItem = ""
                         if (response.body()!!.size == 0) {
-                            mypaymentList.add(PaymentMethod("null", "null", "No Payment method added",null,null,"Not added"))
+                            mypaymentList.add(PaymentMethod("null", "null", "No Payment method added", null, null, "Not added"))
                         } else {
                             paymentId = response.body()!!.get(0).UP_Id!!
                         }

@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Trade
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 
 
 class TableSellerAdapater(var ctx: Context, var model: ArrayList<Trade>,private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableSellerAdapater.MyViewHolder>() {
@@ -26,6 +28,10 @@ class TableSellerAdapater(var ctx: Context, var model: ArrayList<Trade>,private 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bindView(model[position],ctx)
         holder.btn_buy!!.setOnClickListener{
+            if(model[position].FUAC_Id.toString() == SharedPref.getInstance()!!.getProfilePref(ctx).UAC_Id)
+            {
+                Toast.makeText(ctx,"You can not place order on your own trade", Toast.LENGTH_LONG).show()
+            }else
             onItemClick(position)
         }
     }

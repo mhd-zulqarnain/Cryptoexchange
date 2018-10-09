@@ -85,6 +85,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="4dp"
             android:text="Sort deals by"
+            android:visibility="gone"
             android:textSize="20sp" />
 
         <RadioGroup
@@ -92,7 +93,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:visibility="gone"
+            >
 
             <RadioButton
                 android:id="@+id/seller_limit_filter"
