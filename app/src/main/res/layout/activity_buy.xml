@@ -6,15 +6,16 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:orientation="vertical"
+    android:weightSum="4"
     android:background="@drawable/royalcryptobackground"
     >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_top"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+       android:layout_height="0dp"
+        android:layout_weight=".3"
         android:background="#346980"
-        android:layout_marginBottom="4dp"
         android:minHeight="?attr/actionBarSize">
 
         <ImageView
@@ -32,26 +33,22 @@
             />
 
     </android.support.v7.widget.Toolbar>
-
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".3"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
         android:text="Buy E-Currency"
-        android:layout_marginTop="10dp"
         android:textSize="28sp"
         android:fontFamily="@font/oswald_regular"
         />
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".3"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
         android:gravity="center|left"
         android:orientation="horizontal">
 
@@ -73,30 +70,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3.1"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="9dp"
         android:orientation="vertical"
-        android:weightSum="8.5">
+        android:weightSum="10">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
             android:layout_gravity="center"
             android:layout_marginLeft="4dp"
             android:text="Sort deals by"
-            android:visibility="gone"
-
             android:textSize="20sp" />
 
         <RadioGroup
             android:id="@+id/seller_filter_group"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
-            android:visibility="gone"
-
             android:weightSum="3">
 
             <RadioButton
@@ -126,7 +121,8 @@
         <LinearLayout
             android:id="@+id/seller_table_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
             android:orientation="vertical">
 
             <View
@@ -199,7 +195,20 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/table_recycler"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="0dp"
+            android:layout_weight="8"/>
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:id="@+id/tv_no_data"
+            android:fontFamily="@font/oswald_regular"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#cac4c4"
+            />
+
     </LinearLayout>
 </LinearLayout>
 

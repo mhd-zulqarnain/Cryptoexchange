@@ -215,7 +215,6 @@ class ProfileFragment : Fragment() {
 
     }
 
-
     fun addbank(acc_cnic: String, acctitle: String, banknumber: String, bankcode: String) {
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()

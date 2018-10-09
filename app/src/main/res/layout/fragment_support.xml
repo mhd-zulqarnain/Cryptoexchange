@@ -32,35 +32,22 @@
             android:text="Write New Request"
             android:gravity="center"
             android:layout_weight="1"
-            android:textSize="24sp" />
+            android:textSize="22sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="20dp" />
 
-        <LinearLayout
+        <EditText
             android:layout_width="match_parent"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:weightSum="3"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:textSize="20dp" />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:id="@+id/et_title"
-                android:hint="Enter Title" />
-
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/et_title"
+            android:layout_marginBottom="15dp"
+            android:hint="Enter Title"
+            android:backgroundTint="#F6A50A"
+            />
 
 
 

@@ -145,6 +145,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2" />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:id="@+id/d1_message"
+            android:fontFamily="@font/oswald_regular"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#cac4c4"
+            />
+
 
 
         <LinearLayout
@@ -251,6 +263,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2" />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:id="@+id/d2_message"
+            android:fontFamily="@font/oswald_regular"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#cac4c4"
+            />
 
     </LinearLayout>
 

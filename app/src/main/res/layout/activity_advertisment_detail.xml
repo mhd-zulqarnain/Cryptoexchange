@@ -216,5 +216,17 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp" />
 
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/adv_message"
+        android:fontFamily="@font/oswald_regular"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="#cac4c4"
+        />
+
 </LinearLayout>
 

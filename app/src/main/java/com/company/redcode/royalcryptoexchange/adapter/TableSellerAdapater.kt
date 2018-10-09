@@ -11,18 +11,30 @@ import android.widget.TextView
 import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Trade
+import com.company.redcode.royalcryptoexchange.utils.OnLoadMoreListener
 import com.company.redcode.royalcryptoexchange.utils.SharedPref
 
 
 class TableSellerAdapater(var ctx: Context, var model: ArrayList<Trade>,private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableSellerAdapater.MyViewHolder>() {
-
+    var num = 1
+    var data = model
+    var context:Context = ctx
+    var onLoadMoreListener: OnLoadMoreListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_seller, parent, false))
+        var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_buyer, parent, false))
         return view
     }
 
     override fun getItemCount(): Int {
-        return model.size
+        return if (num * 5 > data.size) {
+            data.size
+        } else {
+            num * 5
+        }
+    }
+    fun setOnAddMoreListener(onLoadMoreListener: OnLoadMoreListener) {
+        this.onLoadMoreListener = onLoadMoreListener
+
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
