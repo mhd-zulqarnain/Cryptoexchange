@@ -56,9 +56,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 intent.putExtra("orderId", data[1])
                 intent.putExtra("request", data[0])
 
-
-
-
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
             val channelId = "Default"
