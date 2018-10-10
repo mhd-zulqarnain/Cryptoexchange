@@ -33,7 +33,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:layout_margin="18dp"
+    android:layout_margin="12dp"
     android:orientation="vertical">
     <TextView
         android:id="@+id/tv_title_trade"
@@ -41,27 +41,33 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/oswald_regular"
         android:text="Buying Trade Details "
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        android:textColor="#fff"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3"
-        android:layout_margin="7dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="6dp"
+
         >
 
         <TextView
             style="@style/buyActivityText"
             android:layout_width="0dp"
+            android:textColor="#fff"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" Account Title " />
+            android:text="Account Title " />
 
         <TextView
             android:id="@+id/tv_name"
             style="@style/buyActivityText"
             android:layout_width="0dp"
+            android:textColor="#fff"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Mr Seller" />
@@ -72,11 +78,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3"
-        android:layout_margin="7dp"
+        android:layout_margin="6dp"
         >
 
         <TextView
             style="@style/buyActivityText"
+            android:textColor="#fff"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -84,6 +91,7 @@
 
         <TextView
             android:id="@+id/tv_limit"
+            android:textColor="#fff"
             style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -94,13 +102,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp"
+        android:layout_margin="6dp"
         android:orientation="horizontal"
         android:weightSum="3">
 
         <TextView
             style="@style/buyActivityText"
             android:layout_width="0dp"
+            android:textColor="#fff"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Amount " />
@@ -109,6 +118,7 @@
             android:id="@+id/tv_coin_amount"
             style="@style/buyActivityText"
             android:layout_width="0dp"
+            android:textColor="#fff"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="3BTC" />
@@ -117,19 +127,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp"
+        android:layout_margin="6dp"
         android:orientation="horizontal"
         android:weightSum="3">
 
         <TextView
             style="@style/buyActivityText"
             android:layout_width="0dp"
+            android:textColor="#fff"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Price " />
 
         <TextView
             android:id="@+id/tv_price"
+            android:textColor="#fff"
             style="@style/buyActivityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -140,7 +152,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp"
+        android:layout_margin="6dp"
         android:orientation="horizontal"
         android:weightSum="3">
 
@@ -149,6 +161,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="#fff"
             android:layout_margin="7dp"
             android:text="Payment method " />
 
@@ -161,6 +174,7 @@
             <TextView
                 android:id="@+id/tv_terms"
                 style="@style/buyActivityText"
+                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_terms" />
@@ -168,6 +182,7 @@
             <TextView
                 android:id="@+id/tv_payment_method"
                 style="@style/buyActivityText"
+                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -178,21 +193,23 @@
     <android.support.v7.widget.AppCompatCheckBox
         android:id="@+id/chk_terms"
         android:layout_width="wrap_content"
+        android:textColor="#fff"
         android:layout_height="wrap_content"
         android:text="Accept buyer terms and conditions"
-        android:layout_margin="7dp"
+        android:layout_margin="6dp"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp"
+        android:layout_marginTop="27dp"
         android:orientation="horizontal"
         android:weightSum="4">
 
         <EditText
             android:id="@+id/pkr_ed"
             android:layout_width="match_parent"
+
             android:layout_height="45dp"
             android:layout_margin="8dp"
             android:layout_weight="2"
@@ -230,6 +247,8 @@
         android:layout_gravity="center"
         android:background="@drawable/layout_curve_btn_submit"
         android:text="TRADE"
-        android:fontFamily="@font/oswald_semibold"/>
+        android:fontFamily="@font/oswald_semibold"
+        android:layout_marginTop="27dp"
+        />
 </LinearLayout>
 </LinearLayout>
