@@ -125,14 +125,48 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         val btn_paid: Button = view.findViewById(R.id.btn_paid)
         val tv_status: TextView = view.findViewById(R.id.tv_status)
 
-        if(order.Description==Constants.STATUS_BUOUGHT){
-            btn_paid.visibility = View.VISIBLE
-            btn_release.visibility = View.GONE
-        }else{
-            btn_paid.visibility = View.GONE
+
+
+        if (order.Status == Constants.STATUS_CANCEL) {
+            tv_status.text = "Cancelled"
+        } else
+            tv_status.text = order.Status
+
+        if (order.Status == Constants.STATUS_OPEN) {
+            if(order.Description==Constants.STATUS_BUOUGHT){
+                btn_paid.visibility = View.VISIBLE
+                btn_release.visibility = View.GONE
+            }else{
+                btn_paid.visibility = View.GONE
+                btn_release.visibility = View.VISIBLE
+            }
+        } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
             btn_release.visibility = View.VISIBLE
+            btn_cancel.visibility = View.GONE
+            btn_dispute.visibility = View.VISIBLE
+            btn_paid.visibility = View.GONE
 
+        } else if (order.Status == Constants.STATUS_COMPLETED) {
+            btn_release.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+            btn_paid.visibility = View.GONE
+        } else if (order.Status == Constants.STATUS_CANCEL) {
+            btn_release.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+        } else if (order.Status == Constants.STATUS_DISPUTE) {
+            btn_release.visibility = View.GONE
+            btn_cancel.visibility = View.GONE
+            btn_paid.visibility = View.GONE
+            btn_dispute.visibility = View.GONE
+        }
+        tv_name.text = "U-" + order.FUAC_Id
+        tv_coin_amount.text = order.BitAmount + trade.OrderType
+        tv_price.text = order.BitPrice
 
+        btnClose.setOnClickListener {
+            dialog.dismiss()
         }
         btn_paid.setOnClickListener {
 
@@ -145,38 +179,6 @@ class AdvertismentDetailActivity : AppCompatActivity() {
             startActivityForResult(intent, 44)
 
         }
-        if (order.Status == Constants.STATUS_CANCEL) {
-            tv_status.text = "Cancelled"
-        } else
-            tv_status.text = order.Status
-
-        if (order.Status == Constants.STATUS_OPEN) {
-            btn_release.visibility = View.GONE
-        } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
-            btn_release.visibility = View.VISIBLE
-            btn_cancel.visibility = View.GONE
-            btn_dispute.visibility = View.VISIBLE
-        } else if (order.Status == Constants.STATUS_COMPLETED) {
-            btn_release.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-        } else if (order.Status == Constants.STATUS_CANCEL) {
-            btn_release.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-        } else if (order.Status == Constants.STATUS_DISPUTE) {
-            btn_release.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-        }
-        tv_name.text = "U-" + order.FUAC_Id
-        tv_coin_amount.text = order.BitAmount + trade.OrderType
-        tv_price.text = order.BitPrice
-
-        btnClose.setOnClickListener {
-            dialog.dismiss()
-        }
-
         btn_cancel.setOnClickListener {
             var intent = Intent(this@AdvertismentDetailActivity, DisputeActivity::class.java)
             var obj = Gson().toJson(order)
