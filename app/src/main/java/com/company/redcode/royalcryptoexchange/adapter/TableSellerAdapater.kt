@@ -80,6 +80,13 @@ class TableSellerAdapater(var ctx: Context, var model: ArrayList<Trade>,private 
             tv_amount!!.setText(trade.Amount + trade.CurrencyType)
             tv_price!!.setText(/*Apputils.formatCurrency(*/trade.Price!!)/*)*/
 
+            if(trade.OrderType=="Sell"){
+                btn_buy!!.setText("Buy")
+            }else{
+                btn_buy!!.setText("Sell")
+
+            }
+
             var resources = ctx.getResources()
             if(trade.ut_status=="0"){
                 user_status.setImageDrawable(resources.getDrawable(R.drawable.ic_offline))

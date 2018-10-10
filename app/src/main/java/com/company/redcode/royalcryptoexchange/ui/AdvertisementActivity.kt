@@ -89,8 +89,8 @@ class AdvertisementActivity : AppCompatActivity() {
 
                         remCoin = getCoinAfterFee(amount)
                         fees = amount * 4 / 100
-                        tv_fees!!.setText(BigDecimal.valueOf(fees!!).toPlainString())
-                        tv_total!!.setText(BigDecimal.valueOf(remCoin!!).toPlainString())
+                        tv_fees!!.setText(BigDecimal.valueOf(fees!!).toPlainString()+"%")
+                        tv_total!!.setText(BigDecimal.valueOf(remCoin!!).toPlainString()+"%")
 
                     } catch (e: Exception) {
                         println("error")

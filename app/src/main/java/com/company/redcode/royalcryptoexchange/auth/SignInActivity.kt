@@ -222,6 +222,7 @@ class SignInActivity : AppCompatActivity() {
         val btnSend: Button = view.findViewById(R.id.btnmobileverify)
         val ed_mobilecode: EditText = view.findViewById(R.id.ed_mobilecode)
 
+
         btnSend.setOnClickListener {
             progressDialog!!.show()
             verifyMobile(mbl, object : ServiceListener<String> {
