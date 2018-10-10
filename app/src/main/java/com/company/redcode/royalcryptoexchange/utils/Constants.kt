@@ -26,6 +26,8 @@ class Constants{
         const val STATUS_IN_PROGRESS = "in-process"
         const val STATUS_COMPLETED = "completed"
         const val STATUS_CANCEL = "cancel"
+        const val STATUS_BUOUGHT = "bought"
+        const val STATUS_SOLD = "sold"
 
     }
 }

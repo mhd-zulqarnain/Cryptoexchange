@@ -122,8 +122,29 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         val btn_release: Button = view.findViewById(R.id.btn_release)
         val btn_cancel: Button = view.findViewById(R.id.btn_cancel)
         val btn_dispute: Button = view.findViewById(R.id.btn_dispute)
+        val btn_paid: Button = view.findViewById(R.id.btn_paid)
         val tv_status: TextView = view.findViewById(R.id.tv_status)
 
+        if(order.Description==Constants.STATUS_BUOUGHT){
+            btn_paid.visibility = View.VISIBLE
+            btn_release.visibility = View.GONE
+        }else{
+            btn_paid.visibility = View.GONE
+            btn_release.visibility = View.VISIBLE
+
+
+        }
+        btn_paid.setOnClickListener {
+
+            // updateStatus(Constants.STATUS_IN_PROGRESS, order.ORD_Id!!)
+
+            var intent = Intent(this@AdvertismentDetailActivity, DisputeActivity::class.java)
+            var obj = Gson().toJson(order)
+            intent.putExtra("order", obj)
+            intent.putExtra("activity", "paid")
+            startActivityForResult(intent, 44)
+
+        }
         if (order.Status == Constants.STATUS_CANCEL) {
             tv_status.text = "Cancelled"
         } else
