@@ -134,11 +134,12 @@ class AdvertismentDetailActivity : AppCompatActivity() {
 
         if (order.Status == Constants.STATUS_OPEN) {
             if(order.Description==Constants.STATUS_BUOUGHT){
-                btn_paid.visibility = View.VISIBLE
-                btn_release.visibility = View.GONE
-            }else{
                 btn_paid.visibility = View.GONE
                 btn_release.visibility = View.VISIBLE
+            }else{
+                btn_paid.visibility = View.VISIBLE
+                btn_release.visibility = View.GONE
+
             }
         } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
             btn_release.visibility = View.VISIBLE
