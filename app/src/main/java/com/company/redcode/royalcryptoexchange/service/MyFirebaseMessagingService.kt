@@ -28,9 +28,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             type = "json"
         }
         if (remoteMessage.notification != null) {
-            var messege = remoteMessage.notification.body
+            var messege = remoteMessage.notification.title
 
-            var data = remoteMessage.notification.title!!.split(",")
+            var data = remoteMessage.notification.body!!.split(",")
             var intent:Intent = Intent()
 
             var msg = ""
