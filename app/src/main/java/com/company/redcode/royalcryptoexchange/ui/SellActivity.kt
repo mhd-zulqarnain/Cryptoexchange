@@ -225,7 +225,7 @@ class SellActivity : AppCompatActivity() {
             runOnUiThread {
                 Handler().postDelayed(
                         {
-                            if ((adapter!!.num) * 5 < tradelist!!.size) {
+                            if ((adapter!!.num) * 20 < tradelist!!.size) {
                                 adapter!!.num = adapter!!.num + 1
                             }
                             progressdialog.dismiss()
