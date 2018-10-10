@@ -350,6 +350,9 @@ class ProfileFragment : Fragment() {
         alertBox.setCancelable(true)
         val dialog = alertBox.create()
 
+        //-------------------------------------------------------------------------
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         val ed_old_pass: EditText = view.findViewById(R.id.ed_old_pass)
         val ed_new_pass: EditText = view.findViewById(R.id.ed_new_pass)
         val ed_confirm_pass: EditText = view.findViewById(R.id.ed_confirm_pass)
