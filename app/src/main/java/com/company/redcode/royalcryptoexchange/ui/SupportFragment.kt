@@ -25,6 +25,7 @@ import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.*
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.retrofit.MyApiClint
+import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.Constants
 import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.rengwuxian.materialedittext.MaterialEditText
@@ -35,22 +36,19 @@ import java.io.ByteArrayOutputStream
 
 
 class SupportFragment : Fragment() {
-    var URL = Constants.BASE_URL;
+
     private val CAMERA_INTENT = 555
     private val REQUSET_GALLERY_CODE: Int = 44
     var progressBar: android.app.AlertDialog? = null
     private val MY_PERMISSIONS_REQUEST_CAMERA = 999
     private var attach_img_1: ImageView? = null
-    private var attach_img_2: ImageView? = null
-    private var attach_img_3: ImageView? = null
-    private var attach_img_4: ImageView? = null
-    private var myImgJson: String? = null
+
     var et_title: EditText? = null
     var sharedpref: SharedPref = SharedPref.getInstance()!!
     var et_supportmessage: MaterialEditText? = null
     var btn_supportsubmit: Button? = null
     var btn_add: Button? = null
-    var coin: String = " "
+
     var image: String = "a"
     var fuac_id: String? = null
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -72,18 +70,18 @@ class SupportFragment : Fragment() {
     }
 
     private fun initView(view: View) {
-        btn_add = view!!.findViewById(R.id.btn_add)
+        btn_add = view.findViewById(R.id.btn_add)
 
 
         btn_add!!.setOnClickListener {
             supportImageDialoge()
         }
-        attach_img_1 = view!!.findViewById(R.id.attach_img_1)
-        btn_supportsubmit = view!!.findViewById(R.id.btn_supportsubmit)
-        et_supportmessage = view!!.findViewById(R.id.et_supportmessage)
-        et_title = view!!.findViewById(R.id.et_title)
+        attach_img_1 = view.findViewById(R.id.attach_img_1)
+        btn_supportsubmit = view.findViewById(R.id.btn_supportsubmit)
+        et_supportmessage = view.findViewById(R.id.et_supportmessage)
+        et_title = view.findViewById(R.id.et_title)
 
-        btn_supportsubmit!!.setOnClickListener { v ->
+        btn_supportsubmit!!.setOnClickListener {
 
             validate()
 
@@ -110,7 +108,10 @@ class SupportFragment : Fragment() {
             Toast.makeText(activity!!, "Error in Image uploading", Toast.LENGTH_SHORT).show()
             return;
         }
-
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         progressBar!!.show()
         var support = SupportTicket(null, et_title!!.text.toString(), et_supportmessage!!.text.toString(), image, fuac_id!!)
@@ -191,6 +192,9 @@ class SupportFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+        }else
         progressBar!!.show()
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
 
@@ -228,7 +232,10 @@ class SupportFragment : Fragment() {
         val imageData = imageTostring(bitmap!!)
         var obj = ImageObj(imageData, Constants.SupportPath)
 
-
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         MyApiClint.getInstance()?.getService()?.uploadImage(obj)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                 progressBar!!.dismiss()

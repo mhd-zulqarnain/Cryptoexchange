@@ -38,6 +38,7 @@
             android:gravity="center"
             android:text="Executed Amount"
             android:textColor="#fff"
+            android:maxLength="9"
             android:textSize="12dp" />
 
         <TextView
@@ -48,6 +49,7 @@
             android:gravity="center"
             android:text="Executed Fee"
             android:textColor="#fff"
+            android:maxLength="9"
             android:textSize="12dp" />
 
         <TextView
@@ -56,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Status"
+            android:text="amount"
+            android:maxLength="9"
             android:textColor="#fff"
             android:textSize="12dp" />
         <Button

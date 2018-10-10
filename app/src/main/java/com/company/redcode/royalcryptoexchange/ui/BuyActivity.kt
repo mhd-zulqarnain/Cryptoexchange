@@ -20,6 +20,7 @@ import com.company.redcode.royalcryptoexchange.adapter.TableBuyerAdapater
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.AppExecutors
+import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_buy.*
@@ -75,7 +76,7 @@ class BuyActivity : AppCompatActivity() {
         seller_filter_group = findViewById(R.id.seller_filter_group)
         seller_price_filter = findViewById(R.id.seller_price_filter)
         seller_limit_filter = findViewById(R.id.seller_limit_filter)
-        set_message = findViewById(R.id.buy_message)
+        set_message = findViewById(R.id.tv_no_data)
 
 
         val coin_type_spinner = findViewById(R.id.curreny_type_spinner) as Spinner
@@ -165,6 +166,10 @@ class BuyActivity : AppCompatActivity() {
 
     private fun getAllTrade() {
 
+        if (!Apputils.isNetworkAvailable(this@BuyActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+        return
+        }
         tradelist.clear()
 
         progressBar!!.show()
@@ -184,13 +189,14 @@ class BuyActivity : AppCompatActivity() {
                         tradelist.add(trade)
 
                     }
-                    set_message!!.setText("")
+                    tv_no_data.visibility = View.GONE
                     progressBar!!.dismiss()
                     adapter!!.notifyDataSetChanged()
                 }
                 if(tradelist.size == null || tradelist.size == 0 || response?.body() == null) {
                     Log.d("$$$" , "Working")
-                    set_message!!.setText("Currently no Trade Available!")
+                    tv_no_data!!.setText("Currently no Trade Available!")
+                    tv_no_data.visibility = View.VISIBLE
 
                     //Toast.makeText(this, "Currently no Trade Available!", Toast.LENGTH_LONG).show()
 
@@ -208,19 +214,6 @@ class BuyActivity : AppCompatActivity() {
 
     }
 
-
-    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
-
-        var feeAmount = 4
-        var totalPrice: Double = coinNum * price
-        var fees: Double = totalPrice * feeAmount / 100
-        var actualPrice: Double = totalPrice - fees
-
-        var coinRem: Double = actualPrice / price
-
-        return coinRem
-    }
-
     private fun loadDataFromArrayList() {
         //progressLoadData?.visibility = View.VISIBLE
         val progressdialog = ProgressDialog(this@BuyActivity)
@@ -231,7 +224,7 @@ class BuyActivity : AppCompatActivity() {
             runOnUiThread {
                 Handler().postDelayed(
                         {
-                            if ((adapter!!.num) * 15 < tradelist!!.size) {
+                            if ((adapter!!.num) * 5 < tradelist!!.size) {
                                 adapter!!.num = adapter!!.num + 1
                             }
                             progressdialog.dismiss()
@@ -247,4 +240,20 @@ class BuyActivity : AppCompatActivity() {
             getAllTrade()
         }
     }
-}
+    }
+
+/*
+    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
+
+        var feeAmount = 4
+        var totalPrice: Double = coinNum * price
+        var fees: Double = totalPrice * feeAmount / 100
+        var actualPrice: Double = totalPrice - fees
+
+        var coinRem: Double = actualPrice / price
+
+        return coinRem
+    }
+*/
+
+

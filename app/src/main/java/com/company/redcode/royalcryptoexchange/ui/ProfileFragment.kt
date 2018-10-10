@@ -215,9 +215,11 @@ class ProfileFragment : Fragment() {
 
     }
 
-
     fun addbank(acc_cnic: String, acctitle: String, banknumber: String, bankcode: String) {
-
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         ApiClint?.getInstance()?.getService()?.add_paymentdetail(fuac_id!!, spinnervalue!!, acc_cnic!!, acctitle!!, banknumber!!, bankcode!!)?.enqueue(object : Callback<PaymentMethod> {
             override fun onFailure(call: Call<PaymentMethod>?, t: Throwable?) {
                 print("Error While Adding Bank Details" + t)
@@ -289,6 +291,10 @@ class ProfileFragment : Fragment() {
         if (profile_terms!!.text.toString() == "") {
             terms = "Your Terms";
             //   profile_terms!!.setText(terms);
+        }
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
         }
         ApiClint.getInstance()?.getService()?.update_profile(fuac_id!!, firstname!!, lastname!!, password!!, terms!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
@@ -554,6 +560,11 @@ class ProfileFragment : Fragment() {
 
     fun deletepayment(uP_Id: String?, param: ServiceListener<String>) {
 
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         ApiClint.getInstance()?.getService()?.delete_bank(uP_Id!!)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
                 print("Error")
@@ -579,6 +590,9 @@ class ProfileFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+        }else
         progressBar!!.show()
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
 
@@ -642,6 +656,10 @@ class ProfileFragment : Fragment() {
 
 
     fun userdoc(fuac: String, doc: String, serviceListener: ServiceListener<String>) {
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         ApiClint.getInstance()?.getService()?.add_userdoc(fuac, doc)?.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
 
@@ -655,6 +673,10 @@ class ProfileFragment : Fragment() {
 
 
     fun uploadtoserver(bitmap: Bitmap, i: Int, size: Int) {
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         val imageData = imageTostring(bitmap!!)
         var obj = ImageObj(imageData, Constants.ProfilePath)
 

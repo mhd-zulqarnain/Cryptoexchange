@@ -56,8 +56,6 @@ class AdsDashboardAdapater(var ctx: Context, var model: ArrayList<Trade>, privat
             tv_executed_fee!!.setText(trade.ExecutedFees)
             tv_amount!!.setText(trade.Amount)
 
-
-
         }
 
     }

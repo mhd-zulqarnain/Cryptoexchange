@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.utils.OnLoadMoreListener
-
-
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 
 
 class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableBuyerAdapater.MyViewHolder>() {
@@ -27,16 +27,20 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private 
 
 
     override fun getItemCount(): Int {
-        return if (num * 15 > data.size) {
+        return if (num * 5 > data.size) {
             data.size
         } else {
-            num * 15
+            num * 5
         }
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bindView(model[position],ctx)
         holder.btn_buy!!.setOnClickListener {
+            if(model[position].FUAC_Id.toString() == SharedPref.getInstance()!!.getProfilePref(ctx).UAC_Id)
+            {
+                Toast.makeText(ctx,"You can not place order on your own trade",Toast.LENGTH_LONG).show()
+            }else
             onItemClick(position)
         }
     }
@@ -67,12 +71,12 @@ class TableBuyerAdapater(var ctx: Context, var model: ArrayList<Trade>, private 
             tv_seller = itemView.findViewById(R.id.tv_User)
             tv_amount = itemView.findViewById(R.id.tv_amount)
             btn_buy = itemView.findViewById(R.id.btn_buy)
-           var user_status: ImageView = itemView.findViewById(R.id.user_status)
-
+            var user_status: ImageView = itemView.findViewById(R.id.user_status)
 
             tv_limit!!.setText(/*Apputils.formatCurrency(*/trade.UpperLimit.toString() + "-" +
                     /*Apputils.formatCurrency(*/trade.LowerLimit.toString())
             tv_seller!!.setText("U-" + trade.FUAC_Id)
+
 
             tv_amount!!.setText(trade.Amount )
             tv_price!!.setText(/*Apputils.formatCurrency(*/trade.Price!!)/*)*/

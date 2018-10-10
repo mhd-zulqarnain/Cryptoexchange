@@ -19,10 +19,6 @@ class ProfileActivity : AppCompatActivity() {
         var  fragentTrasaction =supportFragmentManager.beginTransaction()
         fragentTrasaction!!.add(R.id.fragment_container, ProfileFragment()).commit()
 
-
-
-
-
     }
 
 
