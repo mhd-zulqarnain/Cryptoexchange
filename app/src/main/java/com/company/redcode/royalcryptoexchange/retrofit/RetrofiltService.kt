@@ -109,9 +109,9 @@ interface RetrofiltService {
     fun getUserPaymentId(@Path("tradeId") tradeId: String): Call<String>
 
     /*update order status*/
-    @POST("API/Service1.svc/irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}/{fuac_id}")
+    @POST("API/Service1.svc/irelease/{status}/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}/{fuac_id}")
     @Headers("Content-Type:application/json")
-    fun orderIRelease(@Path("ord_id") ord_id: String, @Path("utfee") utfee: String, @Path("utamount") utamount: String,
+    fun orderIRelease(@Path("status") status: String,@Path("ord_id") ord_id: String, @Path("utfee") utfee: String, @Path("utamount") utamount: String,
                       @Path("uobitamount") uobitamount: String, @Path("uoamount") uoamount: String, @Path("ut_id") ut_id: String, @Path("fuac_id") fuac_id: String): Call<Response>
 
     //delete bank detail
@@ -131,9 +131,9 @@ interface RetrofiltService {
     fun addDispute(@Body userOrderDispute: UserOrderDispute): Call<String>
 
     //I have paid
-    @POST("API/Service1.svc/UserOrder_Pay")
+    @POST("API/Service1.svc/UserOrder_Pay/{userid}")
     @Headers("Content-Type:application/json")
-    fun orderPaid(@Body userOrderPay: UserOrderPay): Call<String>
+    fun orderPaid(@Path("userid") userid:String,@Body userOrderPay: UserOrderPay): Call<String>
 
     //I have paid
     @POST("API/Service1.svc/UserCancel_Order/{bitamount}")

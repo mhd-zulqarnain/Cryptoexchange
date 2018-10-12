@@ -246,32 +246,19 @@ class OrderDetailActivity : AppCompatActivity() {
             btn_cancel.visibility = View.GONE
             btn_release.visibility = View.GONE
 
-        } else if (serviceRequest == "dispute") {
+        } else if (serviceRequest == "dispute" || serviceRequest == "release" ||order.Status == Constants.STATUS_COMPLETED||order.Status == Constants.STATUS_CANCEL) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.GONE
             btn_cancel.visibility = View.GONE
             btn_release.visibility = View.GONE
-        } else if (serviceRequest == "release") {
+        } else if (order.Status==Constants.STATUS_IN_PROGRESS) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
+            btn_dispute.visibility = View.VISIBLE
             btn_cancel.visibility = View.GONE
-            btn_release.visibility = View.GONE
+            btn_release.visibility = View.VISIBLE
 
-        } else if (order.Status == Constants.STATUS_COMPLETED) {
-            btn_paid.visibility = View.GONE
-            btn_later.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-            btn_release.visibility = View.GONE
-
-        } else if (order.Status == Constants.STATUS_CANCEL) {
-            btn_paid.visibility = View.GONE
-            btn_later.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-            btn_release.visibility = View.GONE
         }
 
     }
@@ -306,12 +293,16 @@ class OrderDetailActivity : AppCompatActivity() {
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.GONE
             btn_cancel.visibility = View.GONE
+            btn_release.visibility = View.GONE
+
 
         } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.VISIBLE
             btn_cancel.visibility = View.GONE
+            btn_release.visibility = View.VISIBLE
+
         } else if (order.Status == Constants.STATUS_COMPLETED) {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
@@ -323,6 +314,7 @@ class OrderDetailActivity : AppCompatActivity() {
             btn_paid.visibility = View.GONE
             btn_later.visibility = View.GONE
             btn_dispute.visibility = View.GONE
+            btn_release.visibility = View.GONE
             btn_cancel.visibility = View.GONE
 
         }
@@ -412,8 +404,15 @@ class OrderDetailActivity : AppCompatActivity() {
         progressBar!!.show()
 
         var fuacid = SharedPref.getInstance()!!.getProfilePref(this@OrderDetailActivity).UAC_Id
-
-        ApiClint.getInstance()?.getService()?.orderIRelease(orD_Id!!, "00", "00", bitAmount!!, amount2!!, "22", fuacid!!)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+        var status = ""
+        if(order.Description==Constants.STATUS_BUOUGHT){
+            status = "Buy"
+        }
+        else{
+            status = "Sell"
+        }
+        ApiClint.getInstance()?.getService()?.orderIRelease(status,orD_Id!!, "00", "00",
+                bitAmount!!, amount2!!, "22", fuacid!!)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
 
                 print("error " + t)

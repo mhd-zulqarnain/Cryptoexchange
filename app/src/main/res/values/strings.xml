@@ -16,6 +16,9 @@
     <string name="sign_in_underline"><u>Sign in</u></string>
     <string name="sign_up_underline"><u>Sign up</u></string>
     <string name="text_terms"><u>Terms and Conditions</u></string>
+    <string name="text_payment_method"><u>Payment Method</u></string>
+    <string name="text_add_documents"><u>Add documents</u></string>
+    <string name="text_change_password"><u>Change Password</u></string>
     <string name="text_forget_password"><u>Forgot your password?</u></string>
 
     <!-- TODO: Remove or change this placeholder text -->

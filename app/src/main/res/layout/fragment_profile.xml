@@ -8,504 +8,204 @@
     android:fillViewport="true"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="12dp"
-        android:orientation="vertical"
-        android:weightSum="41">
-        <!--38.3-->
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
 
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:orientation="horizontal"
-            android:weightSum="7"
-
-            >
-
-            <TextView
-
-                android:id="@+id/textView4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_vertical"
-                android:layout_weight="2"
-                android:fontFamily="@font/oswald_regular"
-                android:text="Profile "
-                android:textSize="28sp"
-                android:drawableRight="@drawable/ic_face_black_24dp"
-                />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                ></LinearLayout>
-
-            <!--<TextView-->
-                <!--style="@style/signUpEditTextStyle"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_weight="2"-->
-                <!--android:text="Two Factor"-->
-                <!--android:textStyle="bold" />-->
-
-
-        </LinearLayout>
-
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="2"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:weightSum="2">-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:layout_weight="1.3">-->
-
-            <!--</LinearLayout>-->
-
-            <!--<com.kyleduo.switchbutton.SwitchButton-->
-                <!--android:id="@+id/profile_twofactor"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="0.7"-->
-                <!--app:kswTextOff="0"-->
-                <!--app:kswTextOn="1"-->
-                <!--app:kswThumbColor="#c2d1bd"-->
-                <!--app:kswThumbWidth="30dp"-->
-                <!--app:kswTintColor="#2c2aff2e" />-->
-        <!--</LinearLayout>-->
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="2.5"
-            android:orientation="horizontal"
-            android:weightSum="6"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
 
-            <TextView
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.7"
-                android:text="First Name"
-                android:textColor="#fff" />
+            android:drawableRight="@drawable/ic_face_black_24dp"
+            android:fontFamily="@font/oswald_regular"
+            android:text="User Profile "
+            android:textSize="28sp" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/profile_fname"
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@null"
-                android:drawableRight="@drawable/ic_person_outline_black_24dp"
-                android:hint="Enter First name"
+                android:hint="First name"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 android:singleLine="true" />
 
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2.5"
-            android:orientation="horizontal"
-            android:weightSum="6"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
-
-            <TextView
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.7"
-
-
-                android:text="Last Name "
-                android:textColor="#fff" />
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/profile_lastname"
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@null"
-                android:drawableRight="@drawable/ic_person_outline_black_24dp"
-                android:hint="Enter Last name"
+                android:hint="Last name"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2.5"
-            android:orientation="horizontal"
-            android:weightSum="6"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
-
-            <TextView
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.7"
-                android:text="Email "
-                android:textColor="#fff" />
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/profile_email"
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@null"
-                android:drawableRight="@drawable/ic_email_black_24dp"
                 android:enabled="false"
-                android:hint="Enter Email "
+                android:hint="Email "
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true" />
 
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
 
-
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2.5"
-            android:orientation="horizontal"
-            android:weightSum="6"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
+            android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.7"
-                android:text="User ID"
-                android:textColor="#fff" />
-
-            <TextView
+            <EditText
                 android:id="@+id/user_id"
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@null"
-                android:drawableRight="@drawable/ic_userid"
-                android:hint="Enter User ID"
+                android:enabled="false"
+                android:hint="User ID"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
-
-
-
-
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2.5"
-            android:orientation="horizontal"
-            android:weightSum="6"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
-
-            <TextView
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.7"
-                android:inputType="number"
-                android:text="Mobile #"
-                android:textColor="#fff" />
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/profile_mob"
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@null"
-                android:drawableRight="@drawable/ic_local_phone_black_24dp"
                 android:enabled="false"
-
-                android:hint="Enter Mobile Number "
+                android:hint="Mobile Number "
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="11"
                 android:maxLines="1"
                 android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2.5"
-            android:orientation="horizontal"
-            android:weightSum="6"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
-
-            <TextView
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.7"
-                android:text="Password "
-                android:textColor="#fff" />
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/profile_pass"
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@null"
-                android:drawableRight="@drawable/ic_vpn_key_black_24dp"
-                android:hint="Enter Password"
+                android:enabled="false"
+                android:hint="Password"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:enabled="false"
                 android:singleLine="true" />
 
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
-
-
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
-
-            <Button
-                android:id="@+id/btn_pass_change"
-                android:layout_width="0dp"
-                android:layout_weight="1.4"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_yellow_border"
-                android:drawableRight="@drawable/ic_lock_black_24dp"
-                android:text="Change Password"
-                android:textColor="#ffffff"
-                android:textSize="12sp"
-                />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2.5"
-            android:orientation="horizontal"
-            android:weightSum="6"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
-
-            <TextView
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.7"
-                android:text="CNIC "
-                android:textColor="#fff" />
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/profile_cnic"
-                style="@style/signUpEditTextStyle"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@null"
-                android:drawableRight="@drawable/ic_cnic"
-                android:hint="Enter CNIC"
+                android:hint="CNIC"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="13"
                 android:maxLines="1"
                 android:singleLine="true" />
 
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
 
 
         <LinearLayout
-            android:id="@+id/btn_add_bank"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btn_pass_change"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/text_change_password"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
 
             <Button
                 android:id="@+id/addaccount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:background="@drawable/button_payment_layout"
-                android:drawableRight="@drawable/ic_local_atm_black_24dp"
+                android:layout_weight="1"
                 android:text="Payment Method"
                 android:textColor="#ffffff"
                 android:textSize="12sp" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/docimage"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4.5"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
-
-            <ImageView
-                android:id="@+id/attach_img_1"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-
-                android:src="@drawable/ic_no_img_24dp" />
-
-            <ImageView
-                android:id="@+id/attach_img_2"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_no_img_24dp" />
-
-            <ImageView
-                android:id="@+id/attach_img_3"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_no_img_24dp" />
-            <ImageView
-                android:id="@+id/attach_img_4"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_no_img_24dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:id="@+id/adddoc"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            >
 
             <Button
                 android:id="@+id/btn_add_img"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:background="@drawable/button_payment_layout"
-                android:drawableRight="@drawable/ic_note_add_black_24dp"
-                android:text="Add Documents"
+                android:layout_weight="1"
+                android:text="Add documents"
+
                 android:textColor="#ffffff"
                 android:textSize="12sp" />
 
-
         </LinearLayout>
 
 
-        <TextView
-            style="@style/signUpEditTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="Description"
-            android:textColor="#fff"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            />
-
-
-        <EditText
-            android:id="@+id/profile_terms"
-            style="@style/signUpEditTextStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4.3"
-            android:hint="Enter your Description"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            android:imeOptions="actionDone"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"/>
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/profile_terms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:hint="Your Terms"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:textSize="15sp" />
+        </android.support.design.widget.TextInputLayout>
+
         <Button
             android:id="@+id/btnprofileupdate"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2.7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/layout_curve_btn_submit"
             android:onClick="profileValidiation"
             android:text="Update"
-            android:fontFamily="@font/oswald_bold"
             android:textColor="#fff" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            >
-
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
