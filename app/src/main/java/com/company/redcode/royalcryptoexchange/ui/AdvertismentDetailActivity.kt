@@ -134,33 +134,24 @@ class AdvertismentDetailActivity : AppCompatActivity() {
 
         if (order.Status == Constants.STATUS_OPEN) {
             if(order.Description==Constants.STATUS_BUOUGHT){
-                btn_paid.visibility = View.GONE
-                btn_release.visibility = View.VISIBLE
-            }else{
                 btn_paid.visibility = View.VISIBLE
-                btn_release.visibility = View.GONE
+
+            }else{
+                btn_paid.visibility = View.GONE
 
             }
+            btn_release.visibility = View.GONE
         } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
             btn_release.visibility = View.VISIBLE
             btn_cancel.visibility = View.GONE
             btn_dispute.visibility = View.VISIBLE
             btn_paid.visibility = View.GONE
 
-        } else if (order.Status == Constants.STATUS_COMPLETED) {
+        } else if (order.Status == Constants.STATUS_COMPLETED ||order.Status == Constants.STATUS_CANCEL||order.Status == Constants.STATUS_DISPUTE) {
             btn_release.visibility = View.GONE
             btn_cancel.visibility = View.GONE
             btn_dispute.visibility = View.GONE
             btn_paid.visibility = View.GONE
-        } else if (order.Status == Constants.STATUS_CANCEL) {
-            btn_release.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-        } else if (order.Status == Constants.STATUS_DISPUTE) {
-            btn_release.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-            btn_paid.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
         }
         tv_name.text = "U-" + order.FUAC_Id
         tv_coin_amount.text = order.BitAmount + trade.OrderType
