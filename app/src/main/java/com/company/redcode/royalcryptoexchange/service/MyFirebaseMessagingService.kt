@@ -1,6 +1,7 @@
 package com.company.redcode.royalcryptoexchange.service
 
 
+
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -35,25 +36,25 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             var msg = ""
 
 
-                if (data[0] == "release") {
-                    msg = "Order has been release"
-                }
-                if (data[0] == "order"){
-                    msg = "New Order placed"
-                }
-                if (data[0] == "cancel"){
-                    msg = "Order has been canceled"
-                }
-                if (data[0] == "paid"){
-                    msg = "Order has been paid"
-                }
-                if (data[0] == "dispute"){
-                    msg = "Order has been disputed"
-                }
-                intent = Intent(this@MyFirebaseMessagingService, OrderDetailActivity::class.java)
-                intent.putExtra("type", "service")
-                intent.putExtra("orderId", data[1])
-                intent.putExtra("request", data[0])
+            if (data[0] == "release") {
+                msg = "Order has been release"
+            }
+            if (data[0] == "order"){
+                msg = "New Order placed"
+            }
+            if (data[0] == "cancel"){
+                msg = "Order has been canceled"
+            }
+            if (data[0] == "paid"){
+                msg = "Order has been paid"
+            }
+            if (data[0] == "dispute"){
+                msg = "Order has been disputed"
+            }
+            intent = Intent(this@MyFirebaseMessagingService, OrderDetailActivity::class.java)
+            intent.putExtra("type", "service")
+            intent.putExtra("orderId", data[1])
+            intent.putExtra("request", data[0])
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)

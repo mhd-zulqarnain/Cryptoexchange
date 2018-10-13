@@ -399,19 +399,41 @@ class ProfileFragment : Fragment() {
 
             if (spinnervalue == "Bank Transfer") {
                 var check: Boolean = validate(1);
-                if (check) {
+                if (check && account.length == 16 && code.length == 4) {
                     addbank(title.toString(), account.toString(), name.toString(), code.toString());
                     etaccountnumber!!.setText("")
                     etaccountttile!!.setText("")
                     etbankname!!.setText("")
                     etbankcode!!.setText("")
                 }
+                if(account.length < 16){
+                    etaccountnumber!!.error = Html.fromHtml("<font color='black'>Please enter a valid Account number.</font>")
+                    etaccountnumber!!.requestFocus()
+
+                }
+                if(code.length < 4){
+
+                    etbankcode!!.error = Html.fromHtml("<font color='black'>Please enter a valid Branch code.</font>")
+                    etbankcode!!.requestFocus()
+
+                }
+
             } else {
                 var check: Boolean = validate(0);
-                if (check) {
-                    addbank(cnic.toString(), "null", mob.toString(), "null");
-                    etcnic!!.setText("")
-                    etmobilenumber!!.setText("")
+                if (check && cnic.length == 13 && mob.length == 11) {
+
+                        addbank(cnic.toString(), "null", mob.toString(), "null");
+                        etcnic!!.setText("")
+                        etmobilenumber!!.setText("")
+
+                }
+                if(cnic.length < 13){
+                    etcnic!!.error = Html.fromHtml("<font color='black'>Please enter a valid NIC number.</font>")
+                    etcnic!!.requestFocus()
+                }
+                if(mob.length < 11){
+                    etmobilenumber!!.error = Html.fromHtml("<font color='black'>Please enter a valid Mobile number.</font>")
+                    etmobilenumber!!.requestFocus()
                 }
             }
 
