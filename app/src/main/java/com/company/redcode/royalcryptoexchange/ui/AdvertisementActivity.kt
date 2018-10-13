@@ -132,7 +132,6 @@ class AdvertisementActivity : AppCompatActivity() {
             u_limit!!.error = Html.fromHtml("<font color='black'>Enter the Limit</font>")
             u_limit!!.requestFocus()
             return
-
         }
         if (l_limit!!.text.toString() == "") {
             l_limit!!.error = Html.fromHtml("<font color='black'>Enter the Limit</font>")
@@ -146,13 +145,24 @@ class AdvertisementActivity : AppCompatActivity() {
             u_limit!!.requestFocus()
             return
 
+        }else{
+            if(u_limit!!.text.toString().toInt()<1000){
+                u_limit!!.error = Html.fromHtml("<font color='black'>It should be greater than 1000</font>")
+                u_limit!!.requestFocus()
+                return
+            }
         }
 
-        if (l_limit!!.text.trim().length < 4) {
+        if (l_limit!!.text.trim().length > 4) {
             l_limit!!.error = Html.fromHtml("<font color='black'>It should be in four figures</font>")
             l_limit!!.requestFocus()
             return
-
+        }else{
+            if(l_limit!!.text.toString().toInt()<1000){
+                l_limit!!.error = Html.fromHtml("<font color='black'>It should be greater than 1000</font>")
+                l_limit!!.requestFocus()
+                return
+            }
         }
         if (l_limit!!.text.toString().toDouble() > u_limit!!.text.toString().toDouble()) {
             Apputils.showMsg(this@AdvertisementActivity, "Upper limit should  be greater")

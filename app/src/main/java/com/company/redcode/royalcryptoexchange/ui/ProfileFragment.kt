@@ -47,7 +47,7 @@ class ProfileFragment : Fragment() {
     var URL = Constants.IMAGE_URLold;
 
     var btn_add_bank: Button? = null
-    var user_id: TextView? = null
+    var user_id: EditText? = null
     var btn_add_img: Button? = null
     var spinner_payment_method: Spinner? = null
     var bank_recycler_view: RecyclerView? = null
@@ -59,10 +59,10 @@ class ProfileFragment : Fragment() {
     private var mobile_method_view: LinearLayout? = null
     var adapter: UserBankAdapater? = null
     var progressBar: android.app.AlertDialog? = null
-    private var attach_img_1: ImageView? = null
+   /* private var attach_img_1: ImageView? = null
     private var attach_img_2: ImageView? = null
     private var attach_img_3: ImageView? = null
-    private var attach_img_4: ImageView? = null
+    private var attach_img_4: ImageView? = null*/
     var fuac_id: String? = null;
     var fname: EditText? = null
     var lname: EditText? = null
@@ -108,27 +108,9 @@ class ProfileFragment : Fragment() {
         pass_ = view!!.findViewById(R.id.profile_pass)
         btnupdate = view!!.findViewById(R.id.btnprofileupdate);
         profile_terms = view!!.findViewById(R.id.profile_terms);
-        docimage = view!!.findViewById(R.id.docimage);
+       // docimage = view!!.findViewById(R.id.docimage);
         btn_pass_change = view!!.findViewById(R.id.btn_pass_change);
         user_id = view!!.findViewById(R.id.user_id);
-
-
-//        profile_terms.performContextClick()
-        /*    profile_terms!!.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(editable: Editable?) {
-
-                }
-
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    if (profile_terms!!.text.toString() == "") {
-                        var clean = Apputils.stringClean(profile_terms!!.text.toString())
-                        profile_terms!!.setText(clean)
-                    }
-                }
-            })*/
 
 
         initView(view)
@@ -138,10 +120,10 @@ class ProfileFragment : Fragment() {
     private fun initView(view: View?) {
 
         btn_add_bank = view!!.findViewById(R.id.addaccount)
-        attach_img_1 = view!!.findViewById(R.id.attach_img_1)
+     /*   attach_img_1 = view!!.findViewById(R.id.attach_img_1)
         attach_img_2 = view!!.findViewById(R.id.attach_img_2)
         attach_img_3 = view!!.findViewById(R.id.attach_img_3)
-        attach_img_4 = view!!.findViewById(R.id.attach_img_4)
+        attach_img_4 = view!!.findViewById(R.id.attach_img_4)*/
 
         //api call image document
 
@@ -163,10 +145,10 @@ class ProfileFragment : Fragment() {
             profile_terms!!.setText(obj.Terms)
 
         fuac_id = obj.UAC_Id;
-        val im1: ImageView = view.findViewById(R.id.attach_img_1)
+        /*val im1: ImageView = view.findViewById(R.id.attach_img_1)
         val im3: ImageView = view.findViewById(R.id.attach_img_3)
         val im2: ImageView = view.findViewById(R.id.attach_img_2)
-        val im4: ImageView = view.findViewById(R.id.attach_img_4)
+        val im4: ImageView = view.findViewById(R.id.attach_img_4)*/
         if (docver != "Verified") {
             ApiClint.getInstance()?.getService()?.user_document(fuac_id!!)?.enqueue(object : Callback<ArrayList<Document>> {
                 override fun onFailure(call: Call<ArrayList<Document>>?, t: Throwable?) {
@@ -178,23 +160,22 @@ class ProfileFragment : Fragment() {
                         var doclist = response!!.body();
                         var size = doclist!!.size;
                         if (size > 0) {
-                            if (doclist[0] != null)
+                            /*if (doclist[0] != null)
                                 Picasso.with(activity!!).load(image + doclist!![0].User_Document).into(im1);
                             if (size > 1 && doclist[1] != null)
                                 Picasso.with(activity!!).load(image + doclist!![1].User_Document).into(im2);
                             if (size > 2 && doclist[2] != null)
                                 Picasso.with(activity!!).load(image + doclist!![2].User_Document).into(im3);
                             if (size > 3 && doclist[3] != null)
-                                Picasso.with(activity!!).load(image + doclist!![3].User_Document).into(im4);
+                                Picasso.with(activity!!).load(image + doclist!![3].User_Document).into(im4);*/
                         }
                     }
                 }
 
             })
         } else {
-            docimage!!.visibility = (View.GONE);
-            var ll: LinearLayout = view.findViewById(R.id.adddoc);
-            ll!!.visibility = View.GONE
+
+            btn_add_img!!.visibility = View.GONE
         }
         btn_add_img = view!!.findViewById(R.id.btn_add_img)
 
@@ -626,14 +607,14 @@ class ProfileFragment : Fragment() {
                 for (i in 0 until count) {
                     val imageUri = data.clipData.getItemAt(i).uri
                     val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imageUri)
-                    if (i == 0)
+                /*    if (i == 0)
                         attach_img_1!!.setImageBitmap(bitmap)
                     if (i == 1)
                         attach_img_2!!.setImageBitmap(bitmap)
                     if (i == 2)
                         attach_img_3!!.setImageBitmap(bitmap)
                     if (i == 3)
-                        attach_img_4!!.setImageBitmap(bitmap)
+                        attach_img_4!!.setImageBitmap(bitmap)*/
 
                     uploadtoserver(bitmap, i, (count - 1))
                 }
@@ -642,7 +623,7 @@ class ProfileFragment : Fragment() {
                 val imagePath = data.data
 
                 val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imagePath)
-                attach_img_1!!.setImageBitmap(bitmap)
+//                attach_img_1!!.setImageBitmap(bitmap)
                 uploadtoserver(bitmap, 3, 3)
             }
 
@@ -657,14 +638,14 @@ class ProfileFragment : Fragment() {
 
             for (i in 0 until list!!.size) {
 
-                if (i == 0)
+              /*  if (i == 0)
                     attach_img_1!!.setImageBitmap(list[i])
                 if (i == 1)
                     attach_img_2!!.setImageBitmap(list[i])
                 if (i == 2)
                     attach_img_3!!.setImageBitmap(list[i])
                 if (i == 3)
-                    attach_img_4!!.setImageBitmap(list[i])
+                    attach_img_4!!.setImageBitmap(list[i])*/
 
                 var c: Int = list!!.size - 1;
                 uploadtoserver(list[i], i, (c))

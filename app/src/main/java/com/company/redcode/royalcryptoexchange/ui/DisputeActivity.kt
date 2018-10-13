@@ -362,7 +362,8 @@ class DisputeActivity : AppCompatActivity() {
             return
         }
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.orderPaid(userOrderPay)!!.enqueue(object : Callback<String> {
+        var uid  = order.Description
+        ApiClint.getInstance()?.getService()?.orderPaid(uid!!,userOrderPay)!!.enqueue(object : Callback<String> {
             override fun onFailure(call: Call<String>?, t: Throwable?) {
                 print("error " + t)
                 progressBar!!.dismiss()

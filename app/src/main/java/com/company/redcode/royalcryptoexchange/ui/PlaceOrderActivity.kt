@@ -234,10 +234,10 @@ class PlaceOrderActivity : AppCompatActivity() {
         order.Order_Date = System.currentTimeMillis().toString()
         order.Expire = dateText.toString()
 
-        if (orderType == "buy")
+        if (orderType == "BUY")
             order.Description = "bought"
         else
-            order.Description = "Sold"
+            order.Description = "sold"
         if (!Apputils.isNetworkAvailable(this@PlaceOrderActivity)) {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
             return

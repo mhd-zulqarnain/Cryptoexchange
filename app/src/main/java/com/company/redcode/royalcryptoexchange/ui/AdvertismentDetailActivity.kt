@@ -122,7 +122,10 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         val btn_release: Button = view.findViewById(R.id.btn_release)
         val btn_cancel: Button = view.findViewById(R.id.btn_cancel)
         val btn_dispute: Button = view.findViewById(R.id.btn_dispute)
+        val btn_paid: Button = view.findViewById(R.id.btn_paid)
         val tv_status: TextView = view.findViewById(R.id.tv_status)
+
+
 
         if (order.Status == Constants.STATUS_CANCEL) {
             tv_status.text = "Cancelled"
@@ -130,23 +133,25 @@ class AdvertismentDetailActivity : AppCompatActivity() {
             tv_status.text = order.Status
 
         if (order.Status == Constants.STATUS_OPEN) {
+            if(order.Description==Constants.STATUS_BUOUGHT){
+                btn_paid.visibility = View.VISIBLE
+
+            }else{
+                btn_paid.visibility = View.GONE
+
+            }
             btn_release.visibility = View.GONE
         } else if (order.Status == Constants.STATUS_IN_PROGRESS) {
             btn_release.visibility = View.VISIBLE
             btn_cancel.visibility = View.GONE
             btn_dispute.visibility = View.VISIBLE
-        } else if (order.Status == Constants.STATUS_COMPLETED) {
+            btn_paid.visibility = View.GONE
+
+        } else if (order.Status == Constants.STATUS_COMPLETED ||order.Status == Constants.STATUS_CANCEL||order.Status == Constants.STATUS_DISPUTE) {
             btn_release.visibility = View.GONE
             btn_cancel.visibility = View.GONE
             btn_dispute.visibility = View.GONE
-        } else if (order.Status == Constants.STATUS_CANCEL) {
-            btn_release.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
-        } else if (order.Status == Constants.STATUS_DISPUTE) {
-            btn_release.visibility = View.GONE
-            btn_cancel.visibility = View.GONE
-            btn_dispute.visibility = View.GONE
+            btn_paid.visibility = View.GONE
         }
         tv_name.text = "U-" + order.FUAC_Id
         tv_coin_amount.text = order.BitAmount + trade.OrderType
@@ -155,7 +160,17 @@ class AdvertismentDetailActivity : AppCompatActivity() {
         btnClose.setOnClickListener {
             dialog.dismiss()
         }
+        btn_paid.setOnClickListener {
 
+            // updateStatus(Constants.STATUS_IN_PROGRESS, order.ORD_Id!!)
+
+            var intent = Intent(this@AdvertismentDetailActivity, DisputeActivity::class.java)
+            var obj = Gson().toJson(order)
+            intent.putExtra("order", obj)
+            intent.putExtra("activity", "paid")
+            startActivityForResult(intent, 44)
+
+        }
         btn_cancel.setOnClickListener {
             var intent = Intent(this@AdvertismentDetailActivity, DisputeActivity::class.java)
             var obj = Gson().toJson(order)
@@ -191,7 +206,7 @@ class AdvertismentDetailActivity : AppCompatActivity() {
 
         var fuacid = SharedPref.getInstance()!!.getProfilePref(this@AdvertismentDetailActivity).UAC_Id
 
-        ApiClint.getInstance()?.getService()?.orderIRelease(orD_Id!!, fees!!, amount!!, bitAmount!!, amount2!!, uT_Id!!.toString(), fuacid!!)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
+        ApiClint.getInstance()?.getService()?.orderIRelease(trade.OrderType!!,orD_Id!!, fees!!, amount!!, bitAmount!!, amount2!!, uT_Id!!.toString(), fuacid!!)!!.enqueue(object : Callback<com.company.redcode.royalcryptoexchange.models.Response> {
             override fun onFailure(call: Call<com.company.redcode.royalcryptoexchange.models.Response>?, t: Throwable?) {
 
                 print("error " + t)

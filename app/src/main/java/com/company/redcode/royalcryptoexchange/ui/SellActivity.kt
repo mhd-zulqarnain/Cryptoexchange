@@ -94,7 +94,7 @@ class SellActivity : AppCompatActivity() {
             var obj = Gson().toJson(tradelist[position])
             val intent = Intent(this@SellActivity, PlaceOrderActivity::class.java)
             intent.putExtra("tradeObject", obj)
-            intent.putExtra("orderType", "BUY")
+            intent.putExtra("orderType", "Sell")
             startActivityForResult(intent,44)
         }
 
@@ -225,7 +225,7 @@ class SellActivity : AppCompatActivity() {
             runOnUiThread {
                 Handler().postDelayed(
                         {
-                            if ((adapter!!.num) * 5 < tradelist!!.size) {
+                            if ((adapter!!.num) * 20 < tradelist!!.size) {
                                 adapter!!.num = adapter!!.num + 1
                             }
                             progressdialog.dismiss()
