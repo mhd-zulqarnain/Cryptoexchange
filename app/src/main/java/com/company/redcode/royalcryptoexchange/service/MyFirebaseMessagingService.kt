@@ -24,13 +24,12 @@ import com.google.gson.Gson
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     var type = ""
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        if (remoteMessage!!.data.size > 0) {
-            type = "json"
-        }
-        if (remoteMessage.notification != null) {
-            var messege = remoteMessage.notification.title
 
-            var data = remoteMessage.notification.body!!.split(",")
+        if (remoteMessage!!.data.size > 0) {
+            var messege = remoteMessage.data
+            var json = Gson().toJson(remoteMessage.data)
+            var body = JSONObject(json).get("body").toString()
+            var data = body.split(",")
             var intent:Intent = Intent()
 
             var msg = ""

@@ -25,6 +25,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.company.redcode.royalcryptoexchange.R
+import com.company.redcode.royalcryptoexchange.auth.SignInActivity
 import com.company.redcode.royalcryptoexchange.models.*
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.retrofit.MyApiClint
@@ -467,6 +468,14 @@ class DisputeActivity : AppCompatActivity() {
             progressBar!!.dismiss()
         super.onActivityResult(requestCode, resultCode, data)
     }
-
-
+    override fun onStart() {
+        super.onStart()
+//        if()
+        var userId = SharedPref.getInstance()!!.getProfilePref(this@DisputeActivity).UAC_Id
+        if (userId == null) {
+            val intent = Intent(this@DisputeActivity, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
 }
