@@ -96,7 +96,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="buyActivityText">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/oswald_regular</item>
     </style>
 

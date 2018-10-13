@@ -23,8 +23,8 @@
         android:text="Enter Verification Code"
         android:fontFamily="@font/oswald_regular"
         android:textSize="20dp"
-        android:layout_margin="5dp"
-        android:textColor="#FFF"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         />
     <EditText
@@ -36,6 +36,8 @@
         android:inputType="number"
         android:textColor="#FFF"
         android:background="@drawable/drawer_selected_item"
+        android:maxLines="1"
+        android:singleLine="true"
         />
     <Button
         android:id="@+id/btnmobileverify"

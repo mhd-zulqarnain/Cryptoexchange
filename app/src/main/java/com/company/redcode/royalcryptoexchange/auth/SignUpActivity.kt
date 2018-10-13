@@ -69,11 +69,26 @@ class SignUpActivity : AppCompatActivity() {
             ed_first_name!!.requestFocus()
             return
         }
+
+        if (ed_first_name!!.text.toString().trim(' ').length < 3) {
+            ed_first_name!!.error = Html.fromHtml("<font color='black'>First name must contain atleast 3 Alphabets</font>")
+            ed_first_name!!.requestFocus()
+            return
+        }
+
+
         if (ed_last_name!!.text.toString() == "") {
             ed_last_name!!.error = Html.fromHtml("<font color='black'>Enter user last name</font>")
             ed_last_name!!.requestFocus()
             return
         }
+
+        if (ed_last_name!!.text.toString().trim(' ').length < 3) {
+            ed_last_name!!.error = Html.fromHtml("<font color='black'>Last name must contain atleast 3 Alphabets</font>")
+            ed_last_name!!.requestFocus()
+            return
+        }
+
         if (!Apputils.isValidEmail(ed_email!!.text.toString()) || ed_email!!.text.toString() == "") {
             ed_email!!.error = Html.fromHtml("<font color='black'>Invalid email</font>")
             ed_email!!.requestFocus()
@@ -83,6 +98,11 @@ class SignUpActivity : AppCompatActivity() {
 
         if (ed_mobile_number!!.text.toString() == "") {
             ed_mobile_number!!.error = Html.fromHtml("<font color='black'>This field could not be empty</font>")
+            ed_mobile_number!!.requestFocus()
+            return
+        }
+        if (ed_mobile_number!!.text.toString().trim(' ').length < 10) {
+            ed_mobile_number!!.error = Html.fromHtml("<font color='black'>Please enter correct Mobile number</font>")
             ed_mobile_number!!.requestFocus()
             return
         }
@@ -104,6 +124,15 @@ class SignUpActivity : AppCompatActivity() {
             ed_cnic!!.requestFocus()
             return
         }
+
+        if (ed_cnic!!.text.toString().trim(' ').length < 13) {
+            ed_cnic!!.error = Html.fromHtml("<font color='black'>Please enter correct NIC number</font>")
+            ed_cnic!!.requestFocus()
+            return
+        }
+
+
+
         if (ed_dob!!.text.toString() == "") {
             Toast.makeText(baseContext, "Missing date of birth ", Toast.LENGTH_SHORT).show()
             return
@@ -174,6 +203,10 @@ class SignUpActivity : AppCompatActivity() {
         alert.setView(view)
         alert.setCancelable(true)
         var dialog = alert.create()
+
+        //-------------------------------------------------------------------------
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         dialog.show()
         val btnVerify: Button = view.findViewById(R.id.btn_verify)
         val ed_code: EditText = view.findViewById(R.id.ed_code)

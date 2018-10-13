@@ -142,7 +142,7 @@ class PlaceOrderActivity : AppCompatActivity() {
 
         })
         tv_terms.setOnClickListener {
-            showTradeDialog()
+            showTermsDialog()
         }
 
         btn_trade.setOnClickListener {
@@ -266,12 +266,14 @@ class PlaceOrderActivity : AppCompatActivity() {
         })
     }
 
-    private fun showTradeDialog() {
+    private fun showTermsDialog() {
         val view: View = LayoutInflater.from(this@PlaceOrderActivity).inflate(R.layout.dilalog_terms_trade, null)
         val alertBox = AlertDialog.Builder(this@PlaceOrderActivity)
         alertBox.setView(view)
-        alertBox.setCancelable(false)
+        alertBox.setCancelable(true)
         val dialog = alertBox.create()
+        //-------------------------------------------------------------------------
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         val btnSave: Button = view.findViewById(R.id.btn_save)
         val terms_tv: TextView = view.findViewById(R.id.terms_tv)

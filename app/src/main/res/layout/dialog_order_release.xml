@@ -22,11 +22,12 @@
                 android:id="@+id/tv_title_trade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/oswald_regular"
                 android:text="Order Details "
-                android:textColor="@color/backgoundBtn"
-                android:textSize="28sp" />
+                android:fontFamily="@font/oswald_regular"
+                android:textSize="20dp"
+                android:textColor="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,7 +149,7 @@
                         android:textSize="10dp"
                         />
 
-<Button
+                        <Button
                         android:id="@+id/btn_paid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

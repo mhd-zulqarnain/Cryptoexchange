@@ -2,31 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="42dp"
-    android:orientation="vertical"
+    android:layout_margin="12dp"
+    android:background="@drawable/terms_back_ground"
     android:gravity="center"
-
+    android:orientation="vertical"
+    android:paddingBottom="-5dp"
     >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Trade terms and conditions"
-        android:fontFamily="@font/oswald_regular"
         android:textSize="20dp"
-        android:layout_margin="5dp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         />
 
     <TextView
         android:id="@+id/terms_tv"
-        android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lorem ipsum dolor sit amet, porttitor euismod mollis orci, ipsum mauris, elementum erat, id tellus suspendisse dictum sed, varius amet leo sit leo explicabo metus. Morbi in, sit leo ligula. Nisl ultrices natoque nibh sem vitae nulla, metus non enim luctus magna sodales. Cras gravida egestas aliquam, velit elit arcu. Suspendisse commodo, magnis dolor mattis at integer dolor, amet lacinia sollicitudin magna morbi ac euismod, in varius. Id elit  "
         android:fontFamily="@font/oswald_regular"
         android:textSize="15dp"
         android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="15dp"
 
         />
 
@@ -35,8 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ok"
-        android:background="@drawable/layout_curve_btn_submit"
         android:fontFamily="@font/oswald_semibold"
+        android:background="@drawable/layout_curve_btn_text"
         />
 
 

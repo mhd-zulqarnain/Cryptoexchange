@@ -21,8 +21,8 @@
         android:text="Change Password"
         android:fontFamily="@font/oswald_regular"
         android:textSize="20dp"
-        android:textColor="#FFF"
-        android:layout_margin="5dp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         />
     <EditText
@@ -34,8 +34,8 @@
         android:textColor="#FFF"
         android:textColorHint="#DDAAAAAA"
         android:inputType="textPassword"
-
-        android:background="@drawable/drawer_selected_item"
+        android:maxLines="1"
+        android:singleLine="true"
         />
     <EditText
         android:id="@+id/ed_new_pass"
@@ -46,18 +46,22 @@
         android:inputType="textPassword"
         android:textColor="#FFF"
         android:textColorHint="#DDAAAAAA"
-        android:background="@drawable/drawer_selected_item"
+        android:maxLines="1"
+        android:singleLine="true"
         />
     <EditText
         android:id="@+id/ed_confirm_pass"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="15dp"
         android:hint="Confirm password"
         android:textColor="#FFF"
         android:textColorHint="#DDAAAAAA"
         android:inputType="textPassword"
-        android:background="@drawable/drawer_selected_item"
+        android:maxLines="1"
+        android:singleLine="true"
         />
     <Button
         android:id="@+id/btn_verify"
