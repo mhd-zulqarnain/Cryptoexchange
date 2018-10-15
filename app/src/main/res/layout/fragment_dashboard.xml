@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="6">
+        android:weightSum="6.2">
 
 
         <LinearLayout
@@ -72,7 +72,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".5"
                 android:orientation="horizontal"
                 android:weightSum="6">
 
@@ -83,7 +84,9 @@
                     android:gravity="center"
                     android:text="Date/Time"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
@@ -92,25 +95,31 @@
                     android:gravity="center"
                     android:text="Category"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Executed Amount"
+                    android:text="Ex - Amount"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Executed Fee"
+                    android:text="Ex - Fee"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
@@ -119,7 +128,9 @@
                     android:gravity="center"
                     android:text="Amount"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
@@ -128,7 +139,9 @@
                     android:gravity="center"
                     android:text="Action"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
 
             </LinearLayout>
@@ -139,6 +152,12 @@
                 android:background="#fff" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            ></LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/advertisment_recycler"
@@ -186,7 +205,7 @@
             android:id="@+id/seller_table_spinner"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight=".4"
+            android:layout_weight=".5"
             android:orientation="vertical"
             >
 
@@ -197,7 +216,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".5"
                 android:orientation="horizontal"
                 android:weightSum="5">
 
@@ -208,7 +228,9 @@
                     android:gravity="center"
                     android:text="Date/Time"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
@@ -217,7 +239,9 @@
                     android:gravity="center"
                     android:text="Order Description"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
@@ -227,7 +251,9 @@
                     android:text="Price"
 
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
@@ -236,7 +262,9 @@
                     android:gravity="center"
                     android:text="Status"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
@@ -245,7 +273,9 @@
                     android:gravity="center"
                     android:text="Action"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
 
             </LinearLayout>
@@ -257,6 +287,11 @@
                 />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            ></LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/order_recycler"
