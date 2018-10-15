@@ -11,10 +11,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-
+        android:layout_height="match_parent"
+        android:layout_margin="12dp"
         android:orientation="vertical">
 
         <TextView
@@ -40,7 +38,9 @@
                 android:hint="First name"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:enabled="false"
+                />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -56,7 +56,9 @@
                 android:hint="Last name"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:enabled="false"
+                />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -139,6 +141,7 @@
                 android:inputType="number"
                 android:maxLength="13"
                 android:maxLines="1"
+                android:enabled="false"
                 android:singleLine="true" />
 
         </android.support.design.widget.TextInputLayout>
@@ -150,6 +153,8 @@
             android:orientation="horizontal"
             android:weightSum="3.2"
             android:gravity="center"
+
+            android:layout_marginTop="10dp"
             >
 
             <Button
@@ -193,7 +198,9 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
 
             <EditText
                 android:id="@+id/profile_terms"
@@ -204,7 +211,8 @@
                 android:imeOptions="actionDone"
                 android:inputType="textMultiLine"
                 android:lines="2"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                />
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -216,6 +224,7 @@
             android:text="Update"
             android:textColor="#fff"
             android:fontFamily="@font/oswald_bold"
+            android:layout_marginTop="10dp"
             />
 
         <LinearLayout
