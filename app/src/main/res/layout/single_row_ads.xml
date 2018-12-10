@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Date/Time"
+            android:textColor="#fff"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Category"
+            android:textColor="#fff"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tv_executed_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Executed Amount"
+            android:textColor="#fff"
+            android:maxLength="9"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tv_executed_fee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Executed Fee"
+            android:textColor="#fff"
+            android:maxLength="9"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="amount"
+            android:maxLength="9"
+            android:textColor="#fff"
+            android:textSize="12dp" />
+        <Button
+            android:id="@+id/btn_action"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.9"
+            android:gravity="center"
+            android:text="Details"
+            android:textColor="#fff"
+            android:textSize="8sp"
+            android:background="@drawable/action_button_background"
+            />
+
+
+ </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="5dp" />
+</LinearLayout>

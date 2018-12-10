@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/royalcryptobackground"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,11 +23,11 @@
             android:layout_height="0dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="4dp"
-            android:layout_weight=".5"
-            android:fontFamily="@font/mplusregular"
+            android:layout_weight=".6"
+            android:fontFamily="@font/oswald_regular"
             android:text="Place your purchasing rates"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -183,9 +185,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:background="@drawable/layout_curve_btn_boreder_only"
+                    android:background="@drawable/layout_curve_btn_submit"
                     android:text="Trade"
-                    android:textColor="@color/backgoundTheme" />
+                    android:textColor="#fff" />
             </LinearLayout>
         </LinearLayout>
 

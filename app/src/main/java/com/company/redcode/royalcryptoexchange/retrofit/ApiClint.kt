@@ -4,9 +4,9 @@ import com.company.redcode.royalcryptoexchange.utils.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiClint private constructor() {
+ class ApiClint private constructor() {
 
-    private var mRetrofit = Retrofit.Builder().baseUrl(Constants.BASE_URL)
+     private var mRetrofit = Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -31,4 +31,6 @@ class ApiClint private constructor() {
     fun getService():RetrofiltService?{
         return  rService
     }
+
+
 }

@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DrawerActivity"
-    tools:showIn="@layout/app_bar_drawer">
+    tools:showIn="@layout/app_bar_drawer"
+    android:background="@drawable/royalcryptobackground"
+    >
 
 </android.support.constraint.ConstraintLayout>

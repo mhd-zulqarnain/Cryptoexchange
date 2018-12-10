@@ -6,26 +6,44 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.company.redcode.royalcryptoexchange.R
 import com.company.redcode.royalcryptoexchange.models.Trade
-import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.company.redcode.royalcryptoexchange.utils.OnLoadMoreListener
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 
 
 class TableSellerAdapater(var ctx: Context, var model: ArrayList<Trade>,private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<TableSellerAdapater.MyViewHolder>() {
-
+    var num = 1
+    var data = model
+    var context:Context = ctx
+    var onLoadMoreListener: OnLoadMoreListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_seller, parent, false))
+        var view: MyViewHolder = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_table_row_buyer, parent, false))
         return view
     }
 
     override fun getItemCount(): Int {
-        return model.size
+        return if (num * 20 > data.size) {
+            data.size
+        } else {
+            num * 20
+        }
+    }
+    fun setOnAddMoreListener(onLoadMoreListener: OnLoadMoreListener) {
+        this.onLoadMoreListener = onLoadMoreListener
+
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindView(model[position])
+        holder.bindView(model[position],ctx)
         holder.btn_buy!!.setOnClickListener{
+            if(model[position].FUAC_Id.toString() == SharedPref.getInstance()!!.getProfilePref(ctx).UAC_Id)
+            {
+                Toast.makeText(ctx,"You can not place order on your own trade", Toast.LENGTH_LONG).show()
+            }else
             onItemClick(position)
         }
     }
@@ -39,7 +57,7 @@ class TableSellerAdapater(var ctx: Context, var model: ArrayList<Trade>,private 
         var tv_seller:TextView? = null
         var btn_buy:Button? = null
 
-        fun bindView(trade: Trade) {
+        fun bindView(trade: Trade, ctx: Context) {
 
             tv_price = itemView.findViewById(R.id.tv_price)
             tv_limit = itemView.findViewById(R.id.tv_limit)
@@ -47,13 +65,35 @@ class TableSellerAdapater(var ctx: Context, var model: ArrayList<Trade>,private 
             tv_seller = itemView.findViewById(R.id.tv_User)
             tv_amount = itemView.findViewById(R.id.tv_amount)
             btn_buy = itemView.findViewById(R.id.btn_buy)
+            tv_price = itemView.findViewById(R.id.tv_price)
+            tv_limit = itemView.findViewById(R.id.tv_limit)
 
-            tv_limit!!.setText(Apputils.formatCurrency(trade.d_limit.toString())+"-"+
-                    Apputils.formatCurrency(trade.u_limit.toString()))
-            tv_seller!!.setText("user"+trade.uid)
+            tv_seller = itemView.findViewById(R.id.tv_User)
+            tv_amount = itemView.findViewById(R.id.tv_amount)
+            btn_buy = itemView.findViewById(R.id.btn_buy)
+            val user_status:ImageView = itemView.findViewById(R.id.user_status)
 
-            tv_amount!!.setText(trade.amount+trade.currency_type)
-            tv_price!!.setText(Apputils.formatCurrency(trade.price!!))
+            tv_limit!!.setText(/*Apputils.formatCurrency(*/trade.UpperLimit.toString() + "-" +
+                    /*Apputils.formatCurrency(*/trade.LowerLimit.toString())
+            tv_seller!!.setText("U-" + trade.FUAC_Id)
+
+            tv_amount!!.setText(trade.Amount + trade.CurrencyType)
+            tv_price!!.setText(/*Apputils.formatCurrency(*/trade.Price!!)/*)*/
+
+            if(trade.OrderType=="Sell"){
+                btn_buy!!.setText("Buy")
+            }else{
+                btn_buy!!.setText("Sell")
+
+            }
+
+            var resources = ctx.getResources()
+            if(trade.ut_status=="0"){
+                user_status.setImageDrawable(resources.getDrawable(R.drawable.ic_offline))
+            }else{
+                user_status.setImageDrawable(resources.getDrawable(R.drawable.ic_online))
+
+            }
         }
 
 

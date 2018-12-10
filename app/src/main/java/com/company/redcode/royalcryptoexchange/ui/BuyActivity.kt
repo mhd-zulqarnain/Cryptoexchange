@@ -1,6 +1,7 @@
 package com.company.redcode.royalcryptoexchange.ui
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
@@ -11,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.company.redcode.royalcryptoexchange.R
@@ -18,6 +20,8 @@ import com.company.redcode.royalcryptoexchange.adapter.TableBuyerAdapater
 import com.company.redcode.royalcryptoexchange.models.Trade
 import com.company.redcode.royalcryptoexchange.retrofit.ApiClint
 import com.company.redcode.royalcryptoexchange.utils.AppExecutors
+import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.company.redcode.royalcryptoexchange.utils.SharedPref
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_buy.*
 import retrofit2.Call
@@ -26,21 +30,21 @@ import retrofit2.Response
 import java.util.*
 
 
-
 class BuyActivity : AppCompatActivity() {
 
 
-
+    var set_message : TextView? = null
     var seller_filter_group: RadioGroup? = null
     var seller_limit_filter: RadioButton? = null
     var seller_price_filter: RadioButton? = null
     var seller_coin_filter: RadioButton? = null
 
+
     var progressBar: AlertDialog? = null
     var coin: String = "BTC"
     var tradelist = ArrayList<Trade>()
     var adapter: TableBuyerAdapater? = null
-    var total:Double? = null
+    var total: Double? = null
     /*Dialog item */
     var btnCancel: Button? = null
     var ed_currency: TextView? = null
@@ -56,11 +60,8 @@ class BuyActivity : AppCompatActivity() {
     private var currentItems: Int? = 0
     private var totalItems: Int? = 0
     private var scrollOutItems: Int? = 0
-    private var back_btn:ImageView? = null
 
-    var loading: Boolean? = false
-
-    var toolbar :Toolbar ? = null
+    var toolbar: Toolbar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy)
@@ -72,12 +73,13 @@ class BuyActivity : AppCompatActivity() {
     private fun initView() {
 
         seller_coin_filter = findViewById(R.id.seller_coin_filter)
-        seller_filter_group =findViewById(R.id.seller_filter_group)
+        seller_filter_group = findViewById(R.id.seller_filter_group)
         seller_price_filter = findViewById(R.id.seller_price_filter)
         seller_limit_filter = findViewById(R.id.seller_limit_filter)
+        set_message = findViewById(R.id.tv_no_data)
 
 
-        val coin_type_spinner =findViewById(R.id.curreny_type_spinner) as Spinner
+        val coin_type_spinner = findViewById(R.id.curreny_type_spinner) as Spinner
 
         val builder = AlertDialog.Builder(this@BuyActivity!!)
         builder.setView(R.layout.layout_dialog_progress)
@@ -89,9 +91,10 @@ class BuyActivity : AppCompatActivity() {
 
         adapter = TableBuyerAdapater(this@BuyActivity, tradelist) { position ->
             var obj = Gson().toJson(tradelist[position])
-            val intent = Intent(this@BuyActivity, BuyingDetailActivity::class.java)
+            val intent = Intent(this@BuyActivity, PlaceOrderActivity::class.java)
             intent.putExtra("tradeObject", obj)
-            startActivity(intent)
+            intent.putExtra("orderType", "BUY")
+            startActivityForResult(intent,44)
         }
 
         val layoutManager = LinearLayoutManager(this@BuyActivity, LinearLayout.VERTICAL, false)
@@ -134,12 +137,13 @@ class BuyActivity : AppCompatActivity() {
                 val item = parent!!.getItemAtPosition(pos);
                 coin = item.toString()
                 getAllTrade()
+
             }
         })
 
         seller_filter_group!!.setOnCheckedChangeListener(
                 RadioGroup.OnCheckedChangeListener { group, checkId ->
-                    if (seller_limit_filter!!.isChecked) {
+                    if (seller_limit_filter!!.isChecked ) {
                         Collections.sort(tradelist, Trade.Order.ByLimit.ascending());
                         adapter?.notifyDataSetChanged()
                     }
@@ -161,37 +165,53 @@ class BuyActivity : AppCompatActivity() {
 
 
     private fun getAllTrade() {
+
+        if (!Apputils.isNetworkAvailable(this@BuyActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+        return
+        }
         tradelist.clear()
 
         progressBar!!.show()
-        ApiClint.getInstance()?.getService()?.getTradeByType(coin, "buy")?.enqueue(object : Callback<ArrayList<Trade>> {
-            override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
-                response?.body()?.forEach { trade ->
-                    tradelist.add(trade)
-                }
-                progressBar!!.dismiss()
-                adapter!!.notifyDataSetChanged()
-            }
+        var fuacid = SharedPref.getInstance()!!.getProfilePref(this@BuyActivity).UAC_Id
 
+        ApiClint.getInstance()?.getService()?.getTrade("buy", coin,fuacid = fuacid!!)?.enqueue(object : Callback<ArrayList<Trade>> {
             override fun onFailure(call: Call<ArrayList<Trade>>?, t: Throwable?) {
-                println("error tpye  " + t.toString())
-                progressBar!!.dismiss()
-                Toast.makeText(this@BuyActivity, "Network error ", Toast.LENGTH_LONG).show()
+                println("failed "+t)
+            }
+            override fun onResponse(call: Call<ArrayList<Trade>>?, response: Response<ArrayList<Trade>>?) {
+
+
+
+
+                if (response?.body() != null) {
+                    response?.body()?.forEach { trade ->
+                        tradelist.add(trade)
+
+                    }
+                    tv_no_data.visibility = View.GONE
+                    progressBar!!.dismiss()
+                    adapter!!.notifyDataSetChanged()
+                }
+                if(tradelist.size == null || tradelist.size == 0 || response?.body() == null) {
+                    Log.d("$$$" , "Working")
+                    tv_no_data!!.setText("Currently no Trade Available!")
+                    tv_no_data.visibility = View.VISIBLE
+
+                    //Toast.makeText(this, "Currently no Trade Available!", Toast.LENGTH_LONG).show()
+
+                }
+
+
+
+
+
 
             }
+
         })
-    }
 
-    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
 
-        var feeAmount = 4
-        var totalPrice: Double = coinNum * price
-        var fees: Double = totalPrice * feeAmount / 100
-        var actualPrice: Double = totalPrice - fees
-
-        var coinRem: Double = actualPrice / price
-
-        return coinRem
     }
 
     private fun loadDataFromArrayList() {
@@ -204,7 +224,7 @@ class BuyActivity : AppCompatActivity() {
             runOnUiThread {
                 Handler().postDelayed(
                         {
-                            if ((adapter!!.num) * 5 < tradelist!!.size) {
+                            if ((adapter!!.num) * 20 < tradelist!!.size) {
                                 adapter!!.num = adapter!!.num + 1
                             }
                             progressdialog.dismiss()
@@ -215,4 +235,25 @@ class BuyActivity : AppCompatActivity() {
         }
     }
 
-}
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            getAllTrade()
+        }
+    }
+    }
+
+/*
+    fun getCoinAfterFee(coinNum: Double, price: Double): Double {
+
+        var feeAmount = 4
+        var totalPrice: Double = coinNum * price
+        var fees: Double = totalPrice * feeAmount / 100
+        var actualPrice: Double = totalPrice - fees
+
+        var coinRem: Double = actualPrice / price
+
+        return coinRem
+    }
+*/
+
+

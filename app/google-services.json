@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "1098457612828",
-    "firebase_url": "https://testchat-1a284.firebaseio.com",
-    "project_id": "testchat-1a284",
-    "storage_bucket": "testchat-1a284.appspot.com"
+    "project_number": "415848863596",
+    "firebase_url": "https://notify-c5ac0.firebaseio.com",
+    "project_id": "notify-c5ac0",
+    "storage_bucket": "notify-c5ac0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1098457612828:android:c19d123eb510b693",
+        "mobilesdk_app_id": "1:415848863596:android:eeb3676993b4e41c",
         "android_client_info": {
           "package_name": "com.company.redcode.royalcryptoexchange"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1098457612828-ehguqghi3e1hqlbn6s8vr0kjoug79ga6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.company.redcode.royalcryptoexchange",
-            "certificate_hash": "a1321e23dbf3ced39d26d2c556764dee06b6c25d"
-          }
-        },
-        {
-          "client_id": "1098457612828-54jqauup0fm4e1guflt52kk5lqrtdoge.apps.googleusercontent.com",
+          "client_id": "415848863596-0c6as6mvig2sti04u4drbtt9h0agfn0j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCJHINg-XFOMLklFZZgvUDKZ_9KYYxwpkg"
+          "current_key": "AIzaSyBnLvj0bY707l9Z9O5I4CpfwbcQl8gLkwU"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1098457612828-54jqauup0fm4e1guflt52kk5lqrtdoge.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
@@ -52,28 +39,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1098457612828:android:80f4d4d12a5e9600",
+        "mobilesdk_app_id": "1:415848863596:android:b7a26bd1118c1706",
         "android_client_info": {
-          "package_name": "fahee.example.com.chatapplication"
+          "package_name": "com.example.arifbozdar.push"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1098457612828-37mlssjb82lrks7q2pf7q2q69atlj4l9.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "fahee.example.com.chatapplication",
-            "certificate_hash": "65b532bde8508737e652a676d9e096a8bee298c4"
-          }
-        },
-        {
-          "client_id": "1098457612828-54jqauup0fm4e1guflt52kk5lqrtdoge.apps.googleusercontent.com",
+          "client_id": "415848863596-0c6as6mvig2sti04u4drbtt9h0agfn0j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCJHINg-XFOMLklFZZgvUDKZ_9KYYxwpkg"
+          "current_key": "AIzaSyBnLvj0bY707l9Z9O5I4CpfwbcQl8gLkwU"
         }
       ],
       "services": {
@@ -81,13 +60,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1098457612828-54jqauup0fm4e1guflt52kk5lqrtdoge.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

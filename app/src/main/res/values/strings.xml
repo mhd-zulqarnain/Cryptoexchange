@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">RoyalCrypto Exchange</string>
+    <string name="app_name">Royal Crypto Exchange</string>
     <string name="prompt_name">Name</string>
-    <string name="prompt_password">Password </string>
+    <string name="prompt_password">Enter Password </string>
     <string name="action_sign_in">Sign in </string>
     <string name="action_sign_up">Sign up</string>
     <string name="menu_sign_out">Sign out</string>
@@ -16,9 +16,14 @@
     <string name="sign_in_underline"><u>Sign in</u></string>
     <string name="sign_up_underline"><u>Sign up</u></string>
     <string name="text_terms"><u>Terms and Conditions</u></string>
+    <string name="text_payment_method"><u>Payment Method</u></string>
+    <string name="text_add_documents"><u>Add documents</u></string>
+    <string name="text_change_password"><u>Change Password</u></string>
+    <string name="text_forget_password"><u>Forgot your password?</u></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
     <string-array name="array_currency">
@@ -31,11 +36,9 @@
 
     <string-array name="array_coin">
         <item>BTC</item>
-        <item>XRP</item>
+        <item>BCH</item>
+        <item>BTG</item>
         <item>ETH</item>
-        <item>EOS</item>
-        <item>ADA</item>
-        <item>LTC</item>
     </string-array>
 
     <string-array name="array_country">
@@ -59,8 +62,9 @@
     <string-array name="method_payment">
         <item>Easypaisa</item>
         <item>Bank Transfer</item>
-        <item>advcash</item>
-        <item>mobicash</item>
+        <item>Jazz Cash</item>
+        <item>U Paisa</item>
+        <item>Zong Pay</item>
     </string-array>
 
     <string-array name="time_array">
